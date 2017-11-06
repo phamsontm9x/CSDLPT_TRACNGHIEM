@@ -37,7 +37,7 @@ namespace TracNghiem
         public static SqlCommand cmd = new SqlCommand();
         public static Boolean isLogin = false;
 
-        public static BindingSource bds = new BindingSource();
+        public static BindingSource bds;
         public static frmMain frmChinh;
 
         public static int Connection()

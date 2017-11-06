@@ -17,6 +17,8 @@ namespace TracNghiem
         public frmDep()
         {
             InitializeComponent();
+            this.bdsKhoa.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.dataSetTracNghiem);
         }
 
         private void frmDep_Load(object sender, EventArgs e)
@@ -25,6 +27,16 @@ namespace TracNghiem
             // TODO: This line of code loads data into the 'dataSetTracNghiem.KHOA' table. You can move, or remove it, as needed.
             this.kHOATableAdapter.Connection.ConnectionString = Program.connectStr;
             this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
+
+            depID = ((DataRowView)bdsKhoa[0])["MACS"].ToString();
+            MessageBox.Show(depID.ToString());
+            cbbDep.DataSource = Program.bds;
+            cbbDep.DisplayMember = "MACS";
+            cbbDep.ValueMember = "TENCS";
+            cbbDep.SelectedIndex = Program.currentBranch;
+
+            if (Program.currentRole == "TRUONG") cbbDep.Enabled = true;
+            else cbbDep.Enabled = false;
 
         }
 
@@ -49,9 +61,7 @@ namespace TracNghiem
             {
                 this.kHOATableAdapter.Connection.ConnectionString = Program.connectStr;
                 this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
-                this.kHOATableAdapter.Connection.ConnectionString = Program.connectStr;
-                this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
-                depID = ((DataRowView)bdsKhoa[0])["MAKH"].ToString();
+                depID = ((DataRowView)bdsKhoa[0])["MACS"].ToString();
             }
         }
     }

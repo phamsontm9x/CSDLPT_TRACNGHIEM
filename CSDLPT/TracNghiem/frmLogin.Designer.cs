@@ -33,13 +33,13 @@
             this.btnLogin = new System.Windows.Forms.Button();
             this.rbGiaoVien = new System.Windows.Forms.RadioButton();
             this.rbSinhVien = new System.Windows.Forms.RadioButton();
-            this.cbbTenCS = new System.Windows.Forms.ComboBox();
             this.bdsDSPhanManh = new System.Windows.Forms.BindingSource(this.components);
             this.dataSetTracNghiem = new TracNghiem.dataSetTracNghiem();
             this.txtPass = new System.Windows.Forms.TextBox();
             this.txtUser = new System.Windows.Forms.TextBox();
             this.vIEW_DS_PHANMANHTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.VIEW_DS_PHANMANHTableAdapter();
             this.tableAdapterManager = new TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager();
+            this.cbbTenCS = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bdsDSPhanManh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetTracNghiem)).BeginInit();
@@ -93,19 +93,6 @@
             this.rbSinhVien.Text = "Sinh viên";
             this.rbSinhVien.UseVisualStyleBackColor = true;
             this.rbSinhVien.CheckedChanged += new System.EventHandler(this.rbSinhVien_CheckedChanged);
-            // 
-            // cbbTenCS
-            // 
-            this.cbbTenCS.DataSource = this.bdsDSPhanManh;
-            this.cbbTenCS.DisplayMember = "MACS";
-            this.cbbTenCS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbbTenCS.FormattingEnabled = true;
-            this.cbbTenCS.Location = new System.Drawing.Point(53, 40);
-            this.cbbTenCS.Name = "cbbTenCS";
-            this.cbbTenCS.Size = new System.Drawing.Size(280, 30);
-            this.cbbTenCS.TabIndex = 0;
-            this.cbbTenCS.ValueMember = "TENCS";
-            this.cbbTenCS.SelectedIndexChanged += new System.EventHandler(this.cbbTenCS_SelectedIndexChanged);
             // 
             // bdsDSPhanManh
             // 
@@ -161,6 +148,19 @@
             this.tableAdapterManager.SINHVIENTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
+            // cbbTenCS
+            // 
+            this.cbbTenCS.DataSource = this.bdsDSPhanManh;
+            this.cbbTenCS.DisplayMember = "MACS";
+            this.cbbTenCS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbbTenCS.FormattingEnabled = true;
+            this.cbbTenCS.Location = new System.Drawing.Point(53, 40);
+            this.cbbTenCS.Name = "cbbTenCS";
+            this.cbbTenCS.Size = new System.Drawing.Size(280, 30);
+            this.cbbTenCS.TabIndex = 0;
+            this.cbbTenCS.ValueMember = "TENCS";
+            this.cbbTenCS.SelectedIndexChanged += new System.EventHandler(this.cbbTenCS_SelectedIndexChanged);
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
@@ -187,13 +187,13 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtPass;
         private System.Windows.Forms.TextBox txtUser;
-        private dataSetTracNghiem dataSetTracNghiem;
-        private System.Windows.Forms.BindingSource bdsDSPhanManh;
         private dataSetTracNghiemTableAdapters.VIEW_DS_PHANMANHTableAdapter vIEW_DS_PHANMANHTableAdapter;
         private dataSetTracNghiemTableAdapters.TableAdapterManager tableAdapterManager;
-        private System.Windows.Forms.ComboBox cbbTenCS;
         private System.Windows.Forms.RadioButton rbGiaoVien;
         private System.Windows.Forms.RadioButton rbSinhVien;
         private System.Windows.Forms.Button btnLogin;
+        public System.Windows.Forms.BindingSource bdsDSPhanManh;
+        private System.Windows.Forms.ComboBox cbbTenCS;
+        private dataSetTracNghiem dataSetTracNghiem;
     }
 }
