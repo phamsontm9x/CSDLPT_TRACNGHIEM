@@ -79,7 +79,6 @@
             this.rbGiaoVien.Name = "rbGiaoVien";
             this.rbGiaoVien.Size = new System.Drawing.Size(109, 26);
             this.rbGiaoVien.TabIndex = 4;
-            this.rbGiaoVien.TabStop = true;
             this.rbGiaoVien.Text = "Giáo viên";
             this.rbGiaoVien.UseVisualStyleBackColor = true;
             this.rbGiaoVien.CheckedChanged += new System.EventHandler(this.rbGiaoVien_CheckedChanged);
@@ -90,8 +89,7 @@
             this.rbSinhVien.Location = new System.Drawing.Point(53, 187);
             this.rbSinhVien.Name = "rbSinhVien";
             this.rbSinhVien.Size = new System.Drawing.Size(105, 26);
-            this.rbSinhVien.TabIndex = 4;
-            this.rbSinhVien.TabStop = true;
+            this.rbSinhVien.TabIndex = 3;
             this.rbSinhVien.Text = "Sinh viên";
             this.rbSinhVien.UseVisualStyleBackColor = true;
             this.rbSinhVien.CheckedChanged += new System.EventHandler(this.rbSinhVien_CheckedChanged);
@@ -105,8 +103,9 @@
             this.cbbTenCS.Location = new System.Drawing.Point(53, 40);
             this.cbbTenCS.Name = "cbbTenCS";
             this.cbbTenCS.Size = new System.Drawing.Size(280, 30);
-            this.cbbTenCS.TabIndex = 3;
+            this.cbbTenCS.TabIndex = 0;
             this.cbbTenCS.ValueMember = "TENCS";
+            this.cbbTenCS.SelectedIndexChanged += new System.EventHandler(this.cbbTenCS_SelectedIndexChanged);
             // 
             // bdsDSPhanManh
             // 
@@ -124,7 +123,7 @@
             this.txtPass.Location = new System.Drawing.Point(53, 151);
             this.txtPass.Name = "txtPass";
             this.txtPass.Size = new System.Drawing.Size(280, 30);
-            this.txtPass.TabIndex = 0;
+            this.txtPass.TabIndex = 2;
             this.txtPass.Text = "Password";
             this.txtPass.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtPass.Enter += new System.EventHandler(this.txtPass_Load);
@@ -136,7 +135,7 @@
             this.txtUser.Location = new System.Drawing.Point(53, 115);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(280, 30);
-            this.txtUser.TabIndex = 0;
+            this.txtUser.TabIndex = 1;
             this.txtUser.Text = "Username";
             this.txtUser.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtUser.Enter += new System.EventHandler(this.txtUser_Load);
@@ -149,7 +148,17 @@
             // tableAdapterManager
             // 
             this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.BAITHITableAdapter = null;
+            this.tableAdapterManager.BANGDIEMTableAdapter = null;
+            this.tableAdapterManager.BODETableAdapter = null;
             this.tableAdapterManager.Connection = null;
+            this.tableAdapterManager.COSOTableAdapter = null;
+            this.tableAdapterManager.GIAOVIEN_DANGKYTableAdapter = null;
+            this.tableAdapterManager.GIAOVIENTableAdapter = null;
+            this.tableAdapterManager.KHOATableAdapter = null;
+            this.tableAdapterManager.LOPTableAdapter = null;
+            this.tableAdapterManager.MONHOCTableAdapter = null;
+            this.tableAdapterManager.SINHVIENTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // frmLogin

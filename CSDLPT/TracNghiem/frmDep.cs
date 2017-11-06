@@ -16,5 +16,20 @@ namespace TracNghiem
         {
             InitializeComponent();
         }
+
+        private void kHOABindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.bdsKhoa.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.dataSetTracNghiem);
+
+        }
+
+        private void frmDep_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'dataSetTracNghiem.KHOA' table. You can move, or remove it, as needed.
+            this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
+
+        }
     }
 }
