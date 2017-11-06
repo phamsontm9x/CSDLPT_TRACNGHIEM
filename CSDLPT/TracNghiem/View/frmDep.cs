@@ -27,7 +27,6 @@ namespace TracNghiem
             // TODO: This line of code loads data into the 'dataSetTracNghiem.KHOA' table. You can move, or remove it, as needed.
             this.kHOATableAdapter.Connection.ConnectionString = Program.connectStr;
             this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
-
             depID = ((DataRowView)bdsKhoa[0])["MACS"].ToString();
             MessageBox.Show(depID.ToString());
             cbbDep.DataSource = Program.bds;

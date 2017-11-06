@@ -22,6 +22,8 @@ namespace TracNghiem
         {
             this.txtUser.Enabled = isEnable;
             this.txtPass.Enabled = isEnable;
+            this.txtUser.Text= "THIEN";
+            this.txtPass.Text = "123123";
         }
 
         private void txtUser_Load(object sender, EventArgs e)
@@ -127,7 +129,8 @@ namespace TracNghiem
 
                 initForm();
 
-                Close();
+                Hide();
+
             }
             catch
             {
@@ -165,7 +168,7 @@ namespace TracNghiem
             else if (Program.currentRole == "COSO")
             {
                 initRibGroup(true);
-            } 
+            }
         }
         public void initRibGroup(Boolean isEnable)
         {
