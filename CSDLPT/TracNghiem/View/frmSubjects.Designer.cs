@@ -57,6 +57,14 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.bdsExam = new System.Windows.Forms.BindingSource(this.components);
+            this.bODETableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.BODETableAdapter();
+            this.bdsTranscript = new System.Windows.Forms.BindingSource(this.components);
+            this.bANGDIEMTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.BANGDIEMTableAdapter();
+            this.bdsTest = new System.Windows.Forms.BindingSource(this.components);
+            this.bAITHITableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.BAITHITableAdapter();
+            this.bdsRegistration = new System.Windows.Forms.BindingSource(this.components);
+            this.gIAOVIEN_DANGKYTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.GIAOVIEN_DANGKYTableAdapter();
             mAMHLabel = new System.Windows.Forms.Label();
             tENMHLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
@@ -68,6 +76,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.mONHOCGridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdsExam)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdsTranscript)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdsTest)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdsRegistration)).BeginInit();
             this.SuspendLayout();
             // 
             // mAMHLabel
@@ -98,7 +110,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 59);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1026, 267);
+            this.groupBox1.Size = new System.Drawing.Size(1102, 251);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -142,9 +154,9 @@
             // 
             this.groupBox2.Controls.Add(this.mONHOCGridControl);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(0, 326);
+            this.groupBox2.Location = new System.Drawing.Point(0, 310);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1026, 274);
+            this.groupBox2.Size = new System.Drawing.Size(1102, 290);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
@@ -155,7 +167,7 @@
             this.mONHOCGridControl.Location = new System.Drawing.Point(3, 26);
             this.mONHOCGridControl.MainView = this.gridView1;
             this.mONHOCGridControl.Name = "mONHOCGridControl";
-            this.mONHOCGridControl.Size = new System.Drawing.Size(1020, 245);
+            this.mONHOCGridControl.Size = new System.Drawing.Size(1096, 261);
             this.mONHOCGridControl.TabIndex = 0;
             this.mONHOCGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -309,14 +321,14 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(1026, 59);
+            this.barDockControlTop.Size = new System.Drawing.Size(1102, 59);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 600);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1026, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1102, 0);
             // 
             // barDockControlLeft
             // 
@@ -329,14 +341,50 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1026, 59);
+            this.barDockControlRight.Location = new System.Drawing.Point(1102, 59);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 541);
+            // 
+            // bdsExam
+            // 
+            this.bdsExam.DataMember = "FK_BODE_MONHOC";
+            this.bdsExam.DataSource = this.bdsSubjects;
+            // 
+            // bODETableAdapter
+            // 
+            this.bODETableAdapter.ClearBeforeFill = true;
+            // 
+            // bdsTranscript
+            // 
+            this.bdsTranscript.DataMember = "FK_BANGDIEM_MONHOC";
+            this.bdsTranscript.DataSource = this.bdsSubjects;
+            // 
+            // bANGDIEMTableAdapter
+            // 
+            this.bANGDIEMTableAdapter.ClearBeforeFill = true;
+            // 
+            // bdsTest
+            // 
+            this.bdsTest.DataMember = "FK_BAITHI_MONHOC";
+            this.bdsTest.DataSource = this.bdsSubjects;
+            // 
+            // bAITHITableAdapter
+            // 
+            this.bAITHITableAdapter.ClearBeforeFill = true;
+            // 
+            // bdsRegistration
+            // 
+            this.bdsRegistration.DataMember = "FK_GIAOVIEN_DANGKY_MONHOC";
+            this.bdsRegistration.DataSource = this.bdsSubjects;
+            // 
+            // gIAOVIEN_DANGKYTableAdapter
+            // 
+            this.gIAOVIEN_DANGKYTableAdapter.ClearBeforeFill = true;
             // 
             // frmSubjects
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1026, 600);
+            this.ClientSize = new System.Drawing.Size(1102, 600);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.barDockControlLeft);
@@ -358,6 +406,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.mONHOCGridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdsExam)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdsTranscript)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdsTest)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdsRegistration)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -391,5 +443,13 @@
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
+        private System.Windows.Forms.BindingSource bdsExam;
+        private dataSetTracNghiemTableAdapters.BODETableAdapter bODETableAdapter;
+        private System.Windows.Forms.BindingSource bdsTranscript;
+        private dataSetTracNghiemTableAdapters.BANGDIEMTableAdapter bANGDIEMTableAdapter;
+        private System.Windows.Forms.BindingSource bdsTest;
+        private dataSetTracNghiemTableAdapters.BAITHITableAdapter bAITHITableAdapter;
+        private System.Windows.Forms.BindingSource bdsRegistration;
+        private dataSetTracNghiemTableAdapters.GIAOVIEN_DANGKYTableAdapter gIAOVIEN_DANGKYTableAdapter;
     }
 }

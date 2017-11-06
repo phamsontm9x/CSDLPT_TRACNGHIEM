@@ -13,6 +13,8 @@ namespace TracNghiem
     public partial class frmSubjects : Form
     {
         int index;
+        String currentSubName = "";
+        String currentSubID = "";
         public frmSubjects()
         {
             InitializeComponent();
@@ -20,6 +22,15 @@ namespace TracNghiem
 
         private void frmSubjects_Load(object sender, EventArgs e)
         {
+            dataSetTracNghiem.EnforceConstraints = false;
+            // TODO: This line of code loads data into the 'dataSetTracNghiem.GIAOVIEN_DANGKY' table. You can move, or remove it, as needed.
+            this.gIAOVIEN_DANGKYTableAdapter.Fill(this.dataSetTracNghiem.GIAOVIEN_DANGKY);
+            // TODO: This line of code loads data into the 'dataSetTracNghiem.BAITHI' table. You can move, or remove it, as needed.
+            this.bAITHITableAdapter.Fill(this.dataSetTracNghiem.BAITHI);
+            // TODO: This line of code loads data into the 'dataSetTracNghiem.BANGDIEM' table. You can move, or remove it, as needed.
+            this.bANGDIEMTableAdapter.Fill(this.dataSetTracNghiem.BANGDIEM);
+            // TODO: This line of code loads data into the 'dataSetTracNghiem.BODE' table. You can move, or remove it, as needed.
+            this.bODETableAdapter.Fill(this.dataSetTracNghiem.BODE);
             // TODO: This line of code loads data into the 'dataSetTracNghiem.MONHOC' table. You can move, or remove it, as needed.
             this.mONHOCTableAdapter.Fill(this.dataSetTracNghiem.MONHOC);
             groupBox1.Enabled = false;
@@ -113,6 +124,7 @@ namespace TracNghiem
             groupBox1.Enabled = false;
             groupBox2.Enabled = true;
             bdsSubjects.MoveFirst();
+            this.mONHOCTableAdapter.Fill(this.dataSetTracNghiem.MONHOC);
 
             btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
             btnSave.Enabled = btnCancel.Enabled = false;
@@ -120,7 +132,30 @@ namespace TracNghiem
 
         private void btnDel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            
+            index = bdsSubjects.Position;
+            currentSubName = ((DataRowView)bdsSubjects[index])["TENMH"].ToString();
+            currentSubID = ((DataRowView)bdsSubjects[index])["MAMH"].ToString();
+            if (bdsExam.Count > 0 || bdsRegistration.Count > 0 || bdsTest.Count > 0 || bdsTranscript.Count > 0)
+            {
+                MessageBox.Show("Can not delete. \nThe subject has data available! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            else if (MessageBox.Show("Do you want to delete " + currentSubName + " subject", "Notification", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                try
+                {
+                    bdsSubjects.RemoveCurrent();
+                    this.mONHOCTableAdapter.Update(this.dataSetTracNghiem.MONHOC);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failure. Please delete again!\n" + ex.Message, "",
+                        MessageBoxButtons.OK);
+                    this.mONHOCTableAdapter.Fill(this.dataSetTracNghiem.MONHOC);
+                    bdsSubjects.Position = bdsSubjects.Find("MAMH", currentSubID);
+                    return;
+                }
+            }
+            if (bdsSubjects.Count == 0) btnDel.Enabled = false;
         }
     }
 }
