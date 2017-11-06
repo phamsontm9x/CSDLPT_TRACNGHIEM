@@ -179,6 +179,11 @@ namespace TracNghiem
         {
 
         }
+
+        private void txtUser_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
