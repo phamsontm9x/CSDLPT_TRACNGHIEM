@@ -82,7 +82,7 @@ namespace TracNghiem
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (txtUser.Text.Trim() == "" || txtPass.Text.Trim() == "")
+            if (txtUser.Text.Trim() == "Username" || txtPass.Text.Trim() == "Password")
             {
                 MessageBox.Show("Tài khoản đăng nhập không được rỗng", "Báo lỗi đăng nhập", MessageBoxButtons.OK);
                 txtUser.Focus();
@@ -94,10 +94,11 @@ namespace TracNghiem
             {
                 Program.userName = txtUser.Text.Trim();
                 Program.password = txtPass.Text.Trim();
-                Program.currentBranch = cbbTenCS.SelectedIndex;
                 Program.serverName = cbbTenCS.SelectedValue.ToString().Trim();
 
-                Program.connect = Database.Connection(Program.serverName, Program.userName, Program.password);
+                if (Program.Connection() == 0) return;
+                Program.currentBranch = cbbTenCS.SelectedIndex;             
+                Program.bds = bdsDSPhanManh;
                 Program.currentUserName = Program.userName;
                 Program.currentPass = Program.password;
                 String strLenh = "";
@@ -109,22 +110,19 @@ namespace TracNghiem
                 {
                     strLenh = "exec sp_DangNhapSinhVien '" + Program.userName + "'";
                 }
-                Program.dataReader = Database.ExecSqlDataReader(strLenh);
-                if (Program.dataReader == null)
-                {
-                    return;
-                }
-                Program.dataReader.Read();
+                Program.myReader = Program.ExecSqlDataReader(strLenh);
+                if (Program.myReader == null) return;
+                Program.myReader.Read();
 
-                Program.loginName = Program.dataReader.GetString(0);     // Lay username
-                if (Convert.IsDBNull(Program.loginName))
+                Program.currentID = Program.myReader.GetString(0);     // Lay username
+                if (Convert.IsDBNull(Program.currentID))
                 {
                     MessageBox.Show("Login bạn nhập không có quyền truy cập dữ liệu\n Bạn xem lại Username của cơ sở dữ liệu", "", MessageBoxButtons.OK);
                     return;
                 }
-                Program.currentName = Program.dataReader.GetString(1); // lấy họ tên 
-                Program.currentRole = Program.dataReader.GetString(2); // lấy nhóm quyền
-                Program.dataReader.Close();
+                Program.currentUserName = Program.myReader.GetString(1); // lấy họ tên 
+                Program.currentRole = Program.myReader.GetString(2); // lấy nhóm quyền
+                Program.myReader.Close();
                 Program.connect.Close();
 
                 initForm();
@@ -139,8 +137,8 @@ namespace TracNghiem
 
         public void initForm()
         {
-            Program.frmChinh.userID.Text = "UserID : " + Program.loginName;
-            Program.frmChinh.userName.Text = "Username : " + Program.currentName;
+            Program.frmChinh.userID.Text = "UserID : " + Program.currentID;
+            Program.frmChinh.userName.Text = "Username : " + Program.currentUserName;
             Program.frmChinh.userRole.Text = "Group : " + Program.currentRole;
 
             Program.frmChinh.btnLogin.Enabled = false;

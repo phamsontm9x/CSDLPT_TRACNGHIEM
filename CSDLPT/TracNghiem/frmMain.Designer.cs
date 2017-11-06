@@ -67,6 +67,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             this.SuspendLayout();
             // 
+            // btnStudent
+            // 
+            btnStudent.Caption = "Student";
+            btnStudent.Id = 7;
+            btnStudent.LargeGlyph = global::TracNghiem.Properties.Resources.icons8_student_male;
+            btnStudent.Name = "btnStudent";
+            // 
             // ribbonControl1
             // 
             this.ribbonControl1.ExpandCollapseItem.Id = 0;
@@ -130,6 +137,7 @@
             this.btnDep.Id = 4;
             this.btnDep.LargeGlyph = global::TracNghiem.Properties.Resources.icons8_department;
             this.btnDep.Name = "btnDep";
+            this.btnDep.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDep_ItemClick);
             // 
             // btnCLass
             // 
@@ -144,13 +152,6 @@
             this.btnTeacher.Id = 6;
             this.btnTeacher.LargeGlyph = global::TracNghiem.Properties.Resources.icons8_user_account_filled;
             this.btnTeacher.Name = "btnTeacher";
-            // 
-            // btnStudent
-            // 
-            btnStudent.Caption = "Student";
-            btnStudent.Id = 7;
-            btnStudent.LargeGlyph = global::TracNghiem.Properties.Resources.icons8_student_male;
-            btnStudent.Name = "btnStudent";
             // 
             // btnSubject
             // 
@@ -334,6 +335,7 @@
             this.Name = "frmMain";
             this.Ribbon = this.ribbonControl1;
             this.Text = "Đề tài Trắc Nghiệm";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             this.statusStrip1.ResumeLayout(false);

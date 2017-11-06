@@ -46,7 +46,7 @@ namespace TracNghiem
             Program.currentUserName = "";
             Program.currentServer = "";
             Program.currentPass = "";
-            Program.currentName = "";
+            Program.currentID = "";
 
             btnLogin.Enabled = true;
             btnLogout.Enabled = false;
@@ -79,6 +79,18 @@ namespace TracNghiem
             ribTeacher.Visible = isVisible;
             ribManage.Visible = isVisible;
             ribReport.Visible = isVisible;
+        }
+
+        private void btnDep_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExists(typeof(frmDep));
+            if (frm != null) frm.Activate();
+            else
+            {
+                frmDep f = new frmDep();
+                f.MdiParent = this;
+                f.Show();
+            }
         }
     }
 }
