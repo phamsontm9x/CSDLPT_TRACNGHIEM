@@ -15,7 +15,7 @@ namespace TracNghiem
         public frmLogin()
         {
             InitializeComponent();
-            initTextBox(true);
+            initTextBox(false);
         }
 
         private void initTextBox(Boolean isEnable)
@@ -81,7 +81,7 @@ namespace TracNghiem
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (txtUser.Text.Trim() == "" || txtPass.Text.Trim() == "")
+            if (txtUser.Text.Trim() == "Username" || txtPass.Text.Trim() == "Password")
             {
                 MessageBox.Show("Tài khoản đăng nhập không được rỗng", "Báo lỗi đăng nhập", MessageBoxButtons.OK);
                 txtUser.Focus();
@@ -97,6 +97,8 @@ namespace TracNghiem
                 Program.serverName = cbbTenCS.SelectedValue.ToString().Trim();
 
                 Program.connect = Database.Connection(Program.serverName, Program.userName, Program.password);
+                if (Program.connect == null) return;
+
                 Program.currentUserName = Program.userName;
                 Program.currentPass = Program.password;
                 String strLenh = "";

@@ -149,7 +149,17 @@
             // tableAdapterManager
             // 
             this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.BAITHITableAdapter = null;
+            this.tableAdapterManager.BANGDIEMTableAdapter = null;
+            this.tableAdapterManager.BODETableAdapter = null;
             this.tableAdapterManager.Connection = null;
+            this.tableAdapterManager.COSOTableAdapter = null;
+            this.tableAdapterManager.GIAOVIEN_DANGKYTableAdapter = null;
+            this.tableAdapterManager.GIAOVIENTableAdapter = null;
+            this.tableAdapterManager.KHOATableAdapter = null;
+            this.tableAdapterManager.LOPTableAdapter = null;
+            this.tableAdapterManager.MONHOCTableAdapter = null;
+            this.tableAdapterManager.SINHVIENTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // frmLogin
