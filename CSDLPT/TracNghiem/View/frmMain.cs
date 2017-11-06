@@ -92,5 +92,17 @@ namespace TracNghiem
                 f.Show();
             }
         }
+
+        private void btnSubject_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExists(typeof(frmSubjects));
+            if (frm != null) frm.Activate();
+            else
+            {
+                frmSubjects f = new frmSubjects();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
     }
 }

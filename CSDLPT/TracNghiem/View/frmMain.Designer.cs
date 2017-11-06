@@ -159,6 +159,7 @@
             this.btnSubject.Id = 8;
             this.btnSubject.LargeGlyph = global::TracNghiem.Properties.Resources.icons8_book;
             this.btnSubject.Name = "btnSubject";
+            this.btnSubject.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSubject_ItemClick);
             // 
             // btnPoint
             // 

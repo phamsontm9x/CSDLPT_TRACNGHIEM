@@ -28,7 +28,6 @@ namespace TracNghiem
             this.kHOATableAdapter.Connection.ConnectionString = Program.connectStr;
             this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
             depID = ((DataRowView)bdsKhoa[0])["MACS"].ToString();
-            MessageBox.Show(depID.ToString());
             cbbDep.DataSource = Program.bds;
             cbbDep.DisplayMember = "MACS";
             cbbDep.ValueMember = "TENCS";
@@ -41,26 +40,29 @@ namespace TracNghiem
 
         private void cbbDep_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbbDep.SelectedValue.ToString() == "System.Data.DataRowView") return;
-            Program.serverName = cbbDep.SelectedValue.ToString();
+            if (cbbDep.SelectedValue != null)
+            {
+                if (cbbDep.SelectedValue.ToString() == "System.Data.DataRowView") return;
+                Program.serverName = cbbDep.SelectedValue.ToString();
 
-            if (cbbDep.SelectedIndex != Program.currentBranch)
-            {
-                Program.userName = Program.remoteLogin;
-                Program.password = Program.remotePass;
-            }
-            else
-            {
-                Program.userName = Program.currentUserName;
-                Program.password = Program.currentPass;
-            }
-            if (Program.Connection() == 0)
-                MessageBox.Show("Lỗi kết nối về chi nhánh mới", "", MessageBoxButtons.OK);
-            else
-            {
-                this.kHOATableAdapter.Connection.ConnectionString = Program.connectStr;
-                this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
-                depID = ((DataRowView)bdsKhoa[0])["MACS"].ToString();
+                if (cbbDep.SelectedIndex != Program.currentBranch)
+                {
+                    Program.userName = Program.remoteLogin;
+                    Program.password = Program.remotePass;
+                }
+                else
+                {
+                    Program.userName = Program.currentUserName;
+                    Program.password = Program.currentPass;
+                }
+                if (Program.Connection() == 0)
+                    MessageBox.Show("Lỗi kết nối về chi nhánh mới", "", MessageBoxButtons.OK);
+                else
+                {
+                    this.kHOATableAdapter.Connection.ConnectionString = Program.connectStr;
+                    this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
+                    depID = ((DataRowView)bdsKhoa[0])["MACS"].ToString();
+                }
             }
         }
     }

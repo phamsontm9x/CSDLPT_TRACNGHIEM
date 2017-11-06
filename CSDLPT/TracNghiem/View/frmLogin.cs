@@ -22,8 +22,6 @@ namespace TracNghiem
         {
             this.txtUser.Enabled = isEnable;
             this.txtPass.Enabled = isEnable;
-            this.txtUser.Text= "THIEN";
-            this.txtPass.Text = "123123";
         }
 
         private void txtUser_Load(object sender, EventArgs e)
@@ -68,8 +66,6 @@ namespace TracNghiem
         {
             // TODO: This line of code loads data into the 'dataSetTracNghiem.VIEW_DS_PHANMANH' table. You can move, or remove it, as needed.
             this.vIEW_DS_PHANMANHTableAdapter.Fill(this.dataSetTracNghiem.VIEW_DS_PHANMANH);
-
-            
         }
 
         private void rbSinhVien_CheckedChanged(object sender, EventArgs e)
@@ -122,7 +118,7 @@ namespace TracNghiem
                     MessageBox.Show("Login bạn nhập không có quyền truy cập dữ liệu\n Bạn xem lại Username của cơ sở dữ liệu", "", MessageBoxButtons.OK);
                     return;
                 }
-                Program.currentUserName = Program.myReader.GetString(1); // lấy họ tên 
+                Program.currentLoginName = Program.myReader.GetString(1); // lấy họ tên 
                 Program.currentRole = Program.myReader.GetString(2); // lấy nhóm quyền
                 Program.myReader.Close();
                 Program.connect.Close();
@@ -141,7 +137,7 @@ namespace TracNghiem
         public void initForm()
         {
             Program.frmChinh.userID.Text = "UserID : " + Program.currentID;
-            Program.frmChinh.userName.Text = "Username : " + Program.currentUserName;
+            Program.frmChinh.userName.Text = "Username : " + Program.currentLoginName;
             Program.frmChinh.userRole.Text = "Group : " + Program.currentRole;
 
             Program.frmChinh.btnLogin.Enabled = false;

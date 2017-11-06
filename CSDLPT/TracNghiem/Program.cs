@@ -22,6 +22,7 @@ namespace TracNghiem
 
         public static String currentID = "";
         public static String currentPass = "";
+        public static String currentLoginName = "";
         public static String currentUserName = "";
         public static String currentServer = "";
         public static String currentRole = "";

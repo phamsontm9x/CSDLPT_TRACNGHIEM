@@ -166,6 +166,7 @@
             this.gridView1.GridControl = this.kHOAGridControl;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Default;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // DepID
             // 
