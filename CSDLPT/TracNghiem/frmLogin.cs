@@ -15,14 +15,13 @@ namespace TracNghiem
         public frmLogin()
         {
             InitializeComponent();
-            initTextBox(false);
+            initTextBox(true);
         }
 
         private void initTextBox(Boolean isEnable)
         {
             this.txtUser.Enabled = isEnable;
             this.txtPass.Enabled = isEnable;
-            this.cbbTenCS.Enabled = isEnable;
         }
 
         private void txtUser_Load(object sender, EventArgs e)
@@ -67,6 +66,8 @@ namespace TracNghiem
         {
             // TODO: This line of code loads data into the 'dataSetTracNghiem.VIEW_DS_PHANMANH' table. You can move, or remove it, as needed.
             this.vIEW_DS_PHANMANHTableAdapter.Fill(this.dataSetTracNghiem.VIEW_DS_PHANMANH);
+
+            
         }
 
         private void rbSinhVien_CheckedChanged(object sender, EventArgs e)
@@ -176,6 +177,16 @@ namespace TracNghiem
             Program.frmChinh.ribbonStudentGroup.Enabled = isEnable;
             Program.frmChinh.ribbonReportGroup.Enabled = isEnable;
             Program.frmChinh.ribbonManaGroup.Enabled = isEnable;
+        }
+
+        private void cbbTenCS_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtUser_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
