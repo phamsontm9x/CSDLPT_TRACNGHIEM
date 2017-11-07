@@ -73,7 +73,6 @@ namespace TracNghiem
                 {
                     this.kHOATableAdapter.Connection.ConnectionString = Program.connectStr;
                     this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
-                    depID = ((DataRowView)bdsDep[0])["MAKH"].ToString();
                 }
             }
         }
