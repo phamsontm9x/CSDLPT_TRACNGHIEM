@@ -80,7 +80,7 @@ namespace TracNghiem
                 return null;
             }
         }
-        public static DataTable ExecSqlDataTable(String cmd, string connstr)
+        public static DataTable ExecSqlDataTable(String cmd)
         {
             DataTable dt = new DataTable();
             if (Program.connect.State == ConnectionState.Closed) Program.connect.Open();

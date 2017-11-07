@@ -21,6 +21,7 @@ namespace TracNghiem
 
         private void cbbDep_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             if (cbbDep.SelectedValue != null)
             {
                 if (cbbDep.SelectedValue.ToString() == "System.Data.DataRowView") return;
@@ -60,15 +61,35 @@ namespace TracNghiem
             dataSetTracNghiem.EnforceConstraints = false;
             this.lOPTableAdapter.Connection.ConnectionString = Program.connectStr;
             // TODO: This line of code loads data into the 'dataSetTracNghiem.LOP' table. You can move, or remove it, as needed.
-            this.lOPTableAdapter.Fill(this.dataSetTracNghiem.LOP);
-            depID = ((DataRowView)bdsClass[0])["MAKH"].ToString();
+
             cbbDep.DataSource = Program.bds;
             cbbDep.DisplayMember = "MACS";
             cbbDep.ValueMember = "TENCS";
             cbbDep.SelectedIndex = Program.currentBranch;
 
-            if (Program.currentRole == "TRUONG") cbbDep.Enabled = true;
-            else cbbDep.Enabled = false;
+            String nameCS = ((DataRowView)cbbDep.Items[cbbDep.SelectedIndex])["MACS"].ToString();
+            String strLenh = "exec sp_DanhSachKhoa'" + nameCS + "'";
+            DataTable dt = Program.ExecSqlDataTable(strLenh);
+            if (dt != null)
+            {
+                cbbBranch.DataSource = dt;
+                cbbBranch.DisplayMember = "MAKH";
+                cbbBranch.ValueMember = "TENKH";
+            }
+            else
+            {
+
+            }
+
+
+
+            // set branch KHOA
+            //cbbBranch.DataSource = this.dataSetTracNghiem.KHOA;
+            //cbbBranch.DisplayMember = "MAKHOA";
+            //cbbBranch.ValueMember = "TENkh"
+
+            //if (Program.currentRole == "TRUONG") cbbDep.Enabled = true;
+            //else cbbDep.Enabled = false;
         }
 
         private void cbbBranch_SelectedIndexChanged(object sender, EventArgs e)
