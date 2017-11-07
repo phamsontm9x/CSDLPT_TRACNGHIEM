@@ -139,7 +139,7 @@ namespace TracNghiem
             {
                 MessageBox.Show("Can not delete. \nThe subject has data available! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
-            else if (MessageBox.Show("Do you want to delete " + currentSubName + " subject", "Notification", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            else if (MessageBox.Show("Do you want to delete " + currentSubName + " subject", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try
                 {

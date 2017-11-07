@@ -14,20 +14,27 @@ namespace TracNghiem
     {
         int index = 0;
         String depID = "";
+        String currentBranchID = "";
+        String currentBranchName = "";
         public frmDep()
         {
             InitializeComponent();
-            this.bdsKhoa.EndEdit();
+            this.bdsDep.EndEdit();
             this.tableAdapterManager.UpdateAll(this.dataSetTracNghiem);
         }
 
         private void frmDep_Load(object sender, EventArgs e)
         {
             dataSetTracNghiem.EnforceConstraints = false;
+            // TODO: This line of code loads data into the 'dataSetTracNghiem.GIAOVIEN' table. You can move, or remove it, as needed.
+            this.gIAOVIENTableAdapter.Fill(this.dataSetTracNghiem.GIAOVIEN);
+            // TODO: This line of code loads data into the 'dataSetTracNghiem.LOP' table. You can move, or remove it, as needed.
+            this.lOPTableAdapter.Fill(this.dataSetTracNghiem.LOP);
+            
             // TODO: This line of code loads data into the 'dataSetTracNghiem.KHOA' table. You can move, or remove it, as needed.
             this.kHOATableAdapter.Connection.ConnectionString = Program.connectStr;
             this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
-            depID = ((DataRowView)bdsKhoa[0])["MACS"].ToString();
+            depID = ((DataRowView)bdsDep[0])["MAKH"].ToString();
             cbbDep.DataSource = Program.bds;
             cbbDep.DisplayMember = "MACS";
             cbbDep.ValueMember = "TENCS";
@@ -35,7 +42,12 @@ namespace TracNghiem
 
             if (Program.currentRole == "TRUONG") cbbDep.Enabled = true;
             else cbbDep.Enabled = false;
-            Program.currentBidingSource = bdsKhoa;
+            Program.currentBidingSource = bdsDep;
+
+            groupBox1.Enabled = true;
+            txtDepName.Enabled = txtDepID.Enabled = false;
+            btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
+            btnSave.Enabled = btnCancel.Enabled = false;
         }
 
         private void cbbDep_SelectedIndexChanged(object sender, EventArgs e)
@@ -61,9 +73,106 @@ namespace TracNghiem
                 {
                     this.kHOATableAdapter.Connection.ConnectionString = Program.connectStr;
                     this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
-                    depID = ((DataRowView)bdsKhoa[0])["MACS"].ToString();
+                    depID = ((DataRowView)bdsDep[0])["MAKH"].ToString();
                 }
             }
+        }
+
+        private void btnNew_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            index = bdsDep.Position;
+            groupBox1.Enabled = true;
+            txtDepID.Enabled = txtDepName.Enabled = true;
+            cbbDep.Enabled = false;
+            bdsDep.AddNew();
+            groupBox2.Enabled = false;
+            txtDepID.Focus();
+
+            btnCancel.Enabled = btnSave.Enabled = true;
+            btnRefresh.Enabled = btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = false;
+        }
+
+        private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            index = bdsDep.Position;
+            groupBox1.Enabled = true;
+            txtDepID.Enabled = txtDepName.Enabled = true;
+            cbbDep.Enabled = false;
+            groupBox2.Enabled = false;
+
+            btnCancel.Enabled = btnSave.Enabled = true;
+            btnDel.Enabled = btnNew.Enabled = btnRefresh.Enabled = btnEdit.Enabled = false;
+        }
+
+        private void btnSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void btnDel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            index = bdsDep.Position;
+            currentBranchName = ((DataRowView)bdsDep[index])["TENKH"].ToString();
+            currentBranchID = ((DataRowView)bdsDep[index])["MAKH"].ToString();
+            String sqlStr = "";
+            sqlStr = "exec sp_KTKHOA '" + currentBranchID + "'";
+
+            Program.myReader = Program.ExecSqlDataReader(sqlStr);
+            if (Program.myReader == null) return;
+            Program.myReader.Read();
+
+            if (Program.myReader.GetString(0) == "1")
+            {
+                MessageBox.Show("Can not delete. \nThe branch has data available! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            else if (MessageBox.Show("Do you want to delete " + currentBranchName + " branch", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                try
+                {
+                    bdsDep.RemoveCurrent();
+                    this.kHOATableAdapter.Update(this.dataSetTracNghiem.KHOA);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failure. Please delete again!\n" + ex.Message, "",
+                        MessageBoxButtons.OK);
+                    this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
+                    bdsDep.Position = bdsDep.Find("MAKH", currentBranchID);
+                    return;
+                }
+            }
+            if (bdsDep.Count == 0) btnDel.Enabled = false;
+        }
+
+        private void btnRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            groupBox1.Enabled = true;
+            txtDepID.Enabled = txtDepName.Enabled = false;
+            cbbDep.Enabled = true;
+            groupBox2.Enabled = true;
+            bdsDep.MoveFirst();
+            this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
+
+            btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
+            btnSave.Enabled = btnCancel.Enabled = false;
+        }
+
+        private void btnCancel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            groupBox1.Enabled = true;
+            txtDepID.Enabled = txtDepName.Enabled = false;
+            cbbDep.Enabled = true;
+            groupBox2.Enabled = true;
+            index = bdsDep.Position;
+            bdsDep.CancelEdit();
+
+            btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
+            btnSave.Enabled = btnCancel.Enabled = false;
+        }
+
+        private void btnClose_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Close();
         }
     }
 }
