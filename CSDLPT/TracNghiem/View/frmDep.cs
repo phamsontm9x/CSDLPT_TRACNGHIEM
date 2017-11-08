@@ -28,20 +28,36 @@ namespace TracNghiem
             dataSetTracNghiem.EnforceConstraints = false;
             // TODO: This line of code loads data into the 'dataSetTracNghiem.GIAOVIEN' table. You can move, or remove it, as needed.
             this.gIAOVIENTableAdapter.Fill(this.dataSetTracNghiem.GIAOVIEN);
+
             // TODO: This line of code loads data into the 'dataSetTracNghiem.LOP' table. You can move, or remove it, as needed.
             this.lOPTableAdapter.Fill(this.dataSetTracNghiem.LOP);
             
             // TODO: This line of code loads data into the 'dataSetTracNghiem.KHOA' table. You can move, or remove it, as needed.
             this.kHOATableAdapter.Connection.ConnectionString = Program.connectStr;
             this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
-            depID = ((DataRowView)bdsDep[0])["MAKH"].ToString();
+
+
             cbbDep.DataSource = Program.bds;
             cbbDep.DisplayMember = "MACS";
             cbbDep.ValueMember = "TENCS";
             cbbDep.SelectedIndex = Program.currentBranch;
 
+
+            depID = ((DataRowView)bdsDep[0])["MAKH"].ToString();
             depID = "CS" + (cbbDep.SelectedIndex + 1) + "";
 
+            
+            Program.currentBidingSource = bdsDep;
+
+            groupBox1.Enabled = true;
+            txtDepName.Enabled = txtDepID.Enabled = false;
+
+            setCurrentRole();
+            
+        }
+
+        public void setCurrentRole()
+        {
             if (Program.currentRole == "TRUONG")
             {
                 cbbDep.Enabled = true;
@@ -53,11 +69,6 @@ namespace TracNghiem
                 btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
                 btnSave.Enabled = btnCancel.Enabled = false;
             }
-            Program.currentBidingSource = bdsDep;
-
-            groupBox1.Enabled = true;
-            txtDepName.Enabled = txtDepID.Enabled = false;
-            
         }
 
         private void cbbDep_SelectedIndexChanged(object sender, EventArgs e)

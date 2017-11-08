@@ -41,25 +41,10 @@ namespace TracNghiem
                     MessageBox.Show("Can not connect to new server", "Notification!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 else
                 {
-                    String currentBranchName = cbbDep.SelectedValue.ToString();
-                    int indexStr = currentBranchName.IndexOf("\\") + 1;
-                    currentBranchName = currentBranchName.Substring(indexStr);
-
-                    String strLenh = "exec sp_DanhSachKhoa'" + currentBranchName + "'";
-                    DataTable dt = Program.ExecSqlDataTable(strLenh);
-                    if (dt != null)
-                    {
-                        cbbBranch.DataSource = dt;
-                        cbbBranch.DisplayMember = "TENKH";
-                        cbbBranch.ValueMember = "MAKH";
-                    }
-                    else
-                    {
-                        MessageBox.Show("Can not show list branch", "Notification!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    initUIComboBoxBranch();
+                    getDataClassFromDep(getMaKhoaSelected());
                 }
             }
-
 
         }
 
@@ -82,13 +67,59 @@ namespace TracNghiem
             cbbDep.ValueMember = "TENCS";
             cbbDep.SelectedIndex = Program.currentBranch;
 
+            initUIComboBoxBranch();
+            getDataClassFromDep(getMaKhoaSelected());
+
             if (Program.currentRole == "TRUONG") cbbDep.Enabled = true;
             else cbbDep.Enabled = false;
         }
 
+        public void initUIComboBoxBranch ()
+        {
+            String currentBranchName = cbbDep.SelectedValue.ToString();
+            int indexStr = currentBranchName.IndexOf("\\") + 1;
+            currentBranchName = currentBranchName.Substring(indexStr);
+
+            String strLenh = "exec sp_DanhSachKhoa'" + currentBranchName + "'";
+            DataTable dt = Program.ExecSqlDataTable(strLenh);
+            if (dt != null)
+            {
+                cbbBranch.DataSource = dt;
+                cbbBranch.DisplayMember = "TENKH";
+                cbbBranch.ValueMember = "MAKH";
+            } else
+            {
+                MessageBox.Show("Can not show list branch", "Notification!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            String makhoa = cbbBranch.SelectedValue.ToString();
+        }
+
+        public String getMaKhoaSelected()
+        {
+            String makhoa = cbbBranch.SelectedValue.ToString();
+            return makhoa;
+        }
+
+        public void getDataClassFromDep(String maKH)
+        {
+            //this.dataClass.Connection.ConnectionString = Program.connectStr;
+            String strLenh = "exec sp_DanhSachLopTheoKhoa'" + maKH + "'";
+            DataTable data = Program.ExecSqlDataTable(strLenh);
+            if (data != null)
+            {
+                this.dataClass.DataSource = data;
+            }
+            
+        }
+
         private void cbbBranch_SelectedIndexChanged(object sender, EventArgs e)
         {
+           
+        }
 
+        private void cbbBranch_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            getDataClassFromDep(getMaKhoaSelected());
         }
     }
 }

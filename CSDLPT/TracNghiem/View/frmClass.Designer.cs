@@ -39,13 +39,11 @@
             this.bdsClass = new System.Windows.Forms.BindingSource(this.components);
             this.lOPTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.LOPTableAdapter();
             this.tableAdapterManager = new TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager();
-            this.lOPGridControl = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.dataClass = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetTracNghiem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsClass)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lOPGridControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataClass)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -66,11 +64,12 @@
             // 
             this.cbbBranch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbBranch.FormattingEnabled = true;
-            this.cbbBranch.Location = new System.Drawing.Point(101, 177);
+            this.cbbBranch.Location = new System.Drawing.Point(101, 174);
             this.cbbBranch.Name = "cbbBranch";
             this.cbbBranch.Size = new System.Drawing.Size(325, 30);
             this.cbbBranch.TabIndex = 4;
             this.cbbBranch.SelectedIndexChanged += new System.EventHandler(this.cbbBranch_SelectedIndexChanged);
+            this.cbbBranch.SelectionChangeCommitted += new System.EventHandler(this.cbbBranch_SelectionChangeCommitted);
             // 
             // cbbDep
             // 
@@ -132,33 +131,21 @@
             this.tableAdapterManager.SINHVIENTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
-            // lOPGridControl
+            // dataClass
             // 
-            this.lOPGridControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lOPGridControl.DataSource = this.bdsClass;
-            this.lOPGridControl.Location = new System.Drawing.Point(7, 316);
-            this.lOPGridControl.MainView = this.gridView1;
-            this.lOPGridControl.Name = "lOPGridControl";
-            this.lOPGridControl.Size = new System.Drawing.Size(1022, 244);
-            this.lOPGridControl.TabIndex = 2;
-            this.lOPGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
-            // 
-            // gridView1
-            // 
-            this.gridView1.GridControl = this.lOPGridControl;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Default;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.dataClass.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataClass.Location = new System.Drawing.Point(1, 316);
+            this.dataClass.Name = "dataClass";
+            this.dataClass.RowTemplate.Height = 24;
+            this.dataClass.Size = new System.Drawing.Size(1028, 257);
+            this.dataClass.TabIndex = 1;
             // 
             // frmClass
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1030, 572);
-            this.Controls.Add(this.lOPGridControl);
+            this.Controls.Add(this.dataClass);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -170,8 +157,7 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetTracNghiem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsClass)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lOPGridControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataClass)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -186,8 +172,7 @@
         private System.Windows.Forms.BindingSource bdsClass;
         private dataSetTracNghiemTableAdapters.LOPTableAdapter lOPTableAdapter;
         private dataSetTracNghiemTableAdapters.TableAdapterManager tableAdapterManager;
-        private DevExpress.XtraGrid.GridControl lOPGridControl;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private System.Windows.Forms.ComboBox cbbBranch;
+        private System.Windows.Forms.DataGridView dataClass;
     }
 }
