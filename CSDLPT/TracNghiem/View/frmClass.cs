@@ -82,8 +82,8 @@ namespace TracNghiem
             cbbDep.ValueMember = "TENCS";
             cbbDep.SelectedIndex = Program.currentBranch;
 
-            //if (Program.currentRole == "TRUONG") cbbDep.Enabled = true;
-            //else cbbDep.Enabled = false;
+            if (Program.currentRole == "TRUONG") cbbDep.Enabled = true;
+            else cbbDep.Enabled = false;
         }
 
         private void cbbBranch_SelectedIndexChanged(object sender, EventArgs e)

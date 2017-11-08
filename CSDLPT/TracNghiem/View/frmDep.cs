@@ -40,14 +40,24 @@ namespace TracNghiem
             cbbDep.ValueMember = "TENCS";
             cbbDep.SelectedIndex = Program.currentBranch;
 
-            if (Program.currentRole == "TRUONG") cbbDep.Enabled = true;
-            else cbbDep.Enabled = false;
+            depID = "CS" + (cbbDep.SelectedIndex + 1) + "";
+
+            if (Program.currentRole == "TRUONG")
+            {
+                cbbDep.Enabled = true;
+                initButtonBarManage(false);
+            }
+            else
+            {
+                cbbDep.Enabled = false;
+                btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
+                btnSave.Enabled = btnCancel.Enabled = false;
+            }
             Program.currentBidingSource = bdsDep;
 
             groupBox1.Enabled = true;
             txtDepName.Enabled = txtDepID.Enabled = false;
-            btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
-            btnSave.Enabled = btnCancel.Enabled = false;
+            
         }
 
         private void cbbDep_SelectedIndexChanged(object sender, EventArgs e)
@@ -56,6 +66,7 @@ namespace TracNghiem
             {
                 if (cbbDep.SelectedValue.ToString() == "System.Data.DataRowView") return;
                 Program.serverName = cbbDep.SelectedValue.ToString();
+                depID = "CS" + (cbbDep.SelectedIndex + 1) + "";
 
                 if (cbbDep.SelectedIndex != Program.currentBranch)
                 {
@@ -68,13 +79,14 @@ namespace TracNghiem
                     Program.password = Program.currentPass;
                 }
                 if (Program.Connection() == 0)
-                    MessageBox.Show("Lỗi kết nối về chi nhánh mới", "", MessageBoxButtons.OK);
+                    MessageBox.Show("Connect Error", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                 {
                     this.kHOATableAdapter.Connection.ConnectionString = Program.connectStr;
                     this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
                 }
             }
+
         }
 
         private void btnNew_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -84,6 +96,8 @@ namespace TracNghiem
             txtDepID.Enabled = txtDepName.Enabled = true;
             cbbDep.Enabled = false;
             bdsDep.AddNew();
+            txtBranchID.Text = depID;
+            txtBranchID.Enabled = false;
             groupBox2.Enabled = false;
             txtDepID.Focus();
 
@@ -105,7 +119,63 @@ namespace TracNghiem
 
         private void btnSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            String sqlStr = "";
+            sqlStr = "exec sp_KiemTraKhoa '" + txtDepID.Text + "', '" + Program.UPDATE_METHOD + "'";
+            Program.myReader = Program.ExecSqlDataReader(sqlStr);
+            if (Program.myReader == null) return;
+            Program.myReader.Read();
 
+            if (Program.myReader.FieldCount > 0)
+            {
+                MessageBox.Show("The " + txtDepID.Text + " has already exists!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            } 
+            else
+            {
+                if (txtDepID.Text.Length == 0 || txtDepName.Text.Length == 0)
+                {
+                    MessageBox.Show("Department ID or Department Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    
+                    if (txtDepID.Text.Length > 8)
+                    {
+                        MessageBox.Show("Department ID can not exceed 8 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txtDepID.Focus();
+                        return;
+                    }
+                    else if (txtDepName.Text.Length > 40)
+                    {
+                        MessageBox.Show("Department Name can not exceed 40 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txtDepName.Focus();
+                        return;
+                    }
+                    else
+                    {
+                        try
+                        {
+                            
+                            this.Validate();
+                            bdsDep.EndEdit();
+                            bdsDep.ResetCurrentItem(); 
+                            this.kHOATableAdapter.Update(this.dataSetTracNghiem.KHOA);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Update subjects failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                            return;
+                        }
+                    }
+                }
+            }
+            Program.myReader.Close();
+
+            groupBox1.Enabled = false;
+            groupBox2.Enabled = true;
+            btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
+            btnSave.Enabled = btnCancel.Enabled = false;
         }
 
         private void btnDel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -114,32 +184,35 @@ namespace TracNghiem
             currentBranchName = ((DataRowView)bdsDep[index])["TENKH"].ToString();
             currentBranchID = ((DataRowView)bdsDep[index])["MAKH"].ToString();
             String sqlStr = "";
-            sqlStr = "exec sp_KTKHOA '" + currentBranchID + "'";
-
+            sqlStr = "exec sp_KiemTraKhoa '" + currentBranchID + "', '" + Program.DETELE_METHOD + "'";
             Program.myReader = Program.ExecSqlDataReader(sqlStr);
             if (Program.myReader == null) return;
             Program.myReader.Read();
 
-            if (Program.myReader.GetString(0) == "1")
+            if(Program.myReader.FieldCount > 0)
             {
-                MessageBox.Show("Can not delete. \nThe branch has data available! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-            }
-            else if (MessageBox.Show("Do you want to delete " + currentBranchName + " branch", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                MessageBox.Show("Can not delete " + currentBranchName + " branch. \nThe branch has data available! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            } else
             {
-                try
+                if (MessageBox.Show("Do you want to delete " + currentBranchName + " branch", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    bdsDep.RemoveCurrent();
-                    this.kHOATableAdapter.Update(this.dataSetTracNghiem.KHOA);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Failure. Please delete again!\n" + ex.Message, "",
-                        MessageBoxButtons.OK);
-                    this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
-                    bdsDep.Position = bdsDep.Find("MAKH", currentBranchID);
-                    return;
+                    try
+                    {
+                        bdsDep.RemoveCurrent();
+                        this.kHOATableAdapter.Update(this.dataSetTracNghiem.KHOA);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Failure. Please delete again!\n" + ex.Message, "",
+                            MessageBoxButtons.OK);
+                        this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
+                        bdsDep.Position = bdsDep.Find("MAKH", currentBranchID);
+                        return;
+                    }
                 }
             }
+            Program.myReader.Close();
+
             if (bdsDep.Count == 0) btnDel.Enabled = false;
         }
 
@@ -172,6 +245,11 @@ namespace TracNghiem
         private void btnClose_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             Close();
+        }
+
+        public void initButtonBarManage(Boolean isEnable)
+        {
+            btnNew.Enabled = btnEdit.Enabled = btnSave.Enabled = btnRefresh.Enabled = btnDel.Enabled = btnCancel.Enabled = isEnable;
         }
     }
 }

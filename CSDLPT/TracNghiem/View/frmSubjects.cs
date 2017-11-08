@@ -137,7 +137,7 @@ namespace TracNghiem
             currentSubID = ((DataRowView)bdsSubjects[index])["MAMH"].ToString();
             if (bdsExam.Count > 0 || bdsRegistration.Count > 0 || bdsTest.Count > 0 || bdsTranscript.Count > 0)
             {
-                MessageBox.Show("Can not delete. \nThe subject has data available! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Can not delete " + currentSubName + " subject. \nThe subject has data available! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             else if (MessageBox.Show("Do you want to delete " + currentSubName + " subject", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
@@ -156,6 +156,10 @@ namespace TracNghiem
                 }
             }
             if (bdsSubjects.Count == 0) btnDel.Enabled = false;
+        }
+        public void initButtonBarManage(Boolean isEnable)
+        {
+            btnNew.Enabled = btnEdit.Enabled = btnSave.Enabled = btnRefresh.Enabled = btnDel.Enabled = btnCancel.Enabled = isEnable;
         }
     }
 }

@@ -32,19 +32,9 @@
             this.mAKHLabel = new System.Windows.Forms.Label();
             this.tENKHLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtDepName = new DevExpress.XtraEditors.TextEdit();
+            this.txtBranchID = new DevExpress.XtraEditors.TextEdit();
             this.bdsDep = new System.Windows.Forms.BindingSource(this.components);
             this.dataSetTracNghiem = new TracNghiem.dataSetTracNghiem();
-            this.txtDepID = new DevExpress.XtraEditors.TextEdit();
-            this.lblInfo = new System.Windows.Forms.Label();
-            this.cbbDep = new System.Windows.Forms.ComboBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.kHOAGridControl = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.DepID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.DepName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.kHOATableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.KHOATableAdapter();
-            this.tableAdapterManager = new TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.btnNew = new DevExpress.XtraBars.BarButtonItem();
@@ -58,19 +48,32 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.txtDepName = new DevExpress.XtraEditors.TextEdit();
+            this.txtDepID = new DevExpress.XtraEditors.TextEdit();
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.cbbDep = new System.Windows.Forms.ComboBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.kHOAGridControl = new DevExpress.XtraGrid.GridControl();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.DepID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.DepName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.kHOATableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.KHOATableAdapter();
+            this.tableAdapterManager = new TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager();
             this.bdsClass = new System.Windows.Forms.BindingSource(this.components);
             this.lOPTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.LOPTableAdapter();
             this.bdsTeacher = new System.Windows.Forms.BindingSource(this.components);
             this.gIAOVIENTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.GIAOVIENTableAdapter();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDepName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBranchID.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsDep)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetTracNghiem)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDepName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDepID.Properties)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kHOAGridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsClass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsTeacher)).BeginInit();
             this.SuspendLayout();
@@ -78,23 +81,25 @@
             // mAKHLabel
             // 
             this.mAKHLabel.AutoSize = true;
-            this.mAKHLabel.Location = new System.Drawing.Point(462, 126);
+            this.mAKHLabel.Location = new System.Drawing.Point(416, 191);
             this.mAKHLabel.Name = "mAKHLabel";
-            this.mAKHLabel.Size = new System.Drawing.Size(63, 22);
+            this.mAKHLabel.Size = new System.Drawing.Size(91, 22);
             this.mAKHLabel.TabIndex = 2;
-            this.mAKHLabel.Text = "DepID";
+            this.mAKHLabel.Text = "Branch ID";
             // 
             // tENKHLabel
             // 
             this.tENKHLabel.AutoSize = true;
-            this.tENKHLabel.Location = new System.Drawing.Point(436, 171);
+            this.tENKHLabel.Location = new System.Drawing.Point(390, 237);
             this.tENKHLabel.Name = "tENKHLabel";
-            this.tENKHLabel.Size = new System.Drawing.Size(89, 22);
+            this.tENKHLabel.Size = new System.Drawing.Size(117, 22);
             this.tENKHLabel.TabIndex = 4;
-            this.tENKHLabel.Text = "DepName";
+            this.tENKHLabel.Text = "Branch Name";
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.txtBranchID);
             this.groupBox1.Controls.Add(this.tENKHLabel);
             this.groupBox1.Controls.Add(this.txtDepName);
             this.groupBox1.Controls.Add(this.mAKHLabel);
@@ -108,13 +113,15 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
-            // txtDepName
+            // txtBranchID
             // 
-            this.txtDepName.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsDep, "TENKH", true));
-            this.txtDepName.Location = new System.Drawing.Point(543, 172);
-            this.txtDepName.Name = "txtDepName";
-            this.txtDepName.Size = new System.Drawing.Size(316, 22);
-            this.txtDepName.TabIndex = 5;
+            this.txtBranchID.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsDep, "MACS", true));
+            this.txtBranchID.Enabled = false;
+            this.txtBranchID.Location = new System.Drawing.Point(530, 135);
+            this.txtBranchID.MenuManager = this.barManager1;
+            this.txtBranchID.Name = "txtBranchID";
+            this.txtBranchID.Size = new System.Drawing.Size(250, 22);
+            this.txtBranchID.TabIndex = 7;
             // 
             // bdsDep
             // 
@@ -125,107 +132,6 @@
             // 
             this.dataSetTracNghiem.DataSetName = "dataSetTracNghiem";
             this.dataSetTracNghiem.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // txtDepID
-            // 
-            this.txtDepID.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsDep, "MAKH", true));
-            this.txtDepID.Enabled = false;
-            this.txtDepID.Location = new System.Drawing.Point(543, 126);
-            this.txtDepID.Name = "txtDepID";
-            this.txtDepID.Size = new System.Drawing.Size(316, 22);
-            this.txtDepID.TabIndex = 3;
-            // 
-            // lblInfo
-            // 
-            this.lblInfo.AutoSize = true;
-            this.lblInfo.Font = new System.Drawing.Font("VNI-Jamai", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInfo.Location = new System.Drawing.Point(24, 30);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(326, 55);
-            this.lblInfo.TabIndex = 1;
-            this.lblInfo.Text = "Department Info";
-            // 
-            // cbbDep
-            // 
-            this.cbbDep.FormattingEnabled = true;
-            this.cbbDep.Location = new System.Drawing.Point(34, 126);
-            this.cbbDep.Name = "cbbDep";
-            this.cbbDep.Size = new System.Drawing.Size(316, 30);
-            this.cbbDep.TabIndex = 0;
-            this.cbbDep.SelectedIndexChanged += new System.EventHandler(this.cbbDep_SelectedIndexChanged);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.kHOAGridControl);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(0, 377);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(919, 193);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            // 
-            // kHOAGridControl
-            // 
-            this.kHOAGridControl.DataSource = this.bdsDep;
-            this.kHOAGridControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kHOAGridControl.Location = new System.Drawing.Point(3, 26);
-            this.kHOAGridControl.MainView = this.gridView1;
-            this.kHOAGridControl.Name = "kHOAGridControl";
-            this.kHOAGridControl.Size = new System.Drawing.Size(913, 164);
-            this.kHOAGridControl.TabIndex = 0;
-            this.kHOAGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
-            // 
-            // gridView1
-            // 
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.DepID,
-            this.DepName});
-            this.gridView1.GridControl = this.kHOAGridControl;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Default;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
-            // 
-            // DepID
-            // 
-            this.DepID.Caption = "DepID";
-            this.DepID.FieldName = "MAKH";
-            this.DepID.Name = "DepID";
-            this.DepID.OptionsColumn.AllowEdit = false;
-            this.DepID.OptionsColumn.ReadOnly = true;
-            this.DepID.Visible = true;
-            this.DepID.VisibleIndex = 0;
-            this.DepID.Width = 289;
-            // 
-            // DepName
-            // 
-            this.DepName.Caption = "DepName";
-            this.DepName.FieldName = "TENKH";
-            this.DepName.Name = "DepName";
-            this.DepName.OptionsColumn.AllowEdit = false;
-            this.DepName.OptionsColumn.ReadOnly = true;
-            this.DepName.Visible = true;
-            this.DepName.VisibleIndex = 1;
-            this.DepName.Width = 651;
-            // 
-            // kHOATableAdapter
-            // 
-            this.kHOATableAdapter.ClearBeforeFill = true;
-            // 
-            // tableAdapterManager
-            // 
-            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.BAITHITableAdapter = null;
-            this.tableAdapterManager.BANGDIEMTableAdapter = null;
-            this.tableAdapterManager.BODETableAdapter = null;
-            this.tableAdapterManager.COSOTableAdapter = null;
-            this.tableAdapterManager.GIAOVIEN_DANGKYTableAdapter = null;
-            this.tableAdapterManager.GIAOVIENTableAdapter = null;
-            this.tableAdapterManager.KHOATableAdapter = this.kHOATableAdapter;
-            this.tableAdapterManager.LOPTableAdapter = null;
-            this.tableAdapterManager.MONHOCTableAdapter = null;
-            this.tableAdapterManager.SINHVIENTableAdapter = null;
-            this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // barManager1
             // 
@@ -347,6 +253,116 @@
             this.barDockControlRight.Location = new System.Drawing.Point(919, 59);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 511);
             // 
+            // txtDepName
+            // 
+            this.txtDepName.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsDep, "TENKH", true));
+            this.txtDepName.Location = new System.Drawing.Point(530, 238);
+            this.txtDepName.Name = "txtDepName";
+            this.txtDepName.Size = new System.Drawing.Size(316, 22);
+            this.txtDepName.TabIndex = 5;
+            // 
+            // txtDepID
+            // 
+            this.txtDepID.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsDep, "MAKH", true));
+            this.txtDepID.Enabled = false;
+            this.txtDepID.Location = new System.Drawing.Point(530, 192);
+            this.txtDepID.Name = "txtDepID";
+            this.txtDepID.Size = new System.Drawing.Size(316, 22);
+            this.txtDepID.TabIndex = 3;
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Font = new System.Drawing.Font("VNI-Jamai", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo.Location = new System.Drawing.Point(24, 54);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(326, 55);
+            this.lblInfo.TabIndex = 1;
+            this.lblInfo.Text = "Department Info";
+            // 
+            // cbbDep
+            // 
+            this.cbbDep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbbDep.FormattingEnabled = true;
+            this.cbbDep.Location = new System.Drawing.Point(34, 151);
+            this.cbbDep.Name = "cbbDep";
+            this.cbbDep.Size = new System.Drawing.Size(316, 30);
+            this.cbbDep.TabIndex = 0;
+            this.cbbDep.SelectedIndexChanged += new System.EventHandler(this.cbbDep_SelectedIndexChanged);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.kHOAGridControl);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(0, 377);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(919, 193);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            // 
+            // kHOAGridControl
+            // 
+            this.kHOAGridControl.DataSource = this.bdsDep;
+            this.kHOAGridControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kHOAGridControl.Location = new System.Drawing.Point(3, 26);
+            this.kHOAGridControl.MainView = this.gridView1;
+            this.kHOAGridControl.Name = "kHOAGridControl";
+            this.kHOAGridControl.Size = new System.Drawing.Size(913, 164);
+            this.kHOAGridControl.TabIndex = 0;
+            this.kHOAGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView1});
+            // 
+            // gridView1
+            // 
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.DepID,
+            this.DepName});
+            this.gridView1.GridControl = this.kHOAGridControl;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Default;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // DepID
+            // 
+            this.DepID.Caption = "DepID";
+            this.DepID.FieldName = "MAKH";
+            this.DepID.Name = "DepID";
+            this.DepID.OptionsColumn.AllowEdit = false;
+            this.DepID.OptionsColumn.ReadOnly = true;
+            this.DepID.Visible = true;
+            this.DepID.VisibleIndex = 0;
+            this.DepID.Width = 289;
+            // 
+            // DepName
+            // 
+            this.DepName.Caption = "DepName";
+            this.DepName.FieldName = "TENKH";
+            this.DepName.Name = "DepName";
+            this.DepName.OptionsColumn.AllowEdit = false;
+            this.DepName.OptionsColumn.ReadOnly = true;
+            this.DepName.Visible = true;
+            this.DepName.VisibleIndex = 1;
+            this.DepName.Width = 651;
+            // 
+            // kHOATableAdapter
+            // 
+            this.kHOATableAdapter.ClearBeforeFill = true;
+            // 
+            // tableAdapterManager
+            // 
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.BAITHITableAdapter = null;
+            this.tableAdapterManager.BANGDIEMTableAdapter = null;
+            this.tableAdapterManager.BODETableAdapter = null;
+            this.tableAdapterManager.COSOTableAdapter = null;
+            this.tableAdapterManager.GIAOVIEN_DANGKYTableAdapter = null;
+            this.tableAdapterManager.GIAOVIENTableAdapter = null;
+            this.tableAdapterManager.KHOATableAdapter = this.kHOATableAdapter;
+            this.tableAdapterManager.LOPTableAdapter = null;
+            this.tableAdapterManager.MONHOCTableAdapter = null;
+            this.tableAdapterManager.SINHVIENTableAdapter = null;
+            this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            // 
             // bdsClass
             // 
             this.bdsClass.DataMember = "FK_LOP_KHOA";
@@ -364,6 +380,15 @@
             // gIAOVIENTableAdapter
             // 
             this.gIAOVIENTableAdapter.ClearBeforeFill = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(444, 135);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 22);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "DepID";
             // 
             // frmDep
             // 
@@ -383,14 +408,15 @@
             this.Load += new System.EventHandler(this.frmDep_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDepName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBranchID.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsDep)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetTracNghiem)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDepName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDepID.Properties)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kHOAGridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsClass)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsTeacher)).EndInit();
             this.ResumeLayout(false);
@@ -433,5 +459,7 @@
         private dataSetTracNghiemTableAdapters.LOPTableAdapter lOPTableAdapter;
         private System.Windows.Forms.BindingSource bdsTeacher;
         private dataSetTracNghiemTableAdapters.GIAOVIENTableAdapter gIAOVIENTableAdapter;
+        private DevExpress.XtraEditors.TextEdit txtBranchID;
+        private System.Windows.Forms.Label label1;
     }
 }

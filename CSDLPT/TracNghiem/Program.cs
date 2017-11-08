@@ -42,6 +42,9 @@ namespace TracNghiem
         public static BindingSource currentBidingSource = new BindingSource();
         public static frmMain frmChinh;
 
+        public static String UPDATE_METHOD = "UPDATE";
+        public static String DETELE_METHOD = "DELETE";
+
         public static int Connection()
         {
             if (Program.connect != null && Program.connect.State == ConnectionState.Open)

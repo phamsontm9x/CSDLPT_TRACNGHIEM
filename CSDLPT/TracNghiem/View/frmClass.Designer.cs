@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmClass));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbbBranch = new System.Windows.Forms.ComboBox();
             this.cbbDep = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -40,7 +41,6 @@
             this.tableAdapterManager = new TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager();
             this.lOPGridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.cbbBranch = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetTracNghiem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsClass)).BeginInit();
@@ -62,8 +62,19 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
+            // cbbBranch
+            // 
+            this.cbbBranch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbbBranch.FormattingEnabled = true;
+            this.cbbBranch.Location = new System.Drawing.Point(101, 177);
+            this.cbbBranch.Name = "cbbBranch";
+            this.cbbBranch.Size = new System.Drawing.Size(325, 30);
+            this.cbbBranch.TabIndex = 4;
+            this.cbbBranch.SelectedIndexChanged += new System.EventHandler(this.cbbBranch_SelectedIndexChanged);
+            // 
             // cbbDep
             // 
+            this.cbbDep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbDep.FormattingEnabled = true;
             this.cbbDep.Location = new System.Drawing.Point(101, 118);
             this.cbbDep.Name = "cbbDep";
@@ -141,15 +152,6 @@
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Default;
             this.gridView1.OptionsView.ShowGroupPanel = false;
-            // 
-            // cbbBranch
-            // 
-            this.cbbBranch.FormattingEnabled = true;
-            this.cbbBranch.Location = new System.Drawing.Point(101, 177);
-            this.cbbBranch.Name = "cbbBranch";
-            this.cbbBranch.Size = new System.Drawing.Size(325, 30);
-            this.cbbBranch.TabIndex = 4;
-            this.cbbBranch.SelectedIndexChanged += new System.EventHandler(this.cbbBranch_SelectedIndexChanged);
             // 
             // frmClass
             // 
