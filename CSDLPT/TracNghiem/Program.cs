@@ -44,6 +44,7 @@ namespace TracNghiem
 
         public static String UPDATE_METHOD = "UPDATE";
         public static String DETELE_METHOD = "DELETE";
+        public static String NEW_METHOD = "NEW";
 
         public static int Connection()
         {
@@ -74,7 +75,6 @@ namespace TracNghiem
             try
             {
                 myreader = sqlcmd.ExecuteReader(); return myreader;
-
             }
             catch (SqlException ex)
             {

@@ -16,6 +16,7 @@ namespace TracNghiem
         String depID = "";
         String currentBranchID = "";
         String currentBranchName = "";
+        String method = "";
         public frmDep()
         {
             InitializeComponent();
@@ -111,6 +112,7 @@ namespace TracNghiem
             txtBranchID.Enabled = false;
             groupBox2.Enabled = false;
             txtDepID.Focus();
+            method = Program.NEW_METHOD;
 
             btnCancel.Enabled = btnSave.Enabled = true;
             btnRefresh.Enabled = btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = false;
@@ -120,9 +122,11 @@ namespace TracNghiem
         {
             index = bdsDep.Position;
             groupBox1.Enabled = true;
-            txtDepID.Enabled = txtDepName.Enabled = true;
+            txtDepID.Enabled = false;
+            txtDepName.Enabled = true;
             cbbDep.Enabled = false;
             groupBox2.Enabled = false;
+            method = Program.UPDATE_METHOD;
 
             btnCancel.Enabled = btnSave.Enabled = true;
             btnDel.Enabled = btnNew.Enabled = btnRefresh.Enabled = btnEdit.Enabled = false;
@@ -131,57 +135,107 @@ namespace TracNghiem
         private void btnSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             String sqlStr = "";
-            sqlStr = "exec sp_KiemTraKhoa '" + txtDepID.Text + "', '" + Program.UPDATE_METHOD + "'";
-            Program.myReader = Program.ExecSqlDataReader(sqlStr);
-            if (Program.myReader == null) return;
-            Program.myReader.Read();
+            if (method == Program.NEW_METHOD)
+            {
+                sqlStr = "exec sp_KiemTraKhoa '" + txtDepID.Text + "', '" + method + "'";
 
-            if (Program.myReader.FieldCount > 0)
-            {
-                MessageBox.Show("The " + txtDepID.Text + " has already exists!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            } 
-            else
-            {
-                if (txtDepID.Text.Length == 0 || txtDepName.Text.Length == 0)
+                Program.myReader = Program.ExecSqlDataReader(sqlStr);
+                if (Program.myReader == null) return;
+                Program.myReader.Read();
+
+                if (Program.myReader.FieldCount > 0)
                 {
-                    MessageBox.Show("Department ID or Department Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("The " + txtDepID.Text + " has already exists!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 else
                 {
-                    
-                    if (txtDepID.Text.Length > 8)
+                    if (txtDepID.Text.Length == 0 || txtDepName.Text.Length == 0)
                     {
-                        MessageBox.Show("Department ID can not exceed 8 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        txtDepID.Focus();
-                        return;
-                    }
-                    else if (txtDepName.Text.Length > 40)
-                    {
-                        MessageBox.Show("Department Name can not exceed 40 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        txtDepName.Focus();
+                        MessageBox.Show("Department ID or Department Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                     else
                     {
-                        try
+                        if (txtDepID.Text.Length > 8)
                         {
-                            
-                            this.Validate();
-                            bdsDep.EndEdit();
-                            bdsDep.ResetCurrentItem(); 
-                            this.kHOATableAdapter.Update(this.dataSetTracNghiem.KHOA);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Update subjects failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                            MessageBox.Show("Department ID can not exceed 8 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            txtDepID.Focus();
                             return;
+                        }
+                        else if (txtDepName.Text.Length > 40)
+                        {
+                            MessageBox.Show("Department Name can not exceed 40 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            txtDepName.Focus();
+                            return;
+                        }
+                        else
+                        {
+                            try
+                            {
+                                this.Validate();
+                                bdsDep.EndEdit();
+                                bdsDep.ResetCurrentItem();
+                                this.kHOATableAdapter.Update(this.dataSetTracNghiem.KHOA);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Create subjects failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                                return;
+                            }
                         }
                     }
                 }
+                Program.myReader.Close();
             }
-            Program.myReader.Close();
+            else if (method == Program.UPDATE_METHOD)
+            {
+                sqlStr = "exec sp_KiemTraKhoa '" + txtDepID.Text + "', '" + method + "'";
+
+                Program.myReader = Program.ExecSqlDataReader(sqlStr);
+                if (Program.myReader == null) return;
+                Program.myReader.Read();
+
+                currentBranchName = ((DataRowView)bdsDep[index])["TENKH"].ToString();
+                if (txtDepName.Text == currentBranchName)
+                {
+                    MessageBox.Show("You must type different name!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                else
+                {
+                    if (txtDepName.Text.Length == 0)
+                    {
+                        MessageBox.Show("Department Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    else
+                    {
+                        if (txtDepName.Text.Length > 40)
+                        {
+                            MessageBox.Show("Department Name can not exceed 40 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            txtDepName.Focus();
+                            return;
+                        }
+                        else
+                        {
+                            try
+                            {
+                                this.Validate();
+                                bdsDep.EndEdit();
+                                bdsDep.ResetCurrentItem();
+                                this.kHOATableAdapter.Update(this.dataSetTracNghiem.KHOA);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Update subjects failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                                return;
+                            }
+                        }
+                    }
+                }
+                Program.myReader.Close();
+            }
 
             groupBox1.Enabled = false;
             groupBox2.Enabled = true;
@@ -192,10 +246,12 @@ namespace TracNghiem
         private void btnDel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             index = bdsDep.Position;
+            method = Program.DETELE_METHOD;
             currentBranchName = ((DataRowView)bdsDep[index])["TENKH"].ToString();
             currentBranchID = ((DataRowView)bdsDep[index])["MAKH"].ToString();
             String sqlStr = "";
-            sqlStr = "exec sp_KiemTraKhoa '" + currentBranchID + "', '" + Program.DETELE_METHOD + "'";
+            sqlStr = "exec sp_KiemTraKhoa '" + currentBranchID + "', '" + method + "'";
+            
             Program.myReader = Program.ExecSqlDataReader(sqlStr);
             if (Program.myReader == null) return;
             Program.myReader.Read();
@@ -231,7 +287,14 @@ namespace TracNghiem
         {
             groupBox1.Enabled = true;
             txtDepID.Enabled = txtDepName.Enabled = false;
-            cbbDep.Enabled = true;
+            if (Program.currentRole == "TRUONG")
+            {
+                cbbDep.Enabled = true;
+            }
+            else
+            {
+                cbbDep.Enabled = false;
+            }
             groupBox2.Enabled = true;
             bdsDep.MoveFirst();
             this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
