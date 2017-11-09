@@ -102,14 +102,14 @@ namespace TracNghiem
 
         public void getDataClassFromDep(String maKH)
         {
-            //this.dataClass.Connection.ConnectionString = Program.connectStr;
-            String strLenh = "exec sp_DanhSachLopTheoKhoa'" + maKH + "'";
-            DataTable data = Program.ExecSqlDataTable(strLenh);
-            if (data != null)
+            try
             {
-                this.dataClass.DataSource = data;
+                this.sp_DanhSachLopTheoKhoaTableAdapter.Fill(this.dataSetTracNghiem.sp_DanhSachLopTheoKhoa, maKH);
             }
-            
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }  
         }
 
         private void cbbBranch_SelectedIndexChanged(object sender, EventArgs e)
@@ -120,6 +120,31 @@ namespace TracNghiem
         private void cbbBranch_SelectionChangeCommitted(object sender, EventArgs e)
         {
             getDataClassFromDep(getMaKhoaSelected());
+        }
+
+        private void btnRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void btnNew_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            index = bdsClassFromDep.Position;
+            groupBox1.Enabled = true;
+            bdsClassFromDep.AddNew();
+            txtClassId.Enabled = true;
+            txtClassName.Enabled = true;
+            cbbDep.Enabled = false;
+            cbbBranch.Enabled = false;
+            
+            //txtBranchID.Text = depID;
+            //txtBranchID.Enabled = false;
+            //groupBox2.Enabled = false;
+            //txtDepID.Focus();
+            //method = Program.NEW_METHOD;
+
+            //btnCancel.Enabled = btnSave.Enabled = true;
+            //btnRefresh.Enabled = btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = false;
         }
     }
 }
