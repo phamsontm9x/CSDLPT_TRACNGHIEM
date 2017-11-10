@@ -54,7 +54,7 @@ namespace TracNghiem
             txtDepName.Enabled = txtDepID.Enabled = false;
 
             setCurrentRole();
-            
+            if (bdsDep.Count == 0) btnDel.Enabled = false;
         }
 
         public void setCurrentRole()
@@ -153,6 +153,7 @@ namespace TracNghiem
                     if (txtDepID.Text.Length == 0 || txtDepName.Text.Length == 0)
                     {
                         MessageBox.Show("Department ID or Department Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        Program.myReader.Close();
                         return;
                     }
                     else
@@ -180,7 +181,8 @@ namespace TracNghiem
                             }
                             catch (Exception ex)
                             {
-                                MessageBox.Show("Create subjects failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                                MessageBox.Show("Create department failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                                Program.myReader.Close();
                                 return;
                             }
                         }
@@ -200,6 +202,7 @@ namespace TracNghiem
                 if (txtDepName.Text == currentBranchName)
                 {
                     MessageBox.Show("You must type different name!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Program.myReader.Close();
                     return;
                 }
                 else
@@ -229,6 +232,7 @@ namespace TracNghiem
                             catch (Exception ex)
                             {
                                 MessageBox.Show("Update subjects failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                                Program.myReader.Close();
                                 return;
                             }
                         }
@@ -259,6 +263,7 @@ namespace TracNghiem
             if(Program.myReader.FieldCount > 0)
             {
                 MessageBox.Show("Can not delete " + currentBranchName + " branch. \nThe branch has data available! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                Program.myReader.Close();
             } else
             {
                 if (MessageBox.Show("Do you want to delete " + currentBranchName + " branch", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -272,6 +277,7 @@ namespace TracNghiem
                     {
                         MessageBox.Show("Failure. Please delete again!\n" + ex.Message, "",
                             MessageBoxButtons.OK);
+                        Program.myReader.Close();
                         this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
                         bdsDep.Position = bdsDep.Find("MAKH", currentBranchID);
                         return;
@@ -279,8 +285,6 @@ namespace TracNghiem
                 }
             }
             Program.myReader.Close();
-
-            if (bdsDep.Count == 0) btnDel.Enabled = false;
         }
 
         private void btnRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -312,8 +316,7 @@ namespace TracNghiem
             index = bdsDep.Position;
             bdsDep.CancelEdit();
 
-            btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
-            btnSave.Enabled = btnCancel.Enabled = false;
+            setCurrentRole();
         }
 
         private void btnClose_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

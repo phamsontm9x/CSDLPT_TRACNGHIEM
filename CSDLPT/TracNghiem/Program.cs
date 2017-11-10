@@ -74,7 +74,8 @@ namespace TracNghiem
             if (Program.connect.State == ConnectionState.Closed) Program.connect.Open();
             try
             {
-                myreader = sqlcmd.ExecuteReader(); return myreader;
+                myreader = sqlcmd.ExecuteReader();
+                return myreader;
             }
             catch (SqlException ex)
             {
@@ -83,6 +84,8 @@ namespace TracNghiem
                 return null;
             }
         }
+
+
         public static DataTable ExecSqlDataTable(String cmd)
         {
             DataTable dt = new DataTable();

@@ -13,7 +13,10 @@ namespace TracNghiem
     public partial class frmClass : Form
     {
         int index;
-        String depID = "";
+        String currentClassID = "";
+        String currentClassName = "";
+        String method = "";
+        String branchID = "";
         public frmClass()
         {
             InitializeComponent();
@@ -21,7 +24,6 @@ namespace TracNghiem
 
         private void cbbDep_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             if (cbbDep.SelectedValue != null)
             {
                 if (cbbDep.SelectedValue.ToString() == "System.Data.DataRowView") return;
@@ -48,14 +50,6 @@ namespace TracNghiem
 
         }
 
-        private void lOPBindingNavigatorSaveItem_Click(object sender, EventArgs e)
-        {
-            this.Validate();
-            this.bdsClass.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.dataSetTracNghiem);
-
-        }
-
         private void frmClass_Load(object sender, EventArgs e)
         {
             dataSetTracNghiem.EnforceConstraints = false;
@@ -70,8 +64,35 @@ namespace TracNghiem
             initUIComboBoxBranch();
             getDataClassFromDep(getMaKhoaSelected());
 
-            if (Program.currentRole == "TRUONG") cbbDep.Enabled = true;
-            else cbbDep.Enabled = false;
+            groupBox1.Enabled = true;
+            txtClassName.Enabled = txtClassId.Enabled = false;
+
+            setCurrentRole();
+        }
+        public void setCurrentRole()
+        {
+            if (Program.currentRole == "TRUONG")
+            {
+                cbbDep.Enabled = true;
+                cbbBranch.Enabled = true;
+                initButtonBarManage(false);
+            }
+            else
+            {
+                cbbDep.Enabled = false;
+                cbbBranch.Enabled = true;
+                btnNew.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
+                btnSave.Enabled = btnCancel.Enabled = false;
+
+                if (bdsClassFromDep.Count == 0)
+                {
+                    btnDel.Enabled = btnEdit.Enabled = btnRefresh.Enabled = false;
+                }
+                else
+                {
+                    btnDel.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
+                }
+            }
         }
 
         public void initUIComboBoxBranch ()
@@ -91,12 +112,12 @@ namespace TracNghiem
             {
                 MessageBox.Show("Can not show list branch", "Notification!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            String branchID = cbbBranch.SelectedValue.ToString();
+            getMaKhoaSelected();
         }
 
         public String getMaKhoaSelected()
         {
-            String branchID = cbbBranch.SelectedValue.ToString();
+            branchID = cbbBranch.SelectedValue.ToString();
             return branchID;
         }
 
@@ -110,12 +131,14 @@ namespace TracNghiem
             catch (System.Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }  
+            }
+
+            setCurrentRole();
         }
 
         private void cbbBranch_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+            getMaKhoaSelected();
         }
 
         private void cbbBranch_SelectionChangeCommitted(object sender, EventArgs e)
@@ -125,7 +148,28 @@ namespace TracNghiem
 
         private void btnRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            groupBox1.Enabled = true;
+            txtClassId.Enabled = txtClassName.Enabled = false;
 
+            if (bdsClassFromDep.Count == 0) btnDel.Enabled = false;
+            else btnDel.Enabled = true;
+
+            if (Program.currentRole == "TRUONG")
+            {
+                cbbDep.Enabled = true;
+                cbbBranch.Enabled = true;
+            }
+            else
+            {
+                cbbDep.Enabled = false;
+                cbbBranch.Enabled = true;
+            }
+            groupBox3.Enabled = true;
+            bdsClassFromDep.MoveFirst();
+            getDataClassFromDep(getMaKhoaSelected());
+
+            btnNew.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
+            btnSave.Enabled = btnCancel.Enabled = false;
         }
 
         private void btnNew_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -133,59 +177,208 @@ namespace TracNghiem
             index = bdsClassFromDep.Position;
             groupBox1.Enabled = true;
             bdsClassFromDep.AddNew();
-            txtClassId.Enabled = true;
-            txtClassName.Enabled = true;
-            cbbDep.Enabled = false;
+            txtClassId.Enabled = txtClassName.Enabled = true;
             cbbBranch.Enabled = false;
-            
-            //txtBranchID.Text = depID;
-            //txtBranchID.Enabled = false;
-            //groupBox2.Enabled = false;
-            //txtDepID.Focus();
-            //method = Program.NEW_METHOD;
+            groupBox3.Enabled = false;
+            txtClassId.Focus();
+            method = Program.NEW_METHOD;
 
-            //btnCancel.Enabled = btnSave.Enabled = true;
-            //btnRefresh.Enabled = btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = false;
+            btnCancel.Enabled = btnSave.Enabled = true;
+            btnRefresh.Enabled = btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = false;
         }
 
         private void btnClose_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             Close();
+            branchID = "";
         }
 
         private void btnDel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (bdsClassFromDep.Count == 0) btnDel.Enabled = false;
+            index = bdsClassFromDep.Position;
+            method = Program.DETELE_METHOD;
+            currentClassID = ((DataRowView)bdsClassFromDep[index])["MALOP"].ToString();
+            currentClassName = ((DataRowView)bdsClassFromDep[index])["TENLOP"].ToString();
 
+            String sqlStr = "";
+            sqlStr = "exec sp_KiemTraLopTheoKhoa'" + currentClassID + "', '" + method + "'";
+            Program.myReader = Program.ExecSqlDataReader(sqlStr);
+            if (Program.myReader == null) return;
+            Program.myReader.Read();
+
+            if (Program.myReader.FieldCount > 0)
+            {
+                MessageBox.Show("Can not delete " + currentClassName + " class. \nThe class has data available! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            else
+            {
+                if (MessageBox.Show("Do you want to delete " + currentClassName + " class", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        bdsClassFromDep.RemoveCurrent();
+                        this.sp_DanhSachLopTheoKhoaTableAdapter.Delete(currentClassID);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Failure. Please delete again!\n" + ex.Message, "",
+                           MessageBoxButtons.OK);
+                        getDataClassFromDep(getMaKhoaSelected());
+                        bdsClassFromDep.Position = bdsClassFromDep.Find("MALOP", currentClassID);
+                        return;
+                    }
+                }
+            }
+            Program.myReader.Close();
         }
 
         private void btnSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            currentClassID = ((DataRowView)bdsClassFromDep[index])["MALOP"].ToString();
+            currentClassName = ((DataRowView)bdsClassFromDep[index])["TENLOP"].ToString();
+            String sqlStr = "";
 
+            if (method == Program.NEW_METHOD)
+            {
+                sqlStr = "exec sp_KiemTraLopTheoKhoa '" + txtClassId.Text + "', '" + method + "'";
+
+                Program.myReader = Program.ExecSqlDataReader(sqlStr);
+                if (Program.myReader == null) return;
+                Program.myReader.Read();
+
+                if (Program.myReader.FieldCount > 0)
+                {
+                    MessageBox.Show("The " + txtClassId.Text + " has already exists!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Program.myReader.Close();
+                    return;
+                }
+                else
+                {
+                    if (txtClassId.Text.Length == 0 || txtClassName.Text.Length == 0)
+                    {
+                        MessageBox.Show("Class ID or Class Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    else
+                    {
+                        if (txtClassId.Text.Length > 8)
+                        {
+                            MessageBox.Show("Class ID can not exceed 8 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            txtClassId.Focus();
+                            return;
+                        }
+                        else if (txtClassName.Text.Length > 40)
+                        {
+                            MessageBox.Show("Class Name can not exceed 40 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            txtClassName.Focus();
+                            return;
+                        }
+                        else
+                        {
+                            try
+                            {
+                                this.Validate();
+                                bdsClassFromDep.EndEdit();
+                                bdsClassFromDep.ResetCurrentItem();
+                                this.sp_DanhSachLopTheoKhoaTableAdapter.Insert(txtClassId.Text, txtClassName.Text, getMaKhoaSelected());
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Create class failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                                Program.myReader.Close();
+                                return;
+                            }
+                        }
+                    }
+                    Program.myReader.Close();
+                }
+            }
+            else if (method == Program.UPDATE_METHOD)
+            {
+                sqlStr = "exec sp_KiemTraLopTheoKhoa '" + txtClassId.Text + "', '" + method + "'";
+
+                Program.myReader = Program.ExecSqlDataReader(sqlStr);
+                if (Program.myReader == null) return;
+                Program.myReader.Read();
+
+                if (txtClassName.Text == currentClassName)
+                {
+                    MessageBox.Show("You must type different name!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Program.myReader.Close();
+                    return;
+                }
+                else
+                {
+                    if (txtClassName.Text.Length == 0)
+                    {
+                        MessageBox.Show("Class Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    else
+                    {
+                        if (txtClassName.Text.Length > 40)
+                        {
+                            MessageBox.Show("Class Name can not exceed 40 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            txtClassName.Focus();
+                            return;
+                        }
+                        else
+                        {
+                            try
+                            {
+                                this.Validate();
+                                bdsClassFromDep.EndEdit();
+                                bdsClassFromDep.ResetCurrentItem();
+                                this.sp_DanhSachLopTheoKhoaTableAdapter.Update(currentClassID, txtClassName.Text);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Update class failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                                Program.myReader.Close();
+                                return;
+                            }
+                        }
+                    }
+                }
+                Program.myReader.Close();
+            }
+
+            groupBox1.Enabled = true;
+            cbbBranch.Enabled = true;
+            groupBox3.Enabled = true;
+            txtClassId.Enabled = txtClassName.Enabled = false;
+            btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
+            btnSave.Enabled = btnCancel.Enabled = false;
         }
 
         private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            index = bdsClassFromDep.Position;
+            groupBox1.Enabled = true;
+            txtClassId.Enabled = false;
+            txtClassName.Enabled = true;
+            cbbBranch.Enabled = false;
+            groupBox3.Enabled = false;
+            method = Program.UPDATE_METHOD;
 
+            btnCancel.Enabled = btnSave.Enabled = true;
+            btnDel.Enabled = btnNew.Enabled = btnRefresh.Enabled = btnEdit.Enabled = false;
         }
 
         private void btnCancel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             groupBox1.Enabled = true;
             txtClassId.Enabled = txtClassName.Enabled = false;
-            if (Program.currentRole == "TRUONG")
-            {
-                cbbDep.Enabled = true;
-            }
-            else
-            {
-                cbbDep.Enabled = false;
-            }
-            groupBox2.Enabled = true;
+            groupBox3.Enabled = true;
             bdsClassFromDep.MoveFirst();
             getDataClassFromDep(getMaKhoaSelected());
 
-            btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
-            btnSave.Enabled = btnCancel.Enabled = false;
+            setCurrentRole();
+        }
+        public void initButtonBarManage(Boolean isEnable)
+        {
+            btnNew.Enabled = btnEdit.Enabled = btnSave.Enabled = btnRefresh.Enabled = btnDel.Enabled = btnCancel.Enabled = isEnable;
         }
     }
 }

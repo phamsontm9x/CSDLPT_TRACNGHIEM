@@ -55,6 +55,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dataSetTracNghiem.cs">
+      <DependentUpon>dataSetTracNghiem.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dataSetTracNghiem.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
