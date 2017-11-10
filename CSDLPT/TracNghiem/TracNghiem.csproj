@@ -68,6 +68,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dataSetView.xsd</DependentUpon>
     </Compile>
+    <Compile Include="View\frmTeacher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmTeacher.Designer.cs">
+      <DependentUpon>frmTeacher.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\frmClass.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="View\frmTeacher.resx">
+      <DependentUpon>frmTeacher.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\frmClass.resx">
       <DependentUpon>frmClass.cs</DependentUpon>
     </EmbeddedResource>

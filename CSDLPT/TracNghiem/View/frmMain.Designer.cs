@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraBars.BarButtonItem btnStudent;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            this.btnStudent = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.btnLogin = new DevExpress.XtraBars.BarButtonItem();
             this.btnLogout = new DevExpress.XtraBars.BarButtonItem();
@@ -62,7 +62,6 @@
             this.userName = new System.Windows.Forms.ToolStripStatusLabel();
             this.userRole = new System.Windows.Forms.ToolStripStatusLabel();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
-            btnStudent = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
@@ -70,10 +69,10 @@
             // 
             // btnStudent
             // 
-            btnStudent.Caption = "Student";
-            btnStudent.Id = 7;
-            btnStudent.LargeGlyph = global::TracNghiem.Properties.Resources.icons8_student_male;
-            btnStudent.Name = "btnStudent";
+            this.btnStudent.Caption = "Student";
+            this.btnStudent.Id = 7;
+            this.btnStudent.LargeGlyph = global::TracNghiem.Properties.Resources.icons8_student_male;
+            this.btnStudent.Name = "btnStudent";
             // 
             // ribbonControl1
             // 
@@ -86,7 +85,7 @@
             this.btnDep,
             this.btnCLass,
             this.btnTeacher,
-            btnStudent,
+            this.btnStudent,
             this.btnSubject,
             this.btnPoint,
             this.btnExam,
@@ -154,6 +153,7 @@
             this.btnTeacher.Id = 6;
             this.btnTeacher.LargeGlyph = global::TracNghiem.Properties.Resources.icons8_user_account_filled;
             this.btnTeacher.Name = "btnTeacher";
+            this.btnTeacher.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnTeacher_ItemClick);
             // 
             // btnSubject
             // 
@@ -243,7 +243,7 @@
             this.ribbonManaGroup.ItemLinks.Add(this.btnDep);
             this.ribbonManaGroup.ItemLinks.Add(this.btnCLass);
             this.ribbonManaGroup.ItemLinks.Add(this.btnTeacher);
-            this.ribbonManaGroup.ItemLinks.Add(btnStudent);
+            this.ribbonManaGroup.ItemLinks.Add(this.btnStudent);
             this.ribbonManaGroup.ItemLinks.Add(this.btnSubject);
             this.ribbonManaGroup.ItemLinks.Add(this.btnPoint);
             this.ribbonManaGroup.ItemLinks.Add(this.btnCreate);
@@ -383,6 +383,7 @@
         public DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonReportGroup;
         public DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonStudentGroup;
         public DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonTeacherGroup;
+        private DevExpress.XtraBars.BarButtonItem btnStudent;
     }
 }
 

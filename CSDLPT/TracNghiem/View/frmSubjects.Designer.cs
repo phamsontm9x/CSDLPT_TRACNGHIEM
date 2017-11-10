@@ -30,18 +30,19 @@
         {
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSubjects));
+            this.colMAMH = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTENMH = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.mONHOCGridControl = new DevExpress.XtraGrid.GridControl();
+            this.bdsSubjects = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSetTracNghiem = new TracNghiem.dataSetTracNghiem();
             this.mAMHLabel = new System.Windows.Forms.Label();
             this.tENMHLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSubName = new DevExpress.XtraEditors.TextEdit();
-            this.bdsSubjects = new System.Windows.Forms.BindingSource(this.components);
-            this.dataSetTracNghiem = new TracNghiem.dataSetTracNghiem();
             this.txtSubID = new DevExpress.XtraEditors.TextEdit();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.mONHOCGridControl = new DevExpress.XtraGrid.GridControl();
-            this.colMAMH = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colTENMH = new DevExpress.XtraGrid.Columns.GridColumn();
             this.mONHOCTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.MONHOCTableAdapter();
             this.tableAdapterManager = new TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
@@ -66,20 +67,74 @@
             this.bdsRegistration = new System.Windows.Forms.BindingSource(this.components);
             this.gIAOVIEN_DANGKYTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.GIAOVIEN_DANGKYTableAdapter();
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSubName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mONHOCGridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsSubjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetTracNghiem)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSubName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSubID.Properties)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mONHOCGridControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsExam)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsTranscript)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsTest)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsRegistration)).BeginInit();
             this.SuspendLayout();
+            // 
+            // gridView1
+            // 
+            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colMAMH,
+            this.colTENMH});
+            gridView1.GridControl = this.mONHOCGridControl;
+            gridView1.Name = "gridView1";
+            gridView1.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Default;
+            gridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // colMAMH
+            // 
+            this.colMAMH.Caption = "Subjects ID";
+            this.colMAMH.FieldName = "MAMH";
+            this.colMAMH.Name = "colMAMH";
+            this.colMAMH.OptionsColumn.AllowEdit = false;
+            this.colMAMH.OptionsColumn.ReadOnly = true;
+            this.colMAMH.Visible = true;
+            this.colMAMH.VisibleIndex = 0;
+            this.colMAMH.Width = 295;
+            // 
+            // colTENMH
+            // 
+            this.colTENMH.Caption = "Subjects Name";
+            this.colTENMH.FieldName = "TENMH";
+            this.colTENMH.Name = "colTENMH";
+            this.colTENMH.OptionsColumn.AllowEdit = false;
+            this.colTENMH.OptionsColumn.ReadOnly = true;
+            this.colTENMH.Visible = true;
+            this.colTENMH.VisibleIndex = 1;
+            this.colTENMH.Width = 781;
+            // 
+            // mONHOCGridControl
+            // 
+            this.mONHOCGridControl.DataSource = this.bdsSubjects;
+            this.mONHOCGridControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mONHOCGridControl.Location = new System.Drawing.Point(3, 26);
+            this.mONHOCGridControl.MainView = gridView1;
+            this.mONHOCGridControl.Name = "mONHOCGridControl";
+            this.mONHOCGridControl.Size = new System.Drawing.Size(1096, 261);
+            this.mONHOCGridControl.TabIndex = 0;
+            this.mONHOCGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            gridView1});
+            // 
+            // bdsSubjects
+            // 
+            this.bdsSubjects.DataMember = "MONHOC";
+            this.bdsSubjects.DataSource = this.dataSetTracNghiem;
+            // 
+            // dataSetTracNghiem
+            // 
+            this.dataSetTracNghiem.DataSetName = "dataSetTracNghiem";
+            this.dataSetTracNghiem.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // mAMHLabel
             // 
@@ -131,16 +186,6 @@
             this.txtSubName.Size = new System.Drawing.Size(324, 22);
             this.txtSubName.TabIndex = 2;
             // 
-            // bdsSubjects
-            // 
-            this.bdsSubjects.DataMember = "MONHOC";
-            this.bdsSubjects.DataSource = this.dataSetTracNghiem;
-            // 
-            // dataSetTracNghiem
-            // 
-            this.dataSetTracNghiem.DataSetName = "dataSetTracNghiem";
-            this.dataSetTracNghiem.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // txtSubID
             // 
             this.txtSubID.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsSubjects, "MAMH", true));
@@ -159,50 +204,6 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
-            // mONHOCGridControl
-            // 
-            this.mONHOCGridControl.DataSource = this.bdsSubjects;
-            this.mONHOCGridControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mONHOCGridControl.Location = new System.Drawing.Point(3, 26);
-            this.mONHOCGridControl.MainView = gridView1;
-            this.mONHOCGridControl.Name = "mONHOCGridControl";
-            this.mONHOCGridControl.Size = new System.Drawing.Size(1096, 261);
-            this.mONHOCGridControl.TabIndex = 0;
-            this.mONHOCGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            gridView1});
-            // 
-            // gridView1
-            // 
-            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colMAMH,
-            this.colTENMH});
-            gridView1.GridControl = this.mONHOCGridControl;
-            gridView1.Name = "gridView1";
-            gridView1.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Default;
-            gridView1.OptionsView.ShowGroupPanel = false;
-            // 
-            // colMAMH
-            // 
-            this.colMAMH.Caption = "Subjects ID";
-            this.colMAMH.FieldName = "MAMH";
-            this.colMAMH.Name = "colMAMH";
-            this.colMAMH.OptionsColumn.AllowEdit = false;
-            this.colMAMH.OptionsColumn.ReadOnly = true;
-            this.colMAMH.Visible = true;
-            this.colMAMH.VisibleIndex = 0;
-            this.colMAMH.Width = 295;
-            // 
-            // colTENMH
-            // 
-            this.colTENMH.Caption = "Subjects Name";
-            this.colTENMH.FieldName = "TENMH";
-            this.colTENMH.Name = "colTENMH";
-            this.colTENMH.OptionsColumn.AllowEdit = false;
-            this.colTENMH.OptionsColumn.ReadOnly = true;
-            this.colTENMH.Visible = true;
-            this.colTENMH.VisibleIndex = 1;
-            this.colTENMH.Width = 781;
-            // 
             // mONHOCTableAdapter
             // 
             this.mONHOCTableAdapter.ClearBeforeFill = true;
@@ -220,6 +221,7 @@
             this.tableAdapterManager.LOPTableAdapter = null;
             this.tableAdapterManager.MONHOCTableAdapter = this.mONHOCTableAdapter;
             this.tableAdapterManager.SINHVIENTableAdapter = null;
+            this.tableAdapterManager.sp_DanhSachLopTheoKhoaTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // barManager1
@@ -393,19 +395,20 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmSubjects";
             this.Text = "Subjects";
             this.Load += new System.EventHandler(this.frmSubjects_Load);
+            ((System.ComponentModel.ISupportInitialize)(gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mONHOCGridControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdsSubjects)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSetTracNghiem)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtSubName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bdsSubjects)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSetTracNghiem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSubID.Properties)).EndInit();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.mONHOCGridControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsExam)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsTranscript)).EndInit();

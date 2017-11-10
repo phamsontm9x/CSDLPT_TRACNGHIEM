@@ -43,7 +43,6 @@ namespace TracNghiem
             cbbDep.ValueMember = "TENCS";
             cbbDep.SelectedIndex = Program.currentBranch;
 
-
             depID = ((DataRowView)bdsDep[0])["MAKH"].ToString();
             depID = "CS" + (cbbDep.SelectedIndex + 1) + "";
 
@@ -98,7 +97,6 @@ namespace TracNghiem
                     this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
                 }
             }
-
         }
 
         private void btnNew_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

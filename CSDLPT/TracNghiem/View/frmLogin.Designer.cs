@@ -112,7 +112,7 @@
             this.bdsDSPhanManh.DataMember = "VIEW_DS_PHANMANH";
             this.bdsDSPhanManh.DataSource = this.dataSetView;
             // 
-            // dataSetTracNghiem
+            // dataSetView
             // 
             this.dataSetView.DataSetName = "dataSetTracNghiem";
             this.dataSetView.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;

@@ -47,7 +47,6 @@ namespace TracNghiem
                     getDataClassFromDep(getMaKhoaSelected());
                 }
             }
-
         }
 
         private void frmClass_Load(object sender, EventArgs e)
@@ -213,12 +212,18 @@ namespace TracNghiem
             }
             else
             {
-                if (MessageBox.Show("Do you want to delete " + currentClassName + " class", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Do you want to delete " + currentClassName + " class?", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     try
                     {
                         bdsClassFromDep.RemoveCurrent();
                         this.sp_DanhSachLopTheoKhoaTableAdapter.Delete(currentClassID);
+                        if (bdsClassFromDep.Count == 0)
+                        {
+                            btnDel.Enabled = false;
+                            btnEdit.Enabled = false;
+                            btnRefresh.Enabled = false;
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -235,8 +240,11 @@ namespace TracNghiem
 
         private void btnSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            currentClassID = ((DataRowView)bdsClassFromDep[index])["MALOP"].ToString();
-            currentClassName = ((DataRowView)bdsClassFromDep[index])["TENLOP"].ToString();
+            if (bdsClassFromDep.Count != 1)
+            {
+                currentClassID = ((DataRowView)bdsClassFromDep[index])["MALOP"].ToString();
+                currentClassName = ((DataRowView)bdsClassFromDep[index])["TENLOP"].ToString();
+            }
             String sqlStr = "";
 
             if (method == Program.NEW_METHOD)
