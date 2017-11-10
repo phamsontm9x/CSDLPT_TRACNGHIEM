@@ -32,6 +32,7 @@
             this.mAKHLabel = new System.Windows.Forms.Label();
             this.tENKHLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.txtBranchID = new DevExpress.XtraEditors.TextEdit();
             this.bdsDep = new System.Windows.Forms.BindingSource(this.components);
             this.dataSetTracNghiem = new TracNghiem.dataSetTracNghiem();
@@ -63,7 +64,6 @@
             this.lOPTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.LOPTableAdapter();
             this.bdsTeacher = new System.Windows.Forms.BindingSource(this.components);
             this.gIAOVIENTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.GIAOVIENTableAdapter();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtBranchID.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsDep)).BeginInit();
@@ -112,6 +112,15 @@
             this.groupBox1.Size = new System.Drawing.Size(919, 318);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(444, 135);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 22);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "DepID";
             // 
             // txtBranchID
             // 
@@ -328,6 +337,7 @@
             this.DepID.FieldName = "MAKH";
             this.DepID.Name = "DepID";
             this.DepID.OptionsColumn.AllowEdit = false;
+            this.DepID.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
             this.DepID.OptionsColumn.ReadOnly = true;
             this.DepID.Visible = true;
             this.DepID.VisibleIndex = 0;
@@ -339,6 +349,7 @@
             this.DepName.FieldName = "TENKH";
             this.DepName.Name = "DepName";
             this.DepName.OptionsColumn.AllowEdit = false;
+            this.DepName.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
             this.DepName.OptionsColumn.ReadOnly = true;
             this.DepName.Visible = true;
             this.DepName.VisibleIndex = 1;
@@ -361,6 +372,7 @@
             this.tableAdapterManager.LOPTableAdapter = null;
             this.tableAdapterManager.MONHOCTableAdapter = null;
             this.tableAdapterManager.SINHVIENTableAdapter = null;
+            this.tableAdapterManager.sp_DanhSachLopTheoKhoaTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // bdsClass
@@ -380,15 +392,6 @@
             // gIAOVIENTableAdapter
             // 
             this.gIAOVIENTableAdapter.ClearBeforeFill = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(444, 135);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 22);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "DepID";
             // 
             // frmDep
             // 

@@ -60,6 +60,8 @@
             this.sp_DanhSachLopTheoKhoaTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.sp_DanhSachLopTheoKhoaTableAdapter();
             this.sp_DanhSachLopTheoKhoaGridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colMALOP = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTENLOP = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             lblClassId = new System.Windows.Forms.Label();
             lblClassName = new System.Windows.Forms.Label();
@@ -77,21 +79,23 @@
             // 
             // lblClassId
             // 
+            lblClassId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             lblClassId.AutoSize = true;
-            lblClassId.Location = new System.Drawing.Point(736, 79);
+            lblClassId.Location = new System.Drawing.Point(567, 143);
             lblClassId.Name = "lblClassId";
-            lblClassId.Size = new System.Drawing.Size(83, 22);
+            lblClassId.Size = new System.Drawing.Size(79, 22);
             lblClassId.TabIndex = 4;
-            lblClassId.Text = "MALOP:";
+            lblClassId.Text = "Class ID";
             // 
             // lblClassName
             // 
+            lblClassName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             lblClassName.AutoSize = true;
-            lblClassName.Location = new System.Drawing.Point(736, 121);
+            lblClassName.Location = new System.Drawing.Point(541, 181);
             lblClassName.Name = "lblClassName";
-            lblClassName.Size = new System.Drawing.Size(90, 22);
+            lblClassName.Size = new System.Drawing.Size(105, 22);
             lblClassName.TabIndex = 6;
-            lblClassName.Text = "TENLOP:";
+            lblClassName.Text = "Class Name";
             // 
             // groupBox1
             // 
@@ -107,17 +111,18 @@
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Location = new System.Drawing.Point(0, 65);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1197, 226);
+            this.groupBox1.Size = new System.Drawing.Size(1004, 243);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
             // txtClassName
             // 
+            this.txtClassName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtClassName.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsClassFromDep, "TENLOP", true));
-            this.txtClassName.Location = new System.Drawing.Point(832, 118);
+            this.txtClassName.Location = new System.Drawing.Point(663, 182);
             this.txtClassName.MenuManager = this.barManager1;
             this.txtClassName.Name = "txtClassName";
-            this.txtClassName.Size = new System.Drawing.Size(228, 22);
+            this.txtClassName.Size = new System.Drawing.Size(235, 22);
             this.txtClassName.TabIndex = 7;
             // 
             // bdsClassFromDep
@@ -153,7 +158,7 @@
             // 
             this.bar1.BarName = "Tools";
             this.bar1.DockCol = 0;
-            this.bar1.DockRow = 1;
+            this.bar1.DockRow = 0;
             this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnNew, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
@@ -179,6 +184,7 @@
             this.btnEdit.Glyph = global::TracNghiem.Properties.Resources.icons8_pencil;
             this.btnEdit.Id = 1;
             this.btnEdit.Name = "btnEdit";
+            this.btnEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEdit_ItemClick);
             // 
             // btnSave
             // 
@@ -186,6 +192,7 @@
             this.btnSave.Glyph = global::TracNghiem.Properties.Resources.icons8_save;
             this.btnSave.Id = 2;
             this.btnSave.Name = "btnSave";
+            this.btnSave.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSave_ItemClick);
             // 
             // btnDel
             // 
@@ -193,6 +200,7 @@
             this.btnDel.Glyph = global::TracNghiem.Properties.Resources.icons8_trash;
             this.btnDel.Id = 3;
             this.btnDel.Name = "btnDel";
+            this.btnDel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDel_ItemClick);
             // 
             // btnRefresh
             // 
@@ -208,6 +216,7 @@
             this.btnCancel.Glyph = global::TracNghiem.Properties.Resources.icons8_cancel;
             this.btnCancel.Id = 5;
             this.btnCancel.Name = "btnCancel";
+            this.btnCancel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCancel_ItemClick);
             // 
             // btnClose
             // 
@@ -215,39 +224,41 @@
             this.btnClose.Glyph = global::TracNghiem.Properties.Resources.icons8_home;
             this.btnClose.Id = 6;
             this.btnClose.Name = "btnClose";
+            this.btnClose.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnClose_ItemClick);
             // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(1197, 59);
+            this.barDockControlTop.Size = new System.Drawing.Size(1004, 59);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 653);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1197, 0);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 598);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1004, 0);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 59);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 594);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 539);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1197, 59);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 594);
+            this.barDockControlRight.Location = new System.Drawing.Point(1004, 59);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 539);
             // 
             // txtClassId
             // 
+            this.txtClassId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtClassId.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsClassFromDep, "MALOP", true));
-            this.txtClassId.Location = new System.Drawing.Point(825, 76);
+            this.txtClassId.Location = new System.Drawing.Point(663, 140);
             this.txtClassId.MenuManager = this.barManager1;
             this.txtClassId.Name = "txtClassId";
             this.txtClassId.Size = new System.Drawing.Size(235, 22);
@@ -288,9 +299,9 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Location = new System.Drawing.Point(0, 232);
+            this.groupBox2.Location = new System.Drawing.Point(0, 249);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1197, 257);
+            this.groupBox2.Size = new System.Drawing.Size(1004, 257);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "groupBox2";
@@ -330,19 +341,47 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.sp_DanhSachLopTheoKhoaGridControl.DataSource = this.bdsClassFromDep;
-            this.sp_DanhSachLopTheoKhoaGridControl.Location = new System.Drawing.Point(0, 45);
+            this.sp_DanhSachLopTheoKhoaGridControl.Location = new System.Drawing.Point(0, 17);
             this.sp_DanhSachLopTheoKhoaGridControl.MainView = this.gridView1;
             this.sp_DanhSachLopTheoKhoaGridControl.Name = "sp_DanhSachLopTheoKhoaGridControl";
-            this.sp_DanhSachLopTheoKhoaGridControl.Size = new System.Drawing.Size(1191, 311);
+            this.sp_DanhSachLopTheoKhoaGridControl.Size = new System.Drawing.Size(1004, 286);
             this.sp_DanhSachLopTheoKhoaGridControl.TabIndex = 2;
             this.sp_DanhSachLopTheoKhoaGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
             // 
             // gridView1
             // 
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colMALOP,
+            this.colTENLOP});
             this.gridView1.GridControl = this.sp_DanhSachLopTheoKhoaGridControl;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Default;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // colMALOP
+            // 
+            this.colMALOP.Caption = "Class ID";
+            this.colMALOP.FieldName = "MALOP";
+            this.colMALOP.Name = "colMALOP";
+            this.colMALOP.OptionsColumn.AllowEdit = false;
+            this.colMALOP.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
+            this.colMALOP.OptionsColumn.ReadOnly = true;
+            this.colMALOP.Visible = true;
+            this.colMALOP.VisibleIndex = 0;
+            this.colMALOP.Width = 352;
+            // 
+            // colTENLOP
+            // 
+            this.colTENLOP.Caption = "Class Name";
+            this.colTENLOP.FieldName = "TENLOP";
+            this.colTENLOP.Name = "colTENLOP";
+            this.colTENLOP.OptionsColumn.AllowEdit = false;
+            this.colTENLOP.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
+            this.colTENLOP.OptionsColumn.ReadOnly = true;
+            this.colTENLOP.Visible = true;
+            this.colTENLOP.VisibleIndex = 1;
+            this.colTENLOP.Width = 819;
             // 
             // groupBox3
             // 
@@ -351,17 +390,16 @@
             this.groupBox3.Controls.Add(this.sp_DanhSachLopTheoKhoaGridControl);
             this.groupBox3.Location = new System.Drawing.Point(0, 297);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1197, 362);
+            this.groupBox3.Size = new System.Drawing.Size(1004, 289);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "groupBox3";
             // 
             // frmClass
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1197, 653);
+            this.ClientSize = new System.Drawing.Size(1004, 598);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.barDockControlLeft);
@@ -421,5 +459,7 @@
         private DevExpress.XtraEditors.TextEdit txtClassName;
         private DevExpress.XtraEditors.TextEdit txtClassId;
         private System.Windows.Forms.GroupBox groupBox3;
+        private DevExpress.XtraGrid.Columns.GridColumn colMALOP;
+        private DevExpress.XtraGrid.Columns.GridColumn colTENLOP;
     }
 }

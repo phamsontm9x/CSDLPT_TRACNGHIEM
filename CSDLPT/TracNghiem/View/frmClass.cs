@@ -91,24 +91,25 @@ namespace TracNghiem
             {
                 MessageBox.Show("Can not show list branch", "Notification!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            String makhoa = cbbBranch.SelectedValue.ToString();
+            String branchID = cbbBranch.SelectedValue.ToString();
         }
 
         public String getMaKhoaSelected()
         {
-            String makhoa = cbbBranch.SelectedValue.ToString();
-            return makhoa;
+            String branchID = cbbBranch.SelectedValue.ToString();
+            return branchID;
         }
 
-        public void getDataClassFromDep(String maKH)
+        public void getDataClassFromDep(String branchID)
         {
             try
             {
-                this.sp_DanhSachLopTheoKhoaTableAdapter.Fill(this.dataSetTracNghiem.sp_DanhSachLopTheoKhoa, maKH);
+                this.sp_DanhSachLopTheoKhoaTableAdapter.Fill(this.dataSetTracNghiem.sp_DanhSachLopTheoKhoa, branchID);
+                this.sp_DanhSachLopTheoKhoaTableAdapter.ClearBeforeFill = true;
             }
             catch (System.Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message);
             }  
         }
 
@@ -145,6 +146,46 @@ namespace TracNghiem
 
             //btnCancel.Enabled = btnSave.Enabled = true;
             //btnRefresh.Enabled = btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = false;
+        }
+
+        private void btnClose_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Close();
+        }
+
+        private void btnDel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void btnSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void btnCancel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            groupBox1.Enabled = true;
+            txtClassId.Enabled = txtClassName.Enabled = false;
+            if (Program.currentRole == "TRUONG")
+            {
+                cbbDep.Enabled = true;
+            }
+            else
+            {
+                cbbDep.Enabled = false;
+            }
+            groupBox2.Enabled = true;
+            bdsClassFromDep.MoveFirst();
+            getDataClassFromDep(getMaKhoaSelected());
+
+            btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
+            btnSave.Enabled = btnCancel.Enabled = false;
         }
     }
 }
