@@ -122,6 +122,7 @@
             this.txtClassName.Location = new System.Drawing.Point(663, 182);
             this.txtClassName.MenuManager = this.barManager1;
             this.txtClassName.Name = "txtClassName";
+            this.txtClassName.Properties.MaxLength = 40;
             this.txtClassName.Size = new System.Drawing.Size(235, 22);
             this.txtClassName.TabIndex = 7;
             // 
@@ -261,6 +262,7 @@
             this.txtClassId.Location = new System.Drawing.Point(663, 140);
             this.txtClassId.MenuManager = this.barManager1;
             this.txtClassId.Name = "txtClassId";
+            this.txtClassId.Properties.MaxLength = 8;
             this.txtClassId.Size = new System.Drawing.Size(235, 22);
             this.txtClassId.TabIndex = 5;
             // 
@@ -329,6 +331,7 @@
             this.tableAdapterManager.SINHVIENTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachGiaoVienTheoKhoaTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachLopTheoKhoaTableAdapter = null;
+            this.tableAdapterManager.sp_DanhSachSinhVienTheoLopTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // sp_DanhSachLopTheoKhoaTableAdapter

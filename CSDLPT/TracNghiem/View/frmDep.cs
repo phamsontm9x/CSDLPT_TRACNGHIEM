@@ -157,33 +157,18 @@ namespace TracNghiem
                     }
                     else
                     {
-                        if (txtDepID.Text.Length > 8)
+                        try
                         {
-                            MessageBox.Show("Department ID can not exceed 8 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            txtDepID.Focus();
-                            return;
+                            this.Validate();
+                            bdsDep.EndEdit();
+                            bdsDep.ResetCurrentItem();
+                            this.kHOATableAdapter.Update(this.dataSetTracNghiem.KHOA);
                         }
-                        else if (txtDepName.Text.Length > 40)
+                        catch (Exception ex)
                         {
-                            MessageBox.Show("Department Name can not exceed 40 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            txtDepName.Focus();
+                            MessageBox.Show("Create department failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                            Program.myReader.Close();
                             return;
-                        }
-                        else
-                        {
-                            try
-                            {
-                                this.Validate();
-                                bdsDep.EndEdit();
-                                bdsDep.ResetCurrentItem();
-                                this.kHOATableAdapter.Update(this.dataSetTracNghiem.KHOA);
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show("Create department failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
-                                Program.myReader.Close();
-                                return;
-                            }
                         }
                     }
                 }
@@ -213,27 +198,18 @@ namespace TracNghiem
                     }
                     else
                     {
-                        if (txtDepName.Text.Length > 40)
+                        try
                         {
-                            MessageBox.Show("Department Name can not exceed 40 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            txtDepName.Focus();
-                            return;
+                            this.Validate();
+                            bdsDep.EndEdit();
+                            bdsDep.ResetCurrentItem();
+                            this.kHOATableAdapter.Update(this.dataSetTracNghiem.KHOA);
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            try
-                            {
-                                this.Validate();
-                                bdsDep.EndEdit();
-                                bdsDep.ResetCurrentItem();
-                                this.kHOATableAdapter.Update(this.dataSetTracNghiem.KHOA);
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show("Update subjects failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
-                                Program.myReader.Close();
-                                return;
-                            }
+                            MessageBox.Show("Update subjects failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                            Program.myReader.Close();
+                            return;
                         }
                     }
                 }
@@ -265,7 +241,7 @@ namespace TracNghiem
                 Program.myReader.Close();
             } else
             {
-                if (MessageBox.Show("Do you want to delete " + currentBranchName + " branch", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Do you want to delete " + currentBranchName + " branch?", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     try
                     {

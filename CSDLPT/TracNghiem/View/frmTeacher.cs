@@ -138,45 +138,18 @@ namespace TracNghiem
                     }
                     else
                     {
-                        if (txtTeacherID.Text.Length > 8)
+                        try
                         {
-                            MessageBox.Show("Teacher ID can not exceed 8 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            txtTeacherID.Focus();
-                            return;
+                            this.Validate();
+                            bdsTeacherFromDep.EndEdit();
+                            bdsTeacherFromDep.ResetCurrentItem();
+                            this.sp_DanhSachGiaoVienTheoKhoaTableAdapter.Insert(txtTeacherID.Text, txtLastName.Text, txtFirstName.Text, txtDegree.Text, getMaKhoaSelected());
                         }
-                        else if (txtLastName.Text.Length > 40)
+                        catch (Exception ex)
                         {
-                            MessageBox.Show("Last Name can not exceed 40 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            txtLastName.Focus();
+                            MessageBox.Show("Create teacher failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                            Program.myReader.Close();
                             return;
-                        }
-                        else if (txtFirstName.Text.Length > 10)
-                        {
-                            MessageBox.Show("First Name can not exceed 10 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            txtFirstName.Focus();
-                            return;
-                        } 
-                        else if (txtDegree.Text.Length > 20)
-                        {
-                            MessageBox.Show("Address can not exceed 20 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            txtDegree.Focus();
-                            return;
-                        }
-                        else
-                        {
-                            try
-                            {
-                                this.Validate();
-                                bdsTeacherFromDep.EndEdit();
-                                bdsTeacherFromDep.ResetCurrentItem();
-                                this.sp_DanhSachGiaoVienTheoKhoaTableAdapter.Insert(txtTeacherID.Text, txtLastName.Text, txtFirstName.Text, txtDegree.Text, getMaKhoaSelected());
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show("Create teacher failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
-                                Program.myReader.Close();
-                                return;
-                            }
                         }
                     }
                     Program.myReader.Close();
@@ -202,48 +175,21 @@ namespace TracNghiem
                 }
                 else
                 {
-                    if (txtTeacherID.Text.Length > 8)
+                    try
                     {
-                        MessageBox.Show("Teacher ID can not exceed 8 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        txtTeacherID.Focus();
+                        this.Validate();
+                        bdsTeacherFromDep.EndEdit();
+                        bdsTeacherFromDep.ResetCurrentItem();
+                        this.sp_DanhSachGiaoVienTheoKhoaTableAdapter.Update(currentTeacherID, txtLastName.Text, txtFirstName.Text, txtDegree.Text);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Update teacher failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                        Program.myReader.Close();
                         return;
                     }
-                    else if (txtLastName.Text.Length > 40)
-                    {
-                        MessageBox.Show("Last Name can not exceed 40 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        txtLastName.Focus();
-                        return;
-                    }
-                    else if (txtFirstName.Text.Length > 10)
-                    {
-                        MessageBox.Show("First Name can not exceed 10 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        txtFirstName.Focus();
-                        return;
-                    }
-                    else if (txtDegree.Text.Length > 20)
-                    {
-                        MessageBox.Show("Address can not exceed 20 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        txtDegree.Focus();
-                        return;
-                    }
-                    else
-                        {
-                            try
-                            {
-                                this.Validate();
-                                bdsTeacherFromDep.EndEdit();
-                                bdsTeacherFromDep.ResetCurrentItem();
-                                this.sp_DanhSachGiaoVienTheoKhoaTableAdapter.Update(currentTeacherID, txtLastName.Text, txtFirstName.Text, txtDegree.Text);
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show("Update teacher failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
-                                Program.myReader.Close();
-                                return;
-                            }
-                        }
-                    }
-                Program.myReader.Close();
+                    Program.myReader.Close();
+                }
             }
             groupBox1.Enabled = true;
             cbbBranch.Enabled = true;
@@ -268,6 +214,7 @@ namespace TracNghiem
             if (Program.myReader.FieldCount > 0)
             {
                 MessageBox.Show("Can not delete this teacher. \nThe teacher has data available! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                Program.myReader.Close();
             }
             else
             {
@@ -289,7 +236,7 @@ namespace TracNghiem
                         MessageBox.Show("Failure. Please delete again!\n" + ex.Message, "",
                            MessageBoxButtons.OK);
                         getDataTeacherFromDep(getMaKhoaSelected());
-                        bdsTeacherFromDep.Position = bdsTeacherFromDep.Find("MALOP", currentTeacherID);
+                        bdsTeacherFromDep.Position = bdsTeacherFromDep.Find("MAGV", currentTeacherID);
                         return;
                     }
                 }
@@ -420,6 +367,22 @@ namespace TracNghiem
         public void initButtonBarManage(Boolean isEnable)
         {
             btnNew.Enabled = btnEdit.Enabled = btnSave.Enabled = btnRefresh.Enabled = btnDel.Enabled = btnCancel.Enabled = isEnable;
+        }
+
+        private void txtFirstName_KeyboardPressed(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtLastName_KeyboardPressed(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

@@ -148,6 +148,7 @@
             this.txtDegree.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsTeacherFromDep, "HOCVI", true));
             this.txtDegree.Location = new System.Drawing.Point(561, 194);
             this.txtDegree.Name = "txtDegree";
+            this.txtDegree.Properties.MaxLength = 20;
             this.txtDegree.Size = new System.Drawing.Size(205, 22);
             this.txtDegree.TabIndex = 12;
             // 
@@ -166,22 +167,27 @@
             this.txtFirstName.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsTeacherFromDep, "TEN", true));
             this.txtFirstName.Location = new System.Drawing.Point(934, 145);
             this.txtFirstName.Name = "txtFirstName";
+            this.txtFirstName.Properties.MaxLength = 10;
             this.txtFirstName.Size = new System.Drawing.Size(100, 22);
             this.txtFirstName.TabIndex = 8;
+            this.txtFirstName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFirstName_KeyboardPressed);
             // 
             // txtLastName
             // 
             this.txtLastName.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsTeacherFromDep, "HO", true));
             this.txtLastName.Location = new System.Drawing.Point(561, 145);
             this.txtLastName.Name = "txtLastName";
+            this.txtLastName.Properties.MaxLength = 40;
             this.txtLastName.Size = new System.Drawing.Size(234, 22);
             this.txtLastName.TabIndex = 6;
+            this.txtLastName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLastName_KeyboardPressed);
             // 
             // txtTeacherID
             // 
             this.txtTeacherID.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsTeacherFromDep, "MAGV", true));
             this.txtTeacherID.Location = new System.Drawing.Point(561, 101);
             this.txtTeacherID.Name = "txtTeacherID";
+            this.txtTeacherID.Properties.MaxLength = 8;
             this.txtTeacherID.Size = new System.Drawing.Size(198, 22);
             this.txtTeacherID.TabIndex = 4;
             // 
@@ -209,7 +215,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("VNI-Jamai", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(46, 26);
+            this.label1.Location = new System.Drawing.Point(378, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(254, 55);
             this.label1.TabIndex = 0;
@@ -441,6 +447,7 @@
             this.tableAdapterManager.SINHVIENTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachGiaoVienTheoKhoaTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachLopTheoKhoaTableAdapter = null;
+            this.tableAdapterManager.sp_DanhSachSinhVienTheoLopTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // sp_DanhSachGiaoVienTheoKhoaTableAdapter

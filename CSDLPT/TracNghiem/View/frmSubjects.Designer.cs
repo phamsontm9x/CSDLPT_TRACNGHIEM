@@ -185,6 +185,7 @@
             this.txtSubName.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsSubjects, "TENMH", true));
             this.txtSubName.Location = new System.Drawing.Point(488, 180);
             this.txtSubName.Name = "txtSubName";
+            this.txtSubName.Properties.MaxLength = 40;
             this.txtSubName.Size = new System.Drawing.Size(324, 22);
             this.txtSubName.TabIndex = 2;
             // 
@@ -193,6 +194,7 @@
             this.txtSubID.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsSubjects, "MAMH", true));
             this.txtSubID.Location = new System.Drawing.Point(488, 133);
             this.txtSubID.Name = "txtSubID";
+            this.txtSubID.Properties.MaxLength = 5;
             this.txtSubID.Size = new System.Drawing.Size(324, 22);
             this.txtSubID.TabIndex = 1;
             // 
@@ -225,6 +227,7 @@
             this.tableAdapterManager.SINHVIENTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachGiaoVienTheoKhoaTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachLopTheoKhoaTableAdapter = null;
+            this.tableAdapterManager.sp_DanhSachSinhVienTheoLopTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // barManager1

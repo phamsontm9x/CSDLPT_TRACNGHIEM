@@ -268,6 +268,7 @@
             this.txtDepName.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsDep, "TENKH", true));
             this.txtDepName.Location = new System.Drawing.Point(530, 238);
             this.txtDepName.Name = "txtDepName";
+            this.txtDepName.Properties.MaxLength = 40;
             this.txtDepName.Size = new System.Drawing.Size(316, 22);
             this.txtDepName.TabIndex = 5;
             // 
@@ -277,6 +278,7 @@
             this.txtDepID.Enabled = false;
             this.txtDepID.Location = new System.Drawing.Point(530, 192);
             this.txtDepID.Name = "txtDepID";
+            this.txtDepID.Properties.MaxLength = 8;
             this.txtDepID.Size = new System.Drawing.Size(316, 22);
             this.txtDepID.TabIndex = 3;
             // 
@@ -380,6 +382,7 @@
             this.tableAdapterManager.SINHVIENTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachGiaoVienTheoKhoaTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachLopTheoKhoaTableAdapter = null;
+            this.tableAdapterManager.sp_DanhSachSinhVienTheoLopTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // bdsClass

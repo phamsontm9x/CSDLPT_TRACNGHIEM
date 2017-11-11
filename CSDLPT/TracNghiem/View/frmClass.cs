@@ -279,33 +279,18 @@ namespace TracNghiem
                     }
                     else
                     {
-                        if (txtClassId.Text.Length > 8)
+                        try
                         {
-                            MessageBox.Show("Class ID can not exceed 8 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            txtClassId.Focus();
-                            return;
+                            this.Validate();
+                            bdsClassFromDep.EndEdit();
+                            bdsClassFromDep.ResetCurrentItem();
+                            this.sp_DanhSachLopTheoKhoaTableAdapter.Insert(txtClassId.Text, txtClassName.Text, getMaKhoaSelected());
                         }
-                        else if (txtClassName.Text.Length > 40)
+                        catch (Exception ex)
                         {
-                            MessageBox.Show("Class Name can not exceed 40 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            txtClassName.Focus();
+                            MessageBox.Show("Create class failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                            Program.myReader.Close();
                             return;
-                        }
-                        else
-                        {
-                            try
-                            {
-                                this.Validate();
-                                bdsClassFromDep.EndEdit();
-                                bdsClassFromDep.ResetCurrentItem();
-                                this.sp_DanhSachLopTheoKhoaTableAdapter.Insert(txtClassId.Text, txtClassName.Text, getMaKhoaSelected());
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show("Create class failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
-                                Program.myReader.Close();
-                                return;
-                            }
                         }
                     }
                     Program.myReader.Close();
@@ -334,27 +319,18 @@ namespace TracNghiem
                     }
                     else
                     {
-                        if (txtClassName.Text.Length > 40)
+                        try
                         {
-                            MessageBox.Show("Class Name can not exceed 40 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            txtClassName.Focus();
-                            return;
+                            this.Validate();
+                            bdsClassFromDep.EndEdit();
+                            bdsClassFromDep.ResetCurrentItem();
+                            this.sp_DanhSachLopTheoKhoaTableAdapter.Update(currentClassID, txtClassName.Text);
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            try
-                            {
-                                this.Validate();
-                                bdsClassFromDep.EndEdit();
-                                bdsClassFromDep.ResetCurrentItem();
-                                this.sp_DanhSachLopTheoKhoaTableAdapter.Update(currentClassID, txtClassName.Text);
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show("Update class failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
-                                Program.myReader.Close();
-                                return;
-                            }
+                            MessageBox.Show("Update class failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                            Program.myReader.Close();
+                            return;
                         }
                     }
                 }

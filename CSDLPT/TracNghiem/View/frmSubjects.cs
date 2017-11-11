@@ -75,31 +75,17 @@ namespace TracNghiem
             }
             else
             {
-                if (txtSubID.Text.Length > 5)
+                try
                 {
-                    MessageBox.Show("Subjects ID can not exceed 5 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtSubID.Focus();
-                    return;
+                    this.Validate();
+                    bdsSubjects.EndEdit();
+                    bdsSubjects.ResetCurrentItem();
+                    this.mONHOCTableAdapter.Update(this.dataSetTracNghiem.MONHOC);
                 }
-                else if (txtSubName.Text.Length > 40)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Subject Name can not exceed 40 characters!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Update subjects failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
                     return;
-                }
-                else
-                {
-                    try
-                    {
-                        this.Validate();
-                        bdsSubjects.EndEdit();
-                        bdsSubjects.ResetCurrentItem();
-                        this.mONHOCTableAdapter.Update(this.dataSetTracNghiem.MONHOC);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Update subjects failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
-                        return;
-                    }
                 }
             }
 
@@ -145,7 +131,7 @@ namespace TracNghiem
             {
                 MessageBox.Show("Can not delete " + currentSubName + " subject. \nThe subject has data available! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
-            else if (MessageBox.Show("Do you want to delete " + currentSubName + " subject", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            else if (MessageBox.Show("Do you want to delete " + currentSubName + " subject?", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try
                 {
