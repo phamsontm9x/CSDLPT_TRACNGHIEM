@@ -73,6 +73,7 @@
             this.btnStudent.Id = 7;
             this.btnStudent.LargeGlyph = global::TracNghiem.Properties.Resources.icons8_student_male;
             this.btnStudent.Name = "btnStudent";
+            this.btnStudent.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnStudent_ItemClick);
             // 
             // ribbonControl1
             // 

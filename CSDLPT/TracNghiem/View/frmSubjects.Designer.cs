@@ -90,6 +90,8 @@
             gridView1.GridControl = this.mONHOCGridControl;
             gridView1.Name = "gridView1";
             gridView1.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Default;
+            gridView1.OptionsView.ShowDetailButtons = false;
+            gridView1.OptionsView.ShowGroupExpandCollapseButtons = false;
             gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // colMAMH
@@ -221,6 +223,7 @@
             this.tableAdapterManager.LOPTableAdapter = null;
             this.tableAdapterManager.MONHOCTableAdapter = this.mONHOCTableAdapter;
             this.tableAdapterManager.SINHVIENTableAdapter = null;
+            this.tableAdapterManager.sp_DanhSachGiaoVienTheoKhoaTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachLopTheoKhoaTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 

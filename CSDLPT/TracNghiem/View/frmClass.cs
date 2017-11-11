@@ -22,7 +22,7 @@ namespace TracNghiem
             InitializeComponent();
         }
 
-        private void cbbDep_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbbDep_SelectionChangeCommitted(object sender, EventArgs e)
         {
             if (cbbDep.SelectedValue != null)
             {
@@ -44,9 +44,18 @@ namespace TracNghiem
                 else
                 {
                     initUIComboBoxBranch();
-                    getDataClassFromDep(getMaKhoaSelected());
                 }
             }
+        }
+
+        public void initUIComboBoxDep()
+        {
+            cbbDep.DataSource = Program.bds;
+            cbbDep.DisplayMember = "MACS";
+            cbbDep.ValueMember = "TENCS";
+            cbbDep.SelectedIndex = Program.currentBranch;
+
+            initUIComboBoxBranch();
         }
 
         private void frmClass_Load(object sender, EventArgs e)
@@ -55,13 +64,7 @@ namespace TracNghiem
             this.lOPTableAdapter.Connection.ConnectionString = Program.connectStr;
             // TODO: This line of code loads data into the 'dataSetTracNghiem.LOP' table. You can move, or remove it, as needed.
 
-            cbbDep.DataSource = Program.bds;
-            cbbDep.DisplayMember = "MACS";
-            cbbDep.ValueMember = "TENCS";
-            cbbDep.SelectedIndex = Program.currentBranch;
-
-            initUIComboBoxBranch();
-            getDataClassFromDep(getMaKhoaSelected());
+            initUIComboBoxDep();
 
             groupBox1.Enabled = true;
             txtClassName.Enabled = txtClassId.Enabled = false;
@@ -79,6 +82,7 @@ namespace TracNghiem
             else
             {
                 cbbDep.Enabled = false;
+                cbbDep.Visible = false;
                 cbbBranch.Enabled = true;
                 btnNew.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
                 btnSave.Enabled = btnCancel.Enabled = false;
@@ -104,18 +108,28 @@ namespace TracNghiem
             DataTable dt = Program.ExecSqlDataTable(strLenh);
             if (dt != null)
             {
-                cbbBranch.DataSource = dt;
-                cbbBranch.DisplayMember = "TENKH";
-                cbbBranch.ValueMember = "MAKH";
-            } else
+                if (dt.Rows.Count == 0)
+                {
+                    cbbBranch.SelectedIndex = -1;
+                    cbbBranch.DataSource = null;
+                }
+                else
+                {
+                    cbbBranch.DataSource = dt;
+                    cbbBranch.DisplayMember = "TENKH";
+                    cbbBranch.ValueMember = "MAKH";
+                }
+                cbbBranch.SelectedIndex = -1;
+            }
+            else
             {
                 MessageBox.Show("Can not show list branch", "Notification!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            getMaKhoaSelected();
         }
 
         public String getMaKhoaSelected()
         {
+            if (cbbBranch.Items.Count > 0)
             branchID = cbbBranch.SelectedValue.ToString();
             return branchID;
         }
@@ -133,11 +147,6 @@ namespace TracNghiem
             }
 
             setCurrentRole();
-        }
-
-        private void cbbBranch_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            getMaKhoaSelected();
         }
 
         private void cbbBranch_SelectionChangeCommitted(object sender, EventArgs e)

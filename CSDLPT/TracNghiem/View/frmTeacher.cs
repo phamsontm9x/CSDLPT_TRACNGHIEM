@@ -29,13 +29,7 @@ namespace TracNghiem
             this.gIAOVIENTableAdapter.Connection.ConnectionString = Program.connectStr;
             this.gIAOVIENTableAdapter.Fill(this.dataSetTracNghiem.GIAOVIEN);
 
-            cbbDep.DataSource = Program.bds;
-            cbbDep.DisplayMember = "MACS";
-            cbbDep.ValueMember = "TENCS";
-            cbbDep.SelectedIndex = Program.currentBranch;
-
-            initUIComboBoxBranch();
-            getDataTeacherFromDep(getMaKhoaSelected());
+            initUIComboBoxDep();
 
             groupBox1.Enabled = true;
             txtTeacherID.Enabled = txtFirstName.Enabled = txtLastName.Enabled = txtDegree.Enabled = false;
@@ -43,7 +37,7 @@ namespace TracNghiem
             setCurrentRole();
         }
 
-        private void cbbDep_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbbDep_SelectionChangeCommitted(object sender, EventArgs e)
         {
             if (cbbDep.SelectedValue != null)
             {
@@ -65,14 +59,18 @@ namespace TracNghiem
                 else
                 {
                     initUIComboBoxBranch();
-                    getDataTeacherFromDep(getMaKhoaSelected());
                 }
             }
         }
 
-        private void cbbBranch_SelectedIndexChanged(object sender, EventArgs e)
+        public void initUIComboBoxDep()
         {
-            getMaKhoaSelected();
+            cbbDep.DataSource = Program.bds;
+            cbbDep.DisplayMember = "MACS";
+            cbbDep.ValueMember = "TENCS";
+            cbbDep.SelectedIndex = Program.currentBranch;
+
+            initUIComboBoxBranch();
         }
 
         private void cbbBranch_SelectionChangeCommitted(object sender, EventArgs e)
@@ -352,6 +350,7 @@ namespace TracNghiem
             else
             {
                 cbbDep.Enabled = false;
+                cbbDep.Visible = false;
                 cbbBranch.Enabled = true;
                 btnNew.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
                 btnSave.Enabled = btnCancel.Enabled = false;
@@ -377,20 +376,29 @@ namespace TracNghiem
             DataTable dt = Program.ExecSqlDataTable(strLenh);
             if (dt != null)
             {
-                cbbBranch.DataSource = dt;
-                cbbBranch.DisplayMember = "TENKH";
-                cbbBranch.ValueMember = "MAKH";
+                if (dt.Rows.Count == 0)
+                {
+                    cbbBranch.SelectedIndex = -1;
+                    cbbBranch.DataSource = null;
+                }
+                else
+                {
+                    cbbBranch.DataSource = dt;
+                    cbbBranch.DisplayMember = "TENKH";
+                    cbbBranch.ValueMember = "MAKH";
+                }
+                cbbBranch.SelectedIndex = -1;
             }
             else
             {
                 MessageBox.Show("Can not show list branch", "Notification!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            getMaKhoaSelected();
         }
 
         public String getMaKhoaSelected()
         {
-            branchID = cbbBranch.SelectedValue.ToString();
+            if (cbbBranch.Items.Count > 0)
+                branchID = cbbBranch.SelectedValue.ToString();
             return branchID;
         }
 

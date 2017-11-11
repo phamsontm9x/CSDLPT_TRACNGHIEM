@@ -80,6 +80,7 @@
             this.rbGiaoVien.Name = "rbGiaoVien";
             this.rbGiaoVien.Size = new System.Drawing.Size(109, 26);
             this.rbGiaoVien.TabIndex = 4;
+            this.rbGiaoVien.TabStop = true;
             this.rbGiaoVien.Text = "Giáo viên";
             this.rbGiaoVien.UseVisualStyleBackColor = true;
             this.rbGiaoVien.CheckedChanged += new System.EventHandler(this.rbGiaoVien_CheckedChanged);
@@ -91,6 +92,7 @@
             this.rbSinhVien.Name = "rbSinhVien";
             this.rbSinhVien.Size = new System.Drawing.Size(105, 26);
             this.rbSinhVien.TabIndex = 3;
+            this.rbSinhVien.TabStop = true;
             this.rbSinhVien.Text = "Sinh viên";
             this.rbSinhVien.UseVisualStyleBackColor = true;
             this.rbSinhVien.CheckedChanged += new System.EventHandler(this.rbSinhVien_CheckedChanged);

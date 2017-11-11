@@ -34,6 +34,12 @@ namespace TracNghiem
             // TODO: This line of code loads data into the 'dataSetTracNghiem.MONHOC' table. You can move, or remove it, as needed.
             this.mONHOCTableAdapter.Fill(this.dataSetTracNghiem.MONHOC);
             groupBox1.Enabled = false;
+
+            if (bdsSubjects.Count == 0)
+            {
+                btnRefresh.Enabled = btnEdit.Enabled = btnSave.Enabled = btnCancel.Enabled = btnDel.Enabled = false;
+            }
+
             btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
             btnSave.Enabled = btnCancel.Enabled = false;
         }
@@ -145,6 +151,10 @@ namespace TracNghiem
                 {
                     bdsSubjects.RemoveCurrent();
                     this.mONHOCTableAdapter.Update(this.dataSetTracNghiem.MONHOC);
+                    if (bdsSubjects.Count == 0)
+                    {
+                        btnCancel.Enabled = btnDel.Enabled = btnEdit.Enabled = btnRefresh.Enabled = false;
+                    }
                 }
                 catch (Exception ex)
                 {

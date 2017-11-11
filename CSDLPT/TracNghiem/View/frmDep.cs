@@ -66,6 +66,7 @@ namespace TracNghiem
             else
             {
                 cbbDep.Enabled = false;
+                cbbDep.Visible = false;
                 btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
                 btnSave.Enabled = btnCancel.Enabled = false;
             }

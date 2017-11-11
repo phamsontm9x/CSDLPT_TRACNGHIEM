@@ -45,10 +45,12 @@
             this.cbbDep = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.bdsTeacher = new System.Windows.Forms.BindingSource(this.components);
-            this.gIAOVIENTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.GIAOVIENTableAdapter();
-            this.tableAdapterManager = new TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager();
-            this.sp_DanhSachGiaoVienTheoKhoaTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.sp_DanhSachGiaoVienTheoKhoaTableAdapter();
+            this.sp_DanhSachGiaoVienTheoKhoaGridControl = new DevExpress.XtraGrid.GridControl();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colMAGV = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colHO = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTEN = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colHOCVI = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar5 = new DevExpress.XtraBars.Bar();
             this.btnNew = new DevExpress.XtraBars.BarButtonItem();
@@ -62,12 +64,10 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.sp_DanhSachGiaoVienTheoKhoaGridControl = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colMAGV = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colHO = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colTEN = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colHOCVI = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.bdsTeacher = new System.Windows.Forms.BindingSource(this.components);
+            this.gIAOVIENTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.GIAOVIENTableAdapter();
+            this.tableAdapterManager = new TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager();
+            this.sp_DanhSachGiaoVienTheoKhoaTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.sp_DanhSachGiaoVienTheoKhoaTableAdapter();
             mAGVLabel = new System.Windows.Forms.Label();
             hOLabel = new System.Windows.Forms.Label();
             tENLabel = new System.Windows.Forms.Label();
@@ -80,10 +80,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtLastName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTeacherID.Properties)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bdsTeacher)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sp_DanhSachGiaoVienTheoKhoaGridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdsTeacher)).BeginInit();
             this.SuspendLayout();
             // 
             // mAGVLabel
@@ -193,7 +193,6 @@
             this.cbbBranch.Name = "cbbBranch";
             this.cbbBranch.Size = new System.Drawing.Size(317, 30);
             this.cbbBranch.TabIndex = 2;
-            this.cbbBranch.SelectedIndexChanged += new System.EventHandler(this.cbbBranch_SelectedIndexChanged);
             this.cbbBranch.SelectionChangeCommitted += new System.EventHandler(this.cbbBranch_SelectionChangeCommitted);
             // 
             // cbbDep
@@ -204,7 +203,7 @@
             this.cbbDep.Name = "cbbDep";
             this.cbbDep.Size = new System.Drawing.Size(317, 30);
             this.cbbDep.TabIndex = 1;
-            this.cbbDep.SelectedIndexChanged += new System.EventHandler(this.cbbDep_SelectedIndexChanged);
+            this.cbbDep.SelectionChangeCommitted += new System.EventHandler(this.cbbDep_SelectionChangeCommitted);
             // 
             // label1
             // 
@@ -228,35 +227,76 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
-            // bdsTeacher
+            // sp_DanhSachGiaoVienTheoKhoaGridControl
             // 
-            this.bdsTeacher.DataMember = "GIAOVIEN";
-            this.bdsTeacher.DataSource = this.dataSetTracNghiem;
+            this.sp_DanhSachGiaoVienTheoKhoaGridControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.sp_DanhSachGiaoVienTheoKhoaGridControl.DataSource = this.bdsTeacherFromDep;
+            this.sp_DanhSachGiaoVienTheoKhoaGridControl.Location = new System.Drawing.Point(0, 0);
+            this.sp_DanhSachGiaoVienTheoKhoaGridControl.MainView = this.gridView1;
+            this.sp_DanhSachGiaoVienTheoKhoaGridControl.MenuManager = this.barManager1;
+            this.sp_DanhSachGiaoVienTheoKhoaGridControl.Name = "sp_DanhSachGiaoVienTheoKhoaGridControl";
+            this.sp_DanhSachGiaoVienTheoKhoaGridControl.Size = new System.Drawing.Size(1067, 341);
+            this.sp_DanhSachGiaoVienTheoKhoaGridControl.TabIndex = 0;
+            this.sp_DanhSachGiaoVienTheoKhoaGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView1});
             // 
-            // gIAOVIENTableAdapter
+            // gridView1
             // 
-            this.gIAOVIENTableAdapter.ClearBeforeFill = true;
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colMAGV,
+            this.colHO,
+            this.colTEN,
+            this.colHOCVI});
+            this.gridView1.GridControl = this.sp_DanhSachGiaoVienTheoKhoaGridControl;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Default;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
-            // tableAdapterManager
+            // colMAGV
             // 
-            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.BAITHITableAdapter = null;
-            this.tableAdapterManager.BANGDIEMTableAdapter = null;
-            this.tableAdapterManager.BODETableAdapter = null;
-            this.tableAdapterManager.COSOTableAdapter = null;
-            this.tableAdapterManager.GIAOVIEN_DANGKYTableAdapter = null;
-            this.tableAdapterManager.GIAOVIENTableAdapter = this.gIAOVIENTableAdapter;
-            this.tableAdapterManager.KHOATableAdapter = null;
-            this.tableAdapterManager.LOPTableAdapter = null;
-            this.tableAdapterManager.MONHOCTableAdapter = null;
-            this.tableAdapterManager.SINHVIENTableAdapter = null;
-            this.tableAdapterManager.sp_DanhSachGiaoVienTheoKhoaTableAdapter = null;
-            this.tableAdapterManager.sp_DanhSachLopTheoKhoaTableAdapter = null;
-            this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.colMAGV.Caption = "Teacher ID";
+            this.colMAGV.FieldName = "MAGV";
+            this.colMAGV.Name = "colMAGV";
+            this.colMAGV.OptionsColumn.AllowEdit = false;
+            this.colMAGV.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
+            this.colMAGV.OptionsColumn.ReadOnly = true;
+            this.colMAGV.Visible = true;
+            this.colMAGV.VisibleIndex = 0;
             // 
-            // sp_DanhSachGiaoVienTheoKhoaTableAdapter
+            // colHO
             // 
-            this.sp_DanhSachGiaoVienTheoKhoaTableAdapter.ClearBeforeFill = true;
+            this.colHO.Caption = "Last Name";
+            this.colHO.FieldName = "HO";
+            this.colHO.Name = "colHO";
+            this.colHO.OptionsColumn.AllowEdit = false;
+            this.colHO.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
+            this.colHO.OptionsColumn.ReadOnly = true;
+            this.colHO.Visible = true;
+            this.colHO.VisibleIndex = 1;
+            // 
+            // colTEN
+            // 
+            this.colTEN.Caption = "First Name";
+            this.colTEN.FieldName = "TEN";
+            this.colTEN.Name = "colTEN";
+            this.colTEN.OptionsColumn.AllowEdit = false;
+            this.colTEN.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
+            this.colTEN.OptionsColumn.ReadOnly = true;
+            this.colTEN.Visible = true;
+            this.colTEN.VisibleIndex = 2;
+            // 
+            // colHOCVI
+            // 
+            this.colHOCVI.Caption = "Degree";
+            this.colHOCVI.FieldName = "HOCVI";
+            this.colHOCVI.Name = "colHOCVI";
+            this.colHOCVI.OptionsColumn.AllowEdit = false;
+            this.colHOCVI.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
+            this.colHOCVI.OptionsColumn.ReadOnly = true;
+            this.colHOCVI.Visible = true;
+            this.colHOCVI.VisibleIndex = 3;
             // 
             // barManager1
             // 
@@ -377,76 +417,35 @@
             this.barDockControlRight.Location = new System.Drawing.Point(1067, 59);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 612);
             // 
-            // sp_DanhSachGiaoVienTheoKhoaGridControl
+            // bdsTeacher
             // 
-            this.sp_DanhSachGiaoVienTheoKhoaGridControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.sp_DanhSachGiaoVienTheoKhoaGridControl.DataSource = this.bdsTeacherFromDep;
-            this.sp_DanhSachGiaoVienTheoKhoaGridControl.Location = new System.Drawing.Point(0, 0);
-            this.sp_DanhSachGiaoVienTheoKhoaGridControl.MainView = this.gridView1;
-            this.sp_DanhSachGiaoVienTheoKhoaGridControl.MenuManager = this.barManager1;
-            this.sp_DanhSachGiaoVienTheoKhoaGridControl.Name = "sp_DanhSachGiaoVienTheoKhoaGridControl";
-            this.sp_DanhSachGiaoVienTheoKhoaGridControl.Size = new System.Drawing.Size(1067, 341);
-            this.sp_DanhSachGiaoVienTheoKhoaGridControl.TabIndex = 0;
-            this.sp_DanhSachGiaoVienTheoKhoaGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
+            this.bdsTeacher.DataMember = "GIAOVIEN";
+            this.bdsTeacher.DataSource = this.dataSetTracNghiem;
             // 
-            // gridView1
+            // gIAOVIENTableAdapter
             // 
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colMAGV,
-            this.colHO,
-            this.colTEN,
-            this.colHOCVI});
-            this.gridView1.GridControl = this.sp_DanhSachGiaoVienTheoKhoaGridControl;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Default;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gIAOVIENTableAdapter.ClearBeforeFill = true;
             // 
-            // colMAGV
+            // tableAdapterManager
             // 
-            this.colMAGV.Caption = "Teacher ID";
-            this.colMAGV.FieldName = "MAGV";
-            this.colMAGV.Name = "colMAGV";
-            this.colMAGV.OptionsColumn.AllowEdit = false;
-            this.colMAGV.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
-            this.colMAGV.OptionsColumn.ReadOnly = true;
-            this.colMAGV.Visible = true;
-            this.colMAGV.VisibleIndex = 0;
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.BAITHITableAdapter = null;
+            this.tableAdapterManager.BANGDIEMTableAdapter = null;
+            this.tableAdapterManager.BODETableAdapter = null;
+            this.tableAdapterManager.COSOTableAdapter = null;
+            this.tableAdapterManager.GIAOVIEN_DANGKYTableAdapter = null;
+            this.tableAdapterManager.GIAOVIENTableAdapter = this.gIAOVIENTableAdapter;
+            this.tableAdapterManager.KHOATableAdapter = null;
+            this.tableAdapterManager.LOPTableAdapter = null;
+            this.tableAdapterManager.MONHOCTableAdapter = null;
+            this.tableAdapterManager.SINHVIENTableAdapter = null;
+            this.tableAdapterManager.sp_DanhSachGiaoVienTheoKhoaTableAdapter = null;
+            this.tableAdapterManager.sp_DanhSachLopTheoKhoaTableAdapter = null;
+            this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
-            // colHO
+            // sp_DanhSachGiaoVienTheoKhoaTableAdapter
             // 
-            this.colHO.Caption = "Last Name";
-            this.colHO.FieldName = "HO";
-            this.colHO.Name = "colHO";
-            this.colHO.OptionsColumn.AllowEdit = false;
-            this.colHO.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
-            this.colHO.OptionsColumn.ReadOnly = true;
-            this.colHO.Visible = true;
-            this.colHO.VisibleIndex = 1;
-            // 
-            // colTEN
-            // 
-            this.colTEN.Caption = "First Name";
-            this.colTEN.FieldName = "TEN";
-            this.colTEN.Name = "colTEN";
-            this.colTEN.OptionsColumn.AllowEdit = false;
-            this.colTEN.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
-            this.colTEN.OptionsColumn.ReadOnly = true;
-            this.colTEN.Visible = true;
-            this.colTEN.VisibleIndex = 2;
-            // 
-            // colHOCVI
-            // 
-            this.colHOCVI.Caption = "Degree";
-            this.colHOCVI.FieldName = "HOCVI";
-            this.colHOCVI.Name = "colHOCVI";
-            this.colHOCVI.OptionsColumn.AllowEdit = false;
-            this.colHOCVI.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
-            this.colHOCVI.OptionsColumn.ReadOnly = true;
-            this.colHOCVI.Visible = true;
-            this.colHOCVI.VisibleIndex = 3;
+            this.sp_DanhSachGiaoVienTheoKhoaTableAdapter.ClearBeforeFill = true;
             // 
             // frmTeacher
             // 
@@ -474,10 +473,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtLastName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTeacherID.Properties)).EndInit();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bdsTeacher)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sp_DanhSachGiaoVienTheoKhoaGridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdsTeacher)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -330,28 +330,33 @@
             this.gridView1.GridControl = this.kHOAGridControl;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Default;
+            this.gridView1.OptionsDetail.SmartDetailExpand = false;
+            this.gridView1.OptionsView.ShowDetailButtons = false;
+            this.gridView1.OptionsView.ShowGroupExpandCollapseButtons = false;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // DepID
             // 
-            this.DepID.Caption = "DepID";
+            this.DepID.Caption = "Department ID";
             this.DepID.FieldName = "MAKH";
             this.DepID.Name = "DepID";
             this.DepID.OptionsColumn.AllowEdit = false;
             this.DepID.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
             this.DepID.OptionsColumn.ReadOnly = true;
+            this.DepID.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowOnlyInEditor;
             this.DepID.Visible = true;
             this.DepID.VisibleIndex = 0;
             this.DepID.Width = 289;
             // 
             // DepName
             // 
-            this.DepName.Caption = "DepName";
+            this.DepName.Caption = "Department Name";
             this.DepName.FieldName = "TENKH";
             this.DepName.Name = "DepName";
             this.DepName.OptionsColumn.AllowEdit = false;
             this.DepName.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
             this.DepName.OptionsColumn.ReadOnly = true;
+            this.DepName.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowOnlyInEditor;
             this.DepName.Visible = true;
             this.DepName.VisibleIndex = 1;
             this.DepName.Width = 651;
@@ -373,6 +378,7 @@
             this.tableAdapterManager.LOPTableAdapter = null;
             this.tableAdapterManager.MONHOCTableAdapter = null;
             this.tableAdapterManager.SINHVIENTableAdapter = null;
+            this.tableAdapterManager.sp_DanhSachGiaoVienTheoKhoaTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachLopTheoKhoaTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
