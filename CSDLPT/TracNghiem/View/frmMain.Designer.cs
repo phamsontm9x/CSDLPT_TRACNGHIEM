@@ -177,6 +177,7 @@
             this.btnExam.Id = 10;
             this.btnExam.LargeGlyph = global::TracNghiem.Properties.Resources.icons8_questionnaire;
             this.btnExam.Name = "btnExam";
+            this.btnExam.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExam_ItemClick);
             // 
             // btnSign
             // 

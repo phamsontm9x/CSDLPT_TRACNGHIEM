@@ -68,6 +68,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dataSetView.xsd</DependentUpon>
     </Compile>
+    <Compile Include="frmQuestion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQuestion.Designer.cs">
+      <DependentUpon>frmQuestion.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\frmStudent.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +118,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmQuestion.resx">
+      <DependentUpon>frmQuestion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\frmStudent.resx">
       <DependentUpon>frmStudent.cs</DependentUpon>
     </EmbeddedResource>
@@ -253,6 +262,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-user-account-filled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-view.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-search.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
