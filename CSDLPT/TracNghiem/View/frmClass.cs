@@ -100,17 +100,16 @@ namespace TracNghiem
 
         public void initUIComboBoxBranch ()
         {
-            String currentBranchName = cbbDep.SelectedValue.ToString();
-            int indexStr = currentBranchName.IndexOf("\\") + 1;
-            currentBranchName = currentBranchName.Substring(indexStr);
+            String currentServerName = cbbDep.SelectedValue.ToString();
+            int indexStr = currentServerName.IndexOf("\\") + 1;
+            currentServerName = currentServerName.Substring(indexStr);
 
-            String strLenh = "exec sp_DanhSachKhoa'" + currentBranchName + "'";
+            String strLenh = "exec sp_DanhSachKhoa'" + currentServerName + "'";
             DataTable dt = Program.ExecSqlDataTable(strLenh);
             if (dt != null)
             {
                 if (dt.Rows.Count == 0)
                 {
-                    cbbBranch.SelectedIndex = -1;
                     cbbBranch.DataSource = null;
                 }
                 else
@@ -120,6 +119,7 @@ namespace TracNghiem
                     cbbBranch.ValueMember = "MAKH";
                 }
                 cbbBranch.SelectedIndex = -1;
+                getDataClassFromDep("");
             }
             else
             {
@@ -138,7 +138,10 @@ namespace TracNghiem
         {
             try
             {
-                this.sp_DanhSachLopTheoKhoaTableAdapter.Fill(this.dataSetTracNghiem.sp_DanhSachLopTheoKhoa, branchID);
+                String currentServerName = cbbDep.SelectedValue.ToString();
+                int indexStr = currentServerName.IndexOf("\\") + 1;
+                currentServerName = currentServerName.Substring(indexStr);
+                this.sp_DanhSachLopTheoKhoaTableAdapter.Fill(this.dataSetTracNghiem.sp_DanhSachLopTheoKhoa, branchID, currentServerName);
                 this.sp_DanhSachLopTheoKhoaTableAdapter.ClearBeforeFill = true;
             }
             catch (System.Exception ex)
@@ -151,6 +154,7 @@ namespace TracNghiem
 
         private void cbbBranch_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            txtSearch.Text = "";
             getDataClassFromDep(getMaKhoaSelected());
         }
 
@@ -372,6 +376,25 @@ namespace TracNghiem
         public void initButtonBarManage(Boolean isEnable)
         {
             btnNew.Enabled = btnEdit.Enabled = btnSave.Enabled = btnRefresh.Enabled = btnDel.Enabled = btnCancel.Enabled = isEnable;
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            bdsClassFromDep.Filter =  "MALOP LIKE '%" + this.txtSearch.Text + "%'" + " OR TENLOP LIKE '%" + this.txtSearch.Text + "%'";
+        }
+
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkboxSearch.Checked == true)
+            {
+                getDataClassFromDep("");
+                cbbBranch.SelectedIndex = -1;
+                cbbBranch.Enabled = false;
+            } else
+            {
+                cbbBranch.Enabled = true;
+            }
         }
     }
 }

@@ -63,6 +63,8 @@
             this.colMALOP = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTENLOP = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.checkboxSearch = new System.Windows.Forms.CheckBox();
             lblClassId = new System.Windows.Forms.Label();
             lblClassName = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
@@ -111,7 +113,7 @@
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Location = new System.Drawing.Point(0, 65);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1004, 243);
+            this.groupBox1.Size = new System.Drawing.Size(1172, 243);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -232,14 +234,14 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(1004, 59);
+            this.barDockControlTop.Size = new System.Drawing.Size(1172, 59);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 598);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1004, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1172, 0);
             // 
             // barDockControlLeft
             // 
@@ -252,7 +254,7 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1004, 59);
+            this.barDockControlRight.Location = new System.Drawing.Point(1172, 59);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 539);
             // 
             // txtClassId
@@ -302,7 +304,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Location = new System.Drawing.Point(0, 249);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1004, 257);
+            this.groupBox2.Size = new System.Drawing.Size(1172, 257);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "groupBox2";
@@ -347,7 +349,7 @@
             this.sp_DanhSachLopTheoKhoaGridControl.Location = new System.Drawing.Point(0, 17);
             this.sp_DanhSachLopTheoKhoaGridControl.MainView = this.gridView1;
             this.sp_DanhSachLopTheoKhoaGridControl.Name = "sp_DanhSachLopTheoKhoaGridControl";
-            this.sp_DanhSachLopTheoKhoaGridControl.Size = new System.Drawing.Size(1004, 286);
+            this.sp_DanhSachLopTheoKhoaGridControl.Size = new System.Drawing.Size(1172, 286);
             this.sp_DanhSachLopTheoKhoaGridControl.TabIndex = 2;
             this.sp_DanhSachLopTheoKhoaGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -393,16 +395,37 @@
             this.groupBox3.Controls.Add(this.sp_DanhSachLopTheoKhoaGridControl);
             this.groupBox3.Location = new System.Drawing.Point(0, 297);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1004, 289);
+            this.groupBox3.Size = new System.Drawing.Size(1172, 289);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(758, 15);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(250, 30);
+            this.txtSearch.TabIndex = 12;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
+            // checkboxSearch
+            // 
+            this.checkboxSearch.AutoSize = true;
+            this.checkboxSearch.Location = new System.Drawing.Point(1025, 18);
+            this.checkboxSearch.Name = "checkboxSearch";
+            this.checkboxSearch.Size = new System.Drawing.Size(112, 26);
+            this.checkboxSearch.TabIndex = 17;
+            this.checkboxSearch.Text = "SearchAll";
+            this.checkboxSearch.UseVisualStyleBackColor = true;
+            this.checkboxSearch.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // frmClass
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1004, 598);
+            this.ClientSize = new System.Drawing.Size(1172, 598);
+            this.Controls.Add(this.checkboxSearch);
+            this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.barDockControlLeft);
@@ -464,5 +487,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private DevExpress.XtraGrid.Columns.GridColumn colMALOP;
         private DevExpress.XtraGrid.Columns.GridColumn colTENLOP;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.CheckBox checkboxSearch;
     }
 }
