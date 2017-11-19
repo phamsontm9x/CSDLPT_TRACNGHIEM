@@ -434,19 +434,17 @@ namespace TracNghiem
             }
         }
 
-        private void gridView_IndexChanged(object sender, DataGridViewRowEventArgs e)
+        private void gridView1_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
         {
             index = bdsListExamCode.Position;
             String currentTeacherID = ((DataRowView)bdsListExamCode[index])["MAGV"].ToString();
             if (currentTeacherID.Replace(" ", String.Empty) != Program.currentID)
             {
                 btnEdit.Enabled = false;
+            } else
+            {
+                btnEdit.Enabled = true;
             }
-        }
-
-        private void gridView_IndexChanged(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
-        {
-
         }
     }
 }
