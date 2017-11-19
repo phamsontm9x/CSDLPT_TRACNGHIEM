@@ -68,10 +68,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dataSetView.xsd</DependentUpon>
     </Compile>
-    <Compile Include="frmQuestion.cs">
+    <Compile Include="View\frmQuestion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmQuestion.Designer.cs">
+    <Compile Include="View\frmQuestion.Designer.cs">
       <DependentUpon>frmQuestion.cs</DependentUpon>
     </Compile>
     <Compile Include="View\frmStudent.cs">
@@ -118,7 +118,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmQuestion.resx">
+    <EmbeddedResource Include="View\frmQuestion.resx">
       <DependentUpon>frmQuestion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\frmStudent.resx">
@@ -161,7 +161,6 @@
     </None>
     <None Include="dataSetTracNghiem.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dataSetTracNghiem.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="dataSetTracNghiem.xss">
