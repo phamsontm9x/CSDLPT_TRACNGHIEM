@@ -68,6 +68,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dataSetView.xsd</DependentUpon>
     </Compile>
+    <Compile Include="frmRegistration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRegistration.Designer.cs">
+      <DependentUpon>frmRegistration.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\frmQuestion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +124,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmRegistration.resx">
+      <DependentUpon>frmRegistration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\frmQuestion.resx">
       <DependentUpon>frmQuestion.cs</DependentUpon>
     </EmbeddedResource>
