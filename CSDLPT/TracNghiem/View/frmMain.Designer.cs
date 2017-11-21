@@ -170,6 +170,7 @@
             this.btnPoint.Id = 9;
             this.btnPoint.LargeGlyph = global::TracNghiem.Properties.Resources.icons8_scorecard_filled;
             this.btnPoint.Name = "btnPoint";
+            this.btnPoint.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPoint_ItemClick);
             // 
             // btnExam
             // 
@@ -185,6 +186,7 @@
             this.btnSign.Id = 11;
             this.btnSign.LargeGlyph = global::TracNghiem.Properties.Resources.icons8_registration_filled;
             this.btnSign.Name = "btnSign";
+            this.btnSign.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSign_ItemClick);
             // 
             // btnTry
             // 
@@ -192,6 +194,7 @@
             this.btnTry.Id = 12;
             this.btnTry.LargeGlyph = global::TracNghiem.Properties.Resources.icons8_todo_list;
             this.btnTry.Name = "btnTry";
+            this.btnTry.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnTry_ItemClick);
             // 
             // btnTest
             // 
@@ -199,6 +202,7 @@
             this.btnTest.Id = 13;
             this.btnTest.LargeGlyph = global::TracNghiem.Properties.Resources.icons8_todo_list;
             this.btnTest.Name = "btnTest";
+            this.btnTest.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnTest_ItemClick);
             // 
             // btnReport
             // 
@@ -206,6 +210,7 @@
             this.btnReport.Id = 14;
             this.btnReport.LargeGlyph = global::TracNghiem.Properties.Resources.icons8_report_card;
             this.btnReport.Name = "btnReport";
+            this.btnReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReport_ItemClick);
             // 
             // btnCreate
             // 
@@ -213,6 +218,7 @@
             this.btnCreate.Id = 15;
             this.btnCreate.LargeGlyph = global::TracNghiem.Properties.Resources.icons8_add_user_male;
             this.btnCreate.Name = "btnCreate";
+            this.btnCreate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCreate_ItemClick);
             // 
             // ribSystem
             // 

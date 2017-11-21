@@ -152,5 +152,42 @@ namespace TracNghiem
                 f.Show();
             }
         }
+
+        private void btnPoint_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            MessageBox.Show("We are developing this function", "", MessageBoxButtons.OK);
+        }
+
+        private void btnCreate_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            MessageBox.Show("We are developing this function", "", MessageBoxButtons.OK);
+        }
+
+        private void btnSign_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExists(typeof(frmRegistration));
+            if (frm != null) frm.Activate();
+            else
+            {
+                frmRegistration f = new frmRegistration();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
+
+        private void btnReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            MessageBox.Show("We are developing this function", "", MessageBoxButtons.OK);
+        }
+
+        private void btnTest_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            MessageBox.Show("We are developing this function", "", MessageBoxButtons.OK);
+        }
+
+        private void btnTry_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            MessageBox.Show("We are developing this function", "", MessageBoxButtons.OK);
+        }
     }
 }
