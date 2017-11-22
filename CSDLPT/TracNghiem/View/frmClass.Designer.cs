@@ -400,20 +400,20 @@
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(758, 15);
+            this.txtSearch.Location = new System.Drawing.Point(760, 15);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(250, 30);
+            this.txtSearch.Size = new System.Drawing.Size(200, 30);
             this.txtSearch.TabIndex = 12;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // checkboxSearch
             // 
             this.checkboxSearch.AutoSize = true;
-            this.checkboxSearch.Location = new System.Drawing.Point(1025, 18);
+            this.checkboxSearch.Location = new System.Drawing.Point(970, 17);
             this.checkboxSearch.Name = "checkboxSearch";
-            this.checkboxSearch.Size = new System.Drawing.Size(112, 26);
+            this.checkboxSearch.Size = new System.Drawing.Size(116, 26);
             this.checkboxSearch.TabIndex = 17;
-            this.checkboxSearch.Text = "SearchAll";
+            this.checkboxSearch.Text = "Search All";
             this.checkboxSearch.UseVisualStyleBackColor = true;
             this.checkboxSearch.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 

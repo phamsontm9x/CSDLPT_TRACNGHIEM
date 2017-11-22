@@ -75,6 +75,8 @@
             this.colNGAYSINH = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDIACHI = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.checkBoxSearch = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtAddress.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsStudentFromClass)).BeginInit();
@@ -537,11 +539,32 @@
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(760, 15);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(200, 30);
+            this.txtSearch.TabIndex = 11;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
+            // checkBoxSearch
+            // 
+            this.checkBoxSearch.AutoSize = true;
+            this.checkBoxSearch.Location = new System.Drawing.Point(970, 17);
+            this.checkBoxSearch.Name = "checkBoxSearch";
+            this.checkBoxSearch.Size = new System.Drawing.Size(116, 26);
+            this.checkBoxSearch.TabIndex = 12;
+            this.checkBoxSearch.Text = "Search All";
+            this.checkBoxSearch.UseVisualStyleBackColor = true;
+            this.checkBoxSearch.CheckedChanged += new System.EventHandler(this.checkBoxSearch_CheckedChanged);
+            // 
             // frmStudent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1127, 664);
+            this.Controls.Add(this.checkBoxSearch);
+            this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.barDockControlLeft);
@@ -619,5 +642,7 @@
         private System.Windows.Forms.Label tENLabel;
         private System.Windows.Forms.Label nGAYSINHLabel;
         private System.Windows.Forms.Label dIACHILabel;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.CheckBox checkBoxSearch;
     }
 }

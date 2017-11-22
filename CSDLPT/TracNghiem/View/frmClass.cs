@@ -388,6 +388,7 @@ namespace TracNghiem
         {
             if (checkboxSearch.Checked == true)
             {
+                txtSearch.Text = "";
                 getDataClassFromDep("");
                 cbbBranch.SelectedIndex = -1;
                 cbbBranch.Enabled = false;

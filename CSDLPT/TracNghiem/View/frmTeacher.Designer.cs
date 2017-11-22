@@ -47,6 +47,11 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.sp_DanhSachGiaoVienTheoKhoaGridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colMAGV = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colHO = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTEN = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colHOCVI = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colMAKH = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar5 = new DevExpress.XtraBars.Bar();
             this.btnNew = new DevExpress.XtraBars.BarButtonItem();
@@ -66,11 +71,6 @@
             this.sp_DanhSachGiaoVienTheoKhoaTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.sp_DanhSachGiaoVienTheoKhoaTableAdapter();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.checkBoxSearch = new System.Windows.Forms.CheckBox();
-            this.colMAGV = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colHO = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colTEN = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colHOCVI = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colMAKH = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDegree.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsTeacherFromDep)).BeginInit();
@@ -260,6 +260,56 @@
             this.gridView1.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Default;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
+            // colMAGV
+            // 
+            this.colMAGV.Caption = "TeacherID";
+            this.colMAGV.FieldName = "MAGV";
+            this.colMAGV.Name = "colMAGV";
+            this.colMAGV.OptionsColumn.AllowEdit = false;
+            this.colMAGV.OptionsColumn.ReadOnly = true;
+            this.colMAGV.Visible = true;
+            this.colMAGV.VisibleIndex = 0;
+            // 
+            // colHO
+            // 
+            this.colHO.Caption = "Last Name";
+            this.colHO.FieldName = "HO";
+            this.colHO.Name = "colHO";
+            this.colHO.OptionsColumn.AllowEdit = false;
+            this.colHO.OptionsColumn.ReadOnly = true;
+            this.colHO.Visible = true;
+            this.colHO.VisibleIndex = 1;
+            // 
+            // colTEN
+            // 
+            this.colTEN.Caption = "Frist Name";
+            this.colTEN.FieldName = "TEN";
+            this.colTEN.Name = "colTEN";
+            this.colTEN.OptionsColumn.AllowEdit = false;
+            this.colTEN.OptionsColumn.ReadOnly = true;
+            this.colTEN.Visible = true;
+            this.colTEN.VisibleIndex = 2;
+            // 
+            // colHOCVI
+            // 
+            this.colHOCVI.Caption = "Degree";
+            this.colHOCVI.FieldName = "HOCVI";
+            this.colHOCVI.Name = "colHOCVI";
+            this.colHOCVI.OptionsColumn.AllowEdit = false;
+            this.colHOCVI.OptionsColumn.ReadOnly = true;
+            this.colHOCVI.Visible = true;
+            this.colHOCVI.VisibleIndex = 3;
+            // 
+            // colMAKH
+            // 
+            this.colMAKH.Caption = "DepartmentID";
+            this.colMAKH.FieldName = "MAKH";
+            this.colMAKH.Name = "colMAKH";
+            this.colMAKH.OptionsColumn.AllowEdit = false;
+            this.colMAKH.OptionsColumn.ReadOnly = true;
+            this.colMAKH.Visible = true;
+            this.colMAKH.VisibleIndex = 4;
+            // 
             // barManager1
             // 
             this.barManager1.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
@@ -413,72 +463,22 @@
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(753, 12);
+            this.txtSearch.Location = new System.Drawing.Point(760, 15);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(176, 30);
+            this.txtSearch.Size = new System.Drawing.Size(200, 30);
             this.txtSearch.TabIndex = 6;
             this.txtSearch.TextChanged += new System.EventHandler(this.textSearch_TextChanged);
             // 
             // checkBoxSearch
             // 
             this.checkBoxSearch.AutoSize = true;
-            this.checkBoxSearch.Location = new System.Drawing.Point(963, 20);
+            this.checkBoxSearch.Location = new System.Drawing.Point(970, 17);
             this.checkBoxSearch.Name = "checkBoxSearch";
-            this.checkBoxSearch.Size = new System.Drawing.Size(107, 26);
+            this.checkBoxSearch.Size = new System.Drawing.Size(116, 26);
             this.checkBoxSearch.TabIndex = 7;
-            this.checkBoxSearch.Text = "SelectAll";
+            this.checkBoxSearch.Text = "Search All";
             this.checkBoxSearch.UseVisualStyleBackColor = true;
             this.checkBoxSearch.CheckedChanged += new System.EventHandler(this.checkBoxSearch_CheckedChanged);
-            // 
-            // colMAGV
-            // 
-            this.colMAGV.Caption = "TeacherID";
-            this.colMAGV.FieldName = "MAGV";
-            this.colMAGV.Name = "colMAGV";
-            this.colMAGV.OptionsColumn.AllowEdit = false;
-            this.colMAGV.OptionsColumn.ReadOnly = true;
-            this.colMAGV.Visible = true;
-            this.colMAGV.VisibleIndex = 0;
-            // 
-            // colHO
-            // 
-            this.colHO.Caption = "Last Name";
-            this.colHO.FieldName = "HO";
-            this.colHO.Name = "colHO";
-            this.colHO.OptionsColumn.AllowEdit = false;
-            this.colHO.OptionsColumn.ReadOnly = true;
-            this.colHO.Visible = true;
-            this.colHO.VisibleIndex = 1;
-            // 
-            // colTEN
-            // 
-            this.colTEN.Caption = "Frist Name";
-            this.colTEN.FieldName = "TEN";
-            this.colTEN.Name = "colTEN";
-            this.colTEN.OptionsColumn.AllowEdit = false;
-            this.colTEN.OptionsColumn.ReadOnly = true;
-            this.colTEN.Visible = true;
-            this.colTEN.VisibleIndex = 2;
-            // 
-            // colHOCVI
-            // 
-            this.colHOCVI.Caption = "Degree";
-            this.colHOCVI.FieldName = "HOCVI";
-            this.colHOCVI.Name = "colHOCVI";
-            this.colHOCVI.OptionsColumn.AllowEdit = false;
-            this.colHOCVI.OptionsColumn.ReadOnly = true;
-            this.colHOCVI.Visible = true;
-            this.colHOCVI.VisibleIndex = 3;
-            // 
-            // colMAKH
-            // 
-            this.colMAKH.Caption = "DepartmentID";
-            this.colMAKH.FieldName = "MAKH";
-            this.colMAKH.Name = "colMAKH";
-            this.colMAKH.OptionsColumn.AllowEdit = false;
-            this.colMAKH.OptionsColumn.ReadOnly = true;
-            this.colMAKH.Visible = true;
-            this.colMAKH.VisibleIndex = 4;
             // 
             // frmTeacher
             // 

@@ -57,10 +57,21 @@ namespace TracNghiem
             DataTable dt = Program.ExecSqlDataTable(strLenh);
             if (dt != null)
             {
-                cbbBranch.DataSource = dt;
-                cbbBranch.DisplayMember = "TENKH";
-                cbbBranch.ValueMember = "MAKH";
-                initUIComboBoxClass();
+                if (dt.Rows.Count == 0)
+                {
+                    cbbBranch.SelectedIndex = -1;
+                    cbbBranch.DataSource = null;
+                }
+                else
+                {
+                    cbbBranch.DataSource = dt;
+                    cbbBranch.DisplayMember = "TENKH";
+                    cbbBranch.ValueMember = "MAKH";
+                }
+
+                cbbBranch.SelectedIndex = -1;
+                getDataStudentFormClassID("");
+                //initUIComboBoxClass();
             }
             else
             {
@@ -99,7 +110,11 @@ namespace TracNghiem
         {
             try
             {
-                this.sp_DanhSachSinhVienTheoLopTableAdapter.Fill(this.dataSetTracNghiem.sp_DanhSachSinhVienTheoLop, classID);
+                String currentServerName = cbbDep.SelectedValue.ToString();
+                int indexStr = currentServerName.IndexOf("\\") + 1;
+                currentServerName = currentServerName.Substring(indexStr);
+
+                this.sp_DanhSachSinhVienTheoLopTableAdapter.Fill(this.dataSetTracNghiem.sp_DanhSachSinhVienTheoLop, classID, currentServerName);
                 this.sp_DanhSachSinhVienTheoLopTableAdapter.ClearBeforeFill = true;
             }
             catch (System.Exception ex)
@@ -432,6 +447,30 @@ namespace TracNghiem
         {
             pickerBirthday.Format = DateTimePickerFormat.Short;
             pickerBirthday.CustomFormat = "yyyy-MM-dd";
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            bdsStudentFromClass.Filter = "MASV LIKE '%" + this.txtSearch.Text + "%'" + " OR TEN LIKE '%" + this.txtSearch.Text + "%'";
+        }
+
+        private void checkBoxSearch_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxSearch.Checked == true)
+            {
+                txtSearch.Text = "";
+                getDataStudentFormClassID("");
+                cbbBranch.SelectedIndex = -1;
+                cbbClass.SelectedIndex = -1;
+                cbbClass.Enabled = false;
+                cbbBranch.Enabled = false;
+            }
+            else
+            {
+                txtSearch.Text = "";
+                cbbClass.Enabled = true;
+                cbbBranch.Enabled = true;
+            }
         }
     }
 }
