@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label mASVLabel;
-            System.Windows.Forms.Label hOLabel;
-            System.Windows.Forms.Label tENLabel;
-            System.Windows.Forms.Label nGAYSINHLabel;
-            System.Windows.Forms.Label dIACHILabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStudent));
+            this.mASVLabel = new System.Windows.Forms.Label();
+            this.hOLabel = new System.Windows.Forms.Label();
+            this.tENLabel = new System.Windows.Forms.Label();
+            this.nGAYSINHLabel = new System.Windows.Forms.Label();
+            this.dIACHILabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -75,11 +75,6 @@
             this.colNGAYSINH = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDIACHI = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            mASVLabel = new System.Windows.Forms.Label();
-            hOLabel = new System.Windows.Forms.Label();
-            tENLabel = new System.Windows.Forms.Label();
-            nGAYSINHLabel = new System.Windows.Forms.Label();
-            dIACHILabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtAddress.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsStudentFromClass)).BeginInit();
@@ -96,48 +91,48 @@
             // 
             // mASVLabel
             // 
-            mASVLabel.AutoSize = true;
-            mASVLabel.Location = new System.Drawing.Point(496, 86);
-            mASVLabel.Name = "mASVLabel";
-            mASVLabel.Size = new System.Drawing.Size(93, 22);
-            mASVLabel.TabIndex = 4;
-            mASVLabel.Text = "Student ID";
+            this.mASVLabel.AutoSize = true;
+            this.mASVLabel.Location = new System.Drawing.Point(496, 86);
+            this.mASVLabel.Name = "mASVLabel";
+            this.mASVLabel.Size = new System.Drawing.Size(93, 22);
+            this.mASVLabel.TabIndex = 4;
+            this.mASVLabel.Text = "Student ID";
             // 
             // hOLabel
             // 
-            hOLabel.AutoSize = true;
-            hOLabel.Location = new System.Drawing.Point(495, 135);
-            hOLabel.Name = "hOLabel";
-            hOLabel.Size = new System.Drawing.Size(94, 22);
-            hOLabel.TabIndex = 6;
-            hOLabel.Text = "Last Name";
+            this.hOLabel.AutoSize = true;
+            this.hOLabel.Location = new System.Drawing.Point(495, 135);
+            this.hOLabel.Name = "hOLabel";
+            this.hOLabel.Size = new System.Drawing.Size(94, 22);
+            this.hOLabel.TabIndex = 6;
+            this.hOLabel.Text = "Last Name";
             // 
             // tENLabel
             // 
-            tENLabel.AutoSize = true;
-            tENLabel.Location = new System.Drawing.Point(860, 135);
-            tENLabel.Name = "tENLabel";
-            tENLabel.Size = new System.Drawing.Size(98, 22);
-            tENLabel.TabIndex = 8;
-            tENLabel.Text = "First Name";
+            this.tENLabel.AutoSize = true;
+            this.tENLabel.Location = new System.Drawing.Point(860, 135);
+            this.tENLabel.Name = "tENLabel";
+            this.tENLabel.Size = new System.Drawing.Size(98, 22);
+            this.tENLabel.TabIndex = 8;
+            this.tENLabel.Text = "First Name";
             // 
             // nGAYSINHLabel
             // 
-            nGAYSINHLabel.AutoSize = true;
-            nGAYSINHLabel.Location = new System.Drawing.Point(495, 182);
-            nGAYSINHLabel.Name = "nGAYSINHLabel";
-            nGAYSINHLabel.Size = new System.Drawing.Size(78, 22);
-            nGAYSINHLabel.TabIndex = 10;
-            nGAYSINHLabel.Text = "Birthday";
+            this.nGAYSINHLabel.AutoSize = true;
+            this.nGAYSINHLabel.Location = new System.Drawing.Point(495, 182);
+            this.nGAYSINHLabel.Name = "nGAYSINHLabel";
+            this.nGAYSINHLabel.Size = new System.Drawing.Size(78, 22);
+            this.nGAYSINHLabel.TabIndex = 10;
+            this.nGAYSINHLabel.Text = "Birthday";
             // 
             // dIACHILabel
             // 
-            dIACHILabel.AutoSize = true;
-            dIACHILabel.Location = new System.Drawing.Point(495, 228);
-            dIACHILabel.Name = "dIACHILabel";
-            dIACHILabel.Size = new System.Drawing.Size(76, 22);
-            dIACHILabel.TabIndex = 12;
-            dIACHILabel.Text = "Address";
+            this.dIACHILabel.AutoSize = true;
+            this.dIACHILabel.Location = new System.Drawing.Point(495, 228);
+            this.dIACHILabel.Name = "dIACHILabel";
+            this.dIACHILabel.Size = new System.Drawing.Size(76, 22);
+            this.dIACHILabel.TabIndex = 12;
+            this.dIACHILabel.Text = "Address";
             // 
             // groupBox1
             // 
@@ -147,15 +142,15 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(dIACHILabel);
+            this.groupBox1.Controls.Add(this.dIACHILabel);
             this.groupBox1.Controls.Add(this.txtAddress);
-            this.groupBox1.Controls.Add(nGAYSINHLabel);
+            this.groupBox1.Controls.Add(this.nGAYSINHLabel);
             this.groupBox1.Controls.Add(this.pickerBirthday);
-            this.groupBox1.Controls.Add(tENLabel);
+            this.groupBox1.Controls.Add(this.tENLabel);
             this.groupBox1.Controls.Add(this.txtFirstName);
-            this.groupBox1.Controls.Add(hOLabel);
+            this.groupBox1.Controls.Add(this.hOLabel);
             this.groupBox1.Controls.Add(this.txtLastName);
-            this.groupBox1.Controls.Add(mASVLabel);
+            this.groupBox1.Controls.Add(this.mASVLabel);
             this.groupBox1.Controls.Add(this.txtStudentID);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.cbbClass);
@@ -379,7 +374,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("VNI-Jamai", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(74, 149);
+            this.label1.Location = new System.Drawing.Point(53, 107);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(254, 55);
             this.label1.TabIndex = 1;
@@ -437,8 +432,9 @@
             this.tableAdapterManager.LOPTableAdapter = null;
             this.tableAdapterManager.MONHOCTableAdapter = null;
             this.tableAdapterManager.SINHVIENTableAdapter = this.sINHVIENTableAdapter;
+            this.tableAdapterManager.sp_DanhSachBoDeTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachGiaoVienTheoKhoaTableAdapter = null;
-            this.tableAdapterManager.sp_DanhSachLopTheoKhoaTableAdapter = null;
+            this.tableAdapterManager.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachSinhVienTheoLopTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
@@ -618,5 +614,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label mASVLabel;
+        private System.Windows.Forms.Label hOLabel;
+        private System.Windows.Forms.Label tENLabel;
+        private System.Windows.Forms.Label nGAYSINHLabel;
+        private System.Windows.Forms.Label dIACHILabel;
     }
 }

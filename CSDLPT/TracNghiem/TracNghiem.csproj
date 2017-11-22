@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C856A46D-CEE1-4E73-8340-8C0AEFA795B0}</ProjectGuid>
+    <ProjectGuid>{E47B37AB-EF7E-423D-AD98-453768E34472}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TracNghiem</RootNamespace>
@@ -55,9 +55,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="dataSetTracNghiem.cs">
-      <DependentUpon>dataSetTracNghiem.xsd</DependentUpon>
-    </Compile>
     <Compile Include="dataSetTracNghiem.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -67,30 +64,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dataSetView.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="frmRegistration.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmRegistration.Designer.cs">
-      <DependentUpon>frmRegistration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\frmQuestion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\frmQuestion.Designer.cs">
-      <DependentUpon>frmQuestion.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\frmStudent.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\frmStudent.Designer.cs">
-      <DependentUpon>frmStudent.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\frmTeacher.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\frmTeacher.Designer.cs">
-      <DependentUpon>frmTeacher.cs</DependentUpon>
     </Compile>
     <Compile Include="View\frmClass.cs">
       <SubType>Form</SubType>
@@ -116,26 +89,38 @@
     <Compile Include="View\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\frmQuestion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmQuestion.Designer.cs">
+      <DependentUpon>frmQuestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmRegistration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmRegistration.Designer.cs">
+      <DependentUpon>frmRegistration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmStudent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmStudent.Designer.cs">
+      <DependentUpon>frmStudent.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\frmSubjects.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\frmSubjects.Designer.cs">
       <DependentUpon>frmSubjects.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\frmTeacher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmTeacher.Designer.cs">
+      <DependentUpon>frmTeacher.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmRegistration.resx">
-      <DependentUpon>frmRegistration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\frmQuestion.resx">
-      <DependentUpon>frmQuestion.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\frmStudent.resx">
-      <DependentUpon>frmStudent.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\frmTeacher.resx">
-      <DependentUpon>frmTeacher.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\frmClass.resx">
       <DependentUpon>frmClass.cs</DependentUpon>
     </EmbeddedResource>
@@ -148,8 +133,17 @@
     <EmbeddedResource Include="View\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\frmQuestion.resx">
+      <DependentUpon>frmQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmStudent.resx">
+      <DependentUpon>frmStudent.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\frmSubjects.resx">
       <DependentUpon>frmSubjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmTeacher.resx">
+      <DependentUpon>frmTeacher.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -162,14 +156,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="app.config" />
     <None Include="dataSetTracNghiem.xsc">
       <DependentUpon>dataSetTracNghiem.xsd</DependentUpon>
     </None>
     <None Include="dataSetTracNghiem.xsd">
       <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dataSetTracNghiem.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="dataSetTracNghiem.xss">
@@ -254,6 +247,9 @@
     <None Include="Resources\icons8-scorecard-filled1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\icons8-search.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\icons8-Shutdown-32.png" />
   </ItemGroup>
   <ItemGroup>
@@ -273,9 +269,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-view.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons8-search.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

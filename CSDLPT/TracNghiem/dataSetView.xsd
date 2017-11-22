@@ -4,12 +4,12 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="connectStrView" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="connectStrView (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.TracNghiem.Properties.Settings.GlobalReference.Default.connectStrView" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectStrView" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectStrView (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.TracNghiem.Properties.Settings.GlobalReference.Default.ConnectStrView" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="VIEW_DS_PHANMANHTableAdapter" GeneratorDataComponentClassName="VIEW_DS_PHANMANHTableAdapter" Name="VIEW_DS_PHANMANH" UserDataComponentName="VIEW_DS_PHANMANHTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="connectStrView (Settings)" DbObjectName="TRACNGHIEM.dbo.VIEW_DS_PHANMANH" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="ConnectStrView (Settings)" DbObjectName="TRACNGHIEM.dbo.VIEW_DS_PHANMANH" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>SELECT MACS, TENCS FROM dbo.VIEW_DS_PHANMANH</CommandText>

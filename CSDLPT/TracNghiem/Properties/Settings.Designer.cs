@@ -27,9 +27,9 @@ namespace TracNghiem.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=HHUMOROUS-PC;Initial Catalog=TRACNGHIEM;Integrated Security=True")]
-        public string connectStrView {
+        public string ConnectStrView {
             get {
-                return ((string)(this["connectStrView"]));
+                return ((string)(this["ConnectStrView"]));
             }
         }
         
@@ -38,9 +38,9 @@ namespace TracNghiem.Properties {
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=HHUMOROUS-PC\\MSSQLSERVER1;Initial Catalog=TRACNGHIEM;Integrated Secur" +
             "ity=True")]
-        public string connectStrData {
+        public string ConnectStrData {
             get {
-                return ((string)(this["connectStrData"]));
+                return ((string)(this["ConnectStrData"]));
             }
         }
     }

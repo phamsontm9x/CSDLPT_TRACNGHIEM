@@ -44,7 +44,7 @@ namespace TracNghiem
             txtLevel.Enabled = txtContent.Enabled = txtA.Enabled = txtB.Enabled = txtC.Enabled = txtD.Enabled = txtAnswer.Enabled = false;
 
             setCurrentRole();
-            
+
         }
 
         private void cbSubject_CheckedChanged(object sender, EventArgs e)
@@ -441,7 +441,8 @@ namespace TracNghiem
             if (currentTeacherID.Replace(" ", String.Empty) != Program.currentID)
             {
                 btnEdit.Enabled = false;
-            } else
+            }
+            else
             {
                 btnEdit.Enabled = true;
             }

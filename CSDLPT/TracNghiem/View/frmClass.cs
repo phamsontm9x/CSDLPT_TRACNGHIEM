@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TracNghiem
-{   
+{
     public partial class frmClass : Form
     {
         int index;
@@ -98,7 +98,7 @@ namespace TracNghiem
             }
         }
 
-        public void initUIComboBoxBranch ()
+        public void initUIComboBoxBranch()
         {
             String currentServerName = cbbDep.SelectedValue.ToString();
             int indexStr = currentServerName.IndexOf("\\") + 1;
@@ -130,7 +130,7 @@ namespace TracNghiem
         public String getMaKhoaSelected()
         {
             if (cbbBranch.Items.Count > 0)
-            branchID = cbbBranch.SelectedValue.ToString();
+                branchID = cbbBranch.SelectedValue.ToString();
             return branchID;
         }
 
@@ -141,8 +141,8 @@ namespace TracNghiem
                 String currentServerName = cbbDep.SelectedValue.ToString();
                 int indexStr = currentServerName.IndexOf("\\") + 1;
                 currentServerName = currentServerName.Substring(indexStr);
-                this.sp_DanhSachLopTheoKhoaTableAdapter.Fill(this.dataSetTracNghiem.sp_DanhSachLopTheoKhoa, branchID, currentServerName);
-                this.sp_DanhSachLopTheoKhoaTableAdapter.ClearBeforeFill = true;
+                this.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter.Fill(this.dataSetTracNghiem.sp_DanhSachLopTheoKhoaVaCoSo, branchID, currentServerName);
+                this.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter.ClearBeforeFill = true;
             }
             catch (System.Exception ex)
             {
@@ -230,7 +230,7 @@ namespace TracNghiem
                     try
                     {
                         bdsClassFromDep.RemoveCurrent();
-                        this.sp_DanhSachLopTheoKhoaTableAdapter.Delete(currentClassID);
+                        this.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter.Delete(currentClassID);
                         if (bdsClassFromDep.Count == 0)
                         {
                             btnDel.Enabled = false;
@@ -288,7 +288,7 @@ namespace TracNghiem
                             this.Validate();
                             bdsClassFromDep.EndEdit();
                             bdsClassFromDep.ResetCurrentItem();
-                            this.sp_DanhSachLopTheoKhoaTableAdapter.Insert(txtClassId.Text, txtClassName.Text, getMaKhoaSelected());
+                            this.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter.Insert(txtClassId.Text, txtClassName.Text, getMaKhoaSelected());
                         }
                         catch (Exception ex)
                         {
@@ -328,7 +328,7 @@ namespace TracNghiem
                             this.Validate();
                             bdsClassFromDep.EndEdit();
                             bdsClassFromDep.ResetCurrentItem();
-                            this.sp_DanhSachLopTheoKhoaTableAdapter.Update(currentClassID, txtClassName.Text);
+                            this.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter.Update(currentClassID, txtClassName.Text);
                         }
                         catch (Exception ex)
                         {
@@ -380,7 +380,7 @@ namespace TracNghiem
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            bdsClassFromDep.Filter =  "MALOP LIKE '%" + this.txtSearch.Text + "%'" + " OR TENLOP LIKE '%" + this.txtSearch.Text + "%'";
+            bdsClassFromDep.Filter = "MALOP LIKE '%" + this.txtSearch.Text + "%'" + " OR TENLOP LIKE '%" + this.txtSearch.Text + "%'";
         }
 
 
@@ -391,7 +391,8 @@ namespace TracNghiem
                 getDataClassFromDep("");
                 cbbBranch.SelectedIndex = -1;
                 cbbBranch.Enabled = false;
-            } else
+            }
+            else
             {
                 cbbBranch.Enabled = true;
             }

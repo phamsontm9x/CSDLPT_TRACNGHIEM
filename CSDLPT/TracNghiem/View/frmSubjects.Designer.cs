@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.Views.Grid.GridView gridView1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSubjects));
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colMAMH = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTENMH = new DevExpress.XtraGrid.Columns.GridColumn();
             this.mONHOCGridControl = new DevExpress.XtraGrid.GridControl();
@@ -66,8 +66,7 @@
             this.bAITHITableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.BAITHITableAdapter();
             this.bdsRegistration = new System.Windows.Forms.BindingSource(this.components);
             this.gIAOVIEN_DANGKYTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.GIAOVIEN_DANGKYTableAdapter();
-            gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            ((System.ComponentModel.ISupportInitialize)(gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mONHOCGridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsSubjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetTracNghiem)).BeginInit();
@@ -84,15 +83,15 @@
             // 
             // gridView1
             // 
-            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colMAMH,
             this.colTENMH});
-            gridView1.GridControl = this.mONHOCGridControl;
-            gridView1.Name = "gridView1";
-            gridView1.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Default;
-            gridView1.OptionsView.ShowDetailButtons = false;
-            gridView1.OptionsView.ShowGroupExpandCollapseButtons = false;
-            gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.GridControl = this.mONHOCGridControl;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Default;
+            this.gridView1.OptionsView.ShowDetailButtons = false;
+            this.gridView1.OptionsView.ShowGroupExpandCollapseButtons = false;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // colMAMH
             // 
@@ -121,12 +120,12 @@
             this.mONHOCGridControl.DataSource = this.bdsSubjects;
             this.mONHOCGridControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mONHOCGridControl.Location = new System.Drawing.Point(3, 26);
-            this.mONHOCGridControl.MainView = gridView1;
+            this.mONHOCGridControl.MainView = this.gridView1;
             this.mONHOCGridControl.Name = "mONHOCGridControl";
             this.mONHOCGridControl.Size = new System.Drawing.Size(1096, 261);
             this.mONHOCGridControl.TabIndex = 0;
             this.mONHOCGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            gridView1});
+            this.gridView1});
             // 
             // bdsSubjects
             // 
@@ -225,8 +224,9 @@
             this.tableAdapterManager.LOPTableAdapter = null;
             this.tableAdapterManager.MONHOCTableAdapter = this.mONHOCTableAdapter;
             this.tableAdapterManager.SINHVIENTableAdapter = null;
+            this.tableAdapterManager.sp_DanhSachBoDeTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachGiaoVienTheoKhoaTableAdapter = null;
-            this.tableAdapterManager.sp_DanhSachLopTheoKhoaTableAdapter = null;
+            this.tableAdapterManager.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachSinhVienTheoLopTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
@@ -406,7 +406,7 @@
             this.Name = "frmSubjects";
             this.Text = "Subjects";
             this.Load += new System.EventHandler(this.frmSubjects_Load);
-            ((System.ComponentModel.ISupportInitialize)(gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mONHOCGridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsSubjects)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetTracNghiem)).EndInit();
@@ -462,5 +462,6 @@
         private dataSetTracNghiemTableAdapters.GIAOVIEN_DANGKYTableAdapter gIAOVIEN_DANGKYTableAdapter;
         private System.Windows.Forms.Label mAMHLabel;
         private System.Windows.Forms.Label tENMHLabel;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
     }
 }

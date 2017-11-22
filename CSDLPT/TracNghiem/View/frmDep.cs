@@ -32,7 +32,7 @@ namespace TracNghiem
 
             // TODO: This line of code loads data into the 'dataSetTracNghiem.LOP' table. You can move, or remove it, as needed.
             this.lOPTableAdapter.Fill(this.dataSetTracNghiem.LOP);
-            
+
             // TODO: This line of code loads data into the 'dataSetTracNghiem.KHOA' table. You can move, or remove it, as needed.
             this.kHOATableAdapter.Connection.ConnectionString = Program.connectStr;
             this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
@@ -46,7 +46,7 @@ namespace TracNghiem
             depID = ((DataRowView)bdsDep[0])["MAKH"].ToString();
             depID = "CS" + (cbbDep.SelectedIndex + 1) + "";
 
-            
+
             Program.currentBidingSource = bdsDep;
 
             groupBox1.Enabled = true;
@@ -230,16 +230,17 @@ namespace TracNghiem
             currentBranchID = ((DataRowView)bdsDep[index])["MAKH"].ToString();
             String sqlStr = "";
             sqlStr = "exec sp_KiemTraKhoa '" + currentBranchID + "', '" + method + "'";
-            
+
             Program.myReader = Program.ExecSqlDataReader(sqlStr);
             if (Program.myReader == null) return;
             Program.myReader.Read();
 
-            if(Program.myReader.FieldCount > 0)
+            if (Program.myReader.FieldCount > 0)
             {
                 MessageBox.Show("Can not delete " + currentBranchName + " branch. \nThe branch has data available! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 Program.myReader.Close();
-            } else
+            }
+            else
             {
                 if (MessageBox.Show("Do you want to delete " + currentBranchName + " branch?", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {

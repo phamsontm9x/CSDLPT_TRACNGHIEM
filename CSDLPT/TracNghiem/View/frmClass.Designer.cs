@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label lblClassId;
-            System.Windows.Forms.Label lblClassName;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmClass));
+            this.lblClassId = new System.Windows.Forms.Label();
+            this.lblClassName = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtClassName = new DevExpress.XtraEditors.TextEdit();
             this.bdsClassFromDep = new System.Windows.Forms.BindingSource(this.components);
@@ -57,16 +57,14 @@
             this.bdsClass = new System.Windows.Forms.BindingSource(this.components);
             this.lOPTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.LOPTableAdapter();
             this.tableAdapterManager = new TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager();
-            this.sp_DanhSachLopTheoKhoaTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.sp_DanhSachLopTheoKhoaTableAdapter();
-            this.sp_DanhSachLopTheoKhoaGridControl = new DevExpress.XtraGrid.GridControl();
+            this.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter();
+            this.sp_DanhSachLopTheoKhoaVaCoSoGridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colMALOP = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTENLOP = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.checkboxSearch = new System.Windows.Forms.CheckBox();
-            lblClassId = new System.Windows.Forms.Label();
-            lblClassName = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtClassName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsClassFromDep)).BeginInit();
@@ -74,38 +72,38 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtClassId.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsClass)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sp_DanhSachLopTheoKhoaGridControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sp_DanhSachLopTheoKhoaVaCoSoGridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblClassId
             // 
-            lblClassId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            lblClassId.AutoSize = true;
-            lblClassId.Location = new System.Drawing.Point(567, 143);
-            lblClassId.Name = "lblClassId";
-            lblClassId.Size = new System.Drawing.Size(79, 22);
-            lblClassId.TabIndex = 4;
-            lblClassId.Text = "Class ID";
+            this.lblClassId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblClassId.AutoSize = true;
+            this.lblClassId.Location = new System.Drawing.Point(662, 126);
+            this.lblClassId.Name = "lblClassId";
+            this.lblClassId.Size = new System.Drawing.Size(79, 22);
+            this.lblClassId.TabIndex = 4;
+            this.lblClassId.Text = "Class ID";
             // 
             // lblClassName
             // 
-            lblClassName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            lblClassName.AutoSize = true;
-            lblClassName.Location = new System.Drawing.Point(541, 181);
-            lblClassName.Name = "lblClassName";
-            lblClassName.Size = new System.Drawing.Size(105, 22);
-            lblClassName.TabIndex = 6;
-            lblClassName.Text = "Class Name";
+            this.lblClassName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblClassName.AutoSize = true;
+            this.lblClassName.Location = new System.Drawing.Point(636, 164);
+            this.lblClassName.Name = "lblClassName";
+            this.lblClassName.Size = new System.Drawing.Size(105, 22);
+            this.lblClassName.TabIndex = 6;
+            this.lblClassName.Text = "Class Name";
             // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(lblClassName);
+            this.groupBox1.Controls.Add(this.lblClassName);
             this.groupBox1.Controls.Add(this.txtClassName);
-            this.groupBox1.Controls.Add(lblClassId);
+            this.groupBox1.Controls.Add(this.lblClassId);
             this.groupBox1.Controls.Add(this.txtClassId);
             this.groupBox1.Controls.Add(this.cbbBranch);
             this.groupBox1.Controls.Add(this.cbbDep);
@@ -121,7 +119,7 @@
             // 
             this.txtClassName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtClassName.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsClassFromDep, "TENLOP", true));
-            this.txtClassName.Location = new System.Drawing.Point(663, 182);
+            this.txtClassName.Location = new System.Drawing.Point(758, 165);
             this.txtClassName.MenuManager = this.barManager1;
             this.txtClassName.Name = "txtClassName";
             this.txtClassName.Properties.MaxLength = 40;
@@ -130,7 +128,7 @@
             // 
             // bdsClassFromDep
             // 
-            this.bdsClassFromDep.DataMember = "sp_DanhSachLopTheoKhoa";
+            this.bdsClassFromDep.DataMember = "sp_DanhSachLopTheoKhoaVaCoSo";
             this.bdsClassFromDep.DataSource = this.dataSetTracNghiem;
             // 
             // dataSetTracNghiem
@@ -261,7 +259,7 @@
             // 
             this.txtClassId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtClassId.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsClassFromDep, "MALOP", true));
-            this.txtClassId.Location = new System.Drawing.Point(663, 140);
+            this.txtClassId.Location = new System.Drawing.Point(758, 123);
             this.txtClassId.MenuManager = this.barManager1;
             this.txtClassId.Name = "txtClassId";
             this.txtClassId.Properties.MaxLength = 8;
@@ -331,27 +329,28 @@
             this.tableAdapterManager.LOPTableAdapter = this.lOPTableAdapter;
             this.tableAdapterManager.MONHOCTableAdapter = null;
             this.tableAdapterManager.SINHVIENTableAdapter = null;
+            this.tableAdapterManager.sp_DanhSachBoDeTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachGiaoVienTheoKhoaTableAdapter = null;
-            this.tableAdapterManager.sp_DanhSachLopTheoKhoaTableAdapter = null;
+            this.tableAdapterManager.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachSinhVienTheoLopTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
-            // sp_DanhSachLopTheoKhoaTableAdapter
+            // sp_DanhSachLopTheoKhoaVaCoSoTableAdapter
             // 
-            this.sp_DanhSachLopTheoKhoaTableAdapter.ClearBeforeFill = true;
+            this.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter.ClearBeforeFill = true;
             // 
-            // sp_DanhSachLopTheoKhoaGridControl
+            // sp_DanhSachLopTheoKhoaVaCoSoGridControl
             // 
-            this.sp_DanhSachLopTheoKhoaGridControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.sp_DanhSachLopTheoKhoaVaCoSoGridControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.sp_DanhSachLopTheoKhoaGridControl.DataSource = this.bdsClassFromDep;
-            this.sp_DanhSachLopTheoKhoaGridControl.Location = new System.Drawing.Point(0, 17);
-            this.sp_DanhSachLopTheoKhoaGridControl.MainView = this.gridView1;
-            this.sp_DanhSachLopTheoKhoaGridControl.Name = "sp_DanhSachLopTheoKhoaGridControl";
-            this.sp_DanhSachLopTheoKhoaGridControl.Size = new System.Drawing.Size(1172, 286);
-            this.sp_DanhSachLopTheoKhoaGridControl.TabIndex = 2;
-            this.sp_DanhSachLopTheoKhoaGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.sp_DanhSachLopTheoKhoaVaCoSoGridControl.DataSource = this.bdsClassFromDep;
+            this.sp_DanhSachLopTheoKhoaVaCoSoGridControl.Location = new System.Drawing.Point(0, 17);
+            this.sp_DanhSachLopTheoKhoaVaCoSoGridControl.MainView = this.gridView1;
+            this.sp_DanhSachLopTheoKhoaVaCoSoGridControl.Name = "sp_DanhSachLopTheoKhoaVaCoSoGridControl";
+            this.sp_DanhSachLopTheoKhoaVaCoSoGridControl.Size = new System.Drawing.Size(1172, 286);
+            this.sp_DanhSachLopTheoKhoaVaCoSoGridControl.TabIndex = 2;
+            this.sp_DanhSachLopTheoKhoaVaCoSoGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
             // 
             // gridView1
@@ -359,7 +358,7 @@
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colMALOP,
             this.colTENLOP});
-            this.gridView1.GridControl = this.sp_DanhSachLopTheoKhoaGridControl;
+            this.gridView1.GridControl = this.sp_DanhSachLopTheoKhoaVaCoSoGridControl;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Default;
             this.gridView1.OptionsView.ShowGroupPanel = false;
@@ -392,7 +391,7 @@
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox3.Controls.Add(this.sp_DanhSachLopTheoKhoaGridControl);
+            this.groupBox3.Controls.Add(this.sp_DanhSachLopTheoKhoaVaCoSoGridControl);
             this.groupBox3.Location = new System.Drawing.Point(0, 297);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(1172, 289);
@@ -446,7 +445,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtClassId.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsClass)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sp_DanhSachLopTheoKhoaGridControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sp_DanhSachLopTheoKhoaVaCoSoGridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -466,8 +465,8 @@
         private dataSetTracNghiemTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.ComboBox cbbBranch;
         private System.Windows.Forms.BindingSource bdsClassFromDep;
-        private dataSetTracNghiemTableAdapters.sp_DanhSachLopTheoKhoaTableAdapter sp_DanhSachLopTheoKhoaTableAdapter;
-        private DevExpress.XtraGrid.GridControl sp_DanhSachLopTheoKhoaGridControl;
+        private dataSetTracNghiemTableAdapters.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter sp_DanhSachLopTheoKhoaVaCoSoTableAdapter;
+        private DevExpress.XtraGrid.GridControl sp_DanhSachLopTheoKhoaVaCoSoGridControl;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraBars.BarManager barManager1;
         private DevExpress.XtraBars.Bar bar1;
@@ -489,5 +488,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colTENLOP;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.CheckBox checkboxSearch;
+        private System.Windows.Forms.Label lblClassId;
+        private System.Windows.Forms.Label lblClassName;
     }
 }

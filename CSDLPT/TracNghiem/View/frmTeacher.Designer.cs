@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label mAGVLabel;
-            System.Windows.Forms.Label hOLabel;
-            System.Windows.Forms.Label tENLabel;
-            System.Windows.Forms.Label hOCVILabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTeacher));
+            this.mAGVLabel = new System.Windows.Forms.Label();
+            this.hOLabel = new System.Windows.Forms.Label();
+            this.tENLabel = new System.Windows.Forms.Label();
+            this.hOCVILabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtDegree = new DevExpress.XtraEditors.TextEdit();
             this.bdsTeacherFromDep = new System.Windows.Forms.BindingSource(this.components);
@@ -68,10 +68,6 @@
             this.gIAOVIENTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.GIAOVIENTableAdapter();
             this.tableAdapterManager = new TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager();
             this.sp_DanhSachGiaoVienTheoKhoaTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.sp_DanhSachGiaoVienTheoKhoaTableAdapter();
-            mAGVLabel = new System.Windows.Forms.Label();
-            hOLabel = new System.Windows.Forms.Label();
-            tENLabel = new System.Windows.Forms.Label();
-            hOCVILabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDegree.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsTeacherFromDep)).BeginInit();
@@ -88,51 +84,51 @@
             // 
             // mAGVLabel
             // 
-            mAGVLabel.AutoSize = true;
-            mAGVLabel.Location = new System.Drawing.Point(449, 100);
-            mAGVLabel.Name = "mAGVLabel";
-            mAGVLabel.Size = new System.Drawing.Size(98, 22);
-            mAGVLabel.TabIndex = 3;
-            mAGVLabel.Text = "Teacher ID";
+            this.mAGVLabel.AutoSize = true;
+            this.mAGVLabel.Location = new System.Drawing.Point(449, 100);
+            this.mAGVLabel.Name = "mAGVLabel";
+            this.mAGVLabel.Size = new System.Drawing.Size(98, 22);
+            this.mAGVLabel.TabIndex = 3;
+            this.mAGVLabel.Text = "Teacher ID";
             // 
             // hOLabel
             // 
-            hOLabel.AutoSize = true;
-            hOLabel.Location = new System.Drawing.Point(449, 145);
-            hOLabel.Name = "hOLabel";
-            hOLabel.Size = new System.Drawing.Size(94, 22);
-            hOLabel.TabIndex = 5;
-            hOLabel.Text = "Last Name";
+            this.hOLabel.AutoSize = true;
+            this.hOLabel.Location = new System.Drawing.Point(449, 145);
+            this.hOLabel.Name = "hOLabel";
+            this.hOLabel.Size = new System.Drawing.Size(94, 22);
+            this.hOLabel.TabIndex = 5;
+            this.hOLabel.Text = "Last Name";
             // 
             // tENLabel
             // 
-            tENLabel.AutoSize = true;
-            tENLabel.Location = new System.Drawing.Point(820, 144);
-            tENLabel.Name = "tENLabel";
-            tENLabel.Size = new System.Drawing.Size(98, 22);
-            tENLabel.TabIndex = 7;
-            tENLabel.Text = "First Name";
+            this.tENLabel.AutoSize = true;
+            this.tENLabel.Location = new System.Drawing.Point(820, 144);
+            this.tENLabel.Name = "tENLabel";
+            this.tENLabel.Size = new System.Drawing.Size(98, 22);
+            this.tENLabel.TabIndex = 7;
+            this.tENLabel.Text = "First Name";
             // 
             // hOCVILabel
             // 
-            hOCVILabel.AutoSize = true;
-            hOCVILabel.Location = new System.Drawing.Point(449, 193);
-            hOCVILabel.Name = "hOCVILabel";
-            hOCVILabel.Size = new System.Drawing.Size(67, 22);
-            hOCVILabel.TabIndex = 11;
-            hOCVILabel.Text = "Degree";
+            this.hOCVILabel.AutoSize = true;
+            this.hOCVILabel.Location = new System.Drawing.Point(449, 193);
+            this.hOCVILabel.Name = "hOCVILabel";
+            this.hOCVILabel.Size = new System.Drawing.Size(67, 22);
+            this.hOCVILabel.TabIndex = 11;
+            this.hOCVILabel.Text = "Degree";
             // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(hOCVILabel);
+            this.groupBox1.Controls.Add(this.hOCVILabel);
             this.groupBox1.Controls.Add(this.txtDegree);
-            this.groupBox1.Controls.Add(tENLabel);
+            this.groupBox1.Controls.Add(this.tENLabel);
             this.groupBox1.Controls.Add(this.txtFirstName);
-            this.groupBox1.Controls.Add(hOLabel);
+            this.groupBox1.Controls.Add(this.hOLabel);
             this.groupBox1.Controls.Add(this.txtLastName);
-            this.groupBox1.Controls.Add(mAGVLabel);
+            this.groupBox1.Controls.Add(this.mAGVLabel);
             this.groupBox1.Controls.Add(this.txtTeacherID);
             this.groupBox1.Controls.Add(this.cbbBranch);
             this.groupBox1.Controls.Add(this.cbbDep);
@@ -445,8 +441,9 @@
             this.tableAdapterManager.LOPTableAdapter = null;
             this.tableAdapterManager.MONHOCTableAdapter = null;
             this.tableAdapterManager.SINHVIENTableAdapter = null;
+            this.tableAdapterManager.sp_DanhSachBoDeTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachGiaoVienTheoKhoaTableAdapter = null;
-            this.tableAdapterManager.sp_DanhSachLopTheoKhoaTableAdapter = null;
+            this.tableAdapterManager.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachSinhVienTheoLopTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
@@ -525,5 +522,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn colHO;
         private DevExpress.XtraGrid.Columns.GridColumn colTEN;
         private DevExpress.XtraGrid.Columns.GridColumn colHOCVI;
+        private System.Windows.Forms.Label mAGVLabel;
+        private System.Windows.Forms.Label hOLabel;
+        private System.Windows.Forms.Label tENLabel;
+        private System.Windows.Forms.Label hOCVILabel;
     }
 }

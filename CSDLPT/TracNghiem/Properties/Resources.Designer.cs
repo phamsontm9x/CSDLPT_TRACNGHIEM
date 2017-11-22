@@ -255,7 +255,7 @@ namespace TracNghiem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap icons8_search {
             get {
-                object obj = ResourceManager.GetObject("icons8-search", resourceCulture);
+                object obj = ResourceManager.GetObject("icons8_search", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -325,7 +325,7 @@ namespace TracNghiem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap icons8_view {
             get {
-                object obj = ResourceManager.GetObject("icons8-view", resourceCulture);
+                object obj = ResourceManager.GetObject("icons8_view", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
