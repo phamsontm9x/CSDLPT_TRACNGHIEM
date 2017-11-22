@@ -73,6 +73,36 @@ namespace TracNghiem
             initUIComboBoxBranch();
         }
 
+        public void initUIComboBoxBranch()
+        {
+            String currentBranchName = cbbDep.SelectedValue.ToString();
+            int indexStr = currentBranchName.IndexOf("\\") + 1;
+            currentBranchName = currentBranchName.Substring(indexStr);
+
+            String strLenh = "exec sp_DanhSachKhoa'" + currentBranchName + "'";
+            DataTable dt = Program.ExecSqlDataTable(strLenh);
+            if (dt != null)
+            {
+                if (dt.Rows.Count == 0)
+                {
+                    cbbBranch.SelectedIndex = -1;
+                    cbbBranch.DataSource = null;
+                }
+                else
+                {
+                    cbbBranch.DataSource = dt;
+                    cbbBranch.DisplayMember = "TENKH";
+                    cbbBranch.ValueMember = "MAKH";
+                }
+                cbbBranch.SelectedIndex = -1;
+                getDataTeacherFromDep("");
+            }
+            else
+            {
+                MessageBox.Show("Can not show list branch", "Notification!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
         private void cbbBranch_SelectionChangeCommitted(object sender, EventArgs e)
         {
             getDataTeacherFromDep(getMaKhoaSelected());
@@ -313,34 +343,7 @@ namespace TracNghiem
             }
         }
 
-        public void initUIComboBoxBranch()
-        {
-            String currentBranchName = cbbDep.SelectedValue.ToString();
-            int indexStr = currentBranchName.IndexOf("\\") + 1;
-            currentBranchName = currentBranchName.Substring(indexStr);
 
-            String strLenh = "exec sp_DanhSachKhoa'" + currentBranchName + "'";
-            DataTable dt = Program.ExecSqlDataTable(strLenh);
-            if (dt != null)
-            {
-                if (dt.Rows.Count == 0)
-                {
-                    cbbBranch.SelectedIndex = -1;
-                    cbbBranch.DataSource = null;
-                }
-                else
-                {
-                    cbbBranch.DataSource = dt;
-                    cbbBranch.DisplayMember = "TENKH";
-                    cbbBranch.ValueMember = "MAKH";
-                }
-                cbbBranch.SelectedIndex = -1;
-            }
-            else
-            {
-                MessageBox.Show("Can not show list branch", "Notification!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
 
         public String getMaKhoaSelected()
         {
@@ -353,7 +356,11 @@ namespace TracNghiem
         {
             try
             {
-                this.sp_DanhSachGiaoVienTheoKhoaTableAdapter.Fill(this.dataSetTracNghiem.sp_DanhSachGiaoVienTheoKhoa, branchID);
+                String currentServerName = cbbDep.SelectedValue.ToString();
+                int indexStr = currentServerName.IndexOf("\\") + 1;
+                currentServerName = currentServerName.Substring(indexStr);
+
+                this.sp_DanhSachGiaoVienTheoKhoaTableAdapter.Fill(this.dataSetTracNghiem.sp_DanhSachGiaoVienTheoKhoa, branchID, currentServerName);
                 this.sp_DanhSachGiaoVienTheoKhoaTableAdapter.ClearBeforeFill = true;
             }
             catch (System.Exception ex)
@@ -384,5 +391,27 @@ namespace TracNghiem
                 e.Handled = true;
             }
         }
+
+        private void textSearch_TextChanged(object sender, EventArgs e)
+        {
+            bdsTeacherFromDep.Filter = "MAGV LIKE '%" + this.txtSearch.Text + "%'" + " OR TEN LIKE '%" + this.txtSearch.Text + "%'";
+        }
+
+        private void checkBoxSearch_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxSearch.Checked == true)
+            {
+                getDataTeacherFromDep("");
+                cbbBranch.SelectedIndex = -1;
+                cbbBranch.Enabled = false;
+            }
+            else
+            {
+                txtSearch.Text = "";
+                cbbBranch.Enabled = true;
+            }
+        }
+
+
     }
 }

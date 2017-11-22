@@ -47,10 +47,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.sp_DanhSachGiaoVienTheoKhoaGridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colMAGV = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colHO = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colTEN = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colHOCVI = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar5 = new DevExpress.XtraBars.Bar();
             this.btnNew = new DevExpress.XtraBars.BarButtonItem();
@@ -68,6 +64,13 @@
             this.gIAOVIENTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.GIAOVIENTableAdapter();
             this.tableAdapterManager = new TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager();
             this.sp_DanhSachGiaoVienTheoKhoaTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.sp_DanhSachGiaoVienTheoKhoaTableAdapter();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.checkBoxSearch = new System.Windows.Forms.CheckBox();
+            this.colMAGV = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colHO = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTEN = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colHOCVI = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colMAKH = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDegree.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsTeacherFromDep)).BeginInit();
@@ -135,7 +138,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(0, 65);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1066, 259);
+            this.groupBox1.Size = new System.Drawing.Size(1234, 259);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -225,7 +228,7 @@
             this.groupBox2.Controls.Add(this.sp_DanhSachGiaoVienTheoKhoaGridControl);
             this.groupBox2.Location = new System.Drawing.Point(0, 330);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1066, 341);
+            this.groupBox2.Size = new System.Drawing.Size(1234, 341);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
@@ -239,7 +242,7 @@
             this.sp_DanhSachGiaoVienTheoKhoaGridControl.MainView = this.gridView1;
             this.sp_DanhSachGiaoVienTheoKhoaGridControl.MenuManager = this.barManager1;
             this.sp_DanhSachGiaoVienTheoKhoaGridControl.Name = "sp_DanhSachGiaoVienTheoKhoaGridControl";
-            this.sp_DanhSachGiaoVienTheoKhoaGridControl.Size = new System.Drawing.Size(1067, 341);
+            this.sp_DanhSachGiaoVienTheoKhoaGridControl.Size = new System.Drawing.Size(1235, 341);
             this.sp_DanhSachGiaoVienTheoKhoaGridControl.TabIndex = 0;
             this.sp_DanhSachGiaoVienTheoKhoaGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -250,55 +253,12 @@
             this.colMAGV,
             this.colHO,
             this.colTEN,
-            this.colHOCVI});
+            this.colHOCVI,
+            this.colMAKH});
             this.gridView1.GridControl = this.sp_DanhSachGiaoVienTheoKhoaGridControl;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Default;
             this.gridView1.OptionsView.ShowGroupPanel = false;
-            // 
-            // colMAGV
-            // 
-            this.colMAGV.Caption = "Teacher ID";
-            this.colMAGV.FieldName = "MAGV";
-            this.colMAGV.Name = "colMAGV";
-            this.colMAGV.OptionsColumn.AllowEdit = false;
-            this.colMAGV.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
-            this.colMAGV.OptionsColumn.ReadOnly = true;
-            this.colMAGV.Visible = true;
-            this.colMAGV.VisibleIndex = 0;
-            // 
-            // colHO
-            // 
-            this.colHO.Caption = "Last Name";
-            this.colHO.FieldName = "HO";
-            this.colHO.Name = "colHO";
-            this.colHO.OptionsColumn.AllowEdit = false;
-            this.colHO.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
-            this.colHO.OptionsColumn.ReadOnly = true;
-            this.colHO.Visible = true;
-            this.colHO.VisibleIndex = 1;
-            // 
-            // colTEN
-            // 
-            this.colTEN.Caption = "First Name";
-            this.colTEN.FieldName = "TEN";
-            this.colTEN.Name = "colTEN";
-            this.colTEN.OptionsColumn.AllowEdit = false;
-            this.colTEN.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
-            this.colTEN.OptionsColumn.ReadOnly = true;
-            this.colTEN.Visible = true;
-            this.colTEN.VisibleIndex = 2;
-            // 
-            // colHOCVI
-            // 
-            this.colHOCVI.Caption = "Degree";
-            this.colHOCVI.FieldName = "HOCVI";
-            this.colHOCVI.Name = "colHOCVI";
-            this.colHOCVI.OptionsColumn.AllowEdit = false;
-            this.colHOCVI.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
-            this.colHOCVI.OptionsColumn.ReadOnly = true;
-            this.colHOCVI.Visible = true;
-            this.colHOCVI.VisibleIndex = 3;
             // 
             // barManager1
             // 
@@ -396,14 +356,14 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(1067, 59);
+            this.barDockControlTop.Size = new System.Drawing.Size(1235, 59);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 671);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1067, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1235, 0);
             // 
             // barDockControlLeft
             // 
@@ -416,7 +376,7 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1067, 59);
+            this.barDockControlRight.Location = new System.Drawing.Point(1235, 59);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 612);
             // 
             // bdsTeacher
@@ -451,11 +411,82 @@
             // 
             this.sp_DanhSachGiaoVienTheoKhoaTableAdapter.ClearBeforeFill = true;
             // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(753, 12);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(176, 30);
+            this.txtSearch.TabIndex = 6;
+            this.txtSearch.TextChanged += new System.EventHandler(this.textSearch_TextChanged);
+            // 
+            // checkBoxSearch
+            // 
+            this.checkBoxSearch.AutoSize = true;
+            this.checkBoxSearch.Location = new System.Drawing.Point(963, 20);
+            this.checkBoxSearch.Name = "checkBoxSearch";
+            this.checkBoxSearch.Size = new System.Drawing.Size(107, 26);
+            this.checkBoxSearch.TabIndex = 7;
+            this.checkBoxSearch.Text = "SelectAll";
+            this.checkBoxSearch.UseVisualStyleBackColor = true;
+            this.checkBoxSearch.CheckedChanged += new System.EventHandler(this.checkBoxSearch_CheckedChanged);
+            // 
+            // colMAGV
+            // 
+            this.colMAGV.Caption = "TeacherID";
+            this.colMAGV.FieldName = "MAGV";
+            this.colMAGV.Name = "colMAGV";
+            this.colMAGV.OptionsColumn.AllowEdit = false;
+            this.colMAGV.OptionsColumn.ReadOnly = true;
+            this.colMAGV.Visible = true;
+            this.colMAGV.VisibleIndex = 0;
+            // 
+            // colHO
+            // 
+            this.colHO.Caption = "Last Name";
+            this.colHO.FieldName = "HO";
+            this.colHO.Name = "colHO";
+            this.colHO.OptionsColumn.AllowEdit = false;
+            this.colHO.OptionsColumn.ReadOnly = true;
+            this.colHO.Visible = true;
+            this.colHO.VisibleIndex = 1;
+            // 
+            // colTEN
+            // 
+            this.colTEN.Caption = "Frist Name";
+            this.colTEN.FieldName = "TEN";
+            this.colTEN.Name = "colTEN";
+            this.colTEN.OptionsColumn.AllowEdit = false;
+            this.colTEN.OptionsColumn.ReadOnly = true;
+            this.colTEN.Visible = true;
+            this.colTEN.VisibleIndex = 2;
+            // 
+            // colHOCVI
+            // 
+            this.colHOCVI.Caption = "Degree";
+            this.colHOCVI.FieldName = "HOCVI";
+            this.colHOCVI.Name = "colHOCVI";
+            this.colHOCVI.OptionsColumn.AllowEdit = false;
+            this.colHOCVI.OptionsColumn.ReadOnly = true;
+            this.colHOCVI.Visible = true;
+            this.colHOCVI.VisibleIndex = 3;
+            // 
+            // colMAKH
+            // 
+            this.colMAKH.Caption = "DepartmentID";
+            this.colMAKH.FieldName = "MAKH";
+            this.colMAKH.Name = "colMAKH";
+            this.colMAKH.OptionsColumn.AllowEdit = false;
+            this.colMAKH.OptionsColumn.ReadOnly = true;
+            this.colMAKH.Visible = true;
+            this.colMAKH.VisibleIndex = 4;
+            // 
             // frmTeacher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 671);
+            this.ClientSize = new System.Drawing.Size(1235, 671);
+            this.Controls.Add(this.checkBoxSearch);
+            this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.barDockControlLeft);
@@ -518,13 +549,16 @@
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraGrid.GridControl sp_DanhSachGiaoVienTheoKhoaGridControl;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn colMAGV;
-        private DevExpress.XtraGrid.Columns.GridColumn colHO;
-        private DevExpress.XtraGrid.Columns.GridColumn colTEN;
-        private DevExpress.XtraGrid.Columns.GridColumn colHOCVI;
         private System.Windows.Forms.Label mAGVLabel;
         private System.Windows.Forms.Label hOLabel;
         private System.Windows.Forms.Label tENLabel;
         private System.Windows.Forms.Label hOCVILabel;
+        private System.Windows.Forms.CheckBox checkBoxSearch;
+        private System.Windows.Forms.TextBox txtSearch;
+        private DevExpress.XtraGrid.Columns.GridColumn colMAGV;
+        private DevExpress.XtraGrid.Columns.GridColumn colHO;
+        private DevExpress.XtraGrid.Columns.GridColumn colTEN;
+        private DevExpress.XtraGrid.Columns.GridColumn colHOCVI;
+        private DevExpress.XtraGrid.Columns.GridColumn colMAKH;
     }
 }
