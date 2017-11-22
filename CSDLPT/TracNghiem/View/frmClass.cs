@@ -48,16 +48,6 @@ namespace TracNghiem
             }
         }
 
-        public void initUIComboBoxDep()
-        {
-            cbbDep.DataSource = Program.bds;
-            cbbDep.DisplayMember = "MACS";
-            cbbDep.ValueMember = "TENCS";
-            cbbDep.SelectedIndex = Program.currentBranch;
-
-            initUIComboBoxBranch();
-        }
-
         private void frmClass_Load(object sender, EventArgs e)
         {
             dataSetTracNghiem.EnforceConstraints = false;
@@ -96,6 +86,16 @@ namespace TracNghiem
                     btnDel.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
                 }
             }
+        }
+
+        public void initUIComboBoxDep()
+        {
+            cbbDep.DataSource = Program.bds;
+            cbbDep.DisplayMember = "MACS";
+            cbbDep.ValueMember = "TENCS";
+            cbbDep.SelectedIndex = Program.currentBranch;
+
+            initUIComboBoxBranch();
         }
 
         public void initUIComboBoxBranch()
@@ -394,6 +394,7 @@ namespace TracNghiem
             }
             else
             {
+                txtSearch.Text = "";
                 cbbBranch.Enabled = true;
             }
         }
