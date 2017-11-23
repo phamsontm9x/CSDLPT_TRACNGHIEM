@@ -182,7 +182,14 @@ namespace TracNghiem
 
         private void btnTest_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            MessageBox.Show("We are developing this function", "", MessageBoxButtons.OK);
+            Form frm = this.CheckExists(typeof(frmTest));
+            if (frm != null) frm.Activate();
+            else
+            {
+                frmTest f = new frmTest();
+                f.MdiParent = this;
+                f.Show();
+            }
         }
 
         private void btnTry_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
