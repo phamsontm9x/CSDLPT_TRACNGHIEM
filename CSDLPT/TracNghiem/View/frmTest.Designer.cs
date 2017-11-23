@@ -34,8 +34,9 @@
             this.btnAnswer3 = new System.Windows.Forms.RadioButton();
             this.btnAnswer2 = new System.Windows.Forms.RadioButton();
             this.btnAnswer1 = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblQuestion = new System.Windows.Forms.Label();
             this.lbQuestion = new System.Windows.Forms.ListBox();
+            this.btnBegin = new System.Windows.Forms.Button();
             this.groupQuestion.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,11 +51,12 @@
             // 
             // groupQuestion
             // 
+            this.groupQuestion.Controls.Add(this.btnBegin);
             this.groupQuestion.Controls.Add(this.btnAnswer4);
             this.groupQuestion.Controls.Add(this.btnAnswer3);
             this.groupQuestion.Controls.Add(this.btnAnswer2);
             this.groupQuestion.Controls.Add(this.btnAnswer1);
-            this.groupQuestion.Controls.Add(this.label1);
+            this.groupQuestion.Controls.Add(this.lblQuestion);
             this.groupQuestion.Location = new System.Drawing.Point(176, 83);
             this.groupQuestion.Name = "groupQuestion";
             this.groupQuestion.Size = new System.Drawing.Size(1030, 506);
@@ -101,6 +103,7 @@
             // btnAnswer1
             // 
             this.btnAnswer1.AutoSize = true;
+            this.btnAnswer1.Cursor = System.Windows.Forms.Cursors.Default;
             this.btnAnswer1.Location = new System.Drawing.Point(48, 113);
             this.btnAnswer1.Name = "btnAnswer1";
             this.btnAnswer1.Size = new System.Drawing.Size(110, 21);
@@ -110,15 +113,15 @@
             this.btnAnswer1.UseVisualStyleBackColor = true;
             this.btnAnswer1.CheckedChanged += new System.EventHandler(this.btnAnswer1_CheckedChanged);
             // 
-            // label1
+            // lblQuestion
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(45, 70);
-            this.label1.MaximumSize = new System.Drawing.Size(300, 80);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Cau 1:";
+            this.lblQuestion.AutoSize = true;
+            this.lblQuestion.Location = new System.Drawing.Point(45, 70);
+            this.lblQuestion.MaximumSize = new System.Drawing.Size(300, 80);
+            this.lblQuestion.Name = "lblQuestion";
+            this.lblQuestion.Size = new System.Drawing.Size(49, 17);
+            this.lblQuestion.TabIndex = 0;
+            this.lblQuestion.Text = "Cau 1:";
             // 
             // lbQuestion
             // 
@@ -131,6 +134,16 @@
             this.lbQuestion.TabIndex = 1;
             this.lbQuestion.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbQuestion_DrawItem);
             this.lbQuestion.SelectedIndexChanged += new System.EventHandler(this.lbQuestion_SelectedIndexChanged);
+            // 
+            // btnBegin
+            // 
+            this.btnBegin.Location = new System.Drawing.Point(337, 336);
+            this.btnBegin.Name = "btnBegin";
+            this.btnBegin.Size = new System.Drawing.Size(172, 54);
+            this.btnBegin.TabIndex = 11;
+            this.btnBegin.Text = "BatDauThi";
+            this.btnBegin.UseVisualStyleBackColor = true;
+            this.btnBegin.Click += new System.EventHandler(this.btnBegin_Click);
             // 
             // frmTest
             // 
@@ -152,10 +165,11 @@
         private DevExpress.XtraBars.Bar bar1;
         private System.Windows.Forms.GroupBox groupQuestion;
         private System.Windows.Forms.ListBox lbQuestion;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblQuestion;
         private System.Windows.Forms.RadioButton btnAnswer4;
         private System.Windows.Forms.RadioButton btnAnswer3;
         private System.Windows.Forms.RadioButton btnAnswer2;
         private System.Windows.Forms.RadioButton btnAnswer1;
+        private System.Windows.Forms.Button btnBegin;
     }
 }

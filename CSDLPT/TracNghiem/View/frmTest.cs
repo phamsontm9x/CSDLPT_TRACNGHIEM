@@ -36,6 +36,7 @@ namespace TracNghiem
             InitializeComponent();
             listQuestion = new List<ItemQuestion>();
             getDataQuestion();
+            initRoleTest();
         }
 
         public void getDataQuestion()
@@ -48,10 +49,20 @@ namespace TracNghiem
                 item.answer2 = "Cau tra loi B " + i;
                 item.answer3 = "Cau tra loi C " + i;
                 item.answer4 = "Cau tra loi D " + i;
-                
+                item.answer = 0;
                 listQuestion.Add(item);
             }
+            lbQuestion.SelectedIndex = -1;
         }
+
+        public void initRoleTest()
+        {
+            lblQuestion.Text = @"HOC SINH CHU Y KHONG DUOC SU DUNG TAI LIEU HOAC DIEN THOAI";
+            setHiddenAnswer(true);
+            lbQuestion.Enabled = false;
+        }
+
+
 
         public void updateDataListBox ()
         {
@@ -66,6 +77,8 @@ namespace TracNghiem
             btnAnswer2.Text = item.answer2;
             btnAnswer3.Text = item.answer3;
             btnAnswer4.Text = item.answer4;
+
+            lblQuestion.Text = item.title;
 
             setCheckAnswerQuestion(item.answer);
         }
@@ -146,6 +159,23 @@ namespace TracNghiem
             }
         }
 
+        public void setHiddenAnswer (Boolean value)
+        {
+            if (value == true)
+            {
+                btnAnswer1.Hide();
+                btnAnswer2.Hide();
+                btnAnswer3.Hide();
+                btnAnswer4.Hide();
+            } else
+            {
+                btnAnswer1.Show();
+                btnAnswer2.Show();
+                btnAnswer3.Show();
+                btnAnswer4.Show();
+            }
+        }
+
         private void lbQuestion_DrawItem(object sender, DrawItemEventArgs e)
         {
             ItemQuestion item = listQuestion[e.Index];
@@ -153,6 +183,14 @@ namespace TracNghiem
             Graphics g = e.Graphics;
             g.DrawString(item.title, e.Font, item.answer > 0 ? Brushes.Green : Brushes.Black, new PointF(e.Bounds.X, e.Bounds.Y));
             e.DrawFocusRectangle();
+        }
+
+        private void btnBegin_Click(object sender, EventArgs e)
+        {
+            lbQuestion.SelectedIndex = 0;
+            lbQuestion.Enabled = true;
+            setHiddenAnswer(false);
+            btnBegin.Hide();
         }
     }
 }
