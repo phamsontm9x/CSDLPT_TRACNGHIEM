@@ -44,6 +44,7 @@ namespace TracNghiem
                 else
                 {
                     initUIComboBoxClass();
+                    initUIComboBoxSubject();
                     getDataClassFromDep();
                 }
             }
@@ -57,9 +58,12 @@ namespace TracNghiem
             // TODO: This line of code loads data into the 'dataSetTracNghiem.MONHOC' table. You can move, or remove it, as needed.
 
             initUIComboBoxDep();
-            
-            cbbSubject.Enabled = txtTeacherID.Enabled = cbbClass.Enabled = false;
-            //txtLevel.Enabled = txtDate.Enabled = txtTime.Enabled = txtCountdown.Enabled = false;
+
+            cbbSubject.Visible = cbbClass.Visible = false;
+            txtClass.Enabled = txtSubject.Enabled = false;
+            txtLevel.Enabled = pickerDate.Enabled = txtTime.Enabled = txtCountdown.Enabled = txtQuestNum.Enabled = txtTeacherID.Enabled = false;
+
+            setCurrentRole();
         }
 
         public String getSubjectIDSelected()
@@ -82,6 +86,7 @@ namespace TracNghiem
 
             getDataClassFromDep();
             initUIComboBoxClass();
+            initUIComboBoxSubject();
         }
 
         public void initUIComboBoxClass()
@@ -112,6 +117,34 @@ namespace TracNghiem
             }
         }
 
+        public void initUIComboBoxSubject()
+        {
+            String currentServerName = cbbDep.SelectedValue.ToString();
+            int indexStr = currentServerName.IndexOf("\\") + 1;
+            currentServerName = currentServerName.Substring(indexStr);
+
+            String strLenh = "exec sp_DanhSachMonHoc '" + currentServerName + "'";
+            DataTable dt = Program.ExecSqlDataTable(strLenh);
+            if (dt != null)
+            {
+                if (dt.Rows.Count == 0)
+                {
+                    cbbSubject.DataSource = null;
+                }
+                else
+                {
+                    cbbSubject.DataSource = dt;
+                    cbbSubject.DisplayMember = "TENMH";
+                    cbbSubject.ValueMember = "MAMH";
+                }
+                cbbSubject.SelectedIndex = -1;
+            }
+            else
+            {
+                MessageBox.Show("Can not show list subject", "Notification!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
         public void getDataClassFromDep()
         {
             try
@@ -127,7 +160,7 @@ namespace TracNghiem
                 MessageBox.Show(ex.Message);
             }
 
-            //setCurrentRole();
+            setCurrentRole();
         }
 
         private void btnNew_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -135,7 +168,11 @@ namespace TracNghiem
             index = bdsRegistrationFromDep.Position;
             groupBox1.Enabled = true;
             bdsRegistrationFromDep.AddNew();
-            txtLevel.Enabled = txtTime.Enabled = txtCountdown.Enabled = true;
+            txtLevel.Enabled = txtTime.Enabled = pickerDate.Enabled = txtCountdown.Enabled = txtQuestNum.Enabled = true;
+            
+            pickerDate.MinDate = DateTime.Now;
+            pickerDate.Format = DateTimePickerFormat.Custom;
+            pickerDate.CustomFormat = " ";
 
             txtTeacherID.Enabled = false;
             txtTeacherID.Text = Program.currentID;
@@ -144,6 +181,9 @@ namespace TracNghiem
 
             btnCancel.Enabled = btnSave.Enabled = true;
             btnRefresh.Enabled = btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = false;
+
+            txtSubject.Visible = txtClass.Visible = false;
+            cbbClass.Visible = cbbSubject.Visible = true;
         }
 
         private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -152,7 +192,11 @@ namespace TracNghiem
             groupBox1.Enabled = true;
             
             cbbSubject.Enabled = txtTeacherID.Enabled = cbbClass.Enabled = false;
-            //txtLevel.Enabled = txtDate.Enabled = txtTime.Enabled = txtCountdown.Enabled = true;
+            txtLevel.Enabled = pickerDate.Enabled = txtTime.Enabled = txtCountdown.Enabled = txtQuestNum.Enabled = true;
+            txtSubject.Visible = txtClass.Visible = false;
+            cbbClass.Visible = cbbSubject.Visible = true;
+            pickerDate.MinDate = DateTime.Now;
+
             cbbDep.Enabled = false;
             groupBox2.Enabled = false;
 
@@ -163,22 +207,33 @@ namespace TracNghiem
         private void btnDel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             index = bdsRegistrationFromDep.Position;
-            try
+            if (MessageBox.Show("Do you want to delete this registration?", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                bdsRegistrationFromDep.RemoveCurrent();
-                this.sp_DanhSachGVDKTheoCosoTableAdapter.Delete(getSubjectIDSelected(), getClassIDSelected(), Int32.Parse(txtTime.Text));
-                if (bdsRegistrationFromDep.Count == 0)
+                try
                 {
-                    btnDel.Enabled = false;
-                    btnEdit.Enabled = false;
-                    btnRefresh.Enabled = false;
+                    bdsRegistrationFromDep.RemoveCurrent();
+                    this.sp_DanhSachGVDKTheoCosoTableAdapter.Delete(txtSubject.Text, txtClass.Text, Int32.Parse(txtTime.Text));
+                    if (bdsRegistrationFromDep.Count == 0)
+                    {
+                        btnDel.Enabled = false;
+                        btnEdit.Enabled = false;
+                        btnRefresh.Enabled = false;
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Failure. Please delete again!\n" + ex.Message, "",
-                   MessageBoxButtons.OK);
-                return;
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failure. Please delete again!\n" + ex.Message, "",
+                       MessageBoxButtons.OK);
+                    return;
+                }
+
+                groupBox1.Enabled = true;
+                cbbClass.Enabled = false;
+                cbbSubject.Enabled = false;
+                groupBox2.Enabled = true;
+                txtLevel.Enabled = pickerDate.Enabled = txtTime.Enabled = txtCountdown.Enabled = txtQuestNum.Enabled = true;
+                btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
+                btnSave.Enabled = btnCancel.Enabled = false;
             }
         }
 
@@ -200,7 +255,7 @@ namespace TracNghiem
             }
             else
             {
-                if (txtQuestNum.Text.Length == 0 || txtLevel.Text.Length == 0 || txtLevel.Text.Length == 0 || txtTeacherID.Text.Length == 0)
+                if (txtQuestNum.Text.Length == 0 || txtTime.Text.Length == 0 || txtLevel.Text.Length == 0 || txtCountdown.Text.Length == 0)
                 {
                     MessageBox.Show("Can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -213,6 +268,7 @@ namespace TracNghiem
                         bdsRegistrationFromDep.EndEdit();
                         bdsRegistrationFromDep.ResetCurrentItem();
                         this.sp_DanhSachGVDKTheoCosoTableAdapter.Insert(txtTeacherID.Text, getClassIDSelected(), getSubjectIDSelected(), txtLevel.Text, pickerDate.Value.Date, Int32.Parse(txtTime.Text), Int32.Parse(txtQuestNum.Text), Int32.Parse(txtCountdown.Text));
+                        getDataClassFromDep();
                     }
                     catch (Exception ex)
                     {
@@ -224,13 +280,22 @@ namespace TracNghiem
                 Program.myReader.Close();
             }
 
+            groupBox1.Enabled = true;
+            cbbClass.Enabled = false;
+            cbbSubject.Enabled = false;
+            groupBox2.Enabled = true;
+            txtLevel.Enabled = pickerDate.Enabled = txtTime.Enabled = txtCountdown.Enabled = txtQuestNum.Enabled = true;
+            btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
+            txtSubject.Visible = txtClass.Visible = true;
+            cbbClass.Visible = cbbSubject.Visible = false;
+            btnSave.Enabled = btnCancel.Enabled = false;
         }
         
         private void btnRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             groupBox1.Enabled = true;
             cbbSubject.Enabled = txtTeacherID.Enabled = cbbClass.Enabled = false;
-            //txtLevel.Enabled = txtDate.Enabled = txtTime.Enabled = txtCountdown.Enabled = false;
+            txtLevel.Enabled = pickerDate.Enabled = txtTime.Enabled = txtCountdown.Enabled = txtQuestNum.Enabled = false;
 
             if (bdsRegistrationFromDep.Count == 0) btnDel.Enabled = false;
             else btnDel.Enabled = true;
@@ -246,7 +311,10 @@ namespace TracNghiem
                 cbbClass.Enabled = cbbSubject.Enabled = true;
             }
             groupBox2.Enabled = true;
+            getDataClassFromDep();
             bdsRegistrationFromDep.MoveFirst();
+            txtSubject.Visible = txtClass.Visible = true;
+            cbbClass.Visible = cbbSubject.Visible = false;
 
             btnNew.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
             btnSave.Enabled = btnCancel.Enabled = false;
@@ -255,9 +323,12 @@ namespace TracNghiem
         private void btnCancel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             groupBox1.Enabled = true;
-            txtTeacherID.Enabled = txtLevel.Enabled = txtTime.Enabled = txtCountdown.Enabled = false;
+            txtTeacherID.Enabled = txtLevel.Enabled = txtTime.Enabled = pickerDate.Enabled = txtQuestNum.Enabled = txtCountdown.Enabled = false;
             groupBox2.Enabled = true;
+            getDataClassFromDep();
             bdsRegistrationFromDep.MoveFirst();
+            txtSubject.Visible = txtClass.Visible = true;
+            cbbClass.Visible = cbbSubject.Visible = false;
 
             setCurrentRole();
         }
@@ -279,8 +350,8 @@ namespace TracNghiem
             else
             {
                 cbbDep.Visible = false;
-                cbbClass.Visible = true;
-                cbbSubject.Visible = true;
+                cbbClass.Visible = false;
+                cbbSubject.Visible = false;
                 btnNew.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
                 btnSave.Enabled = btnCancel.Enabled = false;
 
@@ -298,6 +369,48 @@ namespace TracNghiem
         public void initButtonBarManage(Boolean isEnable)
         {
             btnNew.Enabled = btnEdit.Enabled = btnSave.Enabled = btnRefresh.Enabled = btnDel.Enabled = btnCancel.Enabled = isEnable;
+        }
+
+        private void pickerDate_ValueChanged(object sender, EventArgs e)
+        {
+            pickerDate.Format = DateTimePickerFormat.Short;
+            pickerDate.CustomFormat = "yyyy-MM-dd";
+        }
+
+        private void gridView1_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+        {
+            DateTime currentDate = DateTime.Now.Date;
+            DateTime selectedDate = pickerDate.Value.Date;
+
+            index = bdsRegistrationFromDep.Position;
+            String currentTeacherID = ((DataRowView)bdsRegistrationFromDep[index])["MAGV"].ToString();
+            if (Program.currentRole != "TRUONG")
+            {
+                if (currentTeacherID.Replace(" ", String.Empty) != Program.currentID)
+                {
+                    btnEdit.Enabled = false;
+                    btnDel.Enabled = false;
+                }
+                else
+                {
+                    btnEdit.Enabled = true;
+                    btnDel.Enabled = true;
+                }
+            }
+        }
+
+        private Boolean compareDates(DateTime currentDate, DateTime selectedDate)
+        {
+            int different = (int)((currentDate - selectedDate).TotalDays);
+
+            if (different < 0)
+            {
+                return true;
+            } 
+            else
+            {
+                return false;
+            }
         }
     }
 }

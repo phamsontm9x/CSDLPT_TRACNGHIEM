@@ -197,8 +197,10 @@
             this.txtAddress.Location = new System.Drawing.Point(598, 229);
             this.txtAddress.MenuManager = this.barManager1;
             this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAddress.Properties.Appearance.Options.UseFont = true;
             this.txtAddress.Properties.MaxLength = 40;
-            this.txtAddress.Size = new System.Drawing.Size(466, 22);
+            this.txtAddress.Size = new System.Drawing.Size(466, 28);
             this.txtAddress.TabIndex = 13;
             // 
             // bdsStudentFromClass
@@ -333,6 +335,7 @@
             // pickerBirthday
             // 
             this.pickerBirthday.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.bdsStudentFromClass, "NGAYSINH", true));
+            this.pickerBirthday.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pickerBirthday.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.pickerBirthday.Location = new System.Drawing.Point(598, 176);
             this.pickerBirthday.Name = "pickerBirthday";
@@ -346,8 +349,10 @@
             this.txtFirstName.Location = new System.Drawing.Point(964, 136);
             this.txtFirstName.MenuManager = this.barManager1;
             this.txtFirstName.Name = "txtFirstName";
+            this.txtFirstName.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFirstName.Properties.Appearance.Options.UseFont = true;
             this.txtFirstName.Properties.MaxLength = 10;
-            this.txtFirstName.Size = new System.Drawing.Size(100, 22);
+            this.txtFirstName.Size = new System.Drawing.Size(100, 28);
             this.txtFirstName.TabIndex = 9;
             this.txtFirstName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFirstName_KeyboardPressed);
             // 
@@ -357,8 +362,10 @@
             this.txtLastName.Location = new System.Drawing.Point(598, 136);
             this.txtLastName.MenuManager = this.barManager1;
             this.txtLastName.Name = "txtLastName";
+            this.txtLastName.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLastName.Properties.Appearance.Options.UseFont = true;
             this.txtLastName.Properties.MaxLength = 40;
-            this.txtLastName.Size = new System.Drawing.Size(238, 22);
+            this.txtLastName.Size = new System.Drawing.Size(238, 28);
             this.txtLastName.TabIndex = 7;
             this.txtLastName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLastName_KeyboardPressed);
             // 
@@ -368,8 +375,10 @@
             this.txtStudentID.Location = new System.Drawing.Point(598, 87);
             this.txtStudentID.MenuManager = this.barManager1;
             this.txtStudentID.Name = "txtStudentID";
+            this.txtStudentID.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStudentID.Properties.Appearance.Options.UseFont = true;
             this.txtStudentID.Properties.MaxLength = 8;
-            this.txtStudentID.Size = new System.Drawing.Size(171, 22);
+            this.txtStudentID.Size = new System.Drawing.Size(171, 28);
             this.txtStudentID.TabIndex = 5;
             // 
             // label1
@@ -436,6 +445,7 @@
             this.tableAdapterManager.SINHVIENTableAdapter = this.sINHVIENTableAdapter;
             this.tableAdapterManager.sp_DanhSachBoDeTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachGiaoVienTheoKhoaTableAdapter = null;
+            this.tableAdapterManager.sp_DanhSachGVDKTheoCosoTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachSinhVienTheoLopTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;

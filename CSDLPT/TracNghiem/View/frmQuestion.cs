@@ -118,7 +118,7 @@ namespace TracNghiem
             int indexStr = currentBranchName.IndexOf("\\") + 1;
             currentBranchName = currentBranchName.Substring(indexStr);
 
-            String strLenh = "exec sp_DanhSachGiaoVienTheoCoSo'" + currentBranchName + "'";
+            String strLenh = "exec sp_DanhSachGiaoVienTheoKhoaVaCoSo NULL, '" + currentBranchName + "'";
             DataTable dt = Program.ExecSqlDataTable(strLenh);
             if (dt != null)
             {
@@ -441,10 +441,12 @@ namespace TracNghiem
             if (currentTeacherID.Replace(" ", String.Empty) != Program.currentID)
             {
                 btnEdit.Enabled = false;
+                btnDel.Enabled = false;
             }
             else
             {
                 btnEdit.Enabled = true;
+                btnDel.Enabled = true;
             }
         }
     }

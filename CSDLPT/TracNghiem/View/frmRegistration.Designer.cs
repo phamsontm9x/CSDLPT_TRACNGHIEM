@@ -36,9 +36,11 @@
             System.Windows.Forms.Label tHOIGIANLabel;
             System.Windows.Forms.Label nGAYTHILabel1;
             System.Windows.Forms.Label sOCAUTHILabel1;
+            System.Windows.Forms.Label mAMHLabel;
+            System.Windows.Forms.Label mALOPLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRegistration));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtCountdown = new DevExpress.XtraEditors.SpinEdit();
+            this.txtQuestNum = new DevExpress.XtraEditors.SpinEdit();
             this.bdsRegistrationFromDep = new System.Windows.Forms.BindingSource(this.components);
             this.dataSetTracNghiem = new TracNghiem.dataSetTracNghiem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
@@ -54,13 +56,14 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.pickerDate = new System.Windows.Forms.DateTimePicker();
+            this.txtCountdown = new DevExpress.XtraEditors.SpinEdit();
             this.sOCAUTHISpinEdit = new DevExpress.XtraEditors.SpinEdit();
             this.txtTime = new DevExpress.XtraEditors.SpinEdit();
             this.txtLevel = new DevExpress.XtraEditors.TextEdit();
             this.txtTeacherID = new DevExpress.XtraEditors.TextEdit();
             this.cbbDep = new System.Windows.Forms.ComboBox();
             this.cbbClass = new System.Windows.Forms.ComboBox();
-            this.cbbSubject = new System.Windows.Forms.ComboBox();
             this.bdsSubject = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.sp_DanhSachGVDKTheoCosoGridControl = new DevExpress.XtraGrid.GridControl();
@@ -76,8 +79,9 @@
             this.sp_DanhSachGVDKTheoCosoTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.sp_DanhSachGVDKTheoCosoTableAdapter();
             this.tableAdapterManager = new TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager();
             this.mONHOCTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.MONHOCTableAdapter();
-            this.pickerDate = new System.Windows.Forms.DateTimePicker();
-            this.txtQuestNum = new DevExpress.XtraEditors.SpinEdit();
+            this.txtSubject = new DevExpress.XtraEditors.TextEdit();
+            this.txtClass = new DevExpress.XtraEditors.TextEdit();
+            this.cbbSubject = new System.Windows.Forms.ComboBox();
             mAGVLabel = new System.Windows.Forms.Label();
             tRINHDOLabel = new System.Windows.Forms.Label();
             lANLabel = new System.Windows.Forms.Label();
@@ -85,11 +89,14 @@
             tHOIGIANLabel = new System.Windows.Forms.Label();
             nGAYTHILabel1 = new System.Windows.Forms.Label();
             sOCAUTHILabel1 = new System.Windows.Forms.Label();
+            mAMHLabel = new System.Windows.Forms.Label();
+            mALOPLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCountdown.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQuestNum.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsRegistrationFromDep)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetTracNghiem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCountdown.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sOCAUTHISpinEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTime.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLevel.Properties)).BeginInit();
@@ -98,14 +105,15 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sp_DanhSachGVDKTheoCosoGridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtQuestNum.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSubject.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtClass.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // mAGVLabel
             // 
             mAGVLabel.AutoSize = true;
             mAGVLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            mAGVLabel.Location = new System.Drawing.Point(220, 111);
+            mAGVLabel.Location = new System.Drawing.Point(175, 168);
             mAGVLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             mAGVLabel.Name = "mAGVLabel";
             mAGVLabel.Size = new System.Drawing.Size(98, 22);
@@ -116,7 +124,7 @@
             // 
             tRINHDOLabel.AutoSize = true;
             tRINHDOLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            tRINHDOLabel.Location = new System.Drawing.Point(569, 111);
+            tRINHDOLabel.Location = new System.Drawing.Point(524, 168);
             tRINHDOLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             tRINHDOLabel.Name = "tRINHDOLabel";
             tRINHDOLabel.Size = new System.Drawing.Size(55, 22);
@@ -127,7 +135,7 @@
             // 
             lANLabel.AutoSize = true;
             lANLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            lANLabel.Location = new System.Drawing.Point(586, 177);
+            lANLabel.Location = new System.Drawing.Point(632, 227);
             lANLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             lANLabel.Name = "lANLabel";
             lANLabel.Size = new System.Drawing.Size(50, 22);
@@ -148,17 +156,41 @@
             // 
             tHOIGIANLabel.AutoSize = true;
             tHOIGIANLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            tHOIGIANLabel.Location = new System.Drawing.Point(129, 180);
+            tHOIGIANLabel.Location = new System.Drawing.Point(175, 230);
             tHOIGIANLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             tHOIGIANLabel.Name = "tHOIGIANLabel";
             tHOIGIANLabel.Size = new System.Drawing.Size(100, 22);
             tHOIGIANLabel.TabIndex = 13;
             tHOIGIANLabel.Text = "Countdown";
             // 
+            // nGAYTHILabel1
+            // 
+            nGAYTHILabel1.AutoSize = true;
+            nGAYTHILabel1.Location = new System.Drawing.Point(768, 227);
+            nGAYTHILabel1.Name = "nGAYTHILabel1";
+            nGAYTHILabel1.Size = new System.Drawing.Size(47, 22);
+            nGAYTHILabel1.TabIndex = 14;
+            nGAYTHILabel1.Text = "Date";
+            // 
+            // sOCAUTHILabel1
+            // 
+            sOCAUTHILabel1.AutoSize = true;
+            sOCAUTHILabel1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            sOCAUTHILabel1.Location = new System.Drawing.Point(392, 230);
+            sOCAUTHILabel1.Name = "sOCAUTHILabel1";
+            sOCAUTHILabel1.Size = new System.Drawing.Size(118, 22);
+            sOCAUTHILabel1.TabIndex = 15;
+            sOCAUTHILabel1.Text = "NumberQuest";
+            // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.cbbSubject);
+            this.groupBox1.Controls.Add(mALOPLabel);
+            this.groupBox1.Controls.Add(this.txtClass);
+            this.groupBox1.Controls.Add(mAMHLabel);
+            this.groupBox1.Controls.Add(this.txtSubject);
             this.groupBox1.Controls.Add(sOCAUTHILabel1);
             this.groupBox1.Controls.Add(this.txtQuestNum);
             this.groupBox1.Controls.Add(nGAYTHILabel1);
@@ -175,43 +207,41 @@
             this.groupBox1.Controls.Add(this.txtTeacherID);
             this.groupBox1.Controls.Add(this.cbbDep);
             this.groupBox1.Controls.Add(this.cbbClass);
-            this.groupBox1.Controls.Add(this.cbbSubject);
             this.groupBox1.Location = new System.Drawing.Point(4, 67);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(1020, 351);
+            this.groupBox1.Size = new System.Drawing.Size(1376, 351);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
-            // txtCountdown
+            // txtQuestNum
             // 
-            this.txtCountdown.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsRegistrationFromDep, "THOIGIAN", true));
-            this.txtCountdown.EditValue = new decimal(new int[] {
-            15,
+            this.txtQuestNum.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsRegistrationFromDep, "SOCAUTHI", true));
+            this.txtQuestNum.EditValue = new decimal(new int[] {
+            10,
             0,
             0,
             0});
-            this.txtCountdown.Location = new System.Drawing.Point(245, 175);
-            this.txtCountdown.Margin = new System.Windows.Forms.Padding(4);
-            this.txtCountdown.MenuManager = this.barManager1;
-            this.txtCountdown.Name = "txtCountdown";
-            this.txtCountdown.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCountdown.Properties.Appearance.Options.UseFont = true;
-            this.txtCountdown.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txtQuestNum.Location = new System.Drawing.Point(531, 227);
+            this.txtQuestNum.MenuManager = this.barManager1;
+            this.txtQuestNum.Name = "txtQuestNum";
+            this.txtQuestNum.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtQuestNum.Properties.Appearance.Options.UseFont = true;
+            this.txtQuestNum.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtCountdown.Properties.MaxValue = new decimal(new int[] {
-            60,
+            this.txtQuestNum.Properties.MaxValue = new decimal(new int[] {
+            100,
             0,
             0,
             0});
-            this.txtCountdown.Properties.MinValue = new decimal(new int[] {
-            15,
+            this.txtQuestNum.Properties.MinValue = new decimal(new int[] {
+            10,
             0,
             0,
             0});
-            this.txtCountdown.Size = new System.Drawing.Size(55, 28);
-            this.txtCountdown.TabIndex = 14;
+            this.txtQuestNum.Size = new System.Drawing.Size(53, 28);
+            this.txtQuestNum.TabIndex = 16;
             // 
             // bdsRegistrationFromDep
             // 
@@ -321,15 +351,15 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Margin = new System.Windows.Forms.Padding(4);
-            this.barDockControlTop.Size = new System.Drawing.Size(1024, 59);
+            this.barDockControlTop.Size = new System.Drawing.Size(1380, 59);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 642);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 654);
             this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(4);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1024, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1380, 0);
             // 
             // barDockControlLeft
             // 
@@ -337,15 +367,54 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 59);
             this.barDockControlLeft.Margin = new System.Windows.Forms.Padding(4);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 583);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 595);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1024, 59);
+            this.barDockControlRight.Location = new System.Drawing.Point(1380, 59);
             this.barDockControlRight.Margin = new System.Windows.Forms.Padding(4);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 583);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 595);
+            // 
+            // pickerDate
+            // 
+            this.pickerDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.bdsRegistrationFromDep, "NGAYTHI", true));
+            this.pickerDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.pickerDate.Location = new System.Drawing.Point(837, 222);
+            this.pickerDate.Name = "pickerDate";
+            this.pickerDate.Size = new System.Drawing.Size(122, 30);
+            this.pickerDate.TabIndex = 15;
+            this.pickerDate.ValueChanged += new System.EventHandler(this.pickerDate_ValueChanged);
+            // 
+            // txtCountdown
+            // 
+            this.txtCountdown.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsRegistrationFromDep, "THOIGIAN", true));
+            this.txtCountdown.EditValue = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            this.txtCountdown.Location = new System.Drawing.Point(291, 225);
+            this.txtCountdown.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCountdown.MenuManager = this.barManager1;
+            this.txtCountdown.Name = "txtCountdown";
+            this.txtCountdown.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCountdown.Properties.Appearance.Options.UseFont = true;
+            this.txtCountdown.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtCountdown.Properties.MaxValue = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.txtCountdown.Properties.MinValue = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            this.txtCountdown.Size = new System.Drawing.Size(55, 28);
+            this.txtCountdown.TabIndex = 14;
             // 
             // sOCAUTHISpinEdit
             // 
@@ -372,7 +441,7 @@
             0,
             0,
             0});
-            this.txtTime.Location = new System.Drawing.Point(644, 174);
+            this.txtTime.Location = new System.Drawing.Point(690, 224);
             this.txtTime.Margin = new System.Windows.Forms.Padding(4);
             this.txtTime.MenuManager = this.barManager1;
             this.txtTime.Name = "txtTime";
@@ -396,20 +465,20 @@
             // txtLevel
             // 
             this.txtLevel.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsRegistrationFromDep, "TRINHDO", true));
-            this.txtLevel.Location = new System.Drawing.Point(644, 108);
+            this.txtLevel.Location = new System.Drawing.Point(599, 165);
             this.txtLevel.Margin = new System.Windows.Forms.Padding(4);
             this.txtLevel.MenuManager = this.barManager1;
             this.txtLevel.Name = "txtLevel";
             this.txtLevel.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLevel.Properties.Appearance.Options.UseFont = true;
             this.txtLevel.Properties.MaxLength = 1;
-            this.txtLevel.Size = new System.Drawing.Size(95, 28);
+            this.txtLevel.Size = new System.Drawing.Size(65, 28);
             this.txtLevel.TabIndex = 6;
             // 
             // txtTeacherID
             // 
             this.txtTeacherID.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsRegistrationFromDep, "MAGV", true));
-            this.txtTeacherID.Location = new System.Drawing.Point(332, 108);
+            this.txtTeacherID.Location = new System.Drawing.Point(287, 165);
             this.txtTeacherID.Margin = new System.Windows.Forms.Padding(4);
             this.txtTeacherID.MenuManager = this.barManager1;
             this.txtTeacherID.Name = "txtTeacherID";
@@ -434,24 +503,11 @@
             // 
             this.cbbClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbClass.FormattingEnabled = true;
-            this.cbbClass.Location = new System.Drawing.Point(539, 31);
+            this.cbbClass.Location = new System.Drawing.Point(573, 107);
             this.cbbClass.Margin = new System.Windows.Forms.Padding(4);
             this.cbbClass.Name = "cbbClass";
             this.cbbClass.Size = new System.Drawing.Size(408, 30);
             this.cbbClass.TabIndex = 1;
-            // 
-            // cbbSubject
-            // 
-            this.cbbSubject.DataSource = this.bdsSubject;
-            this.cbbSubject.DisplayMember = "MAMH";
-            this.cbbSubject.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbbSubject.FormattingEnabled = true;
-            this.cbbSubject.Location = new System.Drawing.Point(308, 29);
-            this.cbbSubject.Margin = new System.Windows.Forms.Padding(4);
-            this.cbbSubject.Name = "cbbSubject";
-            this.cbbSubject.Size = new System.Drawing.Size(156, 30);
-            this.cbbSubject.TabIndex = 0;
-            this.cbbSubject.ValueMember = "MAMH";
             // 
             // bdsSubject
             // 
@@ -462,11 +518,11 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.sp_DanhSachGVDKTheoCosoGridControl);
-            this.groupBox2.Location = new System.Drawing.Point(4, 357);
+            this.groupBox2.Location = new System.Drawing.Point(4, 369);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(1020, 287);
+            this.groupBox2.Size = new System.Drawing.Size(1376, 287);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             // 
@@ -481,7 +537,7 @@
             this.sp_DanhSachGVDKTheoCosoGridControl.Margin = new System.Windows.Forms.Padding(4);
             this.sp_DanhSachGVDKTheoCosoGridControl.MenuManager = this.barManager1;
             this.sp_DanhSachGVDKTheoCosoGridControl.Name = "sp_DanhSachGVDKTheoCosoGridControl";
-            this.sp_DanhSachGVDKTheoCosoGridControl.Size = new System.Drawing.Size(1020, 264);
+            this.sp_DanhSachGVDKTheoCosoGridControl.Size = new System.Drawing.Size(1376, 264);
             this.sp_DanhSachGVDKTheoCosoGridControl.TabIndex = 0;
             this.sp_DanhSachGVDKTheoCosoGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -501,6 +557,7 @@
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Default;
             this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gridView1_RowClick);
             // 
             // colMAGV
             // 
@@ -611,67 +668,62 @@
             // 
             this.mONHOCTableAdapter.ClearBeforeFill = true;
             // 
-            // nGAYTHILabel1
+            // mAMHLabel
             // 
-            nGAYTHILabel1.AutoSize = true;
-            nGAYTHILabel1.Location = new System.Drawing.Point(722, 177);
-            nGAYTHILabel1.Name = "nGAYTHILabel1";
-            nGAYTHILabel1.Size = new System.Drawing.Size(47, 22);
-            nGAYTHILabel1.TabIndex = 14;
-            nGAYTHILabel1.Text = "Date";
+            mAMHLabel.AutoSize = true;
+            mAMHLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            mAMHLabel.Location = new System.Drawing.Point(175, 112);
+            mAMHLabel.Name = "mAMHLabel";
+            mAMHLabel.Size = new System.Drawing.Size(94, 22);
+            mAMHLabel.TabIndex = 17;
+            mAMHLabel.Text = "Subject ID";
             // 
-            // pickerDate
+            // txtSubject
             // 
-            this.pickerDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.bdsRegistrationFromDep, "NGAYTHI", true));
-            this.pickerDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.pickerDate.Location = new System.Drawing.Point(791, 172);
-            this.pickerDate.Name = "pickerDate";
-            this.pickerDate.Size = new System.Drawing.Size(122, 30);
-            this.pickerDate.TabIndex = 15;
+            this.txtSubject.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsRegistrationFromDep, "MAMH", true));
+            this.txtSubject.Location = new System.Drawing.Point(287, 109);
+            this.txtSubject.MenuManager = this.barManager1;
+            this.txtSubject.Name = "txtSubject";
+            this.txtSubject.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSubject.Properties.Appearance.Options.UseFont = true;
+            this.txtSubject.Size = new System.Drawing.Size(100, 28);
+            this.txtSubject.TabIndex = 18;
             // 
-            // sOCAUTHILabel1
+            // mALOPLabel
             // 
-            sOCAUTHILabel1.AutoSize = true;
-            sOCAUTHILabel1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            sOCAUTHILabel1.Location = new System.Drawing.Point(346, 180);
-            sOCAUTHILabel1.Name = "sOCAUTHILabel1";
-            sOCAUTHILabel1.Size = new System.Drawing.Size(118, 22);
-            sOCAUTHILabel1.TabIndex = 15;
-            sOCAUTHILabel1.Text = "NumberQuest";
+            mALOPLabel.AutoSize = true;
+            mALOPLabel.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            mALOPLabel.Location = new System.Drawing.Point(484, 115);
+            mALOPLabel.Name = "mALOPLabel";
+            mALOPLabel.Size = new System.Drawing.Size(75, 21);
+            mALOPLabel.TabIndex = 19;
+            mALOPLabel.Text = "Class ID";
             // 
-            // txtQuestNum
+            // txtClass
             // 
-            this.txtQuestNum.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsRegistrationFromDep, "SOCAUTHI", true));
-            this.txtQuestNum.EditValue = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.txtQuestNum.Location = new System.Drawing.Point(485, 177);
-            this.txtQuestNum.MenuManager = this.barManager1;
-            this.txtQuestNum.Name = "txtQuestNum";
-            this.txtQuestNum.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtQuestNum.Properties.Appearance.Options.UseFont = true;
-            this.txtQuestNum.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtQuestNum.Properties.MaxValue = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.txtQuestNum.Properties.MinValue = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.txtQuestNum.Size = new System.Drawing.Size(53, 28);
-            this.txtQuestNum.TabIndex = 16;
+            this.txtClass.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsRegistrationFromDep, "MALOP", true));
+            this.txtClass.Location = new System.Drawing.Point(573, 112);
+            this.txtClass.MenuManager = this.barManager1;
+            this.txtClass.Name = "txtClass";
+            this.txtClass.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtClass.Properties.Appearance.Options.UseFont = true;
+            this.txtClass.Size = new System.Drawing.Size(100, 26);
+            this.txtClass.TabIndex = 20;
+            // 
+            // cbbSubject
+            // 
+            this.cbbSubject.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbbSubject.FormattingEnabled = true;
+            this.cbbSubject.Location = new System.Drawing.Point(287, 104);
+            this.cbbSubject.Name = "cbbSubject";
+            this.cbbSubject.Size = new System.Drawing.Size(121, 30);
+            this.cbbSubject.TabIndex = 21;
             // 
             // frmRegistration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1024, 642);
+            this.ClientSize = new System.Drawing.Size(1380, 654);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.barDockControlLeft);
@@ -686,10 +738,11 @@
             this.Load += new System.EventHandler(this.frmRegistration_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCountdown.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQuestNum.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsRegistrationFromDep)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetTracNghiem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCountdown.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sOCAUTHISpinEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTime.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLevel.Properties)).EndInit();
@@ -698,7 +751,8 @@
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sp_DanhSachGVDKTheoCosoGridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtQuestNum.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSubject.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtClass.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -720,7 +774,6 @@
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
-        private System.Windows.Forms.ComboBox cbbSubject;
         private System.Windows.Forms.ComboBox cbbClass;
         private System.Windows.Forms.ComboBox cbbDep;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -747,5 +800,8 @@
         private DevExpress.XtraEditors.TextEdit txtTeacherID;
         private System.Windows.Forms.DateTimePicker pickerDate;
         private DevExpress.XtraEditors.SpinEdit txtQuestNum;
+        private DevExpress.XtraEditors.TextEdit txtSubject;
+        private DevExpress.XtraEditors.TextEdit txtClass;
+        private System.Windows.Forms.ComboBox cbbSubject;
     }
 }
