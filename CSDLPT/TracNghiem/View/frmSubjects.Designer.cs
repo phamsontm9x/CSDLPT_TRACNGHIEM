@@ -66,6 +66,7 @@
             this.bAITHITableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.BAITHITableAdapter();
             this.bdsRegistration = new System.Windows.Forms.BindingSource(this.components);
             this.gIAOVIEN_DANGKYTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.GIAOVIEN_DANGKYTableAdapter();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mONHOCGridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsSubjects)).BeginInit();
@@ -389,11 +390,20 @@
             // 
             this.gIAOVIEN_DANGKYTableAdapter.ClearBeforeFill = true;
             // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(770, 16);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(200, 30);
+            this.txtSearch.TabIndex = 6;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
             // frmSubjects
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1102, 600);
+            this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.barDockControlLeft);
@@ -463,5 +473,6 @@
         private System.Windows.Forms.Label mAMHLabel;
         private System.Windows.Forms.Label tENMHLabel;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private System.Windows.Forms.TextBox txtSearch;
     }
 }

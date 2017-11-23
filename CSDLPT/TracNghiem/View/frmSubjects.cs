@@ -157,5 +157,10 @@ namespace TracNghiem
         {
             btnNew.Enabled = btnEdit.Enabled = btnSave.Enabled = btnRefresh.Enabled = btnDel.Enabled = btnCancel.Enabled = isEnable;
         }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            bdsSubjects.Filter = "MAMH LIKE '%" + this.txtSearch.Text + "%'" + " OR TENMH LIKE '%" + this.txtSearch.Text + "%'";
+        }
     }
 }
