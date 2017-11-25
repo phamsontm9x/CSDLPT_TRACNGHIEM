@@ -16,6 +16,7 @@ namespace TracNghiem
         int index;
         String subjectID = "";
         String classID = "";
+        String method = "";
 
         public frmRegistration()
         {
@@ -166,6 +167,7 @@ namespace TracNghiem
         private void btnNew_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             index = bdsRegistrationFromDep.Position;
+            method = Program.NEW_METHOD;
             groupBox1.Enabled = true;
             bdsRegistrationFromDep.AddNew();
             txtLevel.Enabled = txtTime.Enabled = pickerDate.Enabled = txtCountdown.Enabled = txtQuestNum.Enabled = true;
@@ -189,6 +191,7 @@ namespace TracNghiem
         private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             index = bdsRegistrationFromDep.Position;
+            method = Program.UPDATE_METHOD;
             groupBox1.Enabled = true;
             
             cbbSubject.Enabled = txtTeacherID.Enabled = cbbClass.Enabled = false;
@@ -255,29 +258,58 @@ namespace TracNghiem
             }
             else
             {
-                if (txtQuestNum.Text.Length == 0 || txtTime.Text.Length == 0 || txtLevel.Text.Length == 0 || txtCountdown.Text.Length == 0)
+                if (method == Program.NEW_METHOD)
                 {
-                    MessageBox.Show("Can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                else
-                {
-                    try
+                    if (txtQuestNum.Text.Length == 0 || txtTime.Text.Length == 0 || txtLevel.Text.Length == 0 || txtCountdown.Text.Length == 0)
                     {
-                        this.Validate();
-                        bdsRegistrationFromDep.EndEdit();
-                        bdsRegistrationFromDep.ResetCurrentItem();
-                        this.sp_DanhSachGVDKTheoCosoTableAdapter.Insert(txtTeacherID.Text, getClassIDSelected(), getSubjectIDSelected(), txtLevel.Text, pickerDate.Value.Date, Int32.Parse(txtTime.Text), Int32.Parse(txtQuestNum.Text), Int32.Parse(txtCountdown.Text));
-                        getDataClassFromDep();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Create registration failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
-                        Program.myReader.Close();
+                        MessageBox.Show("Can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
+                    else
+                    {
+                        try
+                        {
+                            this.Validate();
+                            bdsRegistrationFromDep.EndEdit();
+                            bdsRegistrationFromDep.ResetCurrentItem();
+                            this.sp_DanhSachGVDKTheoCosoTableAdapter.Insert(txtTeacherID.Text, getClassIDSelected(), getSubjectIDSelected(), txtLevel.Text, pickerDate.Value.Date, Int32.Parse(txtTime.Text), Int32.Parse(txtQuestNum.Text), Int32.Parse(txtCountdown.Text));
+                            getDataClassFromDep();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Create registration failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                            Program.myReader.Close();
+                            return;
+                        }
+                    }
+                    Program.myReader.Close();
                 }
-                Program.myReader.Close();
+                else if (method == Program.UPDATE_METHOD)
+                {
+                    if (txtQuestNum.Text.Length == 0 || txtTime.Text.Length == 0 || txtCountdown.Text.Length == 0)
+                    {
+                        MessageBox.Show("Can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    else
+                    {
+                        try
+                        {
+                            this.Validate();
+                            bdsRegistrationFromDep.EndEdit();
+                            bdsRegistrationFromDep.ResetCurrentItem();
+                            this.sp_DanhSachGVDKTheoCosoTableAdapter.Update(getClassIDSelected(), getSubjectIDSelected(), txtLevel.Text, pickerDate.Value.Date, Int32.Parse(txtTime.Text), Int32.Parse(txtQuestNum.Text), Int32.Parse(txtCountdown.Text));
+                            getDataClassFromDep();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Update registration failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                            Program.myReader.Close();
+                            return;
+                        }
+                    }
+                    Program.myReader.Close();
+                }
             }
 
             groupBox1.Enabled = true;
