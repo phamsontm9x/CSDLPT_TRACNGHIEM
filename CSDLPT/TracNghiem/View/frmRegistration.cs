@@ -171,7 +171,7 @@ namespace TracNghiem
             groupBox1.Enabled = true;
             bdsRegistrationFromDep.AddNew();
             txtLevel.Enabled = txtTime.Enabled = pickerDate.Enabled = txtCountdown.Enabled = txtQuestNum.Enabled = true;
-            
+
             pickerDate.MinDate = DateTime.Now;
             pickerDate.Format = DateTimePickerFormat.Custom;
             pickerDate.CustomFormat = " ";
@@ -193,11 +193,11 @@ namespace TracNghiem
             index = bdsRegistrationFromDep.Position;
             method = Program.UPDATE_METHOD;
             groupBox1.Enabled = true;
-            
+
             cbbSubject.Enabled = txtTeacherID.Enabled = cbbClass.Enabled = false;
             txtLevel.Enabled = pickerDate.Enabled = txtTime.Enabled = txtCountdown.Enabled = txtQuestNum.Enabled = true;
-            txtSubject.Visible = txtClass.Visible = false;
-            cbbClass.Visible = cbbSubject.Visible = true;
+            txtSubject.Visible = txtClass.Visible = true;
+            cbbClass.Visible = cbbSubject.Visible = false;
             pickerDate.MinDate = DateTime.Now;
 
             cbbDep.Enabled = false;
@@ -243,23 +243,23 @@ namespace TracNghiem
         private void btnSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             String sqlStr = "";
-
-            sqlStr = "exec sp_KiemTraGVDK '" + getClassIDSelected() + "', '" + getSubjectIDSelected() + "', '" + txtTime.Text + "'";
-
-            Program.myReader = Program.ExecSqlDataReader(sqlStr);
-            if (Program.myReader == null) return;
-            Program.myReader.Read();
-
-            if (Program.myReader.FieldCount > 0)
+            if (method == Program.NEW_METHOD)
             {
-                MessageBox.Show("The registration for this class has already exists!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Program.myReader.Close();
-                return;
-            }
-            else
-            {
-                if (method == Program.NEW_METHOD)
+                sqlStr = "exec sp_KiemTraGVDK '" + getClassIDSelected() + "', '" + getSubjectIDSelected() + "', '" + txtTime.Text + "'";
+
+                Program.myReader = Program.ExecSqlDataReader(sqlStr);
+                if (Program.myReader == null) return;
+                Program.myReader.Read();
+
+                if (Program.myReader.FieldCount > 0)
                 {
+                    MessageBox.Show("The registration for this class has already exists!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Program.myReader.Close();
+                    return;
+                }
+                else
+                {
+
                     if (txtQuestNum.Text.Length == 0 || txtTime.Text.Length == 0 || txtLevel.Text.Length == 0 || txtCountdown.Text.Length == 0)
                     {
                         MessageBox.Show("Can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -284,39 +284,39 @@ namespace TracNghiem
                     }
                     Program.myReader.Close();
                 }
-                else if (method == Program.UPDATE_METHOD)
+            }
+            else if (method == Program.UPDATE_METHOD)
+            {
+                if (txtQuestNum.Text.Length == 0 || txtTime.Text.Length == 0 || txtCountdown.Text.Length == 0)
                 {
-                    if (txtQuestNum.Text.Length == 0 || txtTime.Text.Length == 0 || txtCountdown.Text.Length == 0)
+                    MessageBox.Show("Can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    try
                     {
-                        MessageBox.Show("Can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        this.Validate();
+                        bdsRegistrationFromDep.EndEdit();
+                        bdsRegistrationFromDep.ResetCurrentItem();
+                        this.sp_DanhSachGVDKTheoCosoTableAdapter.Update(txtSubject.Text, txtClass.Text, Int32.Parse(txtTime.Text), txtLevel.Text, pickerDate.Value.Date, Int32.Parse(txtQuestNum.Text), Int32.Parse(txtCountdown.Text));
+                        getDataClassFromDep();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Update registration failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                        Program.myReader.Close();
                         return;
                     }
-                    else
-                    {
-                        try
-                        {
-                            this.Validate();
-                            bdsRegistrationFromDep.EndEdit();
-                            bdsRegistrationFromDep.ResetCurrentItem();
-                            this.sp_DanhSachGVDKTheoCosoTableAdapter.Update(getClassIDSelected(), getSubjectIDSelected(), txtLevel.Text, pickerDate.Value.Date, Int32.Parse(txtTime.Text), Int32.Parse(txtQuestNum.Text), Int32.Parse(txtCountdown.Text));
-                            getDataClassFromDep();
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Update registration failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
-                            Program.myReader.Close();
-                            return;
-                        }
-                    }
-                    Program.myReader.Close();
                 }
+                Program.myReader.Close();
             }
 
             groupBox1.Enabled = true;
             cbbClass.Enabled = false;
             cbbSubject.Enabled = false;
             groupBox2.Enabled = true;
-            txtLevel.Enabled = pickerDate.Enabled = txtTime.Enabled = txtCountdown.Enabled = txtQuestNum.Enabled = true;
+            txtLevel.Enabled = pickerDate.Enabled = txtTime.Enabled = txtCountdown.Enabled = txtQuestNum.Enabled = false;
             btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
             txtSubject.Visible = txtClass.Visible = true;
             cbbClass.Visible = cbbSubject.Visible = false;
