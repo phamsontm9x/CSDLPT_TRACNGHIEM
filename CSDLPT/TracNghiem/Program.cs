@@ -42,6 +42,12 @@ namespace TracNghiem
         public static BindingSource currentBidingSource = new BindingSource();
         public static frmMain frmChinh;
 
+        public static String insertDepID = "";
+        public static String insertSubjectID = "";
+        public static String insertClassID = "";
+        public static String insertLevel = "";
+        public static String insertTeacherID = "";
+
         public static String UPDATE_METHOD = "UPDATE";
         public static String DETELE_METHOD = "DELETE";
         public static String NEW_METHOD = "NEW";

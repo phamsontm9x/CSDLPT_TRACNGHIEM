@@ -65,6 +65,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dataSetView.xsd</DependentUpon>
     </Compile>
+    <Compile Include="frmInsertQuestion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInsertQuestion.Designer.cs">
+      <DependentUpon>frmInsertQuestion.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\frmTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +133,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmInsertQuestion.resx">
+      <DependentUpon>frmInsertQuestion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\frmTest.resx">
       <DependentUpon>frmTest.cs</DependentUpon>
     </EmbeddedResource>
@@ -283,6 +292,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-view.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-add-file-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-send-file-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-add-file-12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-add-file-26.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

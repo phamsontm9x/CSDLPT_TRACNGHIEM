@@ -73,6 +73,36 @@ namespace TracNghiem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_add_file_12 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-add-file-12", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_add_file_26 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-add-file-26", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_add_file_50 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-add-file-50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_add_user_male {
             get {
                 object obj = ResourceManager.GetObject("icons8_add_user_male", resourceCulture);
@@ -256,6 +286,16 @@ namespace TracNghiem.Properties {
         internal static System.Drawing.Bitmap icons8_search {
             get {
                 object obj = ResourceManager.GetObject("icons8_search", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_send_file_50 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-send-file-50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

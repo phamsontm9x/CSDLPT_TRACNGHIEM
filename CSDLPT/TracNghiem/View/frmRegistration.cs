@@ -95,6 +95,7 @@ namespace TracNghiem
             String currentServerName = cbbDep.SelectedValue.ToString();
             int indexStr = currentServerName.IndexOf("\\") + 1;
             currentServerName = currentServerName.Substring(indexStr);
+            Program.insertDepID = currentServerName == "MSSQLSERVER1" ? "CS1" : "CS2";
 
             String strLenh = "exec sp_DanhSachLopTheoKhoaVaCoSo " + "NULL" + ",'" + currentServerName + "'";
             DataTable dt = Program.ExecSqlDataTable(strLenh);
@@ -245,13 +246,25 @@ namespace TracNghiem
             String sqlStr = "";
             if (method == Program.NEW_METHOD)
             {
-                sqlStr = "exec sp_KiemTraGVDK '" + getClassIDSelected() + "', '" + getSubjectIDSelected() + "', '" + txtTime.Text + "'";
+                Program.connect.Open();
 
-                Program.myReader = Program.ExecSqlDataReader(sqlStr);
-                if (Program.myReader == null) return;
-                Program.myReader.Read();
+                sqlStr = "sp_KiemTraGVDK";
+                Program.cmd = Program.connect.CreateCommand();
+                Program.cmd.CommandType = CommandType.StoredProcedure;
+                Program.cmd.CommandText = sqlStr;
 
-                if (Program.myReader.FieldCount > 0)
+                Program.cmd.Parameters.Add("@MALOP", SqlDbType.NChar).Value = getClassIDSelected();
+                Program.cmd.Parameters.Add("@MAMH", SqlDbType.NChar).Value = getSubjectIDSelected();
+                Program.cmd.Parameters.Add("@LAN", SqlDbType.Int).Value = Int32.Parse(txtTime.Text.ToString());
+                Program.cmd.Parameters.Add("@TRINHDO", SqlDbType.NChar).Value = txtLevel.Text.ToString();
+                Program.cmd.Parameters.Add("@SOCAUTHI", SqlDbType.Int).Value = txtQuestNum.Text.ToString();
+                Program.cmd.Parameters.Add("@ReturnValue", SqlDbType.VarChar).Direction = ParameterDirection.ReturnValue;
+                Program.cmd.ExecuteNonQuery();
+                Program.connect.Close();
+
+                String result = Program.cmd.Parameters["@ReturnValue"].Value.ToString();
+
+                if (result == "-1")
                 {
                     MessageBox.Show("The registration for this class has already exists!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Program.myReader.Close();
@@ -259,13 +272,28 @@ namespace TracNghiem
                 }
                 else
                 {
-
                     if (txtQuestNum.Text.Length == 0 || txtTime.Text.Length == 0 || txtLevel.Text.Length == 0 || txtCountdown.Text.Length == 0)
                     {
                         MessageBox.Show("Can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-                    else
+                    else if (result == "2")
+                    {
+                        if(MessageBox.Show("University have not enough exam code. \nUpdate new exam code?", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            Program.insertLevel = txtLevel.Text;
+                            Program.insertSubjectID = txtSubject.Text;
+                            Program.insertTeacherID = txtTeacherID.Text;
+                            Program.insertClassID = txtClass.Text;
+
+                            frmInsertQuestion frm = new frmInsertQuestion();
+                            frm.ShowDialog();
+                            Program.myReader.Close();
+                        }
+                        else
+                            return;
+                    }
+                    else if (result == "0" || result == "1")
                     {
                         try
                         {
@@ -378,9 +406,11 @@ namespace TracNghiem
                 cbbClass.Visible = false;
                 cbbSubject.Visible = false;
                 initButtonBarManage(false);
+                btnInsert.Visible = false;
             }
             else
             {
+                btnInsert.Visible = true; 
                 cbbDep.Visible = false;
                 cbbClass.Visible = false;
                 cbbSubject.Visible = false;
@@ -443,6 +473,17 @@ namespace TracNghiem
             {
                 return false;
             }
+        }
+
+        private void btnInsert_Click(object sender, EventArgs e)
+        {
+            Program.insertLevel = txtLevel.Text;
+            Program.insertSubjectID = txtSubject.Text;
+            Program.insertTeacherID = txtTeacherID.Text;
+            Program.insertClassID = txtClass.Text;
+
+            frmInsertQuestion frm = new frmInsertQuestion();
+            frm.ShowDialog();
         }
     }
 }
