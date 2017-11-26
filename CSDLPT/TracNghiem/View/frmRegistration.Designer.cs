@@ -40,7 +40,6 @@
             System.Windows.Forms.Label mALOPLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRegistration));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnInsert = new System.Windows.Forms.Button();
             this.cbbSubject = new System.Windows.Forms.ComboBox();
             this.txtClass = new DevExpress.XtraEditors.TextEdit();
             this.bdsRegistrationFromDep = new System.Windows.Forms.BindingSource(this.components);
@@ -207,7 +206,6 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.btnInsert);
             this.groupBox1.Controls.Add(this.cbbSubject);
             this.groupBox1.Controls.Add(mALOPLabel);
             this.groupBox1.Controls.Add(this.txtClass);
@@ -236,19 +234,6 @@
             this.groupBox1.Size = new System.Drawing.Size(1376, 351);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            // 
-            // btnInsert
-            // 
-            this.btnInsert.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInsert.Image = global::TracNghiem.Properties.Resources.icons8_add_file_26;
-            this.btnInsert.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInsert.Location = new System.Drawing.Point(1042, 102);
-            this.btnInsert.Name = "btnInsert";
-            this.btnInsert.Size = new System.Drawing.Size(34, 36);
-            this.btnInsert.TabIndex = 22;
-            this.btnInsert.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnInsert.UseVisualStyleBackColor = true;
-            this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
             // 
             // cbbSubject
             // 
@@ -818,6 +803,5 @@
         private DevExpress.XtraEditors.TextEdit txtSubject;
         private DevExpress.XtraEditors.TextEdit txtClass;
         private System.Windows.Forms.ComboBox cbbSubject;
-        private System.Windows.Forms.Button btnInsert;
     }
 }

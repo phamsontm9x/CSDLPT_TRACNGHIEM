@@ -155,7 +155,7 @@ namespace TracNghiem
                 int indexStr = currentServerName.IndexOf("\\") + 1;
                 currentServerName = currentServerName.Substring(indexStr);
                 this.sp_DanhSachGVDKTheoCosoTableAdapter.Fill(this.dataSetTracNghiem.sp_DanhSachGVDKTheoCoso, currentServerName);
-                this.sp_DanhSachGVDKTheoCosoTableAdapter.ClearBeforeFill = true;
+                //this.sp_DanhSachGVDKTheoCosoTableAdapter.ClearBeforeFill = true;
             }
             catch (System.Exception ex)
             {
@@ -175,7 +175,7 @@ namespace TracNghiem
 
             pickerDate.MinDate = DateTime.Now;
             pickerDate.Format = DateTimePickerFormat.Custom;
-            pickerDate.CustomFormat = " ";
+            //pickerDate.CustomFormat = " ";
 
             txtTeacherID.Enabled = false;
             txtTeacherID.Text = Program.currentID;
@@ -282,7 +282,7 @@ namespace TracNghiem
                         if(MessageBox.Show("University have not enough exam code. \nUpdate new exam code?", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
                             Program.insertLevel = txtLevel.Text;
-                            Program.insertSubjectID = txtSubject.Text;
+                            Program.insertSubjectID = getSubjectIDSelected();
                             Program.insertTeacherID = txtTeacherID.Text;
                             Program.insertClassID = txtClass.Text;
 
@@ -406,11 +406,9 @@ namespace TracNghiem
                 cbbClass.Visible = false;
                 cbbSubject.Visible = false;
                 initButtonBarManage(false);
-                btnInsert.Visible = false;
             }
             else
             {
-                btnInsert.Visible = true; 
                 cbbDep.Visible = false;
                 cbbClass.Visible = false;
                 cbbSubject.Visible = false;

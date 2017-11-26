@@ -65,10 +65,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dataSetView.xsd</DependentUpon>
     </Compile>
-    <Compile Include="frmInsertQuestion.cs">
+    <Compile Include="View\frmInsertQuestion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmInsertQuestion.Designer.cs">
+    <Compile Include="View\frmInsertQuestion.Designer.cs">
       <DependentUpon>frmInsertQuestion.cs</DependentUpon>
     </Compile>
     <Compile Include="View\frmTest.cs">
@@ -133,7 +133,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmInsertQuestion.resx">
+    <EmbeddedResource Include="View\frmInsertQuestion.resx">
       <DependentUpon>frmInsertQuestion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\frmTest.resx">
