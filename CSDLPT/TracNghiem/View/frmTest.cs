@@ -13,7 +13,12 @@ namespace TracNghiem
 {
     public partial class frmTest : Form
     {
-        public int timeExam = 3600;
+        // object exam
+        public int timeExam = 60;
+        public int totalQuestionCorrect = 0;
+        public float score = 0;
+
+        public bool isFinal = false;
         public class ItemQuestion
         {
             public string titleListBox;
@@ -52,7 +57,7 @@ namespace TracNghiem
         {
             String MAMH = "TD1";
             String TRINHDO = "A";
-            String MACS = "CS2";
+            String MACS = "CS1";
             int SoCauHoi = 4;
 
             String strLenh = "exec sp_RandomQuestionTest'" + MAMH + "', '" + TRINHDO + "', '" + MACS + "', '" + SoCauHoi + "'";
@@ -87,6 +92,7 @@ namespace TracNghiem
             lblQuestion.Text = @"HOC SINH CHU Y KHONG DUOC SU DUNG TAI LIEU HOAC DIEN THOAI";
             setHiddenAnswer(true);
             lbQuestion.Enabled = false;
+            btnFinish.Hide();
         }
 
 
@@ -208,8 +214,15 @@ namespace TracNghiem
             ItemQuestion item = listQuestion[e.Index];
             e.DrawBackground();
             Graphics g = e.Graphics;
-            string title = item.answer != null ? item.titleListBox + "\t(" + item.answer + ")" : item.titleListBox;
-            g.DrawString(title, e.Font, item.answer !=null ? Brushes.Green : Brushes.Black, new PointF(e.Bounds.X, e.Bounds.Y));
+            if (isFinal)
+            {
+                string title = item.answer == item.correctAnswer ? item.titleListBox + "\t(" + item.answer + ")" : item.titleListBox + "\t(" + item.answer + ") " + item.correctAnswer;
+                g.DrawString(title, e.Font, item.answer == item.correctAnswer ? Brushes.Green : Brushes.Red, new PointF(e.Bounds.X, e.Bounds.Y));
+            } else
+            {
+                string title = item.answer != null ? item.titleListBox + "\t(" + item.answer + ")" : item.titleListBox;
+                g.DrawString(title, e.Font, item.answer != null ? Brushes.Green : Brushes.Black, new PointF(e.Bounds.X, e.Bounds.Y));
+            }    
             e.DrawFocusRectangle();
         }
 
@@ -219,6 +232,7 @@ namespace TracNghiem
             lbQuestion.Enabled = true;
             setHiddenAnswer(false);
             btnBegin.Hide();
+            btnFinish.Show();
             InitTimmer();
         }
 
@@ -235,7 +249,7 @@ namespace TracNghiem
             if (timeExam == 0)
             {
                 timer1.Stop();
-                ShowMyDialogBox();
+                setFinal();
             } else
             {
                 timeExam--;
@@ -244,9 +258,38 @@ namespace TracNghiem
             
         }
 
-        public void ShowMyDialogBox()
+        public void getScoreExam()
         {
-            lblTimer.Text = "HetGio!";
+            float scorePerQuestion = 10 / (float)listQuestion.Count;
+            foreach (ItemQuestion item in listQuestion)
+            {
+                if (item.answer == item.correctAnswer)
+                {
+                    score += scorePerQuestion;
+                    totalQuestionCorrect++;
+                }
+            }
+           // score = (float) Math.Round(score,2);
+            lblTimer.Text = "Score:" + score;
+        }
+
+        private void btnFinish_Click(object sender, EventArgs e)
+        {
+            setFinal();
+            btnFinish.Hide();
+            MessageBox.Show("You have " + totalQuestionCorrect + "\n Your score is: " + score + "", "Nofitication", MessageBoxButtons.OK);
+        }
+        public void setFinal()
+        {
+            if (isFinal == false)
+            {
+                getScoreExam();
+                isFinal = true;
+                btnAnswer1.Enabled = false;
+                btnAnswer2.Enabled = false;
+                btnAnswer3.Enabled = false;
+                btnAnswer4.Enabled = false;
+            } 
         }
     }
 }

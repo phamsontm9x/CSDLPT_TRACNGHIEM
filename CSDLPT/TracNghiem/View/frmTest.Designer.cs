@@ -40,6 +40,7 @@
             this.lbQuestion = new System.Windows.Forms.ListBox();
             this.lblTimer = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnFinish = new System.Windows.Forms.Button();
             this.groupQuestion.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -151,7 +152,7 @@
             // lblTimer
             // 
             this.lblTimer.AutoSize = true;
-            this.lblTimer.Location = new System.Drawing.Point(34, 428);
+            this.lblTimer.Location = new System.Drawing.Point(55, 419);
             this.lblTimer.Name = "lblTimer";
             this.lblTimer.Size = new System.Drawing.Size(44, 17);
             this.lblTimer.TabIndex = 2;
@@ -161,11 +162,22 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // btnFinish
+            // 
+            this.btnFinish.Location = new System.Drawing.Point(40, 450);
+            this.btnFinish.Name = "btnFinish";
+            this.btnFinish.Size = new System.Drawing.Size(75, 23);
+            this.btnFinish.TabIndex = 3;
+            this.btnFinish.Text = "Bo thi";
+            this.btnFinish.UseVisualStyleBackColor = true;
+            this.btnFinish.Click += new System.EventHandler(this.btnFinish_Click);
+            // 
             // frmTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1203, 638);
+            this.Controls.Add(this.btnFinish);
             this.Controls.Add(this.lblTimer);
             this.Controls.Add(this.lbQuestion);
             this.Controls.Add(this.groupQuestion);
@@ -191,5 +203,6 @@
         private System.Windows.Forms.Button btnBegin;
         private System.Windows.Forms.Label lblTimer;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button btnFinish;
     }
 }
