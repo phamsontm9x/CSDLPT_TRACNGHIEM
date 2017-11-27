@@ -415,6 +415,8 @@
             this.txtQuestNum.Properties.Appearance.Options.UseFont = true;
             this.txtQuestNum.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtQuestNum.Properties.IsFloatValue = false;
+            this.txtQuestNum.Properties.Mask.EditMask = "N00";
             this.txtQuestNum.Properties.MaxValue = new decimal(new int[] {
             100,
             0,
@@ -454,6 +456,8 @@
             this.txtCountdown.Properties.Appearance.Options.UseFont = true;
             this.txtCountdown.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtCountdown.Properties.IsFloatValue = false;
+            this.txtCountdown.Properties.Mask.EditMask = "N00";
             this.txtCountdown.Properties.MaxValue = new decimal(new int[] {
             60,
             0,
@@ -500,6 +504,8 @@
             this.txtTime.Properties.Appearance.Options.UseFont = true;
             this.txtTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtTime.Properties.IsFloatValue = false;
+            this.txtTime.Properties.Mask.EditMask = "N00";
             this.txtTime.Properties.MaxValue = new decimal(new int[] {
             2,
             0,

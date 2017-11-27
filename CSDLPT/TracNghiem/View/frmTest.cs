@@ -13,6 +13,7 @@ namespace TracNghiem
 {
     public partial class frmTest : Form
     {
+        public int timeExam = 3600;
         public class ItemQuestion
         {
             public string titleListBox;
@@ -49,12 +50,12 @@ namespace TracNghiem
 
         public void getDataQuestion()
         {
-            String MAMH = "MMT";
+            String MAMH = "TD1";
             String TRINHDO = "A";
-            String MAGV = "TH123";
-            int SoCauHoi = 10;
+            String MACS = "CS2";
+            int SoCauHoi = 4;
 
-            String strLenh = "exec sp_RandomQuestion'" + MAMH + "', '" + TRINHDO + "', '" + MAGV + "', '" + SoCauHoi + "'";
+            String strLenh = "exec sp_RandomQuestionTest'" + MAMH + "', '" + TRINHDO + "', '" + MACS + "', '" + SoCauHoi + "'";
             DataTable dt = Program.ExecSqlDataTable(strLenh);
             if (dt != null)
             {
@@ -218,6 +219,34 @@ namespace TracNghiem
             lbQuestion.Enabled = true;
             setHiddenAnswer(false);
             btnBegin.Hide();
+            InitTimmer();
+        }
+
+        public void InitTimmer()
+        {
+            timer1 = new System.Windows.Forms.Timer();
+            timer1.Interval = 1000;
+            timer1.Tick += new EventHandler(timer1_Tick);
+            timer1.Enabled = true;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (timeExam == 0)
+            {
+                timer1.Stop();
+                ShowMyDialogBox();
+            } else
+            {
+                timeExam--;
+                lblTimer.Text = timeExam / 60 + ":" + (timeExam % 60 >= 10 ? (timeExam % 60).ToString() : "0" + timeExam % 60);
+            }
+            
+        }
+
+        public void ShowMyDialogBox()
+        {
+            lblTimer.Text = "HetGio!";
         }
     }
 }

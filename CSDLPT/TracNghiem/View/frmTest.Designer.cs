@@ -28,15 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.groupQuestion = new System.Windows.Forms.GroupBox();
+            this.btnBegin = new System.Windows.Forms.Button();
             this.btnAnswer4 = new System.Windows.Forms.RadioButton();
             this.btnAnswer3 = new System.Windows.Forms.RadioButton();
             this.btnAnswer2 = new System.Windows.Forms.RadioButton();
             this.btnAnswer1 = new System.Windows.Forms.RadioButton();
             this.lblQuestion = new System.Windows.Forms.Label();
             this.lbQuestion = new System.Windows.Forms.ListBox();
-            this.btnBegin = new System.Windows.Forms.Button();
+            this.lblTimer = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupQuestion.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,6 +66,16 @@
             this.groupQuestion.TabIndex = 0;
             this.groupQuestion.TabStop = false;
             this.groupQuestion.Text = "groupQuestion";
+            // 
+            // btnBegin
+            // 
+            this.btnBegin.Location = new System.Drawing.Point(337, 336);
+            this.btnBegin.Name = "btnBegin";
+            this.btnBegin.Size = new System.Drawing.Size(172, 54);
+            this.btnBegin.TabIndex = 11;
+            this.btnBegin.Text = "BatDauThi";
+            this.btnBegin.UseVisualStyleBackColor = true;
+            this.btnBegin.Click += new System.EventHandler(this.btnBegin_Click);
             // 
             // btnAnswer4
             // 
@@ -135,21 +148,25 @@
             this.lbQuestion.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbQuestion_DrawItem);
             this.lbQuestion.SelectedIndexChanged += new System.EventHandler(this.lbQuestion_SelectedIndexChanged);
             // 
-            // btnBegin
+            // lblTimer
             // 
-            this.btnBegin.Location = new System.Drawing.Point(337, 336);
-            this.btnBegin.Name = "btnBegin";
-            this.btnBegin.Size = new System.Drawing.Size(172, 54);
-            this.btnBegin.TabIndex = 11;
-            this.btnBegin.Text = "BatDauThi";
-            this.btnBegin.UseVisualStyleBackColor = true;
-            this.btnBegin.Click += new System.EventHandler(this.btnBegin_Click);
+            this.lblTimer.AutoSize = true;
+            this.lblTimer.Location = new System.Drawing.Point(34, 428);
+            this.lblTimer.Name = "lblTimer";
+            this.lblTimer.Size = new System.Drawing.Size(44, 17);
+            this.lblTimer.TabIndex = 2;
+            this.lblTimer.Text = "00:00";
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // frmTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1203, 638);
+            this.Controls.Add(this.lblTimer);
             this.Controls.Add(this.lbQuestion);
             this.Controls.Add(this.groupQuestion);
             this.Name = "frmTest";
@@ -157,6 +174,7 @@
             this.groupQuestion.ResumeLayout(false);
             this.groupQuestion.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -171,5 +189,7 @@
         private System.Windows.Forms.RadioButton btnAnswer2;
         private System.Windows.Forms.RadioButton btnAnswer1;
         private System.Windows.Forms.Button btnBegin;
+        private System.Windows.Forms.Label lblTimer;
+        private System.Windows.Forms.Timer timer1;
     }
 }
