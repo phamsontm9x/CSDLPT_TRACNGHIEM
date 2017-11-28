@@ -65,6 +65,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dataSetView.xsd</DependentUpon>
     </Compile>
+    <Compile Include="frmListExam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmListExam.Designer.cs">
+      <DependentUpon>frmListExam.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\frmInsertQuestion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +139,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmListExam.resx">
+      <DependentUpon>frmListExam.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\frmInsertQuestion.resx">
       <DependentUpon>frmInsertQuestion.cs</DependentUpon>
     </EmbeddedResource>

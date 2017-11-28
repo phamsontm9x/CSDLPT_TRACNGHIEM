@@ -208,6 +208,7 @@ namespace TracNghiem
             if (Program.myReader.FieldCount > 0)
             {
                 MessageBox.Show("The " + strDepID + " has already exists!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Program.myReader.Close();
                 return;
             }
             else
