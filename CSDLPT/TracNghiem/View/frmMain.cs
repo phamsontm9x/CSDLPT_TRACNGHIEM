@@ -182,11 +182,11 @@ namespace TracNghiem
 
         private void btnTest_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            Form frm = this.CheckExists(typeof(frmTest));
+            Form frm = this.CheckExists(typeof(frmListExam));
             if (frm != null) frm.Activate();
             else
             {
-                frmTest f = new frmTest();
+                frmListExam f = new frmListExam();
                 f.MdiParent = this;
                 f.Show();
             }
