@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +18,25 @@ namespace TracNghiem
         String currentClassName = "";
         String method = "";
         String branchID = "";
+
+        public Stack st = new Stack();
+        public ClassDto dtoUndo = new ClassDto("", "", "");
+        public bool isUndo = false;
+
+        public class ClassDto
+        {
+            public String strID;
+            public String strName;
+            public String method;
+            public int index;
+            public ClassDto(String classID, String className, String strMethod)
+            {
+                strID = classID;
+                strName = className;
+                method = strMethod;
+            }
+        }
+
         public frmClass()
         {
             InitializeComponent();
@@ -55,11 +75,12 @@ namespace TracNghiem
             // TODO: This line of code loads data into the 'dataSetTracNghiem.LOP' table. You can move, or remove it, as needed.
 
             initUIComboBoxDep();
-
+            setCurrentRole();
+            updateUI();
             groupBox1.Enabled = true;
             txtClassName.Enabled = txtClassId.Enabled = false;
 
-            setCurrentRole();
+            
         }
         public void setCurrentRole()
         {
@@ -85,6 +106,18 @@ namespace TracNghiem
                 {
                     btnDel.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
                 }
+            }
+        }
+
+        public void updateUI ()
+        {
+            if (cbbBranch.SelectedIndex >= 0)
+            {
+                btnNew.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
+            } else
+            {
+                st.Clear();
+                btnNew.Enabled = btnEdit.Enabled = btnRefresh.Enabled = btnUndo.Enabled = btnDel.Enabled = false;
             }
         }
 
@@ -178,6 +211,8 @@ namespace TracNghiem
             }
             groupBox3.Enabled = true;
             bdsClassFromDep.MoveFirst();
+            st.Clear();
+            updateUIUndo();
             getDataClassFromDep(getMaKhoaSelected());
 
             btnNew.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
@@ -212,43 +247,7 @@ namespace TracNghiem
             method = Program.DETELE_METHOD;
             currentClassID = ((DataRowView)bdsClassFromDep[index])["MALOP"].ToString();
             currentClassName = ((DataRowView)bdsClassFromDep[index])["TENLOP"].ToString();
-
-            String sqlStr = "";
-            sqlStr = "exec sp_KiemTraLopTheoKhoa'" + currentClassID + "', '" + method + "'";
-            Program.myReader = Program.ExecSqlDataReader(sqlStr);
-            if (Program.myReader == null) return;
-            Program.myReader.Read();
-
-            if (Program.myReader.FieldCount > 0)
-            {
-                MessageBox.Show("Can not delete " + currentClassName + " class. \nThe class has data available! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-            }
-            else
-            {
-                if (MessageBox.Show("Do you want to delete " + currentClassName + " class?", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    try
-                    {
-                        bdsClassFromDep.RemoveCurrent();
-                        this.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter.Delete(currentClassID);
-                        if (bdsClassFromDep.Count == 0)
-                        {
-                            btnDel.Enabled = false;
-                            btnEdit.Enabled = false;
-                            btnRefresh.Enabled = false;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Failure. Please delete again!\n" + ex.Message, "",
-                           MessageBoxButtons.OK);
-                        getDataClassFromDep(getMaKhoaSelected());
-                        bdsClassFromDep.Position = bdsClassFromDep.Find("MALOP", currentClassID);
-                        return;
-                    }
-                }
-            }
-            Program.myReader.Close();
+            sqlDeleteMethod(currentClassID, currentClassName, method);
         }
 
         private void btnSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -258,87 +257,14 @@ namespace TracNghiem
                 currentClassID = ((DataRowView)bdsClassFromDep[index])["MALOP"].ToString();
                 currentClassName = ((DataRowView)bdsClassFromDep[index])["TENLOP"].ToString();
             }
-            String sqlStr = "";
 
             if (method == Program.NEW_METHOD)
             {
-                sqlStr = "exec sp_KiemTraLopTheoKhoa '" + txtClassId.Text + "', '" + method + "'";
-
-                Program.myReader = Program.ExecSqlDataReader(sqlStr);
-                if (Program.myReader == null) return;
-                Program.myReader.Read();
-
-                if (Program.myReader.FieldCount > 0)
-                {
-                    MessageBox.Show("The " + txtClassId.Text + " has already exists!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Program.myReader.Close();
-                    return;
-                }
-                else
-                {
-                    if (txtClassId.Text.Length == 0 || txtClassName.Text.Length == 0)
-                    {
-                        MessageBox.Show("Class ID or Class Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                    else
-                    {
-                        try
-                        {
-                            this.Validate();
-                            bdsClassFromDep.EndEdit();
-                            bdsClassFromDep.ResetCurrentItem();
-                            this.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter.Insert(txtClassId.Text, txtClassName.Text, getMaKhoaSelected());
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Create class failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
-                            Program.myReader.Close();
-                            return;
-                        }
-                    }
-                    Program.myReader.Close();
-                }
+                sqlNewMethod(txtClassId.Text, txtClassName.Text, method);
             }
             else if (method == Program.UPDATE_METHOD)
             {
-                sqlStr = "exec sp_KiemTraLopTheoKhoa '" + txtClassId.Text + "', '" + method + "'";
-
-                Program.myReader = Program.ExecSqlDataReader(sqlStr);
-                if (Program.myReader == null) return;
-                Program.myReader.Read();
-
-                if (txtClassName.Text == currentClassName)
-                {
-                    MessageBox.Show("You must type different name!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Program.myReader.Close();
-                    return;
-                }
-                else
-                {
-                    if (txtClassName.Text.Length == 0)
-                    {
-                        MessageBox.Show("Class Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                    else
-                    {
-                        try
-                        {
-                            this.Validate();
-                            bdsClassFromDep.EndEdit();
-                            bdsClassFromDep.ResetCurrentItem();
-                            this.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter.Update(currentClassID, txtClassName.Text);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Update class failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
-                            Program.myReader.Close();
-                            return;
-                        }
-                    }
-                }
-                Program.myReader.Close();
+                sqlUpdateMethod(txtClassId.Text, txtClassName.Text, method);
             }
 
             groupBox1.Enabled = true;
@@ -359,6 +285,12 @@ namespace TracNghiem
             groupBox3.Enabled = false;
             method = Program.UPDATE_METHOD;
 
+            currentClassName = ((DataRowView)bdsClassFromDep[index])["TENLOP"].ToString();
+            currentClassID = ((DataRowView)bdsClassFromDep[index])["MALOP"].ToString();
+
+            dtoUndo.strID = currentClassID;
+            dtoUndo.strName = currentClassName;
+
             btnCancel.Enabled = btnSave.Enabled = true;
             btnDel.Enabled = btnNew.Enabled = btnRefresh.Enabled = btnEdit.Enabled = false;
         }
@@ -373,6 +305,142 @@ namespace TracNghiem
 
             setCurrentRole();
         }
+
+
+        public void sqlNewMethod(String strID, String strName, String method)
+        {
+            String sqlStr = "exec sp_KiemTraLopTheoKhoa '" + strID + "', '" + method + "'";
+
+            Program.myReader = Program.ExecSqlDataReader(sqlStr);
+            if (Program.myReader == null) return;
+            Program.myReader.Read();
+
+            if (Program.myReader.FieldCount > 0)
+            {
+                MessageBox.Show("The " + txtClassId.Text + " has already exists!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Program.myReader.Close();
+                return;
+            }
+            else
+            {
+                if (strID.Length == 0 || strName.Length == 0)
+                {
+                    MessageBox.Show("Class ID or Class Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    try
+                    {
+                        this.Validate();
+                        bdsClassFromDep.EndEdit();
+                        bdsClassFromDep.ResetCurrentItem();
+                        this.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter.Insert(strID, strName, getMaKhoaSelected());
+                        if (isUndo == false)
+                        {
+                            ClassDto dataUndo = new ClassDto(strID, strName, method);
+                            st.Push(dataUndo);
+                            updateUIUndo();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Create class failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                        Program.myReader.Close();
+                        return;
+                    }
+                }
+                Program.myReader.Close();
+            }
+        }
+
+        public void sqlUpdateMethod(String strID, String strName, String method)
+        {
+            String sqlStr = "exec sp_KiemTraLopTheoKhoa '" + strID + "', '" + method + "'";
+
+            Program.myReader = Program.ExecSqlDataReader(sqlStr);
+            if (Program.myReader == null) return;
+            Program.myReader.Read();
+            currentClassName = ((DataRowView)bdsClassFromDep[index])["TENLOP"].ToString();
+            if (strName == currentClassName)
+            {
+                MessageBox.Show("You must type different name!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Program.myReader.Close();
+                return;
+            }
+            else
+            {
+                if (strName.Length == 0)
+                {
+                    MessageBox.Show("Class Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    try
+                    {
+                        this.Validate();
+                        bdsClassFromDep.EndEdit();
+                        bdsClassFromDep.ResetCurrentItem();
+                        this.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter.Update(strID, strName);
+                        if (isUndo == false)
+                        {
+                            ClassDto dataUndo = new ClassDto(dtoUndo.strID, dtoUndo.strName, method);
+                            st.Push(dataUndo);
+                            updateUIUndo();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Update class failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                        Program.myReader.Close();
+                        return;
+                    }
+                }
+            }
+            Program.myReader.Close();
+        }
+
+        public void sqlDeleteMethod(String strID, String strName, String method)
+        {
+            String sqlStr = "";
+            sqlStr = "exec sp_KiemTraLopTheoKhoa'" + strID + "', '" + method + "'";
+            Program.myReader = Program.ExecSqlDataReader(sqlStr);
+            if (Program.myReader == null) return;
+            Program.myReader.Read();
+
+            if (Program.myReader.FieldCount > 0)
+            {
+                MessageBox.Show("Can not delete " + strName + " class. \nThe class has data available! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            else
+            {
+                if (MessageBox.Show("Do you want to delete " + strName + " class?", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        bdsClassFromDep.RemoveCurrent();
+                        this.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter.Delete(strID);
+                        if (bdsClassFromDep.Count == 0)
+                        {
+                            btnDel.Enabled = false;
+                            btnEdit.Enabled = false;
+                            btnRefresh.Enabled = false;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Failure. Please delete again!\n" + ex.Message, "",
+                           MessageBoxButtons.OK);
+                        getDataClassFromDep(getMaKhoaSelected());
+                        bdsClassFromDep.Position = bdsClassFromDep.Find("MALOP", strID);
+                        return;
+                    }
+                }
+            }
+            Program.myReader.Close();
+        }
+
         public void initButtonBarManage(Boolean isEnable)
         {
             btnNew.Enabled = btnEdit.Enabled = btnSave.Enabled = btnRefresh.Enabled = btnDel.Enabled = btnCancel.Enabled = isEnable;
@@ -397,6 +465,66 @@ namespace TracNghiem
             {
                 txtSearch.Text = "";
                 cbbBranch.Enabled = true;
+            }
+            updateUI();
+        }
+
+        private void btnUndo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            isUndo = true;
+            ClassDto dataUndo = (ClassDto)st.Pop();
+            if (dataUndo.method == Program.NEW_METHOD)
+            {
+                int index = getIndexDBS(dataUndo.strID);
+                if (index >= 0)
+                {
+                    bdsClassFromDep.Position = index;
+                    sqlDeleteMethod(dataUndo.strID, dataUndo.strName, Program.DETELE_METHOD);
+                }
+            }
+            else if (dataUndo.method == Program.UPDATE_METHOD)
+            {
+                int index = getIndexDBS(dataUndo.strID);
+                if (index >= 0)
+                {
+                    bdsClassFromDep.Position = index;
+                    txtClassName.Text = dataUndo.strName;
+                    txtClassId.Text = dataUndo.strID;
+                    sqlUpdateMethod(dataUndo.strID, dataUndo.strName, method);
+                }
+
+            }
+            else if (dataUndo.method == Program.DETELE_METHOD)
+            {
+                bdsClassFromDep.AddNew();
+                txtClassName.Text = dataUndo.strName;
+                txtClassId.Text = dataUndo.strID;
+                sqlNewMethod(dataUndo.strID, dataUndo.strName, Program.NEW_METHOD);
+            }
+            isUndo = false;
+            updateUIUndo();
+        }
+
+        public int getIndexDBS(string strID)
+        {
+            for (int i = 0; i < bdsClassFromDep.Count; i++)
+            {
+                if (strID.Trim() == ((DataRowView)bdsClassFromDep[i])["MALOP"].ToString().Trim())
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        public void updateUIUndo()
+        {
+            if (st.Count > 0)
+            {
+                btnUndo.Enabled = true;
+            }
+            else
+            {
+                btnUndo.Enabled = false;
             }
         }
     }
