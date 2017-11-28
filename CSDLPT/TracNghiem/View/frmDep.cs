@@ -212,7 +212,7 @@ namespace TracNghiem
             }
             else
             {
-                if (strDepID.Length == 0 || strDepID.Length == 0)
+                if (strDepID.Length == 0 || strDepName.Length == 0)
                 {
                     MessageBox.Show("Department ID or Department Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     Program.myReader.Close();
@@ -418,7 +418,7 @@ namespace TracNghiem
         {
             for (int i = 0; i < bdsDep.Count; i++)
             {
-               if (strDepID == ((DataRowView)bdsDep[i])["MAKH"].ToString().Trim()) {
+               if (strDepID.Trim() == ((DataRowView)bdsDep[i])["MAKH"].ToString().Trim()) {
                     return i;
                }
             }
