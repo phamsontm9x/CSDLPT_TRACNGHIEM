@@ -52,6 +52,8 @@ namespace TracNghiem
         public static String DETELE_METHOD = "DELETE";
         public static String NEW_METHOD = "NEW";
 
+        public enum Method { New = 0, Edit, Delete};
+
         public static int Connection()
         {
             if (Program.connect != null && Program.connect.State == ConnectionState.Open)
@@ -141,5 +143,17 @@ namespace TracNghiem
             currentUserName = userName;
             password = pass;
         }
+
+        public class UndoObject
+        {
+            public Object objectUndo;
+            public Method method;
+            public UndoObject(Object obj, Method Method) 
+            {
+                objectUndo = obj;
+                method = Method;
+            }
+        }
+
     }
 }

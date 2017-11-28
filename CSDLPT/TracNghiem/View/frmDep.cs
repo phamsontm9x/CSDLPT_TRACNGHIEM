@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +18,26 @@ namespace TracNghiem
         String currentBranchID = "";
         String currentBranchName = "";
         String method = "";
+
+        // Stack Undo
+        public Stack st = new Stack();
+        public DepDto dtoUndo = new DepDto("","","");
+        public bool isUndo = false;
+
+        public class DepDto
+        {
+            public String strDepID;
+            public String strDepName;
+            public String method;
+            public int index;
+            public DepDto(String depID, String depName, String strMethod)
+            {
+                strDepID = depID;
+                strDepName = depName;
+                method = strMethod;
+            }
+        }
+
         public frmDep()
         {
             InitializeComponent();
@@ -53,6 +74,7 @@ namespace TracNghiem
             txtDepName.Enabled = txtDepID.Enabled = false;
 
             setCurrentRole();
+            updateUIUndo();
             if (bdsDep.Count == 0) btnDel.Enabled = false;
         }
 
@@ -69,6 +91,17 @@ namespace TracNghiem
                 cbbDep.Visible = false;
                 btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
                 btnSave.Enabled = btnCancel.Enabled = false;
+            }
+        }
+
+        public void updateUIUndo()
+        {
+            if (st.Count > 0)
+            {
+                btnUndo.Enabled = true;
+            } else
+            {
+                btnUndo.Enabled = false;
             }
         }
 
@@ -103,10 +136,10 @@ namespace TracNghiem
         private void btnNew_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             index = bdsDep.Position;
+            bdsDep.AddNew();
             groupBox1.Enabled = true;
             txtDepID.Enabled = txtDepName.Enabled = true;
             cbbDep.Enabled = false;
-            bdsDep.AddNew();
             txtBranchID.Text = depID;
             txtBranchID.Enabled = false;
             groupBox2.Enabled = false;
@@ -126,100 +159,15 @@ namespace TracNghiem
             cbbDep.Enabled = false;
             groupBox2.Enabled = false;
             method = Program.UPDATE_METHOD;
+            // 
+            currentBranchName = ((DataRowView)bdsDep[index])["TENKH"].ToString();
+            currentBranchID = ((DataRowView)bdsDep[index])["MAKH"].ToString();
+
+            dtoUndo.strDepID = currentBranchID;
+            dtoUndo.strDepName = currentBranchName;
 
             btnCancel.Enabled = btnSave.Enabled = true;
             btnDel.Enabled = btnNew.Enabled = btnRefresh.Enabled = btnEdit.Enabled = false;
-        }
-
-        private void btnSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            String sqlStr = "";
-            if (method == Program.NEW_METHOD)
-            {
-                sqlStr = "exec sp_KiemTraKhoa '" + txtDepID.Text + "', '" + method + "'";
-
-                Program.myReader = Program.ExecSqlDataReader(sqlStr);
-                if (Program.myReader == null) return;
-                Program.myReader.Read();
-
-                if (Program.myReader.FieldCount > 0)
-                {
-                    MessageBox.Show("The " + txtDepID.Text + " has already exists!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-                else
-                {
-                    if (txtDepID.Text.Length == 0 || txtDepName.Text.Length == 0)
-                    {
-                        MessageBox.Show("Department ID or Department Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        Program.myReader.Close();
-                        return;
-                    }
-                    else
-                    {
-                        try
-                        {
-                            this.Validate();
-                            bdsDep.EndEdit();
-                            bdsDep.ResetCurrentItem();
-                            this.kHOATableAdapter.Update(this.dataSetTracNghiem.KHOA);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Create department failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
-                            Program.myReader.Close();
-                            return;
-                        }
-                    }
-                }
-                Program.myReader.Close();
-            }
-            else if (method == Program.UPDATE_METHOD)
-            {
-                sqlStr = "exec sp_KiemTraKhoa '" + txtDepID.Text + "', '" + method + "'";
-
-                Program.myReader = Program.ExecSqlDataReader(sqlStr);
-                if (Program.myReader == null) return;
-                Program.myReader.Read();
-
-                currentBranchName = ((DataRowView)bdsDep[index])["TENKH"].ToString();
-                if (txtDepName.Text == currentBranchName)
-                {
-                    MessageBox.Show("You must type different name!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Program.myReader.Close();
-                    return;
-                }
-                else
-                {
-                    if (txtDepName.Text.Length == 0)
-                    {
-                        MessageBox.Show("Department Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                    else
-                    {
-                        try
-                        {
-                            this.Validate();
-                            bdsDep.EndEdit();
-                            bdsDep.ResetCurrentItem();
-                            this.kHOATableAdapter.Update(this.dataSetTracNghiem.KHOA);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Update subjects failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
-                            Program.myReader.Close();
-                            return;
-                        }
-                    }
-                }
-                Program.myReader.Close();
-            }
-
-            groupBox1.Enabled = false;
-            groupBox2.Enabled = true;
-            btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
-            btnSave.Enabled = btnCancel.Enabled = false;
         }
 
         private void btnDel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -228,8 +176,126 @@ namespace TracNghiem
             method = Program.DETELE_METHOD;
             currentBranchName = ((DataRowView)bdsDep[index])["TENKH"].ToString();
             currentBranchID = ((DataRowView)bdsDep[index])["MAKH"].ToString();
-            String sqlStr = "";
-            sqlStr = "exec sp_KiemTraKhoa '" + currentBranchID + "', '" + method + "'";
+            sqlDeleteMethod(currentBranchID, currentBranchName, method);
+        }
+
+        private void btnSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+           
+            if (method == Program.NEW_METHOD)
+            {
+                sqlNewMethod(txtDepID.Text,txtDepName.Text, method);
+            }
+            else if (method == Program.UPDATE_METHOD)
+            {
+                sqlUpdateMethod(txtDepID.Text, txtDepName.Text, method);
+            }
+
+            groupBox1.Enabled = false;
+            groupBox2.Enabled = true;
+            btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
+            btnSave.Enabled = btnCancel.Enabled = false;
+        }
+
+        public void sqlNewMethod(String strDepID, String strDepName, String method)
+        {
+            String sqlStr = "exec sp_KiemTraKhoa '" + strDepID + "', '" + method + "'";
+   
+            Program.myReader = Program.ExecSqlDataReader(sqlStr);
+            if (Program.myReader == null) return;
+            Program.myReader.Read();
+
+            if (Program.myReader.FieldCount > 0)
+            {
+                MessageBox.Show("The " + strDepID + " has already exists!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            else
+            {
+                if (strDepID.Length == 0 || strDepID.Length == 0)
+                {
+                    MessageBox.Show("Department ID or Department Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Program.myReader.Close();
+                    return;
+                }
+                else
+                {
+                    try
+                    {
+                        this.Validate();
+                        bdsDep.EndEdit();
+                        bdsDep.ResetCurrentItem();
+                        this.kHOATableAdapter.Update(this.dataSetTracNghiem.KHOA);
+                        if (isUndo == false)
+                        {
+                            DepDto dataUndo = new DepDto(strDepID, strDepName, method);
+                            st.Push(dataUndo);
+                            updateUIUndo();
+                        }
+                        
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Create department failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                        Program.myReader.Close();
+                        return;
+                    }
+                }
+            }
+            Program.myReader.Close();
+        }
+
+        public void sqlUpdateMethod(String strDepID, String strDepName, String method)
+        {
+            String sqlStr = "exec sp_KiemTraKhoa '" + txtDepID.Text + "', '" + method + "'";
+
+            Program.myReader = Program.ExecSqlDataReader(sqlStr);
+            if (Program.myReader == null) return;
+            Program.myReader.Read();
+
+            currentBranchName = ((DataRowView)bdsDep[index])["TENKH"].ToString();
+            if (txtDepName.Text == currentBranchName)
+            {
+                MessageBox.Show("You must type different name!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Program.myReader.Close();
+                return;
+            }
+            else
+            {
+                if (txtDepName.Text.Length == 0)
+                {
+                    MessageBox.Show("Department Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    try
+                    {
+                        this.Validate();
+                        bdsDep.EndEdit();
+                        bdsDep.ResetCurrentItem();
+                        this.kHOATableAdapter.Update(this.dataSetTracNghiem.KHOA);
+                        if (isUndo == false)
+                        {
+                            DepDto dataUndo = new DepDto(dtoUndo.strDepID, dtoUndo.strDepName, method);
+                            st.Push(dataUndo);
+                            updateUIUndo();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Update subjects failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                        Program.myReader.Close();
+                        return;
+                    }
+                }
+            }
+            Program.myReader.Close();
+        }
+
+        public void sqlDeleteMethod(String strDepID, String strDepName, String method )
+        {
+            String sqlStr = "exec sp_KiemTraKhoa '" + strDepID + "', '" + method + "'";
 
             Program.myReader = Program.ExecSqlDataReader(sqlStr);
             if (Program.myReader == null) return;
@@ -237,17 +303,23 @@ namespace TracNghiem
 
             if (Program.myReader.FieldCount > 0)
             {
-                MessageBox.Show("Can not delete " + currentBranchName + " branch. \nThe branch has data available! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Can not delete " + strDepName + " branch. \nThe branch has data available! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 Program.myReader.Close();
             }
             else
             {
-                if (MessageBox.Show("Do you want to delete " + currentBranchName + " branch?", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Do you want to delete " + strDepName + " branch?", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     try
                     {
                         bdsDep.RemoveCurrent();
                         this.kHOATableAdapter.Update(this.dataSetTracNghiem.KHOA);
+                        if (isUndo == false)
+                        {
+                            DepDto dataUndo = new DepDto(strDepID, strDepName, method);
+                            st.Push(dataUndo);
+                            updateUIUndo();
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -255,7 +327,7 @@ namespace TracNghiem
                             MessageBoxButtons.OK);
                         Program.myReader.Close();
                         this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
-                        bdsDep.Position = bdsDep.Find("MAKH", currentBranchID);
+                        bdsDep.Position = bdsDep.Find("MAKH", strDepID);
                         return;
                     }
                 }
@@ -277,6 +349,8 @@ namespace TracNghiem
             }
             groupBox2.Enabled = true;
             bdsDep.MoveFirst();
+            st.Clear();
+            updateUIUndo();
             this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
 
             btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
@@ -303,6 +377,52 @@ namespace TracNghiem
         public void initButtonBarManage(Boolean isEnable)
         {
             btnNew.Enabled = btnEdit.Enabled = btnSave.Enabled = btnRefresh.Enabled = btnDel.Enabled = btnCancel.Enabled = isEnable;
+        }
+
+        private void btnUndo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            isUndo = true;
+            DepDto dataUndo = (DepDto)st.Pop();
+            if (dataUndo.method == Program.NEW_METHOD)
+            {
+                int index = getIndexDBS(dataUndo.strDepID);
+                if (index >= 0)
+                {
+                    bdsDep.Position = index;
+                    sqlDeleteMethod(dataUndo.strDepID, dataUndo.strDepName, Program.DETELE_METHOD);
+                }
+            } else if (dataUndo.method == Program.UPDATE_METHOD)
+            {
+                int index = getIndexDBS(dataUndo.strDepID);
+                if (index >= 0)
+                {
+                    bdsDep.Position = index;
+                    txtDepName.Text = dataUndo.strDepName;
+                    txtDepID.Text = dataUndo.strDepID;
+                    sqlUpdateMethod(dataUndo.strDepID, dataUndo.strDepName, method);
+                }
+
+            } else if (dataUndo.method == Program.DETELE_METHOD)
+            {
+                bdsDep.AddNew();
+                txtBranchID.Text = depID;
+                txtDepName.Text = dataUndo.strDepName;
+                txtDepID.Text = dataUndo.strDepID;
+                sqlNewMethod(dataUndo.strDepID, dataUndo.strDepName, Program.NEW_METHOD);
+            }
+            isUndo = false;
+            updateUIUndo();
+        }
+
+        public int getIndexDBS(string strDepID)
+        {
+            for (int i = 0; i < bdsDep.Count; i++)
+            {
+               if (strDepID == ((DataRowView)bdsDep[i])["MAKH"].ToString().Trim()) {
+                    return i;
+               }
+            }
+            return -1;
         }
     }
 }

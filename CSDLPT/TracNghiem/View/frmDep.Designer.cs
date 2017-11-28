@@ -65,6 +65,7 @@
             this.lOPTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.LOPTableAdapter();
             this.bdsTeacher = new System.Windows.Forms.BindingSource(this.components);
             this.gIAOVIENTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.GIAOVIENTableAdapter();
+            this.btnUndo = new DevExpress.XtraBars.BarButtonItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtBranchID.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsDep)).BeginInit();
@@ -159,8 +160,9 @@
             this.btnDel,
             this.btnRefresh,
             this.btnCancel,
-            this.btnClose});
-            this.barManager1.MaxItemId = 8;
+            this.btnClose,
+            this.btnUndo});
+            this.barManager1.MaxItemId = 9;
             // 
             // bar1
             // 
@@ -174,6 +176,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSave, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnDel, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnRefresh, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnUndo, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnCancel, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnClose, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar1.OptionsBar.AllowCollapse = true;
@@ -382,6 +385,7 @@
             this.tableAdapterManager.SINHVIENTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachBoDeTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachGiaoVienTheoKhoaTableAdapter = null;
+            this.tableAdapterManager.sp_DanhSachGVDKTheoCosoTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachSinhVienTheoLopTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
@@ -403,6 +407,14 @@
             // gIAOVIENTableAdapter
             // 
             this.gIAOVIENTableAdapter.ClearBeforeFill = true;
+            // 
+            // btnUndo
+            // 
+            this.btnUndo.Caption = "Undo";
+            this.btnUndo.Id = 8;
+            this.btnUndo.ImageUri.Uri = "Undo";
+            this.btnUndo.Name = "btnUndo";
+            this.btnUndo.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUndo_ItemClick);
             // 
             // frmDep
             // 
@@ -476,5 +488,6 @@
         private dataSetTracNghiemTableAdapters.GIAOVIENTableAdapter gIAOVIENTableAdapter;
         private DevExpress.XtraEditors.TextEdit txtBranchID;
         private System.Windows.Forms.Label label1;
+        private DevExpress.XtraBars.BarButtonItem btnUndo;
     }
 }
