@@ -65,6 +65,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dataSetView.xsd</DependentUpon>
     </Compile>
+    <Compile Include="frmSignUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSignUp.Designer.cs">
+      <DependentUpon>frmSignUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTranscript.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTranscript.Designer.cs">
+      <DependentUpon>frmTranscript.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\frmListExam.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +151,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmSignUp.resx">
+      <DependentUpon>frmSignUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTranscript.resx">
+      <DependentUpon>frmTranscript.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\frmListExam.resx">
       <DependentUpon>frmListExam.cs</DependentUpon>
     </EmbeddedResource>
