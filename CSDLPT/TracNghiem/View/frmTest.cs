@@ -239,11 +239,11 @@ namespace TracNghiem
         private void btnBegin_Click(object sender, EventArgs e)
         {
             timeExam = Int32.Parse(Program.insertCountdown) * 60;
-            lbQuestion.SelectedIndex = 0;
-            lbQuestion.Enabled = true;
-            setHiddenAnswer(false);
             btnBegin.Hide();
             btnFinish.Show();
+            lbQuestion.Enabled = true;
+            setHiddenAnswer(false);
+            lbQuestion.SelectedIndex = 0;
             InitTimmer();
         }
 
@@ -271,42 +271,56 @@ namespace TracNghiem
 
         public void getScoreExam()
         {
+
             float scorePerQuestion = 10 / (float)listQuestion.Count;
             foreach (ItemQuestion item in listQuestion)
             {
-                insertBaiThi(item);
                 if (item.answer == item.correctAnswer)
                 {
                     score += scorePerQuestion;
                     totalQuestionCorrect++;
                 }
             }
-           // score = (float) Math.Round(score,2);
+
             lblTimer.Text = "Score: \n" + score;
-            insertBangDiem();
+            if (Program.currentRole == "SINHVIEN")
+            {
+                insertBaiThi();
+                insertBangDiem();
+            }
+            
 
         }
 
-        public void insertBaiThi (ItemQuestion question)
+        public void insertBaiThi ()
         {
-            try
-            {
-                String sqlStr = "exec sp_BaiThi_Insert '" + Program.currentID + "', '" + lblSubject.Text + "', '" + lblTime.Text +
-               "', '" + question.realNumberQuestion + "', '" + question.title + "', '" + question.answer1 + "', '" + question.answer2 +
-               "', '" + question.answer3 + "', '" + question.answer4 + "', '" + question.correctAnswer + "', '" + question.answer + "'";
 
-                Program.myReader = Program.ExecSqlDataReader(sqlStr);
-                if (Program.myReader == null) return;
-                Program.myReader.Read();
-                Program.myReader.Close();
-            }
-            catch (Exception ex)
+            Program.connect.Open();
+
+            string sqlStr = "sp_BaiThi_Insert";
+            Program.cmd = Program.connect.CreateCommand();
+            Program.cmd.CommandType = CommandType.StoredProcedure;
+            Program.cmd.CommandText = sqlStr;
+
+            foreach (ItemQuestion question in listQuestion)
             {
-                // check agian -> loop
-                //MessageBox.Show("Create exam failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
-                Program.myReader.Close();
-                return;
+                Program.cmd.Parameters.Clear();
+                Program.cmd.Parameters.Add("@MASV", SqlDbType.NChar).Value = Program.currentID;
+                Program.cmd.Parameters.Add("@MAMH", SqlDbType.NChar).Value = lblSubject.Text;
+                Program.cmd.Parameters.Add("@LAN", SqlDbType.Int).Value = Int32.Parse(lblTime.Text.ToString());
+                Program.cmd.Parameters.Add("@CAUHOI", SqlDbType.Int).Value = question.realNumberQuestion;
+                Program.cmd.Parameters.Add("@NOIDUNG", SqlDbType.NChar).Value = question.title;
+                Program.cmd.Parameters.Add("@A", SqlDbType.NChar).Value = question.answer1;
+                Program.cmd.Parameters.Add("@B", SqlDbType.NChar).Value = question.answer2;
+                Program.cmd.Parameters.Add("@C", SqlDbType.NChar).Value = question.answer3;
+                Program.cmd.Parameters.Add("@D", SqlDbType.NChar).Value = question.answer4;
+                Program.cmd.Parameters.Add("@DAPAN", SqlDbType.NChar).Value = question.correctAnswer;
+                Program.cmd.Parameters.Add("@TRALOI", SqlDbType.NChar).Value = question.answer;
+
+                Program.cmd.ExecuteNonQuery();
             }
+
+            Program.connect.Close();
         }
 
         public void insertBangDiem()
@@ -347,6 +361,7 @@ namespace TracNghiem
                 btnAnswer3.Enabled = false;
                 btnAnswer4.Enabled = false;
                 timer1.Stop();
+                lblTimer.Text = "Score: \n" + score;
             } 
         }
     }
