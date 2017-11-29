@@ -21,6 +21,7 @@ namespace TracNghiem
         public bool isFinal = false;
         public class ItemQuestion
         {
+            public int realNumberQuestion;
             public string titleListBox;
             public string title;
             public int status;
@@ -30,8 +31,9 @@ namespace TracNghiem
             public string answer4;
             public string answer;
             public string correctAnswer;
-            public ItemQuestion(string Title, string TitleListBox, int Status, string Answer1, string Answer2, string Answer3, string Answer4, string Answer)
+            public ItemQuestion(int NumberQuestion, string Title, string TitleListBox, int Status, string Answer1, string Answer2, string Answer3, string Answer4, string Answer)
             {
+                realNumberQuestion = NumberQuestion;
                 title = Title;
                 status = Status;
                 answer1 = Answer1;
@@ -67,6 +69,7 @@ namespace TracNghiem
                 int i = 1;
                 foreach (DataRow dtRow in dt.Rows)
                 {
+                    var number = Int32.Parse(dtRow[0].ToString());
                     var title = dtRow[3].ToString();
                     var answer1 = dtRow[4].ToString();
                     var answer2 = dtRow[5].ToString();
@@ -74,7 +77,7 @@ namespace TracNghiem
                     var answer4 = dtRow[7].ToString();
                     var correctAnswer = dtRow[8].ToString();
                     string titleListBox = "Question:" + i++;
-                    ItemQuestion item = new ItemQuestion(title, titleListBox, 0, answer1, answer2, answer3, answer4, correctAnswer);
+                    ItemQuestion item = new ItemQuestion(number, title, titleListBox, 0, answer1, answer2, answer3, answer4, correctAnswer);
                     listQuestion.Add(item);
                     lbQuestion.Items.Add(titleListBox);
                 }
@@ -271,6 +274,7 @@ namespace TracNghiem
             float scorePerQuestion = 10 / (float)listQuestion.Count;
             foreach (ItemQuestion item in listQuestion)
             {
+                insertData(item);
                 if (item.answer == item.correctAnswer)
                 {
                     score += scorePerQuestion;
@@ -279,6 +283,11 @@ namespace TracNghiem
             }
            // score = (float) Math.Round(score,2);
             lblTimer.Text = "Score: \n" + score;
+        }
+
+        public void insertData (ItemQuestion question)
+        {
+
         }
 
         private void btnFinish_Click(object sender, EventArgs e)
