@@ -50,6 +50,14 @@
             this.lblCountdown = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnFinish = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupQuestion.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -71,9 +79,9 @@
             this.groupQuestion.Controls.Add(this.btnAnswer1);
             this.groupQuestion.Controls.Add(this.lblQuestion);
             this.groupQuestion.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupQuestion.Location = new System.Drawing.Point(171, 172);
+            this.groupQuestion.Location = new System.Drawing.Point(248, 172);
             this.groupQuestion.Name = "groupQuestion";
-            this.groupQuestion.Size = new System.Drawing.Size(853, 426);
+            this.groupQuestion.Size = new System.Drawing.Size(776, 426);
             this.groupQuestion.TabIndex = 0;
             this.groupQuestion.TabStop = false;
             // 
@@ -155,7 +163,7 @@
             this.lbQuestion.ItemHeight = 16;
             this.lbQuestion.Location = new System.Drawing.Point(1, 178);
             this.lbQuestion.Name = "lbQuestion";
-            this.lbQuestion.Size = new System.Drawing.Size(164, 500);
+            this.lbQuestion.Size = new System.Drawing.Size(241, 500);
             this.lbQuestion.TabIndex = 1;
             this.lbQuestion.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbQuestion_DrawItem);
             this.lbQuestion.SelectedIndexChanged += new System.EventHandler(this.lbQuestion_SelectedIndexChanged);
@@ -178,7 +186,7 @@
             // 
             this.lblUserId.AutoSize = true;
             this.lblUserId.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserId.Location = new System.Drawing.Point(357, 20);
+            this.lblUserId.Location = new System.Drawing.Point(436, 22);
             this.lblUserId.Name = "lblUserId";
             this.lblUserId.Size = new System.Drawing.Size(72, 22);
             this.lblUserId.TabIndex = 12;
@@ -188,7 +196,7 @@
             // 
             this.lblSubject.AutoSize = true;
             this.lblSubject.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubject.Location = new System.Drawing.Point(61, 73);
+            this.lblSubject.Location = new System.Drawing.Point(140, 75);
             this.lblSubject.Name = "lblSubject";
             this.lblSubject.Size = new System.Drawing.Size(94, 22);
             this.lblSubject.TabIndex = 12;
@@ -198,7 +206,7 @@
             // 
             this.lblName.AutoSize = true;
             this.lblName.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.Location = new System.Drawing.Point(61, 20);
+            this.lblName.Location = new System.Drawing.Point(140, 22);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(56, 22);
             this.lblName.TabIndex = 12;
@@ -208,7 +216,7 @@
             // 
             this.lblTime.AutoSize = true;
             this.lblTime.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTime.Location = new System.Drawing.Point(291, 73);
+            this.lblTime.Location = new System.Drawing.Point(349, 75);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(50, 22);
             this.lblTime.TabIndex = 12;
@@ -218,7 +226,7 @@
             // 
             this.lblClassID.AutoSize = true;
             this.lblClassID.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblClassID.Location = new System.Drawing.Point(560, 20);
+            this.lblClassID.Location = new System.Drawing.Point(639, 22);
             this.lblClassID.Name = "lblClassID";
             this.lblClassID.Size = new System.Drawing.Size(79, 22);
             this.lblClassID.TabIndex = 12;
@@ -228,7 +236,7 @@
             // 
             this.lblDate.AutoSize = true;
             this.lblDate.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDate.Location = new System.Drawing.Point(607, 73);
+            this.lblDate.Location = new System.Drawing.Point(686, 75);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(47, 22);
             this.lblDate.TabIndex = 12;
@@ -238,7 +246,7 @@
             // 
             this.lblLevel.AutoSize = true;
             this.lblLevel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLevel.Location = new System.Drawing.Point(459, 73);
+            this.lblLevel.Location = new System.Drawing.Point(514, 75);
             this.lblLevel.Name = "lblLevel";
             this.lblLevel.Size = new System.Drawing.Size(55, 22);
             this.lblLevel.TabIndex = 12;
@@ -248,7 +256,7 @@
             // 
             this.lblCountdown.AutoSize = true;
             this.lblCountdown.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCountdown.Location = new System.Drawing.Point(291, 128);
+            this.lblCountdown.Location = new System.Drawing.Point(385, 130);
             this.lblCountdown.Name = "lblCountdown";
             this.lblCountdown.Size = new System.Drawing.Size(100, 22);
             this.lblCountdown.TabIndex = 12;
@@ -278,6 +286,86 @@
             this.btnFinish.UseVisualStyleBackColor = true;
             this.btnFinish.Click += new System.EventHandler(this.btnFinish_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(358, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(83, 22);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "User ID :";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(40, 75);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(105, 22);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Subject ID :";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(54, 22);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(67, 22);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Name :";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(293, 75);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(61, 22);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Time :";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(554, 22);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(90, 22);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Class ID :";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(453, 75);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(66, 22);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Level :";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(622, 75);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(58, 22);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "Date :";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(268, 130);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(111, 22);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Countdown :";
+            // 
             // frmTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -285,12 +373,20 @@
             this.ClientSize = new System.Drawing.Size(1203, 680);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnFinish);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.lblCountdown);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.lblDate);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.lblLevel);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.lblClassID);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.lblTime);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.lblName);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblSubject);
             this.Controls.Add(this.lblUserId);
             this.Controls.Add(this.lbQuestion);
@@ -330,5 +426,13 @@
         private System.Windows.Forms.Label lblLevel;
         private System.Windows.Forms.Label lblCountdown;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
     }
 }

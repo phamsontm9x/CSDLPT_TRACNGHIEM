@@ -49,8 +49,8 @@ namespace TracNghiem
         {
             InitializeComponent();
             listQuestion = new List<ItemQuestion>();
-            getDataQuestion();
             initRoleTest();
+            getDataQuestion();
         }
 
         public void getDataQuestion()
@@ -94,14 +94,14 @@ namespace TracNghiem
             lbQuestion.Enabled = false;
             btnFinish.Hide();
 
-            lblUserId.Text = "UserID : " + Program.currentID;
-            lblName.Text = "Name : " + Program.currentLoginName;
-            lblClassID.Text = "Class ID : " + Program.insertClassID;
-            lblSubject.Text = "Subject ID : " +Program.insertSubjectID;
-            lblTime.Text = "Time : " + Program.insertTime;
-            lblLevel.Text = "Level : " + Program.insertLevel;
-            lblDate.Text = "Date : " + Program.insertDate;
-            lblCountdown.Text = "Countdown : " + Program.insertCountdown;
+            lblUserId.Text = Program.currentID;
+            lblName.Text = Program.currentLoginName;
+            lblClassID.Text = Program.insertClassID;
+            lblSubject.Text = Program.insertSubjectID;
+            lblTime.Text = Program.insertTime;
+            lblLevel.Text =Program.insertLevel;
+            lblDate.Text =Program.insertDate;
+            lblCountdown.Text = Program.insertCountdown;
         }
 
         public void updateDataListBox ()
