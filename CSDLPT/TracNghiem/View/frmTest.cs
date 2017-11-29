@@ -49,8 +49,8 @@ namespace TracNghiem
         {
             InitializeComponent();
             listQuestion = new List<ItemQuestion>();
-            getDataQuestion();
             initRoleTest();
+            getDataQuestion();      
         }
 
         public void getDataQuestion()
