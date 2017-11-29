@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +18,28 @@ namespace TracNghiem
         String currentTeacherID = "";
         String method = "";
 
+        public Stack st = new Stack();
+        public TeacherDto dtoUndo = new TeacherDto("", "", "","","");
+        public bool isUndo = false;
+
+        public class TeacherDto
+        {
+            public String teacherID;
+            public String fristName;
+            public String lastName;
+            public String degree;
+            public String method;
+            public int index;
+            public TeacherDto(String strID, String strFristName, String strLastName, String strDegree, String strMethod)
+            {
+                teacherID = strID;
+                fristName = strFristName;
+                lastName = strLastName;
+                degree = strDegree;
+                method = strMethod;
+            }
+        }
+
         public frmTeacher()
         {
             InitializeComponent();
@@ -30,11 +53,37 @@ namespace TracNghiem
             this.gIAOVIENTableAdapter.Fill(this.dataSetTracNghiem.GIAOVIEN);
 
             initUIComboBoxDep();
-
             groupBox1.Enabled = true;
             txtTeacherID.Enabled = txtFirstName.Enabled = txtLastName.Enabled = txtDegree.Enabled = false;
-
             setCurrentRole();
+        }
+
+        public void setCurrentRole()
+        {
+            if (Program.currentRole == "TRUONG")
+            {
+                cbbDep.Enabled = true;
+                cbbBranch.Enabled = true;
+                initButtonBarManage(false);
+            }
+            else
+            {
+                cbbDep.Enabled = false;
+                cbbDep.Visible = false;
+                cbbBranch.Enabled = true;
+                btnNew.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
+                btnSave.Enabled = btnCancel.Enabled = false;
+
+                if (bdsTeacherFromDep.Count == 0)
+                {
+                    btnDel.Enabled = btnEdit.Enabled = btnRefresh.Enabled = false;
+                }
+                else
+                {
+                    btnDel.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
+                }
+            }
+            updateUI();
         }
 
         private void cbbDep_SelectionChangeCommitted(object sender, EventArgs e)
@@ -133,6 +182,11 @@ namespace TracNghiem
             groupBox2.Enabled = false;
             method = Program.UPDATE_METHOD;
 
+            dtoUndo.teacherID = txtTeacherID.Text;
+            dtoUndo.fristName = txtFirstName.Text;
+            dtoUndo.lastName = txtLastName.Text;
+            dtoUndo.degree = txtDegree.Text;
+
             btnCancel.Enabled = btnSave.Enabled = true;
             btnDel.Enabled = btnNew.Enabled = btnRefresh.Enabled = btnEdit.Enabled = false;
         }
@@ -143,83 +197,14 @@ namespace TracNghiem
             {
                 currentTeacherID = ((DataRowView)bdsTeacherFromDep[index])["MAGV"].ToString();
             }
-            String sqlStr = "";
-
+    
             if (method == Program.NEW_METHOD)
             {
-                sqlStr = "exec sp_KiemTraGiaoVienTheoKhoa '" + txtTeacherID.Text + "', '" + method + "'";
-
-                Program.myReader = Program.ExecSqlDataReader(sqlStr);
-                if (Program.myReader == null) return;
-                Program.myReader.Read();
-
-                if (Program.myReader.FieldCount > 0)
-                {
-                    MessageBox.Show("The " + txtTeacherID.Text + " has already exists!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Program.myReader.Close();
-                    return;
-                }
-                else
-                {
-                    if (txtTeacherID.Text.Length == 0 || txtLastName.Text.Length == 0 || txtFirstName.Text.Length == 0)
-                    {
-                        MessageBox.Show("Teacher ID or Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                    else
-                    {
-                        try
-                        {
-                            this.Validate();
-                            bdsTeacherFromDep.EndEdit();
-                            bdsTeacherFromDep.ResetCurrentItem();
-                            this.sp_DanhSachGiaoVienTheoKhoaTableAdapter.Insert(txtTeacherID.Text, txtLastName.Text, txtFirstName.Text, txtDegree.Text, getMaKhoaSelected());
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Create teacher failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
-                            Program.myReader.Close();
-                            return;
-                        }
-                    }
-                    Program.myReader.Close();
-                }
+                sqlNewMethod(txtTeacherID.Text, txtFirstName.Text, txtLastName.Text, txtDegree.Text, Program.NEW_METHOD);
             }
             else if (method == Program.UPDATE_METHOD)
             {
-                sqlStr = "exec sp_KiemTraGiaoVienTheoKhoa '" + txtTeacherID.Text + "', '" + method + "'";
-
-                Program.myReader = Program.ExecSqlDataReader(sqlStr);
-                if (Program.myReader == null) return;
-                Program.myReader.Read();
-
-                if (txtLastName.Text.Length == 0)
-                {
-                    MessageBox.Show("Last Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                else if (txtFirstName.Text.Length == 0)
-                {
-                    MessageBox.Show("First Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                else
-                {
-                    try
-                    {
-                        this.Validate();
-                        bdsTeacherFromDep.EndEdit();
-                        bdsTeacherFromDep.ResetCurrentItem();
-                        this.sp_DanhSachGiaoVienTheoKhoaTableAdapter.Update(currentTeacherID, txtLastName.Text, txtFirstName.Text, txtDegree.Text);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Update teacher failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
-                        Program.myReader.Close();
-                        return;
-                    }
-                    Program.myReader.Close();
-                }
+                sqlUpdateMethod(txtTeacherID.Text, txtFirstName.Text, txtLastName.Text, txtDegree.Text, Program.UPDATE_METHOD);
             }
             groupBox1.Enabled = true;
             cbbBranch.Enabled = true;
@@ -233,10 +218,146 @@ namespace TracNghiem
         {
             index = bdsTeacherFromDep.Position;
             method = Program.DETELE_METHOD;
-            currentTeacherID = ((DataRowView)bdsTeacherFromDep[index])["MAGV"].ToString();
+            sqlDeleteMethod(txtTeacherID.Text, txtFirstName.Text, txtLastName.Text, txtDegree.Text, Program.DETELE_METHOD);
 
+        }
+
+        private void btnRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            groupBox1.Enabled = true;
+            txtTeacherID.Enabled = txtFirstName.Enabled = txtLastName.Enabled = txtDegree.Enabled = false;
+
+            if (bdsTeacherFromDep.Count == 0) btnDel.Enabled = false;
+            else btnDel.Enabled = true;
+
+            if (Program.currentRole == "TRUONG")
+            {
+                cbbDep.Enabled = true;
+                cbbBranch.Enabled = true;
+            }
+            else
+            {
+                cbbDep.Enabled = false;
+                cbbBranch.Enabled = true;
+            }
+            groupBox2.Enabled = true;
+            bdsTeacherFromDep.MoveFirst();
+            st.Clear();
+            updateUIUndo();
+            getDataTeacherFromDep(getMaKhoaSelected());
+
+            btnNew.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
+            btnSave.Enabled = btnCancel.Enabled = false;
+        }
+
+        private void btnCancel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            groupBox1.Enabled = true;
+            txtTeacherID.Enabled = txtFirstName.Enabled = txtLastName.Enabled = txtDegree.Enabled = false;
+            bdsTeacherFromDep.MoveFirst();
+            getDataTeacherFromDep(getMaKhoaSelected());
+            groupBox2.Enabled = true;
+
+            setCurrentRole();
+        }
+
+        private void btnClose_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Close();
+        }
+
+
+        public void sqlNewMethod(String strID, String strFristName, String strLastName, String strDegree, String strMethod)
+        {
+            String sqlStr = "exec sp_KiemTraGiaoVienTheoKhoa '" + strID + "', '" + method + "'";
+
+            Program.myReader = Program.ExecSqlDataReader(sqlStr);
+            if (Program.myReader == null) return;
+            Program.myReader.Read();
+
+            if (Program.myReader.FieldCount > 0)
+            {
+                MessageBox.Show("The " + strID + " has already exists!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Program.myReader.Close();
+                return;
+            }
+            else
+            {
+                if (strID.Length == 0 || strFristName.Length == 0 || strLastName.Length == 0)
+                {
+                    MessageBox.Show("Teacher ID or Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    try
+                    {
+                        this.Validate();
+                        bdsTeacherFromDep.EndEdit();
+                        bdsTeacherFromDep.ResetCurrentItem();
+                        this.sp_DanhSachGiaoVienTheoKhoaTableAdapter.Insert(strID, strLastName, strFristName, strDegree, getMaKhoaSelected());
+                        if (isUndo == false)
+                        {
+                            TeacherDto dataUndo = new TeacherDto(strID, strFristName, strLastName, strDegree, strMethod);
+                            st.Push(dataUndo);
+                            updateUIUndo();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Create teacher failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                        Program.myReader.Close();
+                        return;
+                    }
+                }
+                Program.myReader.Close();
+            }
+        }
+
+        public void sqlUpdateMethod(String strID, String strFristName, String strLastName, String strDegree, String strMethod)
+        {
+            String sqlStr = "exec sp_KiemTraGiaoVienTheoKhoa '" + strID + "', '" + method + "'";
+
+            Program.myReader = Program.ExecSqlDataReader(sqlStr);
+            if (Program.myReader == null) return;
+            Program.myReader.Read();
+
+            if (strLastName.Length == 0)
+            {
+                MessageBox.Show("Last Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (strFristName.Length == 0)
+            {
+                MessageBox.Show("First Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else
+            {
+                try
+                {
+                    this.Validate();
+                    bdsTeacherFromDep.EndEdit();
+                    bdsTeacherFromDep.ResetCurrentItem();
+                    this.sp_DanhSachGiaoVienTheoKhoaTableAdapter.Update(currentTeacherID, txtLastName.Text, txtFirstName.Text, txtDegree.Text);
+                    TeacherDto dataUndo = new TeacherDto(dtoUndo.teacherID, dtoUndo.fristName, dtoUndo.lastName, dtoUndo.degree, strMethod);
+                    st.Push(dataUndo);
+                    updateUIUndo();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Update teacher failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                    Program.myReader.Close();
+                    return;
+                }
+                Program.myReader.Close();
+            }
+        }
+
+        public void sqlDeleteMethod(String strID, String strFristName, String strLastName, String strDegree, String strMethod)
+        {
             String sqlStr = "";
-            sqlStr = "exec sp_KiemTraGiaoVienTheoKhoa'" + currentTeacherID + "', '" + method + "'";
+            sqlStr = "exec sp_KiemTraGiaoVienTheoKhoa'" + strID + "', '" + method + "'";
             Program.myReader = Program.ExecSqlDataReader(sqlStr);
             if (Program.myReader == null) return;
             Program.myReader.Read();
@@ -260,6 +381,13 @@ namespace TracNghiem
                             btnEdit.Enabled = false;
                             btnRefresh.Enabled = false;
                         }
+
+                        if (isUndo == false)
+                        {
+                            TeacherDto dataUndo = new TeacherDto(strID, strFristName, strLastName, strDegree, method);
+                            st.Push(dataUndo);
+                            updateUIUndo();
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -273,76 +401,6 @@ namespace TracNghiem
             }
             Program.myReader.Close();
         }
-
-        private void btnRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            groupBox1.Enabled = true;
-            txtTeacherID.Enabled = txtFirstName.Enabled = txtLastName.Enabled = txtDegree.Enabled = false;
-
-            if (bdsTeacherFromDep.Count == 0) btnDel.Enabled = false;
-            else btnDel.Enabled = true;
-
-            if (Program.currentRole == "TRUONG")
-            {
-                cbbDep.Enabled = true;
-                cbbBranch.Enabled = true;
-            }
-            else
-            {
-                cbbDep.Enabled = false;
-                cbbBranch.Enabled = true;
-            }
-            groupBox2.Enabled = true;
-            bdsTeacherFromDep.MoveFirst();
-            getDataTeacherFromDep(getMaKhoaSelected());
-
-            btnNew.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
-            btnSave.Enabled = btnCancel.Enabled = false;
-        }
-
-        private void btnCancel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            groupBox1.Enabled = true;
-            txtTeacherID.Enabled = txtFirstName.Enabled = txtLastName.Enabled = txtDegree.Enabled = false;
-            bdsTeacherFromDep.MoveFirst();
-            getDataTeacherFromDep(getMaKhoaSelected());
-            groupBox2.Enabled = true;
-
-            setCurrentRole();
-        }
-
-        private void btnClose_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            Close();
-        }
-
-        public void setCurrentRole()
-        {
-            if (Program.currentRole == "TRUONG")
-            {
-                cbbDep.Enabled = true;
-                cbbBranch.Enabled = true;
-                initButtonBarManage(false);
-            }
-            else
-            {
-                cbbDep.Enabled = false;
-                cbbDep.Visible = false;
-                cbbBranch.Enabled = true;
-                btnNew.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
-                btnSave.Enabled = btnCancel.Enabled = false;
-
-                if (bdsTeacherFromDep.Count == 0)
-                {
-                    btnDel.Enabled = btnEdit.Enabled = btnRefresh.Enabled = false;
-                }
-                else
-                {
-                    btnDel.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
-                }
-            }
-        }
-
 
 
         public String getMaKhoaSelected()
@@ -401,6 +459,7 @@ namespace TracNghiem
         {
             if (checkBoxSearch.Checked == true)
             {
+                txtSearch.Text = "";
                 getDataTeacherFromDep("");
                 cbbBranch.SelectedIndex = -1;
                 cbbBranch.Enabled = false;
@@ -410,8 +469,82 @@ namespace TracNghiem
                 txtSearch.Text = "";
                 cbbBranch.Enabled = true;
             }
+            updateUI();
         }
 
+        public void updateUI()
+        {
+            if (cbbBranch.SelectedIndex >= 0)
+            {
+                btnNew.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
+            }
+            else
+            {
+                st.Clear();
+                btnNew.Enabled = btnEdit.Enabled = btnRefresh.Enabled = btnUndo.Enabled = btnDel.Enabled = false;
+            }
+        }
 
+        private void btnUndo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            isUndo = true;
+            TeacherDto dataUndo = (TeacherDto)st.Pop();
+            if (dataUndo.method == Program.NEW_METHOD)
+            {
+                int index = getIndexDBS(dataUndo.teacherID);
+                if (index >= 0)
+                {
+                    bdsTeacherFromDep.Position = index;
+                    sqlDeleteMethod(dataUndo.teacherID, dataUndo.fristName, dataUndo.lastName, dataUndo.degree, Program.DETELE_METHOD);
+                }
+            }
+            else if (dataUndo.method == Program.UPDATE_METHOD)
+            {
+                int index = getIndexDBS(dataUndo.teacherID);
+                if (index >= 0)
+                {
+                    bdsTeacherFromDep.Position = index;
+                    txtTeacherID.Text = dataUndo.teacherID;
+                    txtFirstName.Text = dataUndo.fristName;
+                    txtLastName.Text = dataUndo.lastName;
+                    txtDegree.Text = dataUndo.degree;
+                    sqlUpdateMethod(dataUndo.teacherID, dataUndo.fristName, dataUndo.lastName, dataUndo.degree, Program.UPDATE_METHOD);
+                }
+
+            }
+            else if (dataUndo.method == Program.DETELE_METHOD)
+            {
+                bdsTeacherFromDep.AddNew();
+                txtTeacherID.Text = dataUndo.teacherID;
+                txtFirstName.Text = dataUndo.fristName;
+                txtLastName.Text = dataUndo.lastName;
+                txtDegree.Text = dataUndo.degree;
+                sqlNewMethod(dataUndo.teacherID, dataUndo.fristName, dataUndo.lastName, dataUndo.degree, Program.NEW_METHOD);
+            }
+            isUndo = false;
+            updateUIUndo();
+        }
+        public int getIndexDBS(string strID)
+        {
+            for (int i = 0; i < bdsTeacherFromDep.Count; i++)
+            {
+                if (strID.Trim() == ((DataRowView)bdsTeacherFromDep[i])["MAGV"].ToString().Trim())
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        public void updateUIUndo()
+        {
+            if (st.Count > 0)
+            {
+                btnUndo.Enabled = true;
+            }
+            else
+            {
+                btnUndo.Enabled = false;
+            }
+        }
     }
 }

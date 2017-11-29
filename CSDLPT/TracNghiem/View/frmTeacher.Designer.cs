@@ -71,6 +71,7 @@
             this.sp_DanhSachGiaoVienTheoKhoaTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.sp_DanhSachGiaoVienTheoKhoaTableAdapter();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.checkBoxSearch = new System.Windows.Forms.CheckBox();
+            this.btnUndo = new DevExpress.XtraBars.BarButtonItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDegree.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsTeacherFromDep)).BeginInit();
@@ -326,8 +327,9 @@
             this.btnDel,
             this.btnRefresh,
             this.btnCancel,
-            this.btnClose});
-            this.barManager1.MaxItemId = 7;
+            this.btnClose,
+            this.btnUndo});
+            this.barManager1.MaxItemId = 8;
             // 
             // bar5
             // 
@@ -341,6 +343,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSave, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnDel, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnRefresh, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnUndo, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnCancel, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnClose, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar5.Text = "Custom 6";
@@ -453,6 +456,7 @@
             this.tableAdapterManager.SINHVIENTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachBoDeTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachGiaoVienTheoKhoaTableAdapter = null;
+            this.tableAdapterManager.sp_DanhSachGVDKTheoCosoTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter = null;
             this.tableAdapterManager.sp_DanhSachSinhVienTheoLopTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
@@ -479,6 +483,14 @@
             this.checkBoxSearch.Text = "Search All";
             this.checkBoxSearch.UseVisualStyleBackColor = true;
             this.checkBoxSearch.CheckedChanged += new System.EventHandler(this.checkBoxSearch_CheckedChanged);
+            // 
+            // btnUndo
+            // 
+            this.btnUndo.Caption = "Undo";
+            this.btnUndo.Glyph = global::TracNghiem.Properties.Resources.icons8_undo_32;
+            this.btnUndo.Id = 7;
+            this.btnUndo.Name = "btnUndo";
+            this.btnUndo.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUndo_ItemClick);
             // 
             // frmTeacher
             // 
@@ -560,5 +572,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colTEN;
         private DevExpress.XtraGrid.Columns.GridColumn colHOCVI;
         private DevExpress.XtraGrid.Columns.GridColumn colMAKH;
+        private DevExpress.XtraBars.BarButtonItem btnUndo;
     }
 }

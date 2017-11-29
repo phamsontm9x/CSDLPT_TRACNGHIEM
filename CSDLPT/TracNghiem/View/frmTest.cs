@@ -57,7 +57,7 @@ namespace TracNghiem
         {
             String subjectID = lblSubject.Text;
             String level = lblLevel.Text;
-            String depID = "CS1";
+            String depID = Program.serverName == "MSSQLSERVER1" ? "CS1" : "CS2";
             String numberQuest = Program.insertNumberQuest;
 
             String strLenh = "exec sp_RandomQuestionTest'" + subjectID + "', '" + level + "', '" + depID + "', '" + numberQuest + "'";
@@ -73,7 +73,7 @@ namespace TracNghiem
                     var answer3 = dtRow[6].ToString();
                     var answer4 = dtRow[7].ToString();
                     var correctAnswer = dtRow[8].ToString();
-                    string titleListBox = "Number " + i++;
+                    string titleListBox = "Question:" + i++;
                     ItemQuestion item = new ItemQuestion(title, titleListBox, 0, answer1, answer2, answer3, answer4, correctAnswer);
                     listQuestion.Add(item);
                     lbQuestion.Items.Add(titleListBox);
@@ -278,7 +278,7 @@ namespace TracNghiem
                 }
             }
            // score = (float) Math.Round(score,2);
-            lblTimer.Text = "Score:" + score;
+            lblTimer.Text = "Score: \n" + score;
         }
 
         private void btnFinish_Click(object sender, EventArgs e)
@@ -297,6 +297,7 @@ namespace TracNghiem
                 btnAnswer2.Enabled = false;
                 btnAnswer3.Enabled = false;
                 btnAnswer4.Enabled = false;
+                timer1.Stop();
             } 
         }
     }

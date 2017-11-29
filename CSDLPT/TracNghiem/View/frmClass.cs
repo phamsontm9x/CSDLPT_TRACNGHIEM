@@ -427,6 +427,12 @@ namespace TracNghiem
                             btnEdit.Enabled = false;
                             btnRefresh.Enabled = false;
                         }
+                        if (isUndo == false)
+                        {
+                            ClassDto dataUndo = new ClassDto(strID, strName, method);
+                            st.Push(dataUndo);
+                            updateUIUndo();
+                        }
                     }
                     catch (Exception ex)
                     {
