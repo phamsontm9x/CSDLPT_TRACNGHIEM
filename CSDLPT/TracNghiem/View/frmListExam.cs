@@ -34,15 +34,28 @@ namespace TracNghiem
                 cbbDep.Enabled = true;
                 initUIComboBoxDep();
             }
+            else
+            {
+                btnStart.Visible = true;
+                cbbDep.Enabled = false;
+                initUIComboBoxDep();
+            }
             String currentDay = DateTime.Now.ToString("MM/dd/yyyy");
 
-            if (currentDay == lblDate.Text)
+            if (Program.currentRole == "SINHVIEN")
             {
-                btnStart.Enabled = true;
+                if (currentDay == lblDate.Text)
+                {
+                    btnStart.Enabled = true;
+                }
+                else
+                {
+                    btnStart.Enabled = false;
+                }
             }
             else
             {
-                btnStart.Enabled = false;
+                btnStart.Enabled = true;
             }
         }
 
@@ -64,13 +77,20 @@ namespace TracNghiem
         {
             String currentDay = DateTime.Now.ToString("MM/dd/yyyy");
               
-            if (currentDay == lblDate.Text)
+            if (Program.currentRole == "SINHVIEN")
             {
-                btnStart.Enabled = true;
+                if (currentDay == lblDate.Text)
+                {
+                    btnStart.Enabled = true;
+                }
+                else
+                {
+                    btnStart.Enabled = false;
+                }
             }
             else
             {
-                btnStart.Enabled = false;
+                btnStart.Enabled = true;
             }
         }
 
@@ -86,6 +106,12 @@ namespace TracNghiem
             {
                 btnStart.Visible = false;
                 cbbDep.Enabled = true;
+                getDataFromDep();
+            } 
+            else
+            {
+                btnStart.Visible = true;
+                cbbDep.Enabled = false;
                 getDataFromDep();
             }
         }
@@ -144,15 +170,15 @@ namespace TracNghiem
                 currentServerName = currentServerName.Substring(indexStr);
                 Program.insertDepID = currentServerName == "MSSQLSERVER1" ? "CS1" : "CS2";
 
-                if (Program.currentRole == "TRUONG")
+                if (Program.currentRole == "SINHVIEN")
                 {
                     this.sp_DanhSachMonThiTableAdapter.Connection.ConnectionString = Program.connectStr;
-                    this.sp_DanhSachMonThiTableAdapter.Fill(this.dataSetTracNghiem.sp_DanhSachMonThi, null);
+                    this.sp_DanhSachMonThiTableAdapter.Fill(this.dataSetTracNghiem.sp_DanhSachMonThi, Program.currentID);
                 }
                 else
                 {
                     this.sp_DanhSachMonThiTableAdapter.Connection.ConnectionString = Program.connectStr;
-                    this.sp_DanhSachMonThiTableAdapter.Fill(this.dataSetTracNghiem.sp_DanhSachMonThi, Program.currentID);
+                    this.sp_DanhSachMonThiTableAdapter.Fill(this.dataSetTracNghiem.sp_DanhSachMonThi, null);
                 }
             }
             catch (System.Exception ex)

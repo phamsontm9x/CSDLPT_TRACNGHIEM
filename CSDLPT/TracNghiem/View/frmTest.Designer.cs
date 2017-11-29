@@ -177,6 +177,7 @@
             this.lblTimer.Size = new System.Drawing.Size(95, 41);
             this.lblTimer.TabIndex = 2;
             this.lblTimer.Text = "00:00";
+            this.lblTimer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // timer1
             // 
@@ -186,7 +187,7 @@
             // 
             this.lblUserId.AutoSize = true;
             this.lblUserId.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserId.Location = new System.Drawing.Point(436, 22);
+            this.lblUserId.Location = new System.Drawing.Point(447, 22);
             this.lblUserId.Name = "lblUserId";
             this.lblUserId.Size = new System.Drawing.Size(72, 22);
             this.lblUserId.TabIndex = 12;
@@ -196,7 +197,7 @@
             // 
             this.lblSubject.AutoSize = true;
             this.lblSubject.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubject.Location = new System.Drawing.Point(140, 75);
+            this.lblSubject.Location = new System.Drawing.Point(160, 75);
             this.lblSubject.Name = "lblSubject";
             this.lblSubject.Size = new System.Drawing.Size(94, 22);
             this.lblSubject.TabIndex = 12;
@@ -216,7 +217,7 @@
             // 
             this.lblTime.AutoSize = true;
             this.lblTime.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTime.Location = new System.Drawing.Point(349, 75);
+            this.lblTime.Location = new System.Drawing.Point(358, 75);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(50, 22);
             this.lblTime.TabIndex = 12;
@@ -226,7 +227,7 @@
             // 
             this.lblClassID.AutoSize = true;
             this.lblClassID.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblClassID.Location = new System.Drawing.Point(639, 22);
+            this.lblClassID.Location = new System.Drawing.Point(654, 22);
             this.lblClassID.Name = "lblClassID";
             this.lblClassID.Size = new System.Drawing.Size(79, 22);
             this.lblClassID.TabIndex = 12;
@@ -236,7 +237,7 @@
             // 
             this.lblDate.AutoSize = true;
             this.lblDate.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDate.Location = new System.Drawing.Point(686, 75);
+            this.lblDate.Location = new System.Drawing.Point(695, 75);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(47, 22);
             this.lblDate.TabIndex = 12;
@@ -246,7 +247,7 @@
             // 
             this.lblLevel.AutoSize = true;
             this.lblLevel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLevel.Location = new System.Drawing.Point(514, 75);
+            this.lblLevel.Location = new System.Drawing.Point(525, 75);
             this.lblLevel.Name = "lblLevel";
             this.lblLevel.Size = new System.Drawing.Size(55, 22);
             this.lblLevel.TabIndex = 12;
@@ -277,9 +278,9 @@
             this.btnFinish.Font = new System.Drawing.Font("Stencil", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFinish.Image = global::TracNghiem.Properties.Resources.icons8_enter_32;
             this.btnFinish.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFinish.Location = new System.Drawing.Point(540, 619);
+            this.btnFinish.Location = new System.Drawing.Point(574, 619);
             this.btnFinish.Name = "btnFinish";
-            this.btnFinish.Size = new System.Drawing.Size(114, 34);
+            this.btnFinish.Size = new System.Drawing.Size(127, 49);
             this.btnFinish.TabIndex = 3;
             this.btnFinish.Text = "Submit";
             this.btnFinish.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -392,6 +393,7 @@
             this.Controls.Add(this.lbQuestion);
             this.Controls.Add(this.btnBegin);
             this.Controls.Add(this.groupQuestion);
+            this.IsMdiContainer = true;
             this.Name = "frmTest";
             this.Text = "frmTest";
             this.groupQuestion.ResumeLayout(false);

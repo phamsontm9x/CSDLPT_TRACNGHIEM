@@ -155,7 +155,14 @@ namespace TracNghiem
 
         private void btnPoint_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            MessageBox.Show("We are developing this function", "", MessageBoxButtons.OK);
+            Form frm = this.CheckExists(typeof(frmTranscript));
+            if (frm != null) frm.Activate();
+            else
+            {
+                frmTranscript f = new frmTranscript();
+                f.MdiParent = this;
+                f.Show();
+            }
         }
 
         private void btnCreate_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -194,7 +201,14 @@ namespace TracNghiem
 
         private void btnTry_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            MessageBox.Show("We are developing this function", "", MessageBoxButtons.OK);
+            Form frm = this.CheckExists(typeof(frmListExam));
+            if (frm != null) frm.Activate();
+            else
+            {
+                frmListExam f = new frmListExam();
+                f.MdiParent = this;
+                f.Show();
+            }
         }
     }
 }

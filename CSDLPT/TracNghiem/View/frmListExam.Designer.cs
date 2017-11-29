@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Label mAGVLabel;
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.mAGVLabel1 = new System.Windows.Forms.Label();
+            this.bdsListExam = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSetTracNghiem = new TracNghiem.dataSetTracNghiem();
             this.btnStart = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -40,8 +43,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
-            this.bdsListExam = new System.Windows.Forms.BindingSource(this.components);
-            this.dataSetTracNghiem = new TracNghiem.dataSetTracNghiem();
             this.lblCountdown = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
             this.lblNumber = new System.Windows.Forms.Label();
@@ -51,6 +52,14 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.sp_DanhSachMonThiGridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colMAGV = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colMALOP = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colMAMH = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTRINHDO = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSOCAUTHI = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colLAN = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTHOIGIAN = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNGAYTHI = new DevExpress.XtraGrid.Columns.GridColumn();
             this.sp_DanhSachMonThiTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.sp_DanhSachMonThiTableAdapter();
             this.tableAdapterManager = new TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
@@ -61,15 +70,6 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.colMAGV = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colMALOP = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colMAMH = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colTRINHDO = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colSOCAUTHI = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colLAN = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colTHOIGIAN = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colNGAYTHI = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.mAGVLabel1 = new System.Windows.Forms.Label();
             this.cbbDep = new System.Windows.Forms.ComboBox();
             mAGVLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
@@ -80,6 +80,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // mAGVLabel
+            // 
+            mAGVLabel.AutoSize = true;
+            mAGVLabel.Location = new System.Drawing.Point(711, 26);
+            mAGVLabel.Name = "mAGVLabel";
+            mAGVLabel.Size = new System.Drawing.Size(98, 22);
+            mAGVLabel.TabIndex = 15;
+            mAGVLabel.Text = "Teacher ID";
             // 
             // groupBox1
             // 
@@ -107,6 +116,25 @@
             this.groupBox1.Size = new System.Drawing.Size(1007, 200);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // mAGVLabel1
+            // 
+            this.mAGVLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsListExam, "MAGV", true));
+            this.mAGVLabel1.Location = new System.Drawing.Point(815, 26);
+            this.mAGVLabel1.Name = "mAGVLabel1";
+            this.mAGVLabel1.Size = new System.Drawing.Size(100, 23);
+            this.mAGVLabel1.TabIndex = 16;
+            this.mAGVLabel1.Text = "Teacher ID";
+            // 
+            // bdsListExam
+            // 
+            this.bdsListExam.DataMember = "sp_DanhSachMonThi";
+            this.bdsListExam.DataSource = this.dataSetTracNghiem;
+            // 
+            // dataSetTracNghiem
+            // 
+            this.dataSetTracNghiem.DataSetName = "dataSetTracNghiem";
+            this.dataSetTracNghiem.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // btnStart
             // 
@@ -190,16 +218,6 @@
             this.lblDate.TabIndex = 11;
             this.lblDate.Text = "Date";
             // 
-            // bdsListExam
-            // 
-            this.bdsListExam.DataMember = "sp_DanhSachMonThi";
-            this.bdsListExam.DataSource = this.dataSetTracNghiem;
-            // 
-            // dataSetTracNghiem
-            // 
-            this.dataSetTracNghiem.DataSetName = "dataSetTracNghiem";
-            this.dataSetTracNghiem.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // lblCountdown
             // 
             this.lblCountdown.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsListExam, "THOIGIAN", true));
@@ -221,7 +239,7 @@
             // lblNumber
             // 
             this.lblNumber.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsListExam, "SOCAUTHI", true));
-            this.lblNumber.Location = new System.Drawing.Point(392, 95);
+            this.lblNumber.Location = new System.Drawing.Point(401, 95);
             this.lblNumber.Name = "lblNumber";
             this.lblNumber.Size = new System.Drawing.Size(100, 23);
             this.lblNumber.TabIndex = 5;
@@ -291,6 +309,86 @@
             this.gridView1.OptionsView.ShowGroupPanel = false;
             this.gridView1.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gridView1_RowClick);
             this.gridView1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.gridView1_KeyPress);
+            // 
+            // colMAGV
+            // 
+            this.colMAGV.Caption = "Teacher ID";
+            this.colMAGV.FieldName = "MAGV";
+            this.colMAGV.Name = "colMAGV";
+            this.colMAGV.OptionsColumn.AllowEdit = false;
+            this.colMAGV.OptionsColumn.ReadOnly = true;
+            this.colMAGV.Visible = true;
+            this.colMAGV.VisibleIndex = 0;
+            // 
+            // colMALOP
+            // 
+            this.colMALOP.Caption = "Class ID";
+            this.colMALOP.FieldName = "MALOP";
+            this.colMALOP.Name = "colMALOP";
+            this.colMALOP.OptionsColumn.AllowEdit = false;
+            this.colMALOP.OptionsColumn.ReadOnly = true;
+            this.colMALOP.Visible = true;
+            this.colMALOP.VisibleIndex = 1;
+            // 
+            // colMAMH
+            // 
+            this.colMAMH.Caption = "Subject ID";
+            this.colMAMH.FieldName = "MAMH";
+            this.colMAMH.Name = "colMAMH";
+            this.colMAMH.OptionsColumn.AllowEdit = false;
+            this.colMAMH.OptionsColumn.ReadOnly = true;
+            this.colMAMH.Visible = true;
+            this.colMAMH.VisibleIndex = 2;
+            // 
+            // colTRINHDO
+            // 
+            this.colTRINHDO.Caption = "Level";
+            this.colTRINHDO.FieldName = "TRINHDO";
+            this.colTRINHDO.Name = "colTRINHDO";
+            this.colTRINHDO.OptionsColumn.AllowEdit = false;
+            this.colTRINHDO.OptionsColumn.ReadOnly = true;
+            this.colTRINHDO.Visible = true;
+            this.colTRINHDO.VisibleIndex = 3;
+            // 
+            // colSOCAUTHI
+            // 
+            this.colSOCAUTHI.Caption = "Number";
+            this.colSOCAUTHI.FieldName = "SOCAUTHI";
+            this.colSOCAUTHI.Name = "colSOCAUTHI";
+            this.colSOCAUTHI.OptionsColumn.AllowEdit = false;
+            this.colSOCAUTHI.OptionsColumn.ReadOnly = true;
+            this.colSOCAUTHI.Visible = true;
+            this.colSOCAUTHI.VisibleIndex = 4;
+            // 
+            // colLAN
+            // 
+            this.colLAN.Caption = "Time";
+            this.colLAN.FieldName = "LAN";
+            this.colLAN.Name = "colLAN";
+            this.colLAN.OptionsColumn.AllowEdit = false;
+            this.colLAN.OptionsColumn.ReadOnly = true;
+            this.colLAN.Visible = true;
+            this.colLAN.VisibleIndex = 5;
+            // 
+            // colTHOIGIAN
+            // 
+            this.colTHOIGIAN.Caption = "Countdown";
+            this.colTHOIGIAN.FieldName = "THOIGIAN";
+            this.colTHOIGIAN.Name = "colTHOIGIAN";
+            this.colTHOIGIAN.OptionsColumn.AllowEdit = false;
+            this.colTHOIGIAN.OptionsColumn.ReadOnly = true;
+            this.colTHOIGIAN.Visible = true;
+            this.colTHOIGIAN.VisibleIndex = 6;
+            // 
+            // colNGAYTHI
+            // 
+            this.colNGAYTHI.Caption = "Date";
+            this.colNGAYTHI.FieldName = "NGAYTHI";
+            this.colNGAYTHI.Name = "colNGAYTHI";
+            this.colNGAYTHI.OptionsColumn.AllowEdit = false;
+            this.colNGAYTHI.OptionsColumn.ReadOnly = true;
+            this.colNGAYTHI.Visible = true;
+            this.colNGAYTHI.VisibleIndex = 7;
             // 
             // sp_DanhSachMonThiTableAdapter
             // 
@@ -386,104 +484,6 @@
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(1021, 59);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 460);
-            // 
-            // colMAGV
-            // 
-            this.colMAGV.Caption = "Teacher ID";
-            this.colMAGV.FieldName = "MAGV";
-            this.colMAGV.Name = "colMAGV";
-            this.colMAGV.OptionsColumn.AllowEdit = false;
-            this.colMAGV.OptionsColumn.ReadOnly = true;
-            this.colMAGV.Visible = true;
-            this.colMAGV.VisibleIndex = 0;
-            // 
-            // colMALOP
-            // 
-            this.colMALOP.Caption = "Class ID";
-            this.colMALOP.FieldName = "MALOP";
-            this.colMALOP.Name = "colMALOP";
-            this.colMALOP.OptionsColumn.AllowEdit = false;
-            this.colMALOP.OptionsColumn.ReadOnly = true;
-            this.colMALOP.Visible = true;
-            this.colMALOP.VisibleIndex = 1;
-            // 
-            // colMAMH
-            // 
-            this.colMAMH.Caption = "Subject ID";
-            this.colMAMH.FieldName = "MAMH";
-            this.colMAMH.Name = "colMAMH";
-            this.colMAMH.OptionsColumn.AllowEdit = false;
-            this.colMAMH.OptionsColumn.ReadOnly = true;
-            this.colMAMH.Visible = true;
-            this.colMAMH.VisibleIndex = 2;
-            // 
-            // colTRINHDO
-            // 
-            this.colTRINHDO.Caption = "Level";
-            this.colTRINHDO.FieldName = "TRINHDO";
-            this.colTRINHDO.Name = "colTRINHDO";
-            this.colTRINHDO.OptionsColumn.AllowEdit = false;
-            this.colTRINHDO.OptionsColumn.ReadOnly = true;
-            this.colTRINHDO.Visible = true;
-            this.colTRINHDO.VisibleIndex = 3;
-            // 
-            // colSOCAUTHI
-            // 
-            this.colSOCAUTHI.Caption = "Number";
-            this.colSOCAUTHI.FieldName = "SOCAUTHI";
-            this.colSOCAUTHI.Name = "colSOCAUTHI";
-            this.colSOCAUTHI.OptionsColumn.AllowEdit = false;
-            this.colSOCAUTHI.OptionsColumn.ReadOnly = true;
-            this.colSOCAUTHI.Visible = true;
-            this.colSOCAUTHI.VisibleIndex = 4;
-            // 
-            // colLAN
-            // 
-            this.colLAN.Caption = "Time";
-            this.colLAN.FieldName = "LAN";
-            this.colLAN.Name = "colLAN";
-            this.colLAN.OptionsColumn.AllowEdit = false;
-            this.colLAN.OptionsColumn.ReadOnly = true;
-            this.colLAN.Visible = true;
-            this.colLAN.VisibleIndex = 5;
-            // 
-            // colTHOIGIAN
-            // 
-            this.colTHOIGIAN.Caption = "Countdown";
-            this.colTHOIGIAN.FieldName = "THOIGIAN";
-            this.colTHOIGIAN.Name = "colTHOIGIAN";
-            this.colTHOIGIAN.OptionsColumn.AllowEdit = false;
-            this.colTHOIGIAN.OptionsColumn.ReadOnly = true;
-            this.colTHOIGIAN.Visible = true;
-            this.colTHOIGIAN.VisibleIndex = 6;
-            // 
-            // colNGAYTHI
-            // 
-            this.colNGAYTHI.Caption = "Date";
-            this.colNGAYTHI.FieldName = "NGAYTHI";
-            this.colNGAYTHI.Name = "colNGAYTHI";
-            this.colNGAYTHI.OptionsColumn.AllowEdit = false;
-            this.colNGAYTHI.OptionsColumn.ReadOnly = true;
-            this.colNGAYTHI.Visible = true;
-            this.colNGAYTHI.VisibleIndex = 7;
-            // 
-            // mAGVLabel
-            // 
-            mAGVLabel.AutoSize = true;
-            mAGVLabel.Location = new System.Drawing.Point(711, 26);
-            mAGVLabel.Name = "mAGVLabel";
-            mAGVLabel.Size = new System.Drawing.Size(98, 22);
-            mAGVLabel.TabIndex = 15;
-            mAGVLabel.Text = "Teacher ID";
-            // 
-            // mAGVLabel1
-            // 
-            this.mAGVLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsListExam, "MAGV", true));
-            this.mAGVLabel1.Location = new System.Drawing.Point(815, 26);
-            this.mAGVLabel1.Name = "mAGVLabel1";
-            this.mAGVLabel1.Size = new System.Drawing.Size(100, 23);
-            this.mAGVLabel1.TabIndex = 16;
-            this.mAGVLabel1.Text = "Teacher ID";
             // 
             // cbbDep
             // 
