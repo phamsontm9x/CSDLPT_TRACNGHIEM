@@ -14,7 +14,7 @@ namespace TracNghiem
     public partial class frmTest : Form
     {
         // object exam
-        public int timeExam = 60;
+        public int timeExam;
         public int totalQuestionCorrect = 0;
         public float score = 0;
 
@@ -55,12 +55,12 @@ namespace TracNghiem
 
         public void getDataQuestion()
         {
-            String MAMH = "TD1";
-            String TRINHDO = "A";
-            String MACS = "CS1";
-            int SoCauHoi = 4;
+            String subjectID = lblSubject.Text;
+            String level = lblLevel.Text;
+            String depID = "CS1";
+            String numberQuest = Program.insertNumberQuest;
 
-            String strLenh = "exec sp_RandomQuestionTest'" + MAMH + "', '" + TRINHDO + "', '" + MACS + "', '" + SoCauHoi + "'";
+            String strLenh = "exec sp_RandomQuestionTest'" + subjectID + "', '" + level + "', '" + depID + "', '" + numberQuest + "'";
             DataTable dt = Program.ExecSqlDataTable(strLenh);
             if (dt != null)
             {
@@ -73,7 +73,7 @@ namespace TracNghiem
                     var answer3 = dtRow[6].ToString();
                     var answer4 = dtRow[7].ToString();
                     var correctAnswer = dtRow[8].ToString();
-                    string titleListBox = "Cau " + i++;
+                    string titleListBox = "Number " + i++;
                     ItemQuestion item = new ItemQuestion(title, titleListBox, 0, answer1, answer2, answer3, answer4, correctAnswer);
                     listQuestion.Add(item);
                     lbQuestion.Items.Add(titleListBox);
@@ -93,9 +93,16 @@ namespace TracNghiem
             setHiddenAnswer(true);
             lbQuestion.Enabled = false;
             btnFinish.Hide();
+
+            lblUserId.Text = "UserID : " + Program.currentID;
+            lblName.Text = "Name : " + Program.currentLoginName;
+            lblClassID.Text = "Class ID : " + Program.insertClassID;
+            lblSubject.Text = "Subject ID : " +Program.insertSubjectID;
+            lblTime.Text = "Time : " + Program.insertTime;
+            lblLevel.Text = "Level : " + Program.insertLevel;
+            lblDate.Text = "Date : " + Program.insertDate;
+            lblCountdown.Text = "Countdown : " + Program.insertCountdown;
         }
-
-
 
         public void updateDataListBox ()
         {
@@ -228,6 +235,7 @@ namespace TracNghiem
 
         private void btnBegin_Click(object sender, EventArgs e)
         {
+            timeExam = Int32.Parse(Program.insertCountdown) * 60;
             lbQuestion.SelectedIndex = 0;
             lbQuestion.Enabled = true;
             setHiddenAnswer(false);

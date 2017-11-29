@@ -43,9 +43,9 @@
             this.btnSave = new DevExpress.XtraBars.BarButtonItem();
             this.btnDel = new DevExpress.XtraBars.BarButtonItem();
             this.btnRefresh = new DevExpress.XtraBars.BarButtonItem();
+            this.btnUndo = new DevExpress.XtraBars.BarButtonItem();
             this.btnCancel = new DevExpress.XtraBars.BarButtonItem();
             this.btnClose = new DevExpress.XtraBars.BarButtonItem();
-            this.btnUndo = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -214,6 +214,14 @@
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRefresh_ItemClick);
             // 
+            // btnUndo
+            // 
+            this.btnUndo.Caption = "Undo";
+            this.btnUndo.Glyph = global::TracNghiem.Properties.Resources.icons8_undo_32;
+            this.btnUndo.Id = 7;
+            this.btnUndo.Name = "btnUndo";
+            this.btnUndo.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUndo_ItemClick);
+            // 
             // btnCancel
             // 
             this.btnCancel.Caption = "Cancel";
@@ -229,13 +237,6 @@
             this.btnClose.Id = 6;
             this.btnClose.Name = "btnClose";
             this.btnClose.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnClose_ItemClick);
-            // 
-            // btnUndo
-            // 
-            this.btnUndo.Caption = "Undo";
-            this.btnUndo.Id = 7;
-            this.btnUndo.Name = "btnUndo";
-            this.btnUndo.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUndo_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -411,7 +412,7 @@
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(760, 15);
+            this.txtSearch.Location = new System.Drawing.Point(845, 17);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(200, 30);
             this.txtSearch.TabIndex = 12;
@@ -420,7 +421,7 @@
             // checkboxSearch
             // 
             this.checkboxSearch.AutoSize = true;
-            this.checkboxSearch.Location = new System.Drawing.Point(970, 17);
+            this.checkboxSearch.Location = new System.Drawing.Point(1055, 19);
             this.checkboxSearch.Name = "checkboxSearch";
             this.checkboxSearch.Size = new System.Drawing.Size(116, 26);
             this.checkboxSearch.TabIndex = 17;

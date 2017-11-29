@@ -47,6 +47,10 @@ namespace TracNghiem
         public static String insertClassID = "";
         public static String insertLevel = "";
         public static String insertTeacherID = "";
+        public static String insertCountdown= "";
+        public static String insertTime = "";
+        public static String insertDate = "";
+        public static String insertNumberQuest = "";
 
         public static String UPDATE_METHOD = "UPDATE";
         public static String DETELE_METHOD = "DELETE";

@@ -41,12 +41,12 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.bdsListExam = new System.Windows.Forms.BindingSource(this.components);
             this.dataSetTracNghiem = new TracNghiem.dataSetTracNghiem();
-            this.tHOIGIANLabel1 = new System.Windows.Forms.Label();
-            this.lANLabel1 = new System.Windows.Forms.Label();
-            this.sOCAUTHILabel1 = new System.Windows.Forms.Label();
-            this.tRINHDOLabel1 = new System.Windows.Forms.Label();
-            this.mAMHLabel1 = new System.Windows.Forms.Label();
-            this.mALOPLabel1 = new System.Windows.Forms.Label();
+            this.lblCountdown = new System.Windows.Forms.Label();
+            this.lblTime = new System.Windows.Forms.Label();
+            this.lblNumber = new System.Windows.Forms.Label();
+            this.lblLevel = new System.Windows.Forms.Label();
+            this.lblSubjectId = new System.Windows.Forms.Label();
+            this.lblClassId = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.sp_DanhSachMonThiGridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -59,16 +59,27 @@
             this.colNGAYTHI = new DevExpress.XtraGrid.Columns.GridColumn();
             this.sp_DanhSachMonThiTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.sp_DanhSachMonThiTableAdapter();
             this.tableAdapterManager = new TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager();
+            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.bar1 = new DevExpress.XtraBars.Bar();
+            this.btnRefresh = new DevExpress.XtraBars.BarButtonItem();
+            this.btnClose = new DevExpress.XtraBars.BarButtonItem();
+            this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bdsListExam)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetTracNghiem)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sp_DanhSachMonThiGridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.btnStart);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label6);
@@ -78,21 +89,21 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.lblDate);
-            this.groupBox1.Controls.Add(this.tHOIGIANLabel1);
-            this.groupBox1.Controls.Add(this.lANLabel1);
-            this.groupBox1.Controls.Add(this.sOCAUTHILabel1);
-            this.groupBox1.Controls.Add(this.tRINHDOLabel1);
-            this.groupBox1.Controls.Add(this.mAMHLabel1);
-            this.groupBox1.Controls.Add(this.mALOPLabel1);
-            this.groupBox1.Location = new System.Drawing.Point(4, 256);
+            this.groupBox1.Controls.Add(this.lblCountdown);
+            this.groupBox1.Controls.Add(this.lblTime);
+            this.groupBox1.Controls.Add(this.lblNumber);
+            this.groupBox1.Controls.Add(this.lblLevel);
+            this.groupBox1.Controls.Add(this.lblSubjectId);
+            this.groupBox1.Controls.Add(this.lblClassId);
+            this.groupBox1.Location = new System.Drawing.Point(4, 307);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1007, 248);
+            this.groupBox1.Size = new System.Drawing.Size(1007, 187);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(788, 117);
+            this.btnStart.Location = new System.Drawing.Point(786, 95);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(99, 48);
             this.btnStart.TabIndex = 13;
@@ -103,7 +114,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(459, 179);
+            this.label7.Location = new System.Drawing.Point(457, 157);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(111, 22);
             this.label7.TabIndex = 12;
@@ -112,7 +123,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(204, 178);
+            this.label6.Location = new System.Drawing.Point(202, 156);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(61, 22);
             this.label6.TabIndex = 12;
@@ -121,7 +132,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(540, 117);
+            this.label5.Location = new System.Drawing.Point(538, 95);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(58, 22);
             this.label5.TabIndex = 12;
@@ -130,7 +141,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(315, 117);
+            this.label4.Location = new System.Drawing.Point(313, 95);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(84, 22);
             this.label4.TabIndex = 12;
@@ -139,7 +150,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(126, 117);
+            this.label3.Location = new System.Drawing.Point(124, 95);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(66, 22);
             this.label3.TabIndex = 12;
@@ -148,7 +159,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(415, 48);
+            this.label2.Location = new System.Drawing.Point(413, 26);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(105, 22);
             this.label2.TabIndex = 12;
@@ -157,7 +168,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(151, 48);
+            this.label1.Location = new System.Drawing.Point(149, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 22);
             this.label1.TabIndex = 12;
@@ -166,7 +177,7 @@
             // lblDate
             // 
             this.lblDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsListExam, "NGAYTHI", true));
-            this.lblDate.Location = new System.Drawing.Point(606, 117);
+            this.lblDate.Location = new System.Drawing.Point(604, 95);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(100, 23);
             this.lblDate.TabIndex = 11;
@@ -182,76 +193,76 @@
             this.dataSetTracNghiem.DataSetName = "dataSetTracNghiem";
             this.dataSetTracNghiem.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // tHOIGIANLabel1
+            // lblCountdown
             // 
-            this.tHOIGIANLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsListExam, "THOIGIAN", true));
-            this.tHOIGIANLabel1.Location = new System.Drawing.Point(575, 179);
-            this.tHOIGIANLabel1.Name = "tHOIGIANLabel1";
-            this.tHOIGIANLabel1.Size = new System.Drawing.Size(100, 23);
-            this.tHOIGIANLabel1.TabIndex = 9;
-            this.tHOIGIANLabel1.Text = "Countdown";
+            this.lblCountdown.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsListExam, "THOIGIAN", true));
+            this.lblCountdown.Location = new System.Drawing.Point(573, 157);
+            this.lblCountdown.Name = "lblCountdown";
+            this.lblCountdown.Size = new System.Drawing.Size(100, 23);
+            this.lblCountdown.TabIndex = 9;
+            this.lblCountdown.Text = "Countdown";
             // 
-            // lANLabel1
+            // lblTime
             // 
-            this.lANLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsListExam, "LAN", true));
-            this.lANLabel1.Location = new System.Drawing.Point(265, 178);
-            this.lANLabel1.Name = "lANLabel1";
-            this.lANLabel1.Size = new System.Drawing.Size(100, 23);
-            this.lANLabel1.TabIndex = 7;
-            this.lANLabel1.Text = "Time";
+            this.lblTime.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsListExam, "LAN", true));
+            this.lblTime.Location = new System.Drawing.Point(263, 156);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(100, 23);
+            this.lblTime.TabIndex = 7;
+            this.lblTime.Text = "Time";
             // 
-            // sOCAUTHILabel1
+            // lblNumber
             // 
-            this.sOCAUTHILabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsListExam, "SOCAUTHI", true));
-            this.sOCAUTHILabel1.Location = new System.Drawing.Point(394, 117);
-            this.sOCAUTHILabel1.Name = "sOCAUTHILabel1";
-            this.sOCAUTHILabel1.Size = new System.Drawing.Size(100, 23);
-            this.sOCAUTHILabel1.TabIndex = 5;
-            this.sOCAUTHILabel1.Text = "Num Quest";
+            this.lblNumber.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsListExam, "SOCAUTHI", true));
+            this.lblNumber.Location = new System.Drawing.Point(392, 95);
+            this.lblNumber.Name = "lblNumber";
+            this.lblNumber.Size = new System.Drawing.Size(100, 23);
+            this.lblNumber.TabIndex = 5;
+            this.lblNumber.Text = "Num Quest";
             // 
-            // tRINHDOLabel1
+            // lblLevel
             // 
-            this.tRINHDOLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsListExam, "TRINHDO", true));
-            this.tRINHDOLabel1.Location = new System.Drawing.Point(204, 117);
-            this.tRINHDOLabel1.Name = "tRINHDOLabel1";
-            this.tRINHDOLabel1.Size = new System.Drawing.Size(100, 23);
-            this.tRINHDOLabel1.TabIndex = 3;
-            this.tRINHDOLabel1.Text = "Level";
+            this.lblLevel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsListExam, "TRINHDO", true));
+            this.lblLevel.Location = new System.Drawing.Point(202, 95);
+            this.lblLevel.Name = "lblLevel";
+            this.lblLevel.Size = new System.Drawing.Size(100, 23);
+            this.lblLevel.TabIndex = 3;
+            this.lblLevel.Text = "Level";
             // 
-            // mAMHLabel1
+            // lblSubjectId
             // 
-            this.mAMHLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsListExam, "MAMH", true));
-            this.mAMHLabel1.Location = new System.Drawing.Point(556, 48);
-            this.mAMHLabel1.Name = "mAMHLabel1";
-            this.mAMHLabel1.Size = new System.Drawing.Size(100, 23);
-            this.mAMHLabel1.TabIndex = 2;
-            this.mAMHLabel1.Text = "Subject ID";
+            this.lblSubjectId.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsListExam, "MAMH", true));
+            this.lblSubjectId.Location = new System.Drawing.Point(554, 26);
+            this.lblSubjectId.Name = "lblSubjectId";
+            this.lblSubjectId.Size = new System.Drawing.Size(100, 23);
+            this.lblSubjectId.TabIndex = 2;
+            this.lblSubjectId.Text = "Subject ID";
             // 
-            // mALOPLabel1
+            // lblClassId
             // 
-            this.mALOPLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsListExam, "MALOP", true));
-            this.mALOPLabel1.Location = new System.Drawing.Point(265, 48);
-            this.mALOPLabel1.Name = "mALOPLabel1";
-            this.mALOPLabel1.Size = new System.Drawing.Size(100, 23);
-            this.mALOPLabel1.TabIndex = 1;
-            this.mALOPLabel1.Text = "Class ID";
+            this.lblClassId.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsListExam, "MALOP", true));
+            this.lblClassId.Location = new System.Drawing.Point(263, 26);
+            this.lblClassId.Name = "lblClassId";
+            this.lblClassId.Size = new System.Drawing.Size(100, 23);
+            this.lblClassId.TabIndex = 1;
+            this.lblClassId.Text = "Class ID";
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.sp_DanhSachMonThiGridControl);
-            this.groupBox2.Location = new System.Drawing.Point(-2, 3);
+            this.groupBox2.Location = new System.Drawing.Point(4, 54);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1019, 247);
+            this.groupBox2.Size = new System.Drawing.Size(1007, 247);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
             // sp_DanhSachMonThiGridControl
             // 
             this.sp_DanhSachMonThiGridControl.DataSource = this.bdsListExam;
-            this.sp_DanhSachMonThiGridControl.Location = new System.Drawing.Point(6, 19);
+            this.sp_DanhSachMonThiGridControl.Location = new System.Drawing.Point(0, 17);
             this.sp_DanhSachMonThiGridControl.MainView = this.gridView1;
             this.sp_DanhSachMonThiGridControl.Name = "sp_DanhSachMonThiGridControl";
-            this.sp_DanhSachMonThiGridControl.Size = new System.Drawing.Size(1007, 224);
+            this.sp_DanhSachMonThiGridControl.Size = new System.Drawing.Size(1007, 237);
             this.sp_DanhSachMonThiGridControl.TabIndex = 0;
             this.sp_DanhSachMonThiGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -271,6 +282,7 @@
             this.gridView1.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Default;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             this.gridView1.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gridView1_RowClick);
+            this.gridView1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.gridView1_KeyPress);
             // 
             // colMALOP
             // 
@@ -367,6 +379,76 @@
             this.tableAdapterManager.sp_DanhSachSinhVienTheoLopTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = TracNghiem.dataSetTracNghiemTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
+            // barManager1
+            // 
+            this.barManager1.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
+            this.bar1});
+            this.barManager1.DockControls.Add(this.barDockControlTop);
+            this.barManager1.DockControls.Add(this.barDockControlBottom);
+            this.barManager1.DockControls.Add(this.barDockControlLeft);
+            this.barManager1.DockControls.Add(this.barDockControlRight);
+            this.barManager1.Form = this;
+            this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
+            this.btnRefresh,
+            this.btnClose});
+            this.barManager1.MaxItemId = 2;
+            // 
+            // bar1
+            // 
+            this.bar1.BarName = "Tools";
+            this.bar1.DockCol = 0;
+            this.bar1.DockRow = 0;
+            this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+            this.bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnRefresh, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnClose, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            this.bar1.Offset = 361;
+            this.bar1.Text = "Tools";
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Caption = "Refresh";
+            this.btnRefresh.Glyph = global::TracNghiem.Properties.Resources.icons8_refresh;
+            this.btnRefresh.Id = 0;
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRefresh_ItemClick);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Caption = "Close";
+            this.btnClose.Glyph = global::TracNghiem.Properties.Resources.icons8_home;
+            this.btnClose.Id = 1;
+            this.btnClose.Name = "btnClose";
+            this.btnClose.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnClose_ItemClick);
+            // 
+            // barDockControlTop
+            // 
+            this.barDockControlTop.CausesValidation = false;
+            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlTop.Size = new System.Drawing.Size(1021, 59);
+            // 
+            // barDockControlBottom
+            // 
+            this.barDockControlBottom.CausesValidation = false;
+            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 506);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1021, 0);
+            // 
+            // barDockControlLeft
+            // 
+            this.barDockControlLeft.CausesValidation = false;
+            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 59);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 447);
+            // 
+            // barDockControlRight
+            // 
+            this.barDockControlRight.CausesValidation = false;
+            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.barDockControlRight.Location = new System.Drawing.Point(1021, 59);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 447);
+            // 
             // frmListExam
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
@@ -374,6 +456,10 @@
             this.ClientSize = new System.Drawing.Size(1021, 506);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.barDockControlLeft);
+            this.Controls.Add(this.barDockControlRight);
+            this.Controls.Add(this.barDockControlBottom);
+            this.Controls.Add(this.barDockControlTop);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmListExam";
@@ -386,7 +472,9 @@
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sp_DanhSachMonThiGridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -408,12 +496,12 @@
         private DevExpress.XtraGrid.Columns.GridColumn colTHOIGIAN;
         private DevExpress.XtraGrid.Columns.GridColumn colNGAYTHI;
         private System.Windows.Forms.Label lblDate;
-        private System.Windows.Forms.Label tHOIGIANLabel1;
-        private System.Windows.Forms.Label lANLabel1;
-        private System.Windows.Forms.Label sOCAUTHILabel1;
-        private System.Windows.Forms.Label tRINHDOLabel1;
-        private System.Windows.Forms.Label mAMHLabel1;
-        private System.Windows.Forms.Label mALOPLabel1;
+        private System.Windows.Forms.Label lblCountdown;
+        private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.Label lblNumber;
+        private System.Windows.Forms.Label lblLevel;
+        private System.Windows.Forms.Label lblSubjectId;
+        private System.Windows.Forms.Label lblClassId;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
@@ -422,5 +510,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnStart;
+        private DevExpress.XtraBars.BarManager barManager1;
+        private DevExpress.XtraBars.Bar bar1;
+        private DevExpress.XtraBars.BarButtonItem btnRefresh;
+        private DevExpress.XtraBars.BarButtonItem btnClose;
+        private DevExpress.XtraBars.BarDockControl barDockControlTop;
+        private DevExpress.XtraBars.BarDockControl barDockControlBottom;
+        private DevExpress.XtraBars.BarDockControl barDockControlLeft;
+        private DevExpress.XtraBars.BarDockControl barDockControlRight;
     }
 }
