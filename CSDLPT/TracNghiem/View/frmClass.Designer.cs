@@ -61,8 +61,9 @@
             this.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter();
             this.sp_DanhSachLopTheoKhoaVaCoSoGridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colMALOP = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colTENLOP = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ClassID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ClassName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.DepID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.checkboxSearch = new System.Windows.Forms.CheckBox();
@@ -368,36 +369,43 @@
             // gridView1
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colMALOP,
-            this.colTENLOP});
+            this.ClassID,
+            this.ClassName,
+            this.DepID});
             this.gridView1.GridControl = this.sp_DanhSachLopTheoKhoaVaCoSoGridControl;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Default;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
-            // colMALOP
+            // ClassID
             // 
-            this.colMALOP.Caption = "Class ID";
-            this.colMALOP.FieldName = "MALOP";
-            this.colMALOP.Name = "colMALOP";
-            this.colMALOP.OptionsColumn.AllowEdit = false;
-            this.colMALOP.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
-            this.colMALOP.OptionsColumn.ReadOnly = true;
-            this.colMALOP.Visible = true;
-            this.colMALOP.VisibleIndex = 0;
-            this.colMALOP.Width = 352;
+            this.ClassID.Caption = "ClassID";
+            this.ClassID.FieldName = "MALOP";
+            this.ClassID.Name = "ClassID";
+            this.ClassID.OptionsColumn.AllowEdit = false;
+            this.ClassID.OptionsColumn.ReadOnly = true;
+            this.ClassID.Visible = true;
+            this.ClassID.VisibleIndex = 0;
             // 
-            // colTENLOP
+            // ClassName
             // 
-            this.colTENLOP.Caption = "Class Name";
-            this.colTENLOP.FieldName = "TENLOP";
-            this.colTENLOP.Name = "colTENLOP";
-            this.colTENLOP.OptionsColumn.AllowEdit = false;
-            this.colTENLOP.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
-            this.colTENLOP.OptionsColumn.ReadOnly = true;
-            this.colTENLOP.Visible = true;
-            this.colTENLOP.VisibleIndex = 1;
-            this.colTENLOP.Width = 819;
+            this.ClassName.Caption = "ClassName";
+            this.ClassName.FieldName = "TENLOP";
+            this.ClassName.Name = "ClassName";
+            this.ClassName.OptionsColumn.AllowEdit = false;
+            this.ClassName.OptionsColumn.ReadOnly = true;
+            this.ClassName.Visible = true;
+            this.ClassName.VisibleIndex = 1;
+            // 
+            // DepID
+            // 
+            this.DepID.Caption = "DepID";
+            this.DepID.FieldName = "MAKH";
+            this.DepID.Name = "DepID";
+            this.DepID.OptionsColumn.AllowEdit = false;
+            this.DepID.OptionsColumn.ReadOnly = true;
+            this.DepID.Visible = true;
+            this.DepID.VisibleIndex = 2;
             // 
             // groupBox3
             // 
@@ -496,12 +504,13 @@
         private DevExpress.XtraEditors.TextEdit txtClassName;
         private DevExpress.XtraEditors.TextEdit txtClassId;
         private System.Windows.Forms.GroupBox groupBox3;
-        private DevExpress.XtraGrid.Columns.GridColumn colMALOP;
-        private DevExpress.XtraGrid.Columns.GridColumn colTENLOP;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.CheckBox checkboxSearch;
         private System.Windows.Forms.Label lblClassId;
         private System.Windows.Forms.Label lblClassName;
         private DevExpress.XtraBars.BarButtonItem btnUndo;
+        private DevExpress.XtraGrid.Columns.GridColumn ClassID;
+        private DevExpress.XtraGrid.Columns.GridColumn ClassName;
+        private DevExpress.XtraGrid.Columns.GridColumn DepID;
     }
 }

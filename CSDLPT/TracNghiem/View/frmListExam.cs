@@ -25,13 +25,13 @@ namespace TracNghiem
             if (Program.currentRole == "SINHVIEN")
             {
                 btnStart.Visible = true;
-                this.sp_DanhSachMonThiTableAdapter.Fill(this.dataSetTracNghiem.sp_DanhSachMonThi, Program.currentID);
-                cbbDep.Visible = false;
+                initUIComboBoxDep();
+                cbbDep.Enabled = false;
             }
             else if (Program.currentRole == "TRUONG")
             {
                 btnStart.Visible = false;
-                cbbDep.Visible = true;
+                cbbDep.Enabled = true;
                 initUIComboBoxDep();
             }
             String currentDay = DateTime.Now.ToString("MM/dd/yyyy");
@@ -80,12 +80,12 @@ namespace TracNghiem
             {
                 btnStart.Visible = true;
                 this.sp_DanhSachMonThiTableAdapter.Fill(this.dataSetTracNghiem.sp_DanhSachMonThi, Program.currentID);
-                cbbDep.Visible = false;
+                cbbDep.Enabled = false;
             }
             else if (Program.currentRole == "TRUONG")
             {
                 btnStart.Visible = false;
-                cbbDep.Visible = true;
+                cbbDep.Enabled = true;
                 getDataFromDep();
             }
         }
@@ -142,8 +142,18 @@ namespace TracNghiem
                 String currentServerName = cbbDep.SelectedValue.ToString();
                 int indexStr = currentServerName.IndexOf("\\") + 1;
                 currentServerName = currentServerName.Substring(indexStr);
-                this.sp_DanhSachMonThiTableAdapter.Connection.ConnectionString = Program.connectStr;
-                this.sp_DanhSachMonThiTableAdapter.Fill(this.dataSetTracNghiem.sp_DanhSachMonThi, null);
+                Program.insertDepID = currentServerName == "MSSQLSERVER1" ? "CS1" : "CS2";
+
+                if (Program.currentRole == "TRUONG")
+                {
+                    this.sp_DanhSachMonThiTableAdapter.Connection.ConnectionString = Program.connectStr;
+                    this.sp_DanhSachMonThiTableAdapter.Fill(this.dataSetTracNghiem.sp_DanhSachMonThi, null);
+                }
+                else
+                {
+                    this.sp_DanhSachMonThiTableAdapter.Connection.ConnectionString = Program.connectStr;
+                    this.sp_DanhSachMonThiTableAdapter.Fill(this.dataSetTracNghiem.sp_DanhSachMonThi, Program.currentID);
+                }
             }
             catch (System.Exception ex)
             {
