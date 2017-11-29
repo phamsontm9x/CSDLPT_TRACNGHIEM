@@ -274,7 +274,7 @@ namespace TracNghiem
             float scorePerQuestion = 10 / (float)listQuestion.Count;
             foreach (ItemQuestion item in listQuestion)
             {
-                insertData(item);
+                insertBaiThi(item);
                 if (item.answer == item.correctAnswer)
                 {
                     score += scorePerQuestion;
@@ -283,11 +283,51 @@ namespace TracNghiem
             }
            // score = (float) Math.Round(score,2);
             lblTimer.Text = "Score: \n" + score;
+            insertBangDiem();
+
         }
 
-        public void insertData (ItemQuestion question)
+        public void insertBaiThi (ItemQuestion question)
         {
+            try
+            {
+                String sqlStr = "exec sp_BaiThi_Insert '" + Program.currentID + "', '" + lblSubject.Text + "', '" + lblTime.Text +
+               "', '" + question.realNumberQuestion + "', '" + question.title + "', '" + question.answer1 + "', '" + question.answer2 +
+               "', '" + question.answer3 + "', '" + question.answer4 + "', '" + question.correctAnswer + "', '" + question.answer + "'";
 
+                Program.myReader = Program.ExecSqlDataReader(sqlStr);
+                if (Program.myReader == null) return;
+                Program.myReader.Read();
+                Program.myReader.Close();
+            }
+            catch (Exception ex)
+            {
+                // check agian -> loop
+                //MessageBox.Show("Create exam failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                Program.myReader.Close();
+                return;
+            }
+        }
+
+        public void insertBangDiem()
+        {
+            try
+            {
+                String sqlStr = "exec sp_BangDiem_Insert '" + Program.currentID + "', '" + lblSubject.Text + "', ' " + lblTime.Text +
+               "', '" + lblDate.Text + "', '" + score + "'";
+          
+                Program.myReader = Program.ExecSqlDataReader(sqlStr);
+                if (Program.myReader == null) return;
+                Program.myReader.Read();
+                MessageBox.Show("Insert exam score successful", "Notification", MessageBoxButtons.OK);
+                Program.myReader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Insert exam failed! \n" + ex.Message, "Error", MessageBoxButtons.OK);
+                Program.myReader.Close();
+                return;
+            }
         }
 
         private void btnFinish_Click(object sender, EventArgs e)
