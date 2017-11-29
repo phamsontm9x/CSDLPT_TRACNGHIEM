@@ -57,7 +57,7 @@ namespace TracNghiem
         {
             String subjectID = lblSubject.Text;
             String level = lblLevel.Text;
-            String depID = "CS1";
+            String depID = Program.insertDepID;
             String numberQuest = Program.insertNumberQuest;
 
             String strLenh = "exec sp_RandomQuestionTest'" + subjectID + "', '" + level + "', '" + depID + "', '" + numberQuest + "'";
