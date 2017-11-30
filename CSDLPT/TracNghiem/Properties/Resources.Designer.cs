@@ -163,6 +163,16 @@ namespace TracNghiem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_exit_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-exit-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_home {
             get {
                 object obj = ResourceManager.GetObject("icons8_home", resourceCulture);
@@ -206,6 +216,16 @@ namespace TracNghiem.Properties {
         internal static System.Drawing.Bitmap icons8_plus {
             get {
                 object obj = ResourceManager.GetObject("icons8_plus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_print_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-print-32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
