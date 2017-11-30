@@ -55,7 +55,7 @@ namespace TracNghiem
             initUIComboBoxDep();
             groupBox1.Enabled = true;
             txtTeacherID.Enabled = txtFirstName.Enabled = txtLastName.Enabled = txtDegree.Enabled = false;
-            setCurrentRole();
+            //setCurrentRole();
         }
 
         public void setCurrentRole()
@@ -82,8 +82,13 @@ namespace TracNghiem
                 {
                     btnDel.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
                 }
+
+                if (cbbBranch.SelectedIndex < 0)
+                {
+                    st.Clear();
+                    btnNew.Enabled = btnEdit.Enabled = btnRefresh.Enabled = btnUndo.Enabled = btnDel.Enabled = false;
+                }
             }
-            updateUI();
         }
 
         private void cbbDep_SelectionChangeCommitted(object sender, EventArgs e)
@@ -431,7 +436,7 @@ namespace TracNghiem
 
         public void initButtonBarManage(Boolean isEnable)
         {
-            btnNew.Enabled = btnEdit.Enabled = btnSave.Enabled = btnRefresh.Enabled = btnDel.Enabled = btnCancel.Enabled = isEnable;
+            btnNew.Enabled = btnEdit.Enabled = btnSave.Enabled = btnRefresh.Enabled = btnDel.Enabled = btnCancel.Enabled = btnUndo.Enabled = isEnable;
         }
 
         private void txtFirstName_KeyboardPressed(object sender, KeyPressEventArgs e)
@@ -474,15 +479,7 @@ namespace TracNghiem
 
         public void updateUI()
         {
-            if (cbbBranch.SelectedIndex >= 0)
-            {
-                btnNew.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
-            }
-            else
-            {
-                st.Clear();
-                btnNew.Enabled = btnEdit.Enabled = btnRefresh.Enabled = btnUndo.Enabled = btnDel.Enabled = false;
-            }
+            setCurrentRole();
         }
 
         private void btnUndo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

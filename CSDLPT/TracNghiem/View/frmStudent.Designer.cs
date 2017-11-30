@@ -69,14 +69,15 @@
             this.sp_DanhSachSinhVienTheoLopTableAdapter = new TracNghiem.dataSetTracNghiemTableAdapters.sp_DanhSachSinhVienTheoLopTableAdapter();
             this.sp_DanhSachSinhVienTheoLopGridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.checkBoxSearch = new System.Windows.Forms.CheckBox();
             this.colMASV = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colHO = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTEN = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colNGAYSINH = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDIACHI = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.checkBoxSearch = new System.Windows.Forms.CheckBox();
+            this.colMALOP = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtAddress.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsStudentFromClass)).BeginInit();
@@ -167,29 +168,29 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(757, 32);
+            this.label4.Location = new System.Drawing.Point(782, 32);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 22);
+            this.label4.Size = new System.Drawing.Size(54, 22);
             this.label4.TabIndex = 14;
-            this.label4.Text = "Class ID";
+            this.label4.Text = "Class";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(383, 32);
+            this.label3.Location = new System.Drawing.Point(408, 32);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 22);
+            this.label3.Size = new System.Drawing.Size(66, 22);
             this.label3.TabIndex = 14;
-            this.label3.Text = "Branch ID";
+            this.label3.Text = "Branch";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(80, 32);
+            this.label2.Location = new System.Drawing.Point(105, 32);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(126, 22);
+            this.label2.Size = new System.Drawing.Size(101, 22);
             this.label2.TabIndex = 14;
-            this.label2.Text = "Department ID";
+            this.label2.Text = "Department";
             // 
             // txtAddress
             // 
@@ -475,68 +476,14 @@
             this.colHO,
             this.colTEN,
             this.colNGAYSINH,
-            this.colDIACHI});
+            this.colDIACHI,
+            this.colMALOP});
             this.gridView1.GridControl = this.sp_DanhSachSinhVienTheoLopGridControl;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Default;
             this.gridView1.OptionsView.ShowDetailButtons = false;
             this.gridView1.OptionsView.ShowGroupExpandCollapseButtons = false;
             this.gridView1.OptionsView.ShowGroupPanel = false;
-            // 
-            // colMASV
-            // 
-            this.colMASV.Caption = "Student ID";
-            this.colMASV.FieldName = "MASV";
-            this.colMASV.Name = "colMASV";
-            this.colMASV.OptionsColumn.AllowEdit = false;
-            this.colMASV.OptionsColumn.ReadOnly = true;
-            this.colMASV.Visible = true;
-            this.colMASV.VisibleIndex = 0;
-            this.colMASV.Width = 123;
-            // 
-            // colHO
-            // 
-            this.colHO.Caption = "Last Name";
-            this.colHO.FieldName = "HO";
-            this.colHO.Name = "colHO";
-            this.colHO.OptionsColumn.AllowEdit = false;
-            this.colHO.OptionsColumn.ReadOnly = true;
-            this.colHO.Visible = true;
-            this.colHO.VisibleIndex = 1;
-            this.colHO.Width = 271;
-            // 
-            // colTEN
-            // 
-            this.colTEN.Caption = "First Name";
-            this.colTEN.FieldName = "TEN";
-            this.colTEN.Name = "colTEN";
-            this.colTEN.OptionsColumn.AllowEdit = false;
-            this.colTEN.OptionsColumn.ReadOnly = true;
-            this.colTEN.Visible = true;
-            this.colTEN.VisibleIndex = 2;
-            this.colTEN.Width = 131;
-            // 
-            // colNGAYSINH
-            // 
-            this.colNGAYSINH.Caption = "Birthday";
-            this.colNGAYSINH.FieldName = "NGAYSINH";
-            this.colNGAYSINH.Name = "colNGAYSINH";
-            this.colNGAYSINH.OptionsColumn.AllowEdit = false;
-            this.colNGAYSINH.OptionsColumn.ReadOnly = true;
-            this.colNGAYSINH.Visible = true;
-            this.colNGAYSINH.VisibleIndex = 3;
-            this.colNGAYSINH.Width = 188;
-            // 
-            // colDIACHI
-            // 
-            this.colDIACHI.Caption = "Address";
-            this.colDIACHI.FieldName = "DIACHI";
-            this.colDIACHI.Name = "colDIACHI";
-            this.colDIACHI.OptionsColumn.AllowEdit = false;
-            this.colDIACHI.OptionsColumn.ReadOnly = true;
-            this.colDIACHI.Visible = true;
-            this.colDIACHI.VisibleIndex = 4;
-            this.colDIACHI.Width = 303;
             // 
             // groupBox2
             // 
@@ -567,6 +514,66 @@
             this.checkBoxSearch.Text = "Search All";
             this.checkBoxSearch.UseVisualStyleBackColor = true;
             this.checkBoxSearch.CheckedChanged += new System.EventHandler(this.checkBoxSearch_CheckedChanged);
+            // 
+            // colMASV
+            // 
+            this.colMASV.Caption = "StudentId";
+            this.colMASV.FieldName = "MASV";
+            this.colMASV.Name = "colMASV";
+            this.colMASV.OptionsColumn.AllowEdit = false;
+            this.colMASV.OptionsColumn.ReadOnly = true;
+            this.colMASV.Visible = true;
+            this.colMASV.VisibleIndex = 0;
+            // 
+            // colHO
+            // 
+            this.colHO.Caption = "LastName";
+            this.colHO.FieldName = "HO";
+            this.colHO.Name = "colHO";
+            this.colHO.OptionsColumn.AllowEdit = false;
+            this.colHO.OptionsColumn.ReadOnly = true;
+            this.colHO.Visible = true;
+            this.colHO.VisibleIndex = 1;
+            // 
+            // colTEN
+            // 
+            this.colTEN.Caption = "FristName";
+            this.colTEN.FieldName = "TEN";
+            this.colTEN.Name = "colTEN";
+            this.colTEN.OptionsColumn.AllowEdit = false;
+            this.colTEN.OptionsColumn.ReadOnly = true;
+            this.colTEN.Visible = true;
+            this.colTEN.VisibleIndex = 2;
+            // 
+            // colNGAYSINH
+            // 
+            this.colNGAYSINH.Caption = "DateOfBirth";
+            this.colNGAYSINH.FieldName = "NGAYSINH";
+            this.colNGAYSINH.Name = "colNGAYSINH";
+            this.colNGAYSINH.OptionsColumn.AllowEdit = false;
+            this.colNGAYSINH.OptionsColumn.ReadOnly = true;
+            this.colNGAYSINH.Visible = true;
+            this.colNGAYSINH.VisibleIndex = 3;
+            // 
+            // colDIACHI
+            // 
+            this.colDIACHI.Caption = "Adress";
+            this.colDIACHI.FieldName = "DIACHI";
+            this.colDIACHI.Name = "colDIACHI";
+            this.colDIACHI.OptionsColumn.AllowEdit = false;
+            this.colDIACHI.OptionsColumn.ReadOnly = true;
+            this.colDIACHI.Visible = true;
+            this.colDIACHI.VisibleIndex = 4;
+            // 
+            // colMALOP
+            // 
+            this.colMALOP.Caption = "ClassID";
+            this.colMALOP.FieldName = "MALOP";
+            this.colMALOP.Name = "colMALOP";
+            this.colMALOP.OptionsColumn.AllowEdit = false;
+            this.colMALOP.OptionsColumn.ReadOnly = true;
+            this.colMALOP.Visible = true;
+            this.colMALOP.VisibleIndex = 5;
             // 
             // frmStudent
             // 
@@ -634,11 +641,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private DevExpress.XtraGrid.GridControl sp_DanhSachSinhVienTheoLopGridControl;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn colMASV;
-        private DevExpress.XtraGrid.Columns.GridColumn colHO;
-        private DevExpress.XtraGrid.Columns.GridColumn colTEN;
-        private DevExpress.XtraGrid.Columns.GridColumn colNGAYSINH;
-        private DevExpress.XtraGrid.Columns.GridColumn colDIACHI;
         private DevExpress.XtraEditors.TextEdit txtAddress;
         private System.Windows.Forms.DateTimePicker pickerBirthday;
         private DevExpress.XtraEditors.TextEdit txtFirstName;
@@ -654,5 +656,11 @@
         private System.Windows.Forms.Label dIACHILabel;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.CheckBox checkBoxSearch;
+        private DevExpress.XtraGrid.Columns.GridColumn colMASV;
+        private DevExpress.XtraGrid.Columns.GridColumn colHO;
+        private DevExpress.XtraGrid.Columns.GridColumn colTEN;
+        private DevExpress.XtraGrid.Columns.GridColumn colNGAYSINH;
+        private DevExpress.XtraGrid.Columns.GridColumn colDIACHI;
+        private DevExpress.XtraGrid.Columns.GridColumn colMALOP;
     }
 }

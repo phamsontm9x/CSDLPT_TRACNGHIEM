@@ -57,6 +57,11 @@ namespace TracNghiem
 
             initRib(true);
             initRibGroup(false);
+
+            foreach (Form form in this.MdiChildren)
+            {
+                form.Close();
+            }
         }
 
         private void frmMain_Load(object sender, EventArgs e)
