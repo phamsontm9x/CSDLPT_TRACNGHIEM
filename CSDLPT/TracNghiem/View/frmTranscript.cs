@@ -16,5 +16,10 @@ namespace TracNghiem
         {
             InitializeComponent();
         }
+
+        private void frmTranscript_Load(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
