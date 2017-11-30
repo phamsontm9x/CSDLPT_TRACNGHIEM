@@ -104,21 +104,20 @@ namespace TracNghiem
                 }
                 else
                 {
-                    btnDel.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
+                    btnDel.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;                    
+                }
+
+                if (cbbBranch.SelectedIndex < 0)
+                {
+                    st.Clear();
+                    btnNew.Enabled = btnEdit.Enabled = btnRefresh.Enabled = btnUndo.Enabled = btnDel.Enabled = false;
                 }
             }
         }
 
         public void updateUI ()
         {
-            if (cbbBranch.SelectedIndex >= 0)
-            {
-                btnNew.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
-            } else
-            {
-                st.Clear();
-                btnNew.Enabled = btnEdit.Enabled = btnRefresh.Enabled = btnUndo.Enabled = btnDel.Enabled = false;
-            }
+            setCurrentRole();
         }
 
         public void initUIComboBoxDep()
@@ -449,7 +448,7 @@ namespace TracNghiem
 
         public void initButtonBarManage(Boolean isEnable)
         {
-            btnNew.Enabled = btnEdit.Enabled = btnSave.Enabled = btnRefresh.Enabled = btnDel.Enabled = btnCancel.Enabled = isEnable;
+            btnNew.Enabled = btnEdit.Enabled = btnSave.Enabled = btnRefresh.Enabled = btnDel.Enabled = btnCancel.Enabled = btnUndo.Enabled = isEnable;
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)

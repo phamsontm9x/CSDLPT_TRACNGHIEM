@@ -35,13 +35,29 @@ namespace TracNghiem
             this.mONHOCTableAdapter.Fill(this.dataSetTracNghiem.MONHOC);
             groupBox1.Enabled = false;
 
-            if (bdsSubjects.Count == 0)
-            {
-                btnRefresh.Enabled = btnEdit.Enabled = btnSave.Enabled = btnCancel.Enabled = btnDel.Enabled = false;
-            }
+            setCurrentRole();
+        }
 
-            btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
-            btnSave.Enabled = btnCancel.Enabled = false;
+        public void setCurrentRole()
+        {
+            if (Program.currentRole == "TRUONG")
+            {
+                initButtonBarManage(false);
+            }
+            else
+            {
+                btnNew.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
+                btnSave.Enabled = btnCancel.Enabled = false;
+
+                if (bdsSubjects.Count == 0)
+                {
+                    btnDel.Enabled = btnEdit.Enabled = btnRefresh.Enabled = false;
+                }
+                else
+                {
+                    btnDel.Enabled = btnEdit.Enabled = btnRefresh.Enabled = true;
+                }
+            }
         }
 
         private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

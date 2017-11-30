@@ -71,7 +71,7 @@ namespace TracNghiem
 
                 cbbBranch.SelectedIndex = -1;
                 getDataStudentFormClassID("");
-                //initUIComboBoxClass();
+                initUIComboBoxClass();
             }
             else
             {
@@ -133,13 +133,13 @@ namespace TracNghiem
 
         public String getBranchIDSelected()
         {
-            branchID = cbbBranch.SelectedValue.ToString();
+            branchID = cbbBranch.SelectedIndex >= 0 ? cbbBranch.SelectedValue.ToString() : "";
             return branchID;
         }
 
         public String getClassIDSelected()
         {
-            classID = cbbClass.SelectedValue.ToString();
+            classID = cbbClass.SelectedIndex>=0 ?  cbbClass.SelectedValue.ToString() : "";
             return classID;
         }
 
