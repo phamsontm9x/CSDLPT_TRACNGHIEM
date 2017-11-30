@@ -28,6 +28,7 @@ namespace TracNghiem
             lblROle.Visible = lblUserName.Visible = true;
             txtPass.Enabled = txtPassConfirm.Enabled = txtUserID.Enabled = txtUserName.Enabled = true;
             btnCreate.Enabled = true;
+            txtUserID.MaxLength = 5;
         }
 
         private void rbStudent_CheckedChanged(object sender, EventArgs e)
@@ -37,6 +38,7 @@ namespace TracNghiem
             lblROle.Visible = lblUserName.Visible = false;
             txtPass.Enabled = txtPassConfirm.Enabled = txtUserID.Enabled = txtUserName.Enabled = true;
             btnCreate.Enabled = true;
+            txtUserID.MaxLength = 3;
         }
 
         private String checkExistsAccount(String userID)

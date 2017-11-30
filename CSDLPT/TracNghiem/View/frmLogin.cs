@@ -166,6 +166,8 @@ namespace TracNghiem
             else if (Program.currentRole == "TRUONG")
             {
                 initRibGroup(true);
+                Program.frmChinh.btnCreate.Enabled = false;
+                Program.frmChinh.btnTry.Enabled = false;
             }
             else if (Program.currentRole == "COSO")
             {

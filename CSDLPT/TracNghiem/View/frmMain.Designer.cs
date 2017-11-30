@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.btnStudent = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.btnLogin = new DevExpress.XtraBars.BarButtonItem();
@@ -341,7 +340,6 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.ribbonControl1);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.Name = "frmMain";
@@ -376,10 +374,8 @@
         private DevExpress.XtraBars.BarButtonItem btnPoint;
         private DevExpress.XtraBars.BarButtonItem btnExam;
         private DevExpress.XtraBars.BarButtonItem btnSign;
-        private DevExpress.XtraBars.BarButtonItem btnTry;
         private DevExpress.XtraBars.BarButtonItem btnTest;
         private DevExpress.XtraBars.BarButtonItem btnReport;
-        private DevExpress.XtraBars.BarButtonItem btnCreate;
         public DevExpress.XtraBars.BarButtonItem btnLogout;
         public DevExpress.XtraBars.BarButtonItem btnLogin;
         public DevExpress.XtraBars.Ribbon.RibbonPage ribSystem;
@@ -392,6 +388,8 @@
         public DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonStudentGroup;
         public DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonTeacherGroup;
         private DevExpress.XtraBars.BarButtonItem btnStudent;
+        public DevExpress.XtraBars.BarButtonItem btnCreate;
+        public DevExpress.XtraBars.BarButtonItem btnTry;
     }
 }
 
