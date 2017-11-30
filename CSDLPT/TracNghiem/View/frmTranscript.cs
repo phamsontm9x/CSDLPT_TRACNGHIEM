@@ -36,6 +36,11 @@ namespace TracNghiem
             cbbDep.ValueMember = "TENCS";
             cbbDep.SelectedIndex = Program.currentBranch;
 
+            if (Program.currentRole == "COSO")
+            {
+                cbbDep.Enabled = false;
+            }
+
             initUIComboBoxBranch();
         }
 
@@ -160,6 +165,7 @@ namespace TracNghiem
             dt = Program.ExecSqlDataTable(sqlStr);
 
             rp.SetDataSource(dt);
+            rp.SetParameterValue("KHOA", getBranchIDSelected());
             rp.SetParameterValue("MALOP", getClassIDSelected());
             rp.SetParameterValue("MAMH", getSubjectIDSelected());
             rp.SetParameterValue("LAN", spTime.Text);

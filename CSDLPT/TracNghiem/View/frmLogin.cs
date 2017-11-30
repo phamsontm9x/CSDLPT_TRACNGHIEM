@@ -161,7 +161,6 @@ namespace TracNghiem
                 initRibGroup(true);
                 Program.frmChinh.ribTeacher.Visible = false;
                 Program.frmChinh.ribManage.Visible = false;
-                Program.frmChinh.ribReport.Visible = false;
             }
             else if (Program.currentRole == "TRUONG")
             {
