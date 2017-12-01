@@ -20,9 +20,12 @@ namespace TracNghiem
         String method = "";
 
         // Stack Undo
-        public Stack st = new Stack();
+        public Stack stUndo = new Stack();
+        public Stack stRedo = new Stack();
         public DepDto dtoUndo = new DepDto("","","");
         public bool isUndo = false;
+        public bool isRedo = false;
+
 
         public class DepDto
         {
@@ -96,12 +99,21 @@ namespace TracNghiem
 
         public void updateUIUndo()
         {
-            if (st.Count > 0)
+            if (stUndo.Count > 0)
             {
                 btnUndo.Enabled = true;
             } else
             {
                 btnUndo.Enabled = false;
+            }
+
+            if (stRedo.Count > 0)
+            {
+                btnRedo.Enabled = true;
+            }
+            else
+            {
+                btnRedo.Enabled = false;
             }
         }
 
@@ -230,7 +242,7 @@ namespace TracNghiem
                         if (isUndo == false)
                         {
                             DepDto dataUndo = new DepDto(strDepID, strDepName, method);
-                            st.Push(dataUndo);
+                            stUndo.Push(dataUndo);
                             updateUIUndo();
                         }
                         
@@ -279,7 +291,7 @@ namespace TracNghiem
                         if (isUndo == false)
                         {
                             DepDto dataUndo = new DepDto(dtoUndo.strDepID, dtoUndo.strDepName, method);
-                            st.Push(dataUndo);
+                            stUndo.Push(dataUndo);
                             updateUIUndo();
                         }
                     }
@@ -318,7 +330,7 @@ namespace TracNghiem
                         if (isUndo == false)
                         {
                             DepDto dataUndo = new DepDto(strDepID, strDepName, method);
-                            st.Push(dataUndo);
+                            stUndo.Push(dataUndo);
                             updateUIUndo();
                         }
                     }
@@ -350,7 +362,8 @@ namespace TracNghiem
             }
             groupBox2.Enabled = true;
             bdsDep.MoveFirst();
-            st.Clear();
+            stUndo.Clear();
+            stRedo.Clear();
             updateUIUndo();
             this.kHOATableAdapter.Fill(this.dataSetTracNghiem.KHOA);
 
@@ -377,15 +390,16 @@ namespace TracNghiem
 
         public void initButtonBarManage(Boolean isEnable)
         {
-            btnNew.Enabled = btnEdit.Enabled = btnSave.Enabled = btnRefresh.Enabled = btnDel.Enabled = btnCancel.Enabled = btnUndo.Enabled = isEnable;
+            btnNew.Enabled = btnEdit.Enabled = btnSave.Enabled = btnRefresh.Enabled = btnDel.Enabled = btnCancel.Enabled = btnUndo.Enabled = btnRedo.Enabled = isEnable;
         }
 
         private void btnUndo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             isUndo = true;
-            DepDto dataUndo = (DepDto)st.Pop();
+            DepDto dataUndo = (DepDto)stUndo.Pop();
             if (dataUndo.method == Program.NEW_METHOD)
             {
+                stRedo.Push(dataUndo);
                 int index = getIndexDBS(dataUndo.strDepID);
                 if (index >= 0)
                 {
@@ -397,6 +411,8 @@ namespace TracNghiem
                 int index = getIndexDBS(dataUndo.strDepID);
                 if (index >= 0)
                 {
+                    DepDto dataRedo = new DepDto(txtDepID.Text, txtDepName.Text, method);
+                    stRedo.Push(dataRedo);
                     bdsDep.Position = index;
                     txtDepName.Text = dataUndo.strDepName;
                     txtDepID.Text = dataUndo.strDepID;
@@ -405,6 +421,7 @@ namespace TracNghiem
 
             } else if (dataUndo.method == Program.DETELE_METHOD)
             {
+                stRedo.Push(dataUndo);
                 bdsDep.AddNew();
                 txtBranchID.Text = depID;
                 txtDepName.Text = dataUndo.strDepName;
@@ -415,15 +432,58 @@ namespace TracNghiem
             updateUIUndo();
         }
 
+        private void btnRedo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            isRedo = isUndo = true;
+            DepDto dataRedo = (DepDto)stRedo.Pop();
+            if (dataRedo.method == Program.NEW_METHOD)
+            {
+                stUndo.Push(dataRedo);
+                bdsDep.AddNew();
+                txtBranchID.Text = depID;
+                txtDepName.Text = dataRedo.strDepName;
+                txtDepID.Text = dataRedo.strDepID;
+                sqlNewMethod(dataRedo.strDepID, dataRedo.strDepName, Program.NEW_METHOD);
+            }
+            else if (dataRedo.method == Program.UPDATE_METHOD)
+            {
+                int index = getIndexDBS(dataRedo.strDepID);
+                if (index >= 0)
+                {
+                    DepDto dataUndo = new DepDto(txtDepID.Text, txtDepName.Text, method);
+                    stUndo.Push(dataUndo);
+                    bdsDep.Position = index;
+                    txtDepName.Text = dataRedo.strDepName;
+                    txtDepID.Text = dataRedo.strDepID;
+                    sqlUpdateMethod(dataRedo.strDepID, dataRedo.strDepName, method);
+                }
+
+            }
+            else if (dataRedo.method == Program.DETELE_METHOD)
+            {
+                stUndo.Push(dataRedo);
+                int index = getIndexDBS(dataRedo.strDepID);
+                if (index >= 0)
+                {
+                    bdsDep.Position = index;
+                    sqlDeleteMethod(dataRedo.strDepID, dataRedo.strDepName, Program.DETELE_METHOD);
+                }
+            }
+            isRedo = isUndo = false;
+            updateUIUndo();
+        }
+
         public int getIndexDBS(string strDepID)
         {
             for (int i = 0; i < bdsDep.Count; i++)
             {
-               if (strDepID.Trim() == ((DataRowView)bdsDep[i])["MAKH"].ToString().Trim()) {
+                if (strDepID.Trim() == ((DataRowView)bdsDep[i])["MAKH"].ToString().Trim())
+                {
                     return i;
-               }
+                }
             }
             return -1;
         }
+
     }
 }
