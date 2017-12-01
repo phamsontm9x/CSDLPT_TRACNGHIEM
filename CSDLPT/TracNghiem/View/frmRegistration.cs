@@ -275,6 +275,7 @@ namespace TracNghiem
                     if (txtQuestNum.Text.Length == 0 || txtTime.Text.Length == 0 || txtLevel.Text.Length == 0 || txtCountdown.Text.Length == 0)
                     {
                         MessageBox.Show("Can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        Program.myReader.Close();
                         return;
                     }
                     else if (result == "2")
@@ -292,6 +293,12 @@ namespace TracNghiem
                         }
                         else
                             return;
+                    }
+                    else if (result == "3")
+                    {
+                        MessageBox.Show("This class have not tested yet", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        Program.myReader.Close();
+                        return;
                     }
                     else if (result == "0" || result == "1")
                     {
