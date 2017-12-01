@@ -29,7 +29,7 @@ namespace TracNghiem
         private void frmQuestion_Load(object sender, EventArgs e)
         {
             dataSetTracNghiem.EnforceConstraints = false;
-            this.bODETableAdapter.Connection.ConnectionString = Program.connectStr;
+            this.sp_DanhSachBoDeTableAdapter.Connection.ConnectionString = Program.connectStr;
             // TODO: This line of code loads data into the 'dataSetTracNghiem.MONHOC' table. You can move, or remove it, as needed.
             this.mONHOCTableAdapter.Fill(this.dataSetTracNghiem.MONHOC);
             // TODO: This line of code loads data into the 'dataSetTracNghiem.BODE' table. You can move, or remove it, as needed.
@@ -216,7 +216,7 @@ namespace TracNghiem
 
             if (method == Program.NEW_METHOD)
             {
-                sqlStr = "exec sp_KiemTraBoDe '" + txtQuestID.Text + "', '" + method + "'";
+                sqlStr = "exec sp_KiemTraBoDe '" + txtQuestID.Text + "', '" + method + "', '" + txtSubID.Text + "', '" + txtLevel.Text + "'";
 
                 Program.myReader = Program.ExecSqlDataReader(sqlStr);
                 if (Program.myReader == null) return;
@@ -256,12 +256,6 @@ namespace TracNghiem
             }
             else if (method == Program.UPDATE_METHOD)
             {
-                sqlStr = "exec sp_KiemTraBoDe '" + txtQuestID.Text + "', '" + method + "'";
-
-                Program.myReader = Program.ExecSqlDataReader(sqlStr);
-                if (Program.myReader == null) return;
-                Program.myReader.Read();
-
                 if (txtLevel.Text.Length == 0)
                 {
                     MessageBox.Show("Level can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -300,17 +294,31 @@ namespace TracNghiem
 
         private void btnDel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            Program.connect.Close();
             index = bdsListExamCode.Position;
             method = Program.DETELE_METHOD;
             currentQuestID = Int32.Parse(((DataRowView)bdsListExamCode[index])["CAUHOI"].ToString());
 
-            String sqlStr = "";
-            sqlStr = "exec sp_KiemTraBoDe '" + currentQuestID + "', '" + method + "'";
-            Program.myReader = Program.ExecSqlDataReader(sqlStr);
-            if (Program.myReader == null) return;
-            Program.myReader.Read();
+            Program.connect.Open();
 
-            if (Program.myReader.FieldCount > 0)
+            String sqlStr = "";
+            sqlStr = "sp_KiemTraBoDe";
+            Program.cmd = Program.connect.CreateCommand();
+            Program.cmd.CommandType = CommandType.StoredProcedure;
+            Program.cmd.CommandText = sqlStr;
+
+            Program.cmd.Parameters.Add("@CAUHOI", SqlDbType.Int).Value = txtQuestID.Text;
+            Program.cmd.Parameters.Add("@METHOD", SqlDbType.NChar).Value = method;
+            Program.cmd.Parameters.Add("@MAMH", SqlDbType.NChar).Value = txtSubID.Text;
+            Program.cmd.Parameters.Add("@TRINHDO", SqlDbType.NChar).Value = txtLevel.Text;
+            Program.cmd.Parameters.Add("@ReturnValue", SqlDbType.VarChar).Direction = ParameterDirection.ReturnValue;
+            Program.cmd.ExecuteNonQuery();
+            Program.connect.Close();
+
+
+            String result = Program.cmd.Parameters["@ReturnValue"].Value.ToString();
+
+            if (result == "0" || result == "1")
             {
                 MessageBox.Show("Can not delete this question. \nThe question has data available! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 Program.myReader.Close();

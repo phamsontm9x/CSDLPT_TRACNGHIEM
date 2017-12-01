@@ -263,12 +263,6 @@ namespace TracNghiem
             }
             else if (method == Program.UPDATE_METHOD)
             {
-                sqlStr = "exec sp_KiemTraSinhVienTheoLop '" + txtStudentID.Text + "', '" + method + "'";
-
-                Program.myReader = Program.ExecSqlDataReader(sqlStr);
-                if (Program.myReader == null) return;
-                Program.myReader.Read();
-
                 if (txtLastName.Text.Length == 0)
                 {
                     MessageBox.Show("Last Name can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -286,7 +280,7 @@ namespace TracNghiem
                         this.Validate();
                         bdsStudentFromClass.EndEdit();
                         bdsStudentFromClass.ResetCurrentItem();
-                        this.sp_DanhSachSinhVienTheoLopTableAdapter.Update(currentStudentID, txtLastName.Text, txtFirstName.Text, pickerBirthday.Value.Date, txtAddress.Text);
+                        this.sp_DanhSachSinhVienTheoLopTableAdapter.Update(txtStudentID.Text, txtLastName.Text, txtFirstName.Text, pickerBirthday.Value.Date, txtAddress.Text);
                     }
                     catch (Exception ex)
                     {

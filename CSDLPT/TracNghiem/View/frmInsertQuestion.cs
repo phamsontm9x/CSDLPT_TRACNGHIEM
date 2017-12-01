@@ -30,7 +30,7 @@ namespace TracNghiem
         private void btnInsert_Click(object sender, EventArgs e)
         {
             String sqlStr = "";
-                sqlStr = "exec sp_KiemTraBoDe '" + txtQuestID.Text + "', '" + Program.NEW_METHOD + "'";
+                sqlStr = "exec sp_KiemTraBoDe '" + txtQuestID.Text + "', '" + Program.NEW_METHOD + "', '" + txtSubjectID.Text + "', '" + txtLevel.Text + "'";
 
                 Program.myReader = Program.ExecSqlDataReader(sqlStr);
                 if (Program.myReader == null) return;

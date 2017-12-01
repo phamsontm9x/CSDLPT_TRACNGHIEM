@@ -165,12 +165,15 @@ namespace TracNghiem
             else if (Program.currentRole == "TRUONG")
             {
                 initRibGroup(true);
-                Program.frmChinh.btnCreate.Enabled = false;
                 Program.frmChinh.btnTry.Enabled = false;
+                Program.frmChinh.ribReport.Visible = false;
+                Program.frmChinh.ribStudent.Visible = false;
             }
             else if (Program.currentRole == "COSO")
             {
                 initRibGroup(true);
+                Program.frmChinh.ribReport.Visible = false;
+                Program.frmChinh.ribStudent.Visible = false;
             }
         }
         public void initRibGroup(Boolean isEnable)

@@ -395,7 +395,8 @@
             this.Controls.Add(this.groupQuestion);
             this.IsMdiContainer = true;
             this.Name = "frmTest";
-            this.Text = "frmTest";
+            this.Text = "Test";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.groupQuestion.ResumeLayout(false);
             this.groupQuestion.PerformLayout();
             this.groupBox1.ResumeLayout(false);

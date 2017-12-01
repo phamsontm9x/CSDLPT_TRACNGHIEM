@@ -235,7 +235,7 @@ namespace TracNghiem
                 cbbClass.Enabled = false;
                 cbbSubject.Enabled = false;
                 groupBox2.Enabled = true;
-                txtLevel.Enabled = pickerDate.Enabled = txtTime.Enabled = txtCountdown.Enabled = txtQuestNum.Enabled = true;
+                txtLevel.Enabled = pickerDate.Enabled = txtTime.Enabled = txtCountdown.Enabled = txtQuestNum.Enabled = false;
                 btnNew.Enabled = btnEdit.Enabled = btnDel.Enabled = btnRefresh.Enabled = true;
                 btnSave.Enabled = btnCancel.Enabled = false;
             }
@@ -244,6 +244,8 @@ namespace TracNghiem
         private void btnSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             String sqlStr = "";
+            
+
             if (method == Program.NEW_METHOD)
             {
                 Program.connect.Open();
@@ -258,12 +260,13 @@ namespace TracNghiem
                 Program.cmd.Parameters.Add("@LAN", SqlDbType.Int).Value = Int32.Parse(txtTime.Text.ToString());
                 Program.cmd.Parameters.Add("@TRINHDO", SqlDbType.NChar).Value = txtLevel.Text.ToString();
                 Program.cmd.Parameters.Add("@SOCAUTHI", SqlDbType.Int).Value = txtQuestNum.Text.ToString();
+                Program.cmd.Parameters.Add("@NGAYTHI", SqlDbType.DateTime).Value = pickerDate.Value.ToString();
+                Program.cmd.Parameters.Add("@THOIGIAN", SqlDbType.Int).Value = txtCountdown.Text.ToString();
                 Program.cmd.Parameters.Add("@ReturnValue", SqlDbType.VarChar).Direction = ParameterDirection.ReturnValue;
                 Program.cmd.ExecuteNonQuery();
                 Program.connect.Close();
 
                 String result = Program.cmd.Parameters["@ReturnValue"].Value.ToString();
-
                 if (result == "-1")
                 {
                     MessageBox.Show("The registration for this class has already exists!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -300,6 +303,12 @@ namespace TracNghiem
                         Program.myReader.Close();
                         return;
                     }
+                    else if (result == "4")
+                    {
+                        MessageBox.Show("Date must be after first test's date", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        Program.myReader.Close();
+                        return;
+                    }
                     else if (result == "0" || result == "1")
                     {
                         try
@@ -322,12 +331,60 @@ namespace TracNghiem
             }
             else if (method == Program.UPDATE_METHOD)
             {
+                Program.connect.Open();
+
+                sqlStr = "sp_KiemTraGVDK";
+                Program.cmd = Program.connect.CreateCommand();
+                Program.cmd.CommandType = CommandType.StoredProcedure;
+                Program.cmd.CommandText = sqlStr;
+
+                Program.cmd.Parameters.Add("@MALOP", SqlDbType.NChar).Value = txtClass.Text;
+                Program.cmd.Parameters.Add("@MAMH", SqlDbType.NChar).Value = txtSubject.Text;
+                Program.cmd.Parameters.Add("@LAN", SqlDbType.Int).Value = Int32.Parse(txtTime.Text.ToString());
+                Program.cmd.Parameters.Add("@TRINHDO", SqlDbType.NChar).Value = txtLevel.Text.ToString();
+                Program.cmd.Parameters.Add("@SOCAUTHI", SqlDbType.Int).Value = txtQuestNum.Text.ToString();
+                Program.cmd.Parameters.Add("@NGAYTHI", SqlDbType.DateTime).Value = pickerDate.Value.ToString();
+                Program.cmd.Parameters.Add("@THOIGIAN", SqlDbType.Int).Value = txtCountdown.Text.ToString();
+                Program.cmd.Parameters.Add("@ReturnValue", SqlDbType.VarChar).Direction = ParameterDirection.ReturnValue;
+                Program.cmd.ExecuteNonQuery();
+                Program.connect.Close();
+
+                String result = Program.cmd.Parameters["@ReturnValue"].Value.ToString();
+
                 if (txtQuestNum.Text.Length == 0 || txtTime.Text.Length == 0 || txtCountdown.Text.Length == 0)
                 {
                     MessageBox.Show("Can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                else
+                else if (result == "2")
+                {
+                    if (MessageBox.Show("University have not enough exam code. \nUpdate new exam code?", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        Program.insertLevel = txtLevel.Text;
+                        Program.insertSubjectID = txtSubject.Text;
+                        Program.insertTeacherID = txtTeacherID.Text;
+                        Program.insertClassID = txtClass.Text;
+
+                        frmInsertQuestion frm = new frmInsertQuestion();
+                        frm.ShowDialog();
+                        Program.myReader.Close();
+                    }
+                    else
+                        return;
+                }
+                else if (result == "3")
+                {
+                    MessageBox.Show("This class have not tested yet", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Program.myReader.Close();
+                    return;
+                }
+                else if (result == "4")
+                {
+                    MessageBox.Show("Date must be after first test's date", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Program.myReader.Close();
+                    return;
+                }
+                else if (result == "0" || result == "1")
                 {
                     try
                     {

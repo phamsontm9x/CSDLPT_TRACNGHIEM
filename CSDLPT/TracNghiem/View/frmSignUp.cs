@@ -17,8 +17,23 @@ namespace TracNghiem
         public frmSignUp()
         {
             InitializeComponent();
-            txtPass.Enabled = txtPassConfirm.Enabled = txtUserID.Enabled = txtUserName.Enabled = false;
+            txtPass.Enabled = txtPassConfirm.Enabled = txtUserID.Enabled = txtUserName.Enabled = cbbRole.Enabled = false;
             btnCreate.Enabled = false;
+
+            if (Program.currentRole == "TRUONG")
+            {
+                rbStudent.Visible = false;
+                cbbRole.Items.Clear();
+                cbbRole.Items.Add("TRUONG");
+            }
+            else
+            {
+                rbStudent.Visible = true;
+                cbbRole.Items.Clear();
+                cbbRole.Items.Add("GIANGVIEN");
+                cbbRole.Items.Add("COSO");
+                cbbRole.Items.Add("TRUONG");
+            }
         }
 
         private void rbTeacher_CheckedChanged(object sender, EventArgs e)
@@ -26,7 +41,7 @@ namespace TracNghiem
             cbbRole.Visible = true;
             txtUserName.Visible = true;
             lblROle.Visible = lblUserName.Visible = true;
-            txtPass.Enabled = txtPassConfirm.Enabled = txtUserID.Enabled = txtUserName.Enabled = true;
+            txtPass.Enabled = txtPassConfirm.Enabled = txtUserID.Enabled = txtUserName.Enabled = cbbRole.Enabled = true;
             btnCreate.Enabled = true;
             txtUserID.MaxLength = 5;
         }
