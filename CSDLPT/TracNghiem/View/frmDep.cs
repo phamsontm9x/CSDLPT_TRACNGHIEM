@@ -52,9 +52,11 @@ namespace TracNghiem
         {
             dataSetTracNghiem.EnforceConstraints = false;
             // TODO: This line of code loads data into the 'dataSetTracNghiem.GIAOVIEN' table. You can move, or remove it, as needed.
+            this.gIAOVIENTableAdapter.Connection.ConnectionString = Program.connectStr;
             this.gIAOVIENTableAdapter.Fill(this.dataSetTracNghiem.GIAOVIEN);
 
             // TODO: This line of code loads data into the 'dataSetTracNghiem.LOP' table. You can move, or remove it, as needed.
+            this.lOPTableAdapter.Connection.ConnectionString = Program.connectStr;
             this.lOPTableAdapter.Fill(this.dataSetTracNghiem.LOP);
 
             // TODO: This line of code loads data into the 'dataSetTracNghiem.KHOA' table. You can move, or remove it, as needed.

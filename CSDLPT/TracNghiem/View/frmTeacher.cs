@@ -48,6 +48,7 @@ namespace TracNghiem
         private void frmTeacher_Load(object sender, EventArgs e)
         {
             dataSetTracNghiem.EnforceConstraints = false;
+            this.sp_DanhSachGiaoVienTheoKhoaTableAdapter.Connection.ConnectionString = Program.connectStr;
             // TODO: This line of code loads data into the 'dataSetTracNghiem.GIAOVIEN' table. You can move, or remove it, as needed.
             this.gIAOVIENTableAdapter.Connection.ConnectionString = Program.connectStr;
             this.gIAOVIENTableAdapter.Fill(this.dataSetTracNghiem.GIAOVIEN);

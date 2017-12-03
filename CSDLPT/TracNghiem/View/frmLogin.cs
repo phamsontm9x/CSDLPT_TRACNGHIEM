@@ -26,46 +26,40 @@ namespace TracNghiem
 
         private void txtUser_Load(object sender, EventArgs e)
         {
-            //if (txtUser.Text == "Username")
-            //{
-            //    txtUser.Text = "";
-            //    txtUser.ForeColor = Color.Black;
-            //}
-
-            // define UserName
-            txtUser.Text = "TUNG";
+            if (txtUser.Text == "Username")
+            {
+                txtUser.Text = "";
+                txtUser.ForeColor = Color.Black;
+            }
         }
 
         private void txtUser_DidLoad(object sender, EventArgs e)
         {
-            //if (txtUser.Text == "")
-            //{
-            //    txtUser.Text = "Username";
-            //    txtUser.ForeColor = Color.LightGray;
-            //}
+            if (txtUser.Text == "")
+            {
+                txtUser.Text = "Username";
+                txtUser.ForeColor = Color.LightGray;
+            }
         }
 
         private void txtPass_Load(object sender, EventArgs e)
         {
-            //if (txtPass.Text == "Password")
-            //{
-            //    txtPass.Text = "";
-            //    txtPass.ForeColor = Color.Black;
-            //    txtPass.UseSystemPasswordChar = true;
-            //}
-
-            // define Password
-            txtPass.Text = "123456";
+            if (txtPass.Text == "Password")
+            {
+                txtPass.Text = "";
+                txtPass.ForeColor = Color.Black;
+                txtPass.UseSystemPasswordChar = true;
+            }
         }
 
         private void txtPass_DidLoad(object sender, EventArgs e)
         {
-            //if (txtPass.Text == "")
-            //{
-            //    txtPass.Text = "Password";
-            //    txtPass.ForeColor = Color.LightGray;
-            //    txtPass.UseSystemPasswordChar = false;
-            //}
+            if (txtPass.Text == "")
+            {
+                txtPass.Text = "Password";
+                txtPass.ForeColor = Color.LightGray;
+                txtPass.UseSystemPasswordChar = false;
+            }
         }
 
         private void frmLogin_Load(object sender, EventArgs e)

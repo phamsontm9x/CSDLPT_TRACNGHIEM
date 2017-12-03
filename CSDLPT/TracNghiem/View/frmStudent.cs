@@ -26,6 +26,7 @@ namespace TracNghiem
         private void frmStudent_Load(object sender, EventArgs e)
         {
             dataSetTracNghiem.EnforceConstraints = false;
+            this.sp_DanhSachSinhVienTheoLopTableAdapter.Connection.ConnectionString = Program.connectStr;
             // TODO: This line of code loads data into the 'dataSetTracNghiem.SINHVIEN' table. You can move, or remove it, as needed.
             this.sINHVIENTableAdapter.Fill(this.dataSetTracNghiem.SINHVIEN);
 

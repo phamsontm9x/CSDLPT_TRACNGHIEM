@@ -72,6 +72,7 @@ namespace TracNghiem
         {
             dataSetTracNghiem.EnforceConstraints = false;
             this.lOPTableAdapter.Connection.ConnectionString = Program.connectStr;
+            this.sp_DanhSachLopTheoKhoaVaCoSoTableAdapter.Connection.ConnectionString = Program.connectStr;
             // TODO: This line of code loads data into the 'dataSetTracNghiem.LOP' table. You can move, or remove it, as needed.
 
             initUIComboBoxDep();

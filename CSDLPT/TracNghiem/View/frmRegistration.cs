@@ -54,6 +54,7 @@ namespace TracNghiem
         private void frmRegistration_Load(object sender, EventArgs e)
         {
             dataSetTracNghiem.EnforceConstraints = false;
+            this.mONHOCTableAdapter.Connection.ConnectionString = Program.connectStr;
             this.mONHOCTableAdapter.Fill(this.dataSetTracNghiem.MONHOC);
             this.sp_DanhSachGVDKTheoCosoTableAdapter.Connection.ConnectionString = Program.connectStr;
             // TODO: This line of code loads data into the 'dataSetTracNghiem.MONHOC' table. You can move, or remove it, as needed.

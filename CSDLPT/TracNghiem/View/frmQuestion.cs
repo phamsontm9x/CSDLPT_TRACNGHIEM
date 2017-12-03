@@ -53,11 +53,13 @@ namespace TracNghiem
             {
                 filterSubject = "TRUE";
                 cbbSubject.Enabled = true;
+                subjectID = "";
             }
             else
             {
                 filterSubject = "FALSE";
                 cbbSubject.Enabled = false;
+                subjectID = getSubjectIDSelected();
             }
         }
 
@@ -67,11 +69,13 @@ namespace TracNghiem
             {
                 filterTeacher = "TRUE";
                 cbbTeacher.Enabled = true;
+                teacherID = "";
             }
             else
             {
                 filterTeacher = "FALSE";
                 cbbTeacher.Enabled = false;
+                teacherID = getTeacherIDSelected();
             }
         }
 
@@ -143,6 +147,7 @@ namespace TracNghiem
 
         private void btnPreview_Click(object sender, EventArgs e)
         {
+            this.sp_DanhSachBoDeTableAdapter.Connection.ConnectionString = Program.connectStr;
             this.sp_DanhSachBoDeTableAdapter.Fill(this.dataSetTracNghiem.sp_DanhSachBoDe, subjectID, teacherID, currentDepID, filterSubject, filterTeacher);
             setCurrentRole();
         }
@@ -216,7 +221,7 @@ namespace TracNghiem
 
             if (method == Program.NEW_METHOD)
             {
-                sqlStr = "exec sp_KiemTraBoDe '" + txtQuestID.Text + "', '" + method + "', '" + txtSubID.Text + "', '" + txtLevel.Text + "'";
+                sqlStr = "exec sp_KiemTraBoDe '" + txtQuestID.Text + "', '" + method + "', '" + txtSubID.Text + "', '" + txtLevel.Text + "', '" + txtContent.Text + "'";
 
                 Program.myReader = Program.ExecSqlDataReader(sqlStr);
                 if (Program.myReader == null) return;
@@ -233,6 +238,12 @@ namespace TracNghiem
                     if (txtQuestID.Text.Length == 0 || txtLevel.Text.Length == 0 || txtSubID.Text.Length == 0 || txtTeacherID.Text.Length == 0)
                     {
                         MessageBox.Show("Can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    else if (txtA.Text == txtB.Text || txtA.Text == txtC.Text || txtA.Text == txtD.Text ||
+                        txtB.Text == txtC.Text || txtB.Text == txtD.Text || txtC.Text == txtD.Text)
+                    {
+                        MessageBox.Show("Answer cannot same as same other answer", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                     else
@@ -259,6 +270,12 @@ namespace TracNghiem
                 if (txtLevel.Text.Length == 0)
                 {
                     MessageBox.Show("Level can not empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else if (txtA.Text == txtB.Text || txtA.Text == txtC.Text || txtA.Text == txtD.Text ||
+                        txtB.Text == txtC.Text || txtB.Text == txtD.Text || txtC.Text == txtD.Text)
+                {
+                    MessageBox.Show("Answer cannot same as same other answer", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 else if (txtAnswer.Text.Length == 0)
@@ -311,6 +328,7 @@ namespace TracNghiem
             Program.cmd.Parameters.Add("@METHOD", SqlDbType.NChar).Value = method;
             Program.cmd.Parameters.Add("@MAMH", SqlDbType.NChar).Value = txtSubID.Text;
             Program.cmd.Parameters.Add("@TRINHDO", SqlDbType.NChar).Value = txtLevel.Text;
+            Program.cmd.Parameters.Add("@NOIDUNG", SqlDbType.NVarChar).Value = txtContent.Text;
             Program.cmd.Parameters.Add("@ReturnValue", SqlDbType.VarChar).Direction = ParameterDirection.ReturnValue;
             Program.cmd.ExecuteNonQuery();
             Program.connect.Close();
